@@ -8,18 +8,18 @@ using System.Text;
 class Server
 {
     #region "Definitions"
-    private static int TimeoutTime = 50;
-    private static int BufferSize = 1024 * 64;
-    private static TcpListener server = null;
-    public static bool ServerStarted = false;
-    public static int HeaderLen = 9;
-    private static byte StartByte = (byte)('C');
-    public static bool _isClientConnected = false;
-    private static TcpClient client;
-    private static int ErrorCounter = 0;
+    private int TimeoutTime = 50;
+    private int BufferSize = 1024 * 64;
+    private TcpListener server = null;
+    public bool ServerStarted = false;
+    public int HeaderLen = 9;
+    private byte StartByte = (byte)('C');
+    public bool _isClientConnected = false;
+    private TcpClient client;
+    private int ErrorCounter = 0;
     #endregion
 
-    public static bool StartListener()
+    public bool StartListener()
     {
         try
         {
@@ -40,7 +40,7 @@ class Server
             return false;
         }
     }
-    public static bool SetupServer(int port)
+    public bool SetupServer(int port)
     {
         bool Success = false;
         try
@@ -55,7 +55,6 @@ class Server
                     localAddr = ip;
                 }
             }
-            //IPAddress localAddr = IPAddress.Parse(IP);
             server = new TcpListener(localAddr, port);
             Console.WriteLine("IP: " + localAddr);
             server.Start();
@@ -68,7 +67,7 @@ class Server
         }
         return Success;
     }
-    public static void CloseServer()
+    public void CloseServer()
     {
         try
         {
@@ -82,8 +81,7 @@ class Server
             Console.WriteLine("could not close the Server ");
         }
     }
-    //static Stopwatch stopwatch12 = new Stopwatch();
-    public static bool SendDataToClient(byte[] Data)
+    public bool SendDataToClient(byte[] Data)
     {
         bool success = false;
         try
@@ -135,12 +133,12 @@ class Server
             Debug.WriteLine("Unable to Send Message");
             _isClientConnected = false;
             client.Close();
-            //client.Dispose();
+            client.Dispose();
         }
 
         return success;
     }
-    public static byte[] GetData()
+    public byte[] GetData()
     {
         try
         {
@@ -149,7 +147,7 @@ class Server
                 Debug.WriteLine("forced to disconnect from client!");
                 _isClientConnected = false;
                 client.Close();
-                //client.Dispose();
+                client.Dispose();
                 ErrorCounter = 0;
                 return null;
             }
@@ -170,7 +168,6 @@ class Server
                 {
                     if (!_isfirstSampleReceived)
                     {
-                        //watch2.Restart();
                         numBytesRead = stream.Read(data, 0, HeaderLen);
                         if (numBytesRead == HeaderLen)
                         {
@@ -184,7 +181,6 @@ class Server
                             Debug.WriteLine("Missing Header Bytes!");
                             break;
                         }
-                        //watch2.Stop();
                     }
                     else
                     {
@@ -234,7 +230,6 @@ class Server
                             else
                             {
                                 Debug.WriteLine("Start byte was Wrong! received: " + ReceivedData[0]);
-                                //Console.WriteLine("Data: " + Encoding.ASCII.GetString(ReceivedData, 0, ReceivedData.Length));
                                 stream.Flush();
                                 return null;
                             }
@@ -251,7 +246,7 @@ class Server
             Debug.WriteLine("Receive Data Failed!");
             _isClientConnected = false;
             client.Close();
-            //client.Dispose();
+            client.Dispose();
             return null;
         }
     }
