@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileSharingApp_Desktop", "FileSharingApp_Desktop\FileSharingApp_Desktop.csproj", "{3C17A7EB-C8D5-4240-BE5A-7DEF1AE0EC2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C17A7EB-C8D5-4240-BE5A-7DEF1AE0EC2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C17A7EB-C8D5-4240-BE5A-7DEF1AE0EC2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C17A7EB-C8D5-4240-BE5A-7DEF1AE0EC2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C17A7EB-C8D5-4240-BE5A-7DEF1AE0EC2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F527C37E-6A47-4FD2-9788-A144BCE2DB5C}
+	EndGlobalSection
+EndGlobal
