@@ -23,6 +23,9 @@ namespace FileSharingApp_Desktop
         public MainWindow()
         {
             InitializeComponent();
+
+            System.Diagnostics.Debug.WriteLine("push yapıyorum");
+            
         }
     }
 }
