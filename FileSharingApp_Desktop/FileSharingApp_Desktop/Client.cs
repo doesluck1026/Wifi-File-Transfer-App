@@ -6,19 +6,19 @@ using System.Text;
 
 class Client
 {
-    private static int HeaderLen = 15;// Communication.HeaderLength;
-    private static int TimeoutTime = 50;
-    private static int BufferSize = 1024 * 64;
-    private static TcpClient client;
-    public static byte StartByte = 65;// Communication.StartByte;
-    public static bool _isClientConnected = false;
+    private  int HeaderLen = 9;
+    private  int TimeoutTime = 50;
+    private  int BufferSize = 1024 * 64;
+    private  TcpClient client;
+    public  byte StartByte = (byte)('C');
+    public  bool _isClientConnected = false;
 
     /// <summary>
     /// Connects to server with specified IP.
     /// </summary>
     /// <param name="IP"></param>
     /// <returns></returns>
-    public static bool ConnectToServer(string IP, int Port)
+    public  bool ConnectToServer(string IP, int Port)
     {
         bool success;
         try
@@ -27,7 +27,6 @@ class Client
             client.Connect(IP, Port);           /// Connect
             success = true;
             _isClientConnected = true;
-            //BufferSize = client.ReceiveBufferSize;
             client.ReceiveBufferSize = BufferSize;
             client.SendBufferSize = BufferSize;
             Debug.WriteLine("Connected to: " + IP + " on Port: " + Port);
@@ -39,7 +38,7 @@ class Client
         }
         return success;
     }
-    public static bool DisconnectFromServer()
+    public  bool DisconnectFromServer()
     {
         bool success = false;
         if (client != null)
@@ -61,7 +60,7 @@ class Client
         }
         return success;
     }
-    public static bool SendDataServer(byte[] Data)
+    public  bool SendDataServer(byte[] Data)
     {
         bool success = false;
         if (client != null)
@@ -110,7 +109,7 @@ class Client
     /// Gets Data from server and retuns byte array as fuction code, in first byte, and data
     /// </summary>
     /// <returns></returns>
-    public static byte[] GetData()
+    public  byte[] GetData()
     {
         try
         {
@@ -132,7 +131,7 @@ class Client
                         numBytesRead = stream.Read(data, 0, HeaderLen);
                         if (numBytesRead == HeaderLen)
                         {
-                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24);
+                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24) | (data[7] << 32) | (data[8] << 40);
                             _isfirstSampleReceived = true;
                             ms.Write(data, 0, numBytesRead);
                             watchdog.Restart();
@@ -174,15 +173,15 @@ class Client
                             ReceivedData = ms.ToArray();
                             if (ReceivedData[0] == 67)
                             {
-                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24);
-                                if (DataLen == ReceivedData.Length - 7)
+                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24) | (ReceivedData[7] << 32) | (ReceivedData[8] << 40);
+                                if (DataLen == ReceivedData.Length - HeaderLen)
                                 {
                                     stream.Flush();
                                     return ReceivedData;
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - 7));
+                                    Console.WriteLine("Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - HeaderLen));
                                     stream.Flush();
                                     return null;
                                 }
