@@ -12,14 +12,19 @@ class Server
     private int BufferSize = 1024 * 64;
     private TcpListener server = null;
     public bool ServerStarted = false;
-    public int HeaderLen = 9;
-    private byte StartByte = (byte)('C');
+    public int HeaderLen = 7;
+    private byte StartByte = (byte)('J');
     public bool _isClientConnected = false;
     private TcpClient client;
     private int ErrorCounter = 0;
+    private int Port;
     #endregion
 
-    public bool StartListener()
+    public Server(int port=41000)
+    {
+        this.Port = port;
+    }
+    private bool StartListener()
     {
         try
         {
@@ -40,9 +45,8 @@ class Server
             return false;
         }
     }
-    public bool SetupServer(int port)
+    public bool SetupServer()
     {
-        bool Success = false;
         try
         {
             ServerStarted = true;
@@ -55,17 +59,16 @@ class Server
                     localAddr = ip;
                 }
             }
-            server = new TcpListener(localAddr, port);
+            server = new TcpListener(localAddr, Port);
             Console.WriteLine("IP: " + localAddr);
             server.Start();
-            Success = true;
+            return StartListener();
         }
         catch (Exception e)
         {
             Console.WriteLine("Client Failed to connect!  " + e.ToString());
-            Success = false;
+            return false;
         }
-        return Success;
     }
     public void CloseServer()
     {
@@ -154,8 +157,6 @@ class Server
             var stream = client.GetStream();
             System.Diagnostics.Stopwatch watchdog = new System.Diagnostics.Stopwatch();
             watchdog.Restart();
-            bool _isDataRececived = false;
-
             byte[] data = new byte[BufferSize];
             using (MemoryStream ms = new MemoryStream())
             {
@@ -171,7 +172,7 @@ class Server
                         numBytesRead = stream.Read(data, 0, HeaderLen);
                         if (numBytesRead == HeaderLen)
                         {
-                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24) | (data[7] << 32) | (data[8] << 40);
+                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24);
                             _isfirstSampleReceived = true;
                             ms.Write(data, 0, numBytesRead);
                             watchdog.Restart();
@@ -211,9 +212,9 @@ class Server
                         {
                             byte[] ReceivedData = new byte[ms.Length];
                             ReceivedData = ms.ToArray();
-                            if (ReceivedData[0] == 67)
+                            if (ReceivedData[0] == StartByte)
                             {
-                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24) | (ReceivedData[7] << 32) | (ReceivedData[8] << 40);
+                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24);
                                 if (DataLen == ReceivedData.Length - HeaderLen)
                                 {
                                     stream.Flush();

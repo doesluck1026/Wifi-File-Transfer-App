@@ -6,19 +6,27 @@ using System.Text;
 
 class Client
 {
-    private  int HeaderLen = 9;
+    private  int HeaderLen = 7;
     private  int TimeoutTime = 50;
     private  int BufferSize = 1024 * 64;
     private  TcpClient client;
-    public  byte StartByte = (byte)('C');
+    public  byte StartByte = (byte)('J');
     public  bool _isClientConnected = false;
+    private string IP;
+    private int Port;
+
+    public Client(string IP,int port=41000)
+    {
+        this.IP = IP;
+        this.Port = port;
+    }
 
     /// <summary>
     /// Connects to server with specified IP.
     /// </summary>
     /// <param name="IP"></param>
     /// <returns></returns>
-    public  bool ConnectToServer(string IP, int Port)
+    public  bool ConnectToServer()
     {
         bool success;
         try
@@ -131,7 +139,7 @@ class Client
                         numBytesRead = stream.Read(data, 0, HeaderLen);
                         if (numBytesRead == HeaderLen)
                         {
-                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24) | (data[7] << 32) | (data[8] << 40);
+                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24);
                             _isfirstSampleReceived = true;
                             ms.Write(data, 0, numBytesRead);
                             watchdog.Restart();
@@ -171,9 +179,9 @@ class Client
                         {
                             byte[] ReceivedData = new byte[ms.Length];
                             ReceivedData = ms.ToArray();
-                            if (ReceivedData[0] == 67)
+                            if (ReceivedData[0] == StartByte)
                             {
-                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24) | (ReceivedData[7] << 32) | (ReceivedData[8] << 40);
+                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24);
                                 if (DataLen == ReceivedData.Length - HeaderLen)
                                 {
                                     stream.Flush();
