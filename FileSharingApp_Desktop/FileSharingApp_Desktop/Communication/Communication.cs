@@ -28,6 +28,8 @@ class Communication
 
     public static bool isClientConnected = false;
     public static bool isConnectedToServer = false;
+    public static uint LastPackNumberReceived {get; private set;}
+    public static uint LastPackNumberSent {get; private set; }
     public enum SizeTypes
     {
         Byte=0,
@@ -105,12 +107,13 @@ class Communication
             if (ReceivedData[HeaderLen] == 1)
             {
                 uint LastPackReceived = BitConverter.ToUInt32(ReceivedData,HeaderLen+2);
+                LastPackNumberReceived = LastPackReceived;
                 isAccepted = true;
             }
         }
             return isAccepted;
     }
-    public static bool SendFilePacks(byte[] data,int numPackage)
+    public static bool SendFilePacks(byte[] data,uint numPackage)
     {
         byte[] HeaderBytes = PrepareDataHeader(Functions.SendingFile, (uint)(data.Length + 4));
         byte[] DataToSend = new byte[data.Length + 4 + HeaderLen];
@@ -118,6 +121,7 @@ class Communication
         Array.Copy(BitConverter.GetBytes(numPackage), 0, DataToSend, HeaderLen, sizeof(int));
         Array.Copy(data, 0, DataToSend, HeaderLen+4, data.Length);
         server.SendDataToClient(DataToSend);
+        LastPackNumberSent = numPackage;
         return GetResponse();
     }
     public static bool CompleteTransfer()
