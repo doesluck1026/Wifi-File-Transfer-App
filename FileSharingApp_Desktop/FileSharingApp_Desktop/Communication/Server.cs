@@ -18,13 +18,14 @@ class Server
     private TcpClient client;
     private int ErrorCounter = 0;
     private int Port;
+    public string IP = "";
     #endregion
 
     public Server(int port=41000)
     {
         this.Port = port;
     }
-    private bool StartListener()
+    public bool StartListener()
     {
         try
         {
@@ -45,7 +46,7 @@ class Server
             return false;
         }
     }
-    public bool SetupServer()
+    public string SetupServer()
     {
         try
         {
@@ -61,13 +62,14 @@ class Server
             }
             server = new TcpListener(localAddr, Port);
             Console.WriteLine("IP: " + localAddr);
+            this.IP = localAddr.ToString();
             server.Start();
-            return StartListener();
+            return localAddr.ToString();
         }
         catch (Exception e)
         {
             Console.WriteLine("Client Failed to connect!  " + e.ToString());
-            return false;
+            return null;
         }
     }
     public void CloseServer()

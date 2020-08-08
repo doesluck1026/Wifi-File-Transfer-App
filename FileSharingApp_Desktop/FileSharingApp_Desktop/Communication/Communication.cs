@@ -53,7 +53,12 @@ class Communication
     public static bool CreateServer()
     {
         server = new Server();
-        isClientConnected=server.SetupServer();
+        string serverIP=server.SetupServer();
+        /// generate code for transfer here.
+        string code = GenerateTransferCode(serverIP);
+        /// display the code in ui here
+        
+        isClientConnected =server.StartListener();
         return isClientConnected;
     }
     /// <summary>
@@ -64,11 +69,13 @@ class Communication
     /// <param name="sizeType">type of size like MB, GB etc..</param>
     public static bool QueryForTransfer(string fileName, double fileSize, SizeTypes sizeType)
     {
+        if (fileName == null || fileName.Length == 0)
+            return false;
         byte[] nameBytes = Encoding.ASCII.GetBytes(fileName);
         int lenName = nameBytes.Length;
         byte[] sizeBytes = BitConverter.GetBytes(fileSize);
         int lenSize = sizeBytes.Length;
-        int DataLen = lenName + lenSize + 1 + 4 + 4;
+        int DataLen = lenName + lenSize + 1 + 4 + 2;
         byte[] HeaderBytes = PrepareDataHeader(Functions.QueryTransfer, (uint)DataLen);
         byte[] DataToSend = new byte[DataLen + HeaderLen];
         Array.Copy(HeaderBytes, 0, DataToSend, 0, HeaderBytes.Length);
@@ -76,10 +83,8 @@ class Communication
         DataToSend[HeaderLen+1] = (byte)((lenName>>8) & 0xff);
         Array.Copy(nameBytes, 0, DataToSend, HeaderLen + 2, lenName);
         int IndexSize = HeaderLen + 2 + lenName;
-        DataToSend[IndexSize] = (byte)(lenSize & 0xff);
-        DataToSend[IndexSize + 1] = (byte)((lenSize >> 8) & 0xff);
-        Array.Copy(sizeBytes, 0, DataToSend, IndexSize + 2, lenSize);
-        int IndexType = IndexSize + 2 + lenSize;
+        Array.Copy(sizeBytes, 0, DataToSend, IndexSize, lenSize);
+        int IndexType = IndexSize + lenSize;
         DataToSend[IndexType] = (byte)sizeType;
         int packageCount= CalculatePackageCount(fileSize, sizeType);
         byte[] packageCountBytes = BitConverter.GetBytes(packageCount);
@@ -145,7 +150,22 @@ class Communication
         int packageCount = (int)Math.Ceiling(PackageSize / (server.BufferSize - HeaderLen));
         return packageCount;
     }
+    private static string GenerateTransferCode(string ip)
+    {
+        char[] splitter = { '.' };
+        string ipEnd = ip.Split(splitter)[3];
+        if (ipEnd.Length==1)
+                ipEnd = "00" + ipEnd;
+        else if (ipEnd.Length == 2)
+            ipEnd = "0" + ipEnd;
+        Debug.WriteLine("ipend=" + ipEnd);
+        Random random = new Random();
+        int head = random.Next(0, 1000);
+        string code = head.ToString() + ipEnd;
+        return code;
+    }
     #endregion
+
     #region Client Functions
     /// <summary>
     /// Connects to server with given ip at given port. This is used to receive file from another device.
@@ -158,6 +178,57 @@ class Communication
         client = new Client(ip, port);
         isConnectedToServer = client.ConnectToServer();
         return isConnectedToServer;
+    }
+    public static void GetFileSpecs(out string fileName, out double fileSize, out SizeTypes sizeType)
+    {
+        fileName = "";
+        fileSize = 0;
+        sizeType = SizeTypes.Byte;
+        byte[] receivedData = client.GetData();
+        if (receivedData[0] == StartByte)
+        {
+            if (receivedData[1] == (byte)Functions.QueryTransfer)
+            {
+                int dataLen = BitConverter.ToInt32(receivedData, 3);
+                if (dataLen == receivedData.Length - HeaderLen)
+                {
+                    int nameLen = receivedData[HeaderLen] | (receivedData[HeaderLen + 1] << 8);
+                    fileName = Encoding.ASCII.GetString(receivedData, HeaderLen + 2, nameLen);
+                    int IndexSize = HeaderLen + 2 + nameLen;
+                    fileSize = BitConverter.ToDouble(receivedData, IndexSize);
+                    sizeType = (SizeTypes)receivedData[IndexSize + sizeof(double)];
+                    Debug.WriteLine("Sending request received: Filename:" + fileName + " size:" + fileSize + sizeType.ToString());
+                    /// display this specs in user interface.
+                }
+                else
+                {
+                    Debug.WriteLine("GetFileSpecs function: data length does not match! told:" + dataLen + " but received: " + (receivedData.Length - HeaderLen));
+                }
+            }
+            else
+            {
+                Debug.WriteLine("GetFileSpecs function: function byte was Wrong:" + receivedData[1]);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("GetFileSpecs function: Start Byte was Wrong: " + receivedData[0]);
+        }
+    }
+    public static void RespondToTransferRequest(bool isAccepted)
+    {
+        byte[] header = PrepareDataHeader(Functions.QueryTransfer, 1);
+        byte[] dataToSend = new byte[HeaderLen + 1];
+        Array.Copy(header, 0, dataToSend, 0, HeaderLen);
+        if (isAccepted)
+        {
+            dataToSend[HeaderLen] = 1;
+        }
+        else
+        {
+            dataToSend[HeaderLen] = 0;
+        }
+        client.SendDataServer(dataToSend);
     }
     #endregion
 
