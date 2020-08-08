@@ -13,3 +13,10 @@ C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masa�
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.exe
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.pdb
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.g.cs
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.g.cs
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop_MarkupCompile.cache
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop_MarkupCompile.lref
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.exe
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.pdb
