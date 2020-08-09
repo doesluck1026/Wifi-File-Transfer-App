@@ -31,6 +31,8 @@ class Communication
     public static uint LastPackNumberReceived {get; private set;}
     public static uint LastPackNumberSent {get; private set; }
     public static int NumberOfPacks { get; private set; }
+    public static bool isFileReceived { get; private set; }
+
     public enum SizeTypes
     {
         Byte=0,
@@ -46,6 +48,7 @@ class Communication
         FileSent=4,
         TransferStatus=5,
     }
+
     #region Server Functions
     /// <summary>
     /// Creates a server and starts listening to port. This is used to send file to another device.
@@ -249,17 +252,37 @@ class Communication
         }
         client.SendDataServer(dataToSend);                                  /// Send pack to the server
     }
+    /// <summary>
+    /// Gets data from buffer and checks. returns file bytes only. you can directly write them to fileStream
+    /// </summary>
+    /// <returns>File Bytes as Byte array</returns>
     public static byte[] ReceiveFilePacks()
     {
-        byte[] receivedData = client.GetData();
-        if(receivedData[0]==StartByte)
+        byte[] receivedData = client.GetData();                                     /// Get Data From Buffer
+        if(receivedData[0]==StartByte)                                              /// check if start byte is correct
         {
-            if(receivedData[1]==(byte)Functions.SendingFile)
+            if(receivedData[1]==(byte)Functions.SendingFile)                        /// Check the function byte
+            {   
+                uint dataLen = BitConverter.ToUInt32(receivedData, 3);              /// Get the length of the data bytes (index bytes are included to this number)
+                uint packIndex = BitConverter.ToUInt32(receivedData, HeaderLen);    /// Get the index of data pack
+                if (packIndex == LastPackNumberReceived - 1)                        /// Check if the index is correct
+                {
+                    LastPackNumberReceived = packIndex;                             /// update the index
+                    SendAckToServer(true);                                          /// Send Ack to Server
+                }
+                else
+                {
+                    SendAckToServer(false);                                         /// Send Nack to Server
+                    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
+                }
+                byte[] dataPack = new byte[dataLen-4];                              /// Create data pack variable to store file bytes 
+                Array.Copy(receivedData, HeaderLen+4, dataPack, 0, dataLen-4);      /// Copy array to data packs byte
+                return dataPack;                                                    /// return data pack
+            }
+            else if (receivedData[1]==(byte)Functions.FileSent)
             {
-                uint dataLen = BitConverter.ToUInt32(receivedData, 3);
-                byte[] dataPack = new byte[dataLen-4];
-                Array.Copy(receivedData, HeaderLen, dataPack, 0, dataLen);
-                return dataPack;
+                ConfirmFileIsReceived();
+                return null;
             }
             else
             {
@@ -272,6 +295,33 @@ class Communication
             Debug.WriteLine("ReceiveFilePacks function: Start Byte is wrong!: "+receivedData[0]);
             return null;
         }
+    }
+    private static void SendAckToServer(bool isreceived)
+    {
+        byte[] header = PrepareDataHeader(Functions.TransferStatus, 1);      /// Prepare Data Header 
+        byte[] dataToSend = new byte[HeaderLen + 1];                        /// Prepare Carrier Pack
+        Array.Copy(header, 0, dataToSend, 0, HeaderLen);                    /// Copy header to Carrier Pack
+        if (isreceived)                                                     /// if transfer is accepted
+        {
+            dataToSend[HeaderLen] = 1;                                      /// write one to state byte
+        }
+        else                                                                /// if the transfer is rejected by user
+        {
+            dataToSend[HeaderLen] = 0;                                      /// write zero to state byte  
+        }
+        client.SendDataServer(dataToSend);                                  /// Send pack to the server
+    }
+    /// <summary>
+    /// This function is used to tell server that the file is succesfully received.
+    /// </summary>
+    private static void ConfirmFileIsReceived()
+    {
+        byte[] header = PrepareDataHeader(Functions.FileSent, 1);
+        byte[] dataToSend = new byte[HeaderLen + 1];
+        header.CopyTo(dataToSend, 0);
+        dataToSend[HeaderLen] = 1;
+        client.SendDataServer(dataToSend);
+        isFileReceived = true;
     }
     #endregion
 
