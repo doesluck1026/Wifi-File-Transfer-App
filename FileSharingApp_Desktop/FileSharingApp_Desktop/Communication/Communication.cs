@@ -25,6 +25,8 @@ class Communication
     private static Client client;
     private static readonly int HeaderLen = 7;
     private static readonly byte StartByte = (byte)'J';
+    private static int Port = 41000;
+
 
     public static bool isClientConnected = false;
     public static bool isConnectedToServer = false;
@@ -56,7 +58,7 @@ class Communication
     /// <returns></returns>
     public static bool CreateServer()
     {
-        server = new Server();                          /// Create server instance
+        server = new Server(Port);                      /// Create server instance
         string serverIP=server.SetupServer();           /// Setup Server on default port. this Function will return device ip as string.
        
         string code = GenerateTransferCode(serverIP);   /// Generate a code to secure transfer
@@ -185,9 +187,9 @@ class Communication
     /// <param name="ip"></param>
     /// <param name="port"></param>
     /// <returns></returns>
-    public static bool ConnectToServer(string ip,int port)
+    public static bool ConnectToServer(string ip)
     {
-        client = new Client(ip, port);
+        client = new Client(ip, Port);
         isConnectedToServer = client.ConnectToServer();
         return isConnectedToServer;
     }
@@ -322,6 +324,26 @@ class Communication
         dataToSend[HeaderLen] = 1;
         client.SendDataServer(dataToSend);
         isFileReceived = true;
+    }
+    public static string DecodeTransferCode(string code)
+    {
+        if(code.Length==6)
+        {
+            string dummyCode = code.Substring(0, 3);
+            string ipEndWithZeros = code.Substring(3, 3);
+            string currentIP = client.GetDeviceIP();
+            char[] splitterUsta = { '.' };                                          /// Define the seperator for ip address.
+            string[] IpParts = currentIP.Split(splitterUsta);                       /// split the ip string. this will return four different strings. for Example: if ip is "192.168.1.100"
+            char[] splitterZero = { '0' };                                          /// Define the seperator for ip address.
+            string IpEnd=ipEndWithZeros.Trim(splitterZero);
+            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;
+            return ServersIP;
+        }
+        else
+        {
+            Debug.WriteLine("Code Length was incorrect: " + code.Length);
+            return "";
+        }
     }
     #endregion
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -218,5 +219,22 @@ class Client
             }
             return null;
         }
+    }
+    /// <summary>
+    /// Gets current device's ip4 address.
+    /// </summary>
+    /// <returns>ip as string</returns>
+    public string GetDeviceIP()
+    {
+        var host = Dns.GetHostEntry(Dns.GetHostName());
+        string localAddr = "";
+        foreach (var ip in host.AddressList)
+        {
+            if (ip.AddressFamily == AddressFamily.InterNetwork)
+            {
+                localAddr = ip.ToString();
+            }
+        }
+        return localAddr;
     }
 }
