@@ -186,6 +186,10 @@ class Communication
         string code = head.ToString() + ipEnd;      /// put the ip part and the random number together.    
         return code;                                /// return the code
     }
+    /// <summary>
+    /// receive the  verification code from to client
+    /// </summary>
+    /// <returns></returns>
     public static bool VerifyCode()
     {
         byte[] receivedData = server.GetData();
