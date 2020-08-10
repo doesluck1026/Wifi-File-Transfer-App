@@ -48,6 +48,8 @@ namespace FileSharingApp_Desktop
             }
             return isConnected;                         /// return connection status
         }
+
+
         /// <summary>
         /// This function is used to send information to client about the file to be transfered and queries if client still wants to receive the file
         /// </summary>
@@ -81,7 +83,10 @@ namespace FileSharingApp_Desktop
         /// <returns>returns true if a client successfully connected</returns>
         private static bool WaitForConnection()
         {
-            bool Success=Communication.CreateServer();  /// setup the server and start listening to port
+            string IpCode=Communication.CreateServer();  /// setup the server and start listening to port
+            // display the "IpCode" in ui here
+            bool Success = Communication.startServer();
+
             return Success; 
         }
         /// <summary>

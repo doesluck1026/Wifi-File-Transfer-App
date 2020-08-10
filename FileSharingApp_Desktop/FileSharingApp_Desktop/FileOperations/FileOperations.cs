@@ -10,8 +10,12 @@ namespace FileSharingApp_Desktop.FileOperations
 
     class FileOperations
     {
-
+        
         private static string _FilePath;
+        private FileStream Fs;
+        private double _FileSize;
+        private Communication.SizeTypes _sizeTypes;
+
         public string FilePath
         {
             get
@@ -24,6 +28,30 @@ namespace FileSharingApp_Desktop.FileOperations
             }
         }
 
+        public double FileSize
+        {
+            get
+            {
+                return _FileSize;
+            }
+            private set
+            {
+                _FileSize = value;
+            }
+        }
+
+        public Communication.SizeTypes FilesizeTypes
+        {
+            get
+            {
+                return _sizeTypes;
+            }
+            private set
+            {
+                _sizeTypes = value;
+            }
+        }
+
         /// <summary>
         /// Create File Operation
         /// </summary>
@@ -31,6 +59,37 @@ namespace FileSharingApp_Desktop.FileOperations
         public FileOperations(string FilePath)
         {
             this.FilePath = FilePath;
+            Fs = File.OpenRead(FilePath);
+
+            long fileSizeAsByte = Fs.Length;
+            int pow = (int)Math.Log(fileSizeAsByte, 1024);               /// calculate the greatest type ( byte megabyte gigabyte etc...) the filesize can be respresent as integer variable
+            FileSize = fileSizeAsByte / Math.Pow(1024, pow);              /// Convert file size from bytes to the greatest type
+            switch (pow)                                            /// to assign type:
+            {
+                case 0:                                                   /// if pow equals to 0
+                    FilesizeTypes = Communication.SizeTypes.Byte;        /// then the type is bytes
+                    break;
+                case 1:                                                  /// if pow equals to 1 
+                    FilesizeTypes = Communication.SizeTypes.KB;          /// then the type is kilobytes and so on
+                    break;
+                case 2:
+                    FilesizeTypes = Communication.SizeTypes.MB;
+                    break;
+                case 3:
+                    FilesizeTypes = Communication.SizeTypes.GB;
+                    break;
+                case 4:
+                    FilesizeTypes = Communication.SizeTypes.TB;
+                    break;
+            }
+
+        }
+
+        public void FileReadAtByteIndex(long BufferIndx, out int BytesRead, out byte[] Buffer, int chunkSize = 1024)
+        {
+            Buffer = new byte[chunkSize];
+            Fs.Position = BufferIndx;
+            BytesRead = Fs.Read(Buffer, 0, chunkSize);
         }
 
         /// <summary>

@@ -57,7 +57,7 @@ class Communication
     /// Creates a server and starts listening to port. This is used to send file to another device.
     /// </summary>
     /// <returns></returns>
-    public static bool CreateServer()
+    public static string CreateServer()
     {
         server = new Server(Port);                      /// Create server instance
         string serverIP=server.SetupServer();           /// Setup Server on default port. this Function will return device ip as string.
@@ -65,10 +65,16 @@ class Communication
         string code = GenerateTransferCode(serverIP);   /// Generate a code to secure transfer
         TransferCode = code;
         // display the code in ui here
-        
-        isClientConnected =server.StartListener();      /// Start Listener for possible clients.
+        return code;
+
+    }
+
+    public static bool startServer()
+    {
+        isClientConnected = server.StartListener();      /// Start Listener for possible clients.
         return isClientConnected;                       /// return connection status
     }
+
     /// <summary>
     /// Sends the file specs to the receiver. the receiver will send a response after receiving tihs query.
     /// </summary>
