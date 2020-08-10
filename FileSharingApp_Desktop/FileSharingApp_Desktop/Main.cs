@@ -39,9 +39,13 @@ namespace FileSharingApp_Desktop
         public static bool SetFileURL(string url)           
         {
             URL = url;                                  /// assign URL
-           bool isConnected= WaitForConnection();       /// Setup the server and accept connection
-            if(isConnected)                             /// if connection succeed
-                ReadFile();                             /// Read file specs
+            bool isConnected= WaitForConnection();       /// Setup the server and accept connection
+            if (isConnected)                             /// if connection succeed
+            {
+                bool isVerified = Communication.VerifyCode();
+                if (isVerified)
+                    ReadFile();                             /// Read file specs
+            }
             return isConnected;                         /// return connection status
         }
         /// <summary>

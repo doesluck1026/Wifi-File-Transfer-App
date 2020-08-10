@@ -34,6 +34,7 @@ class Communication
     public static uint LastPackNumberSent {get; private set; }
     public static int NumberOfPacks { get; private set; }
     public static bool isFileReceived { get; private set; }
+    public static string TransferCode { get; private set; }
 
     public enum SizeTypes
     {
@@ -62,6 +63,7 @@ class Communication
         string serverIP=server.SetupServer();           /// Setup Server on default port. this Function will return device ip as string.
        
         string code = GenerateTransferCode(serverIP);   /// Generate a code to secure transfer
+        TransferCode = code;
         // display the code in ui here
         
         isClientConnected =server.StartListener();      /// Start Listener for possible clients.
@@ -178,9 +180,66 @@ class Communication
         string code = head.ToString() + ipEnd;      /// put the ip part and the random number together.    
         return code;                                /// return the code
     }
+    public static bool VerifyCode()
+    {
+        byte[] receivedData = server.GetData();
+        bool isVerified = false;
+        if(receivedData[0]==StartByte)
+        {
+            if(receivedData[1]==(byte)Functions.QueryTransfer)
+            {
+                string code = Encoding.ASCII.GetString(receivedData, HeaderLen, 6);
+                if (code.CompareTo(TransferCode) == 0)
+                {
+                    Debug.WriteLine("Code is verified!");
+                    isVerified = true;
+                }
+                else
+                    Debug.WriteLine("Code is not verified!");
+            }
+            else
+            {
+                Debug.WriteLine("VerifyCode Function : Function Byte was Wrong: " + (Functions)receivedData[1]);
+            }
+        }
+        else
+        {
+            Debug.WriteLine("VerifyCode Function : Start Byte was Wrong: "+receivedData[0]);
+        }
+        return isVerified;
+    }
     #endregion
 
     #region Client Functions
+    public static string DecodeTransferCode(string code)
+    {
+        if (code.Length == 6)
+        {
+            string dummyCode = code.Substring(0, 3);
+            string ipEndWithZeros = code.Substring(3, 3);
+            string currentIP = client.GetDeviceIP();
+            char[] splitterUsta = { '.' };                                          /// Define the seperator for ip address.
+            string[] IpParts = currentIP.Split(splitterUsta);                       /// split the ip string. this will return four different strings. for Example: if ip is "192.168.1.100"
+            char[] splitterZero = { '0' };                                          /// Define the seperator for ip address.
+            string IpEnd = ipEndWithZeros.Trim(splitterZero);
+            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;
+            return ServersIP;
+        }
+        else
+        {
+            Debug.WriteLine("Code Length was incorrect: " + code.Length);
+            return "";
+        }
+    }
+    public static void SendVerification(string code)
+    {
+        byte[] header = PrepareDataHeader(Functions.QueryTransfer, 6);
+        byte[] dataToSend = new byte[HeaderLen + 6];
+        header.CopyTo(dataToSend, 0);
+        byte[] codeBytes = Encoding.ASCII.GetBytes(code);
+        Array.Copy(codeBytes, 0, dataToSend, HeaderLen, codeBytes.Length);
+        client.SendDataServer(dataToSend);
+    }
     /// <summary>
     /// Connects to server with given ip at given port. This is used to receive file from another device.
     /// </summary>
@@ -325,26 +384,7 @@ class Communication
         client.SendDataServer(dataToSend);
         isFileReceived = true;
     }
-    public static string DecodeTransferCode(string code)
-    {
-        if(code.Length==6)
-        {
-            string dummyCode = code.Substring(0, 3);
-            string ipEndWithZeros = code.Substring(3, 3);
-            string currentIP = client.GetDeviceIP();
-            char[] splitterUsta = { '.' };                                          /// Define the seperator for ip address.
-            string[] IpParts = currentIP.Split(splitterUsta);                       /// split the ip string. this will return four different strings. for Example: if ip is "192.168.1.100"
-            char[] splitterZero = { '0' };                                          /// Define the seperator for ip address.
-            string IpEnd=ipEndWithZeros.Trim(splitterZero);
-            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;
-            return ServersIP;
-        }
-        else
-        {
-            Debug.WriteLine("Code Length was incorrect: " + code.Length);
-            return "";
-        }
-    }
+
     #endregion
 
     #region Common Functions
