@@ -13,7 +13,9 @@ namespace FileSharingApp_Desktop
     class Main
     {
         #region Parameters
+
         private static int PackSize = 1024 * 32;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB
+
         #endregion
 
         #region Variables
@@ -24,8 +26,10 @@ namespace FileSharingApp_Desktop
         private static Communication.SizeTypes SizeType;    /// unit of filesize parameter which can be bytes, kilobytes megabytes etc...
         private static FileStream fileStream;               /// File Stream to be used to read file 
         private static Thread sendingThread;
+
         #endregion
 
+        #region Server Functions
 
         /// <summary>
         /// Gets the Selected URL and setups server
@@ -135,5 +139,14 @@ namespace FileSharingApp_Desktop
                     Debug.WriteLine("File Transfer Failed!");
             }
         }
+
+        #endregion
+
+        #region Client Functions
+
+
+
+        #endregion
+
     }
 }
