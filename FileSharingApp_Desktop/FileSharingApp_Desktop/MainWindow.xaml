@@ -43,8 +43,8 @@
 
             </Grid>
         </Border>
-        
-        <!-- Step 2, choice of transaction type  -->
+
+        <!-- Step 2, Confirmation of the file to be sent or received  -->
         <Border Grid.Row="1" Padding="10" IsEnabled="False" >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -110,7 +110,7 @@
             </Grid>
         </Border>
 
-        <!-- Step 3, choice of transaction type  -->
+        <!-- Step 3, tracking the sending or receiving process -->
         <Border Grid.Row="2" Padding="10" IsEnabled="False" >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -143,16 +143,12 @@
 
                             </StackPanel>
                             
-                            
                         </Grid>    
-                        
 
                     </Grid>
 
                 </Grid>
                 
-
-
             </Grid>
             
         </Border>

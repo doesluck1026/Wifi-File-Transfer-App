@@ -53,6 +53,10 @@ namespace FileSharingApp_Desktop
 
         }
 
+        /// <summary>
+        /// The address of the file to be processed is selected
+        /// </summary>
+        /// <returns>the address of the file in memory</returns>
         private string SelectFile()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
