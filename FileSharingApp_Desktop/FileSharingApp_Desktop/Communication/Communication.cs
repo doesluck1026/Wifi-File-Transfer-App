@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,8 +31,8 @@ class Communication
 
     public static bool isClientConnected = false;
     public static bool isConnectedToServer = false;
-    public static uint LastPackNumberReceived {get; private set;}
-    public static uint LastPackNumberSent {get; private set; }
+    public static long LastPackNumberReceived {get; private set;}
+    public static long LastPackNumberSent {get; private set; }
     public static int NumberOfPacks { get; private set; }
     public static bool isFileReceived { get; private set; }
     public static string TransferCode { get; private set; }
@@ -68,13 +69,13 @@ class Communication
         return code;
 
     }
-
-    public static bool startServer()
+    public static string startServer()
     {
-        isClientConnected = server.StartListener();      /// Start Listener for possible clients.
-        return isClientConnected;                       /// return connection status
+        IPEndPoint  hostname = server.StartListener();      /// Start Listener for possible clients.
+        if (hostname != null)
+            isClientConnected = true;
+        return hostname.Address.ToString();                        /// return connection status
     }
-
     /// <summary>
     /// Sends the file specs to the receiver. the receiver will send a response after receiving tihs query.
     /// </summary>
@@ -143,7 +144,7 @@ class Communication
     /// <param name="data">File Pack bytes (Max 32 Kb)</param>
     /// <param name="numPackage">Index of the data pack to be sent</param>
     /// <returns>Returns Acknowledge</returns>
-    public static bool SendFilePacks(byte[] data,uint numPackage)
+    public static bool SendFilePacks(byte[] data,long numPackage)
     {
         byte[] HeaderBytes = PrepareDataHeader(Functions.SendingFile, (uint)(data.Length + 4));     /// Prepare Data Header for given length. +4 is for to specify current package index.
         byte[] DataToSend = new byte[data.Length + 4 + HeaderLen];                                  /// Create carrier data pack
@@ -221,19 +222,24 @@ class Communication
     #endregion
 
     #region Client Functions
+    /// <summary>
+    /// Decodes Transfer Code that is given by user interface and gets the servers ip from the code.
+    /// </summary>
+    /// <param name="code"></param>
+    /// <returns>Returns Servers Ip as string.</returns>
     public static string DecodeTransferCode(string code)
     {
         if (code.Length == 6)
         {
-            string dummyCode = code.Substring(0, 3);
-            string ipEndWithZeros = code.Substring(3, 3);
-            string currentIP = client.GetDeviceIP();
+            string dummyCode = code.Substring(0, 3);                                /// Get the code that is generated randomly. this part has no effect to ip
+            string ipEndWithZeros = code.Substring(3, 3);                           /// Get the last thre digits which are the last digits of servers ip address.
+            string currentIP = client.GetDeviceIP();                                /// Get current device's ip. this will be used to detect the family of ip adress.
             char[] splitterUsta = { '.' };                                          /// Define the seperator for ip address.
             string[] IpParts = currentIP.Split(splitterUsta);                       /// split the ip string. this will return four different strings. for Example: if ip is "192.168.1.100"
-            char[] splitterZero = { '0' };                                          /// Define the seperator for ip address.
-            string IpEnd = ipEndWithZeros.Trim(splitterZero);
-            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;
-            return ServersIP;
+            char[] splitterZero = { '0' };                                          /// define target chars to be searched in string
+            string IpEnd = ipEndWithZeros.TrimStart(splitterZero);                  /// Remove Zeros at the beginning in th ipEnd.
+            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;        /// Sum all ip parts to get the servers ip
+            return ServersIP;                                                       /// return ip
         }
         else
         {
@@ -241,14 +247,18 @@ class Communication
             return "";
         }
     }
+    /// <summary>
+    /// Sends the vTransfer verification code back to server.
+    /// </summary>
+    /// <param name="code">the code that given by user on user interface which created by sender device</param>
     public static void SendVerification(string code)
     {
-        byte[] header = PrepareDataHeader(Functions.QueryTransfer, 6);
-        byte[] dataToSend = new byte[HeaderLen + 6];
-        header.CopyTo(dataToSend, 0);
-        byte[] codeBytes = Encoding.ASCII.GetBytes(code);
-        Array.Copy(codeBytes, 0, dataToSend, HeaderLen, codeBytes.Length);
-        client.SendDataServer(dataToSend);
+        byte[] header = PrepareDataHeader(Functions.QueryTransfer, 6);              /// Prepare Data Header
+        byte[] dataToSend = new byte[HeaderLen + 6];                                /// Create Carrier Byte array
+        header.CopyTo(dataToSend, 0);                                               /// Copy Header to the carrier.
+        byte[] codeBytes = Encoding.ASCII.GetBytes(code);                           /// Convert code to byte array.
+        Array.Copy(codeBytes, 0, dataToSend, HeaderLen, codeBytes.Length);          /// Copy coe array to carrier bytes
+        client.SendDataServer(dataToSend);                                          /// Send data to server.
     }
     /// <summary>
     /// Connects to server with given ip at given port. This is used to receive file from another device.
@@ -367,9 +377,13 @@ class Communication
             return null;
         }
     }
+    /// <summary>
+    /// Sends Acknowledge to Server. This is Used to send feedback to server when a file pack is received. if this feedback is not sent then the file transfer will be stopped by server.
+    /// </summary>
+    /// <param name="isreceived"></param>
     private static void SendAckToServer(bool isreceived)
     {
-        byte[] header = PrepareDataHeader(Functions.TransferStatus, 1);      /// Prepare Data Header 
+        byte[] header = PrepareDataHeader(Functions.TransferStatus, 1);     /// Prepare Data Header 
         byte[] dataToSend = new byte[HeaderLen + 1];                        /// Prepare Carrier Pack
         Array.Copy(header, 0, dataToSend, 0, HeaderLen);                    /// Copy header to Carrier Pack
         if (isreceived)                                                     /// if transfer is accepted

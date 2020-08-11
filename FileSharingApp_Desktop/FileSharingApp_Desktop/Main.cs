@@ -21,11 +21,8 @@ namespace FileSharingApp_Desktop
         #region Variables
 
         private static string URL;                          /// File Path
-        private static string FileName;                     /// Name of the file including extention
-        private static double FileSize;                     /// Size of the file which can be bytes, kilobytes megabytes etc...
-        private static Communication.SizeTypes SizeType;    /// unit of filesize parameter which can be bytes, kilobytes megabytes etc...
-        private static FileStream fileStream;               /// File Stream to be used to read file 
         private static Thread sendingThread;
+        private static FileOperations FileOps;
 
         #endregion
 
@@ -36,38 +33,45 @@ namespace FileSharingApp_Desktop
         /// </summary>
         /// <param name="url">Path of the file to be transfered</param>
         /// <returns></returns>
-        public static bool SetFileURL(string url)           
+        public static void SetFileURL(string url)           
         {
-            URL = url;                                  /// assign URL
-            bool isConnected= WaitForConnection();       /// Setup the server and accept connection
-            if (isConnected)                             /// if connection succeed
+            URL = url;                                                  /// assign URL
+            FileOps = new FileOperations(url);
+            string  clientHostname= WaitForConnection();                /// Setup the server and accept connection
+            if (clientHostname!=null || clientHostname!="")             /// if connection succeed
             {
                 bool isVerified = Communication.VerifyCode();
                 if (isVerified)
-                    ReadFile();                             /// Read file specs
+                {
+                    // display hostname here
+                    // Ask User if still wants to transfer file to connected client.
+                }
             }
-            return isConnected;                         /// return connection status
         }
-
-
         /// <summary>
         /// This function is used to send information to client about the file to be transfered and queries if client still wants to receive the file
+        /// Call this Function after User confirms to send file.
         /// </summary>
         /// <returns> returns acception status according to answer of the client (true or false)</returns>
         public static bool QueryForTransfer()
         {
-           bool isAccepted= Communication.QueryForTransfer(FileName, FileSize, SizeType);
-            return isAccepted;                          /// return acception status
+           bool isAccepted= Communication.QueryForTransfer(FileOps.FileName, FileOps.FileSize, FileOps.FilesizeType);
+            if(isAccepted)
+            {
+                bool isTransferStarted=StartFileTransfer();                     /// Start File Transfer
+                return isTransferStarted;
+            }
+            return false;                                                       /// return false
         }
         /// <summary>
         /// Starts sending slected file to client in another thread.
         /// </summary>
         /// <returns>returns true if transfer is started</returns>
-        public static bool StartFileTransfer()
+        private static bool StartFileTransfer()
         {
             try
             {
-                sendingThread = new Thread(SendingCoreFcn);
+                sendingThread = new Thread(SendingCoreFcn);                             /// Start Sending File
                 sendingThread.Start();
                 return true;
             }
@@ -81,67 +85,40 @@ namespace FileSharingApp_Desktop
         /// Sets up the server and starts listening to clients
         /// </summary>
         /// <returns>returns true if a client successfully connected</returns>
-        private static bool WaitForConnection()
+        private static string WaitForConnection()
         {
-            string IpCode=Communication.CreateServer();  /// setup the server and start listening to port
+            bool success = false;
+            string IpCode=Communication.CreateServer();                     /// setup the server and start listening to port
             // display the "IpCode" in ui here
-            bool Success = Communication.startServer();
-
-            return Success; 
-        }
-        /// <summary>
-        /// assigns to file stream object and reads file specs..
-        /// </summary>
-        private static void ReadFile()
-        {
-            fileStream = new FileStream(URL, FileMode.Open);        /// create a file stream object to be used to read file
-            long fileSizeAsByte= fileStream.Length;                 /// get the length of the file as bytes length
-            int pow = (int)Math.Log(fileSizeAsByte, 1024);          /// calculate the greatest type ( byte megabyte gigabyte etc...) the filesize can be respresent as integer variable
-            FileSize = fileSizeAsByte/Math.Pow(1024, pow);          /// Convert file size from bytes to the greatest type
-            switch (pow)                                            /// to assign type:
-            {                                                       
-                case 0:                                             /// if pow equals to 0
-                    SizeType = Communication.SizeTypes.Byte;        /// then the type is bytes
-                    break;
-                case 1:                                             /// if pow equals to 1 
-                    SizeType = Communication.SizeTypes.KB;          /// then the type is kilobytes and so on
-                    break;
-                case 2:
-                    SizeType = Communication.SizeTypes.MB;
-                    break;
-                case 3:
-                    SizeType = Communication.SizeTypes.GB;
-                    break;
-                case 4:
-                    SizeType = Communication.SizeTypes.TB;
-                    break;
-            }
+            string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
+            return clientHostname; 
         }
         /// <summary>
         /// This function is used in a thread to send all file bytes to client.
         /// </summary>
         private static void SendingCoreFcn()
         {
-            if(fileStream!=null)
+            if(FileOps!=null)
             {
                 /// define variables
                 long bytesSent = 0;
                 int BytesRead = 0;
-                uint numPack = 0;
+                long numPack = 0;
                 bool isSent = false;
-                byte[] BytesToSend = new byte[PackSize];                                /// Define byte array to carry file bytes
-                while (bytesSent<fileStream.Length)                                     /// while the number of bytes sent to client is smaller than the total file length
+                byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
+                while (bytesSent<FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
                 {
-                    BytesRead = fileStream.Read(BytesToSend, 0, BytesToSend.Length);    /// read file and copy to carrier array.
-                    isSent = Communication.SendFilePacks(BytesToSend, numPack);         /// send the bytes
-                    if (!isSent)                                                        /// if fails
-                        break;                                                          /// stop file transfer
-                    numPack++;                                                          /// increase the number of package sent variable
-                    bytesSent += BytesRead;                                             /// update the number of bytes sent to client.
+                    FileOps.FileReadAtByteIndex(numPack, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
+                    isSent = Communication.SendFilePacks(BytesToSend, numPack);                         /// send the bytes
+                    if (isSent)
+                    {
+                        numPack++;                                                                      /// increase the number of package sent variable
+                        bytesSent += BytesRead;                                                         /// update the number of bytes sent to client.
+                    }
                 }
-                if (isSent)                                                             /// if all file is sent
+                if (isSent)                                                                             /// if all file is sent
                 {
-                    Communication.CompleteTransfer();                                   /// stop data transfer and let client know that the transfer is successfully done.
+                    Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
                     Debug.WriteLine("File is Succesfully Sent");
                 }
                 else
