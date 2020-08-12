@@ -25,7 +25,7 @@ class Server
     {
         this.Port = port;
     }
-    public bool StartListener()
+    public IPEndPoint StartListener()
     {
         try
         {
@@ -38,12 +38,12 @@ class Server
             client.SendBufferSize = BufferSize;
             Debug.WriteLine("Connected to: " + client.Client.RemoteEndPoint.ToString());
             ErrorCounter = 0;
-            return _isClientConnected;
+            return endPoint;
         }
         catch (Exception e)
         {
             Debug.WriteLine("Client Failed to connect!  " + e.ToString());
-            return false;
+            return null;
         }
     }
     public string SetupServer()
