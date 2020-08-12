@@ -30,10 +30,50 @@ namespace FileSharingApp_Desktop
         private static Thread sendingThread;
         private static FileOperations FileOps;
         private static Thread receivingThread;
+        private static object speedLock = new object();
+        private static object completedLock = new object();
+        private static double _transferSpeed = 0;
+        private static int _completedPercentage = 0;
+        public static double TransferSpeed
+        {
+
+            get
+            {
+                lock (speedLock)
+                {
+                    return _transferSpeed;
+                }
+            }
+            set
+            {
+                lock (speedLock)
+                {
+                    _transferSpeed = value;
+                }
+            }
+        }
+        public static int CompletedPercentage
+        {
+
+            get
+            {
+                lock (completedLock)
+                {
+                    return _completedPercentage;
+                }
+            }
+            set
+            {
+                lock (completedLock)
+                {
+                    _completedPercentage = value;
+                }
+            }
+        }
 
         #endregion
 
-        
+
 
         #region Server Functions
 
@@ -97,7 +137,6 @@ namespace FileSharingApp_Desktop
         /// <returns>returns true if a client successfully connected</returns>
         private static string WaitForConnection()
         {
-            bool success = false;
             string IpCode=Communication.CreateServer();                     /// setup the server and start listening to port
             // display the "IpCode" in ui here
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
@@ -116,6 +155,9 @@ namespace FileSharingApp_Desktop
                 long numPack = 0;
                 bool isSent = false;
                 byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
+                long numberOfPacks = Communication.NumberOfPacks;
+                long checkPoint = 0;
+                Stopwatch stopwatch = Stopwatch.StartNew();
                 while (bytesSent<FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
                 {
                     FileOps.FileReadAtByteIndex(bytesSent, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
@@ -125,6 +167,13 @@ namespace FileSharingApp_Desktop
                         numPack++;                                                                      /// increase the number of package sent variable
                         bytesSent += BytesRead;                                                         /// update the number of bytes sent to client.
                     }
+                    if(stopwatch.ElapsedMilliseconds>1000)
+                    {
+                        TransferSpeed = (bytesSent - checkPoint) / (1024.0 * 1024);                     ///
+                        checkPoint = bytesSent;
+                        stopwatch.Restart();
+                    }
+                    CompletedPercentage = (int)(numPack / numberOfPacks) *100;
                 }
                 if (isSent)                                                                             /// if all file is sent
                 {
@@ -179,7 +228,7 @@ namespace FileSharingApp_Desktop
                 Debug.WriteLine("File Transfer is Started");
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 Debug.WriteLine("Failed to Start sending thread! \n " + e.ToString());
                 return false;
@@ -192,25 +241,28 @@ namespace FileSharingApp_Desktop
                 /// define variables
                 long bytesWritten = 0;
                 long numPack = 0;
-                bool isSent = false;
                 byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
+                long numberOfPacks = Communication.NumberOfPacks;
+                long checkPoint = 0;
+                Stopwatch stopwatch = Stopwatch.StartNew();
                 while (numPack < Communication.NumberOfPacks)                                           /// while the number of bytes sent to client is smaller than the total file length
                 {
                     BytesToWrite = Communication.ReceiveFilePacks();
                     FileOps.FileWriteAtByteIndex(numPack, BytesToWrite);                                /// read file and copy to carrier array.
-                    if (isSent)
+
+                    numPack++;                                                                      /// increase the number of package sent variable
+                    bytesWritten += BytesToWrite.Length;                                                         /// update the number of bytes sent to client.
+                    if (stopwatch.ElapsedMilliseconds > 1000)
                     {
-                        numPack++;                                                                      /// increase the number of package sent variable
-                        bytesWritten += BytesToWrite.Length;                                                         /// update the number of bytes sent to client.
+                        TransferSpeed = (bytesWritten - checkPoint) / (1024.0 * 1024);                     ///
+                        checkPoint = bytesWritten;
+                        stopwatch.Restart();
                     }
+                    CompletedPercentage = (int)(numPack / numberOfPacks) * 100;
                 }
-                if (isSent)                                                                             /// if all file is sent
-                {
-                    Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
-                    Debug.WriteLine("File is Succesfully Sent");
-                }
-                else
-                    Debug.WriteLine("File Transfer Failed!");
+                Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
+                Debug.WriteLine("File is Succesfully Received");
+
             }
         }
         #endregion
