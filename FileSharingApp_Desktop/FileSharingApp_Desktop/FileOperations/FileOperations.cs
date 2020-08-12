@@ -99,9 +99,12 @@ class FileOperations
     {
         this.FilePath = FilePath;                                       /// Assign path to FilePath variable
         if (transferMode == TransferMode.Receive)
+        {
+            Fs = File.OpenWrite(FilePath);
             return;
+        }
         Fs = File.OpenRead(FilePath);                                   /// Open File
-        char[] splitterUsta= {'/'};                                     /// Define splitter array that will be used to find file name
+        char[] splitterUsta= {'\\','/'};                                     /// Define splitter array that will be used to find file name
         string[] nameArray = FilePath.Split(splitterUsta);              /// Split path string to array by '/' sign
         this.FileName = nameArray[nameArray.Length - 1];                /// Get the last string which will be the file name as "filename.extension"
         long fileSizeAsByte = Fs.Length;                                /// Get the Total length of the file as bytes

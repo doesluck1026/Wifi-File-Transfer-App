@@ -112,7 +112,7 @@ namespace FileSharingApp_Desktop
                 byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
                 while (bytesSent<FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
                 {
-                    FileOps.FileReadAtByteIndex(numPack, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
+                    FileOps.FileReadAtByteIndex(bytesSent, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
                     isSent = Communication.SendFilePacks(BytesToSend, numPack);                         /// send the bytes
                     if (isSent)
                     {
@@ -185,7 +185,6 @@ namespace FileSharingApp_Desktop
             {
                 /// define variables
                 long bytesWritten = 0;
-                int BytesRead = 0;
                 long numPack = 0;
                 bool isSent = false;
                 byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
