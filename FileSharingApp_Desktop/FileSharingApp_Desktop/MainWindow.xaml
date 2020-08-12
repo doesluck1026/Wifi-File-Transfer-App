@@ -7,6 +7,150 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height = "*" />
+            <RowDefinition Height = "*" />
+            <RowDefinition Height = "*" />
+        </Grid.RowDefinitions>
+
+        <!-- Step 1, choice of transaction type  -->
+        <Border Grid.Row="0" Padding="10" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width = "1*" />
+                    <ColumnDefinition Width = "3*" />
+                    <ColumnDefinition Width = "3*" />
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column = "0" Padding = "10">
+                    <Label x:Name="lbl_FirstStep" Background="Green" />
+
+                </Border>
+
+                <Border Grid.Column = "1" Padding = "10">
+                    <Button x:Name="btn_SendFile" Content=" Send File" Click="btn_SendFile_Click" >
+                        
+                    </Button>
+                    
+                </Border>
+
+                <Border Grid.Column = "2" Padding = "10">
+                    <Button x:Name="btn_ReceiveFile" Content=" Receive File" Click="btn_ReceiveFile_Click" >
+
+                    </Button>
+
+                </Border>
+
+            </Grid>
+        </Border>
+
+        <!-- Step 2, Confirmation of the file to be sent or received  -->
+        <Border Grid.Row="1" Padding="10" IsEnabled="False" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width = "1*" />
+                    <ColumnDefinition Width = "3*" />
+                    <ColumnDefinition Width = "3*" />
+                </Grid.ColumnDefinitions>
+
+                <Border  Grid.Column = "0" Padding = "10">
+                    <Label x:Name="lbl_SecondStep" Background="LightSkyBlue" />
+
+                </Border>
+
+                <Border  Grid.Column = "1" Padding = "10">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height = "*" />
+                            <RowDefinition Height = "*" />
+                            <RowDefinition Height = "*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Content=" File Info      : " VerticalAlignment="Center" Background="#eee"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <Label Content=" File Name  : " VerticalAlignment="Center" />
+                            <TextBlock VerticalAlignment="Center" Text=" dummy File" />
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <Label Content=" File Size      : " VerticalAlignment="Center" />
+                            <TextBlock VerticalAlignment="Center" Text=" dummy Size " />
+
+                        </StackPanel>
+                        
+                    </Grid>
+                    
+                </Border>
+                
+                <Border  Grid.Column = "3" Padding = "10">
+                    <Grid >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height = "*" />
+                            <RowDefinition Height = "*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0"  HorizontalAlignment="Center">
+
+                            <TextBlock VerticalAlignment="Center" Text=" DUMMY KOD" FontSize="40" FontWeight="Bold" />
+
+                        </Grid>
+
+                        <Border Grid.Row="1" Padding="8">
+                            <Grid   >
+                                <Button x:Name="btn_Confirm" Content="Confirm" FontWeight="Bold"/>
+
+                            </Grid>
+
+                        </Border>
+
+                    </Grid>
+
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- Step 3, tracking the sending or receiving process -->
+        <Border Grid.Row="2" Padding="10" IsEnabled="False" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width = "1*" />
+                    <ColumnDefinition Width = "6*" />
+
+                </Grid.ColumnDefinitions>
+
+                <Border  Grid.Column = "0" Padding = "10">
+                    <Label x:Name="lbl_ThirdStep" Background="LightBlue" />
+
+                </Border>
+
+                <Grid Grid.Column = "1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height = "*" />
+                        <RowDefinition Height = "*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row = "0" Margin="15">
+                        <ProgressBar Minimum="0" Maximum="100" Value="75" Name="pbStatus" />
+                        <TextBlock Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+
+                    <Grid Grid.Row = "1" Margin="10">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content=" Speed : " VerticalAlignment="Center"/>
+                                <TextBlock VerticalAlignment="Center" Text=" dummy speed MB/s" />
+
+                            </StackPanel>
+                            
+                        </Grid>    
+
+                    </Grid>
+
+                </Grid>
+                
+            </Grid>
+            
+        </Border>
     </Grid>
 </Window>

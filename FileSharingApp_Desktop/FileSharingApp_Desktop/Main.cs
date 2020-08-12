@@ -12,6 +12,12 @@ namespace FileSharingApp_Desktop
 {
     class Main
     {
+        public enum ProccessType
+        {
+            SendFile,
+            ReceiveFile
+        }
+
         #region Parameters
 
         private static int PackSize = 1024 * 32;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB

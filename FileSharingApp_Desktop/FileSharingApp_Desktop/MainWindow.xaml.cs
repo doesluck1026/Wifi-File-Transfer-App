@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,5 +28,52 @@ namespace FileSharingApp_Desktop
             System.Diagnostics.Debug.WriteLine("push yapıyorum");
             
         }
+
+        private void btn_SendFile_Click(object sender, RoutedEventArgs e)
+        {
+            string FileURL = SelectFile();
+            if(FileURL == null)
+            {
+                //show wrong url message
+                return;
+            }
+            System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
+
+        }
+
+        private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
+        {
+            string FileURL = SelectFile();
+            if (FileURL == null)
+            {
+                //show wrong url message
+                return;
+            }
+            System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
+
+        }
+
+        /// <summary>
+        /// The address of the file to be processed is selected
+        /// </summary>
+        /// <returns>the address of the file in memory</returns>
+        private string SelectFile()
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.Filter = " All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            
+            if (openFileDialog1.ShowDialog() == true)
+            {
+                string selectedFileName = openFileDialog1.FileName;
+                return selectedFileName;
+            }
+
+            return null;
+        }
+
     }
 }
