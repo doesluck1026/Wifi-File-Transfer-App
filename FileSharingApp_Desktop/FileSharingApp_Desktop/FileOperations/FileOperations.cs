@@ -14,6 +14,12 @@ class FileOperations
     private FileStream Fs;
     private Communication.SizeTypes _sizeTypes;
 
+    public enum TransferMode
+    {
+        Send,
+        Receive
+    }
+
     /// <summary>
     /// Path and name of the file including extention
     /// </summary>
@@ -89,9 +95,11 @@ class FileOperations
     /// Create File Operation
     /// </summary>
     /// <param name="FilePath">Reading address of the file to be sent or the address to save the received file</param>
-    public FileOperations(string FilePath)
+    public FileOperations(string FilePath, TransferMode transferMode)
     {
         this.FilePath = FilePath;                                       /// Assign path to FilePath variable
+        if (transferMode == TransferMode.Receive)
+            return;
         Fs = File.OpenRead(FilePath);                                   /// Open File
         char[] splitterUsta= {'/'};                                     /// Define splitter array that will be used to find file name
         string[] nameArray = FilePath.Split(splitterUsta);              /// Split path string to array by '/' sign
@@ -127,7 +135,11 @@ class FileOperations
         Fs.Position = BufferIndx;
         BytesRead = Fs.Read(Buffer, 0, chunkSize);
     }
-
+    public void FileWriteAtByteIndex(long BufferIndx, byte[] Buffer)
+    {
+        Fs.Position = BufferIndx;
+        Fs.Write(Buffer, 0, Buffer.Length);
+    }
     /// <summary>
     /// The file at the given address is taken to the Ram piece by piece and sent by the server
     /// </summary>
