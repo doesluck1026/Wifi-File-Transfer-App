@@ -31,7 +31,9 @@ namespace FileSharingApp_Desktop
         private static FileOperations FileOps;
         private static Thread receivingThread;
         private static object speedLock = new object();
+        private static object completedLock = new object();
         private static double _transferSpeed = 0;
+        private static int _completedPercentage = 0;
         public static double TransferSpeed
         {
 
@@ -50,9 +52,28 @@ namespace FileSharingApp_Desktop
                 }
             }
         }
+        public static int CompletedPercentage
+        {
+
+            get
+            {
+                lock (completedLock)
+                {
+                    return _completedPercentage;
+                }
+            }
+            set
+            {
+                lock (completedLock)
+                {
+                    _completedPercentage = value;
+                }
+            }
+        }
+
         #endregion
 
-        
+
 
         #region Server Functions
 
@@ -135,6 +156,7 @@ namespace FileSharingApp_Desktop
                 long numPack = 0;
                 bool isSent = false;
                 byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
+                long numberOfPacks = Communication.NumberOfPacks;
                 long checkPoint = 0;
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 while (bytesSent<FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
@@ -152,6 +174,7 @@ namespace FileSharingApp_Desktop
                         checkPoint = bytesSent;
                         stopwatch.Restart();
                     }
+                    CompletedPercentage = (int)(numPack / numberOfPacks) *100;
                 }
                 if (isSent)                                                                             /// if all file is sent
                 {
@@ -206,7 +229,7 @@ namespace FileSharingApp_Desktop
                 Debug.WriteLine("File Transfer is Started");
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 Debug.WriteLine("Failed to Start sending thread! \n " + e.ToString());
                 return false;
@@ -221,6 +244,7 @@ namespace FileSharingApp_Desktop
                 long numPack = 0;
                 bool isSent = false;
                 byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
+                long numberOfPacks = Communication.NumberOfPacks;
                 long checkPoint = 0;
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 while (numPack < Communication.NumberOfPacks)                                           /// while the number of bytes sent to client is smaller than the total file length
@@ -236,6 +260,7 @@ namespace FileSharingApp_Desktop
                         checkPoint = bytesWritten;
                         stopwatch.Restart();
                     }
+                    CompletedPercentage = (int)(numPack / numberOfPacks) * 100;
                 }
                 Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
                 Debug.WriteLine("File is Succesfully Received");
