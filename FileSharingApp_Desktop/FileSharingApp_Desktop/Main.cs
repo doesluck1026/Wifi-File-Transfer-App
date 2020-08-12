@@ -137,7 +137,6 @@ namespace FileSharingApp_Desktop
         /// <returns>returns true if a client successfully connected</returns>
         private static string WaitForConnection()
         {
-            bool success = false;
             string IpCode=Communication.CreateServer();                     /// setup the server and start listening to port
             // display the "IpCode" in ui here
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
@@ -242,7 +241,6 @@ namespace FileSharingApp_Desktop
                 /// define variables
                 long bytesWritten = 0;
                 long numPack = 0;
-                bool isSent = false;
                 byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
                 long numberOfPacks = Communication.NumberOfPacks;
                 long checkPoint = 0;
