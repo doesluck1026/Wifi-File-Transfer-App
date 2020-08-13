@@ -230,9 +230,12 @@ class Client
         string localAddr = "";
         foreach (var ip in host.AddressList)
         {
+            Debug.WriteLine("ip : " );
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
                 localAddr = ip.ToString();
+                Debug.WriteLine("ip : "+ localAddr);
+
             }
         }
         return localAddr;
