@@ -26,7 +26,19 @@ namespace FileSharingApp_Desktop
             InitializeComponent();
 
             System.Diagnostics.Debug.WriteLine("push yapıyorum");
-            
+            Main.event_UpdateUI += UpdateUI;
+
+        }
+
+        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage)
+        {
+            // Dispatcher
+            if (!IPCode.Equals(""))
+            {
+                txt_IpCode.Text = IPCode;
+
+            }
+
         }
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
@@ -37,6 +49,8 @@ namespace FileSharingApp_Desktop
                 //show wrong url message
                 return;
             }
+            Main.SetFileURL(FileURL);
+
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
 
         }
