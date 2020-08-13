@@ -32,6 +32,8 @@ namespace FileSharingApp_Desktop
         private static Thread receivingThread;
         private static object speedLock = new object();
         private static object completedLock = new object();
+        private static object transferApprovedLock = new object();
+        private static object transferabortedLock = new object();
 
 
         public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage);
@@ -41,6 +43,8 @@ namespace FileSharingApp_Desktop
         private static bool _TransferVerified = false;
         private static double _transferSpeed = 0;
         private static int _completedPercentage = 0;
+        private static bool _transferApproved = false;
+        private static bool _transferAborted = false;
 
         public static double TransferSpeed
         {
@@ -78,7 +82,42 @@ namespace FileSharingApp_Desktop
                 }
             }
         }
+        public static bool TransferApproved
+        {
 
+            get
+            {
+                lock (transferApprovedLock)
+                {
+                    return _transferApproved;
+                }
+            }
+            set
+            {
+                lock (transferApprovedLock)
+                {
+                    _transferApproved = value;
+                }
+            }
+        }
+        public static bool TransferAborted
+        {
+
+            get
+            {
+                lock (transferabortedLock)
+                {
+                    return _transferAborted;
+                }
+            }
+            set
+            {
+                lock (transferabortedLock)
+                {
+                    _transferAborted = value;
+                }
+            }
+        }
         #endregion
 
 
@@ -94,19 +133,8 @@ namespace FileSharingApp_Desktop
         {
             URL = url;                                                  /// assign URL
             FileOps = new FileOperations(url,FileOperations.TransferMode.Send);
-            string  clientHostname= WaitForConnection();                /// Setup the server and accept connection
-            if (clientHostname!=null && clientHostname!= "")             /// if connection succeed
-            {
-                bool isVerified = Communication.VerifyCode();
-                if (isVerified)
-                {
-                    _TransferVerified = isVerified;
-                    _HostName = clientHostname;
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
-                    // display hostname here
-                    // Ask User if still wants to transfer file to connected client.
-                }
-            }
+            WaitForConnection();                /// Setup the server and accept connection
+            
         }
         /// <summary>
         /// This function is used to send information to client about the file to be transfered and queries if client still wants to receive the file
@@ -116,11 +144,6 @@ namespace FileSharingApp_Desktop
         public static bool QueryForTransfer()
         {
            bool isAccepted= Communication.QueryForTransfer(FileOps.FileName, FileOps.FileSize, FileOps.FilesizeType);
-            if(isAccepted)
-            {
-                bool isTransferStarted=StartFileTransfer();                     /// Start File Transfer
-                return isTransferStarted;
-            }
             return false;                                                       /// return false
         }
         /// <summary>
@@ -146,15 +169,12 @@ namespace FileSharingApp_Desktop
         /// Sets up the server and starts listening to clients
         /// </summary>
         /// <returns>returns true if a client successfully connected</returns>
-        private static string WaitForConnection()
+        private static void WaitForConnection()
         {
             string IpCode=Communication.CreateServer();                     /// setup the server and start listening to port
             _IpCode = IpCode;
             event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
-
-            // display the "IpCode" in ui here
-            string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
-            return clientHostname; 
+            bool isTransferStarted = StartFileTransfer();                     /// Start File Transfer
         }
         /// <summary>
         /// This function is used in a thread to send all file bytes to client.
@@ -163,6 +183,35 @@ namespace FileSharingApp_Desktop
         {
             if(FileOps!=null)
             {
+                string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
+                _HostName = clientHostname;
+                event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                while (!TransferApproved && !TransferAborted);
+                if(TransferAborted)
+                {
+                    sendingThread.Abort();
+                    return;
+                }
+                if (clientHostname != null && clientHostname != "")             /// if connection succeed
+                {
+                    bool isVerified = Communication.VerifyCode();
+                    if (isVerified)
+                    {
+                        _TransferVerified = isVerified;
+                        _HostName = clientHostname;
+                        event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                    }
+                    else
+                    {
+                        sendingThread.Abort();
+                        return;
+                    }
+                }
+                else
+                {
+                    sendingThread.Abort();
+                    return;
+                }
                 /// define variables
                 long bytesSent = 0;
                 int BytesRead = 0;
@@ -220,6 +269,7 @@ namespace FileSharingApp_Desktop
                     double fileSize;
                     Communication.SizeTypes sizeType;
                     Communication.GetFileSpecs(out fileName, out fileSize, out sizeType);
+                    FileOps.FileName = fileName;
                     // Show Specs to user and ask for permission
                 }
             }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace FileSharingApp_Desktop
 {
@@ -21,6 +23,7 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string FileURL = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -32,13 +35,23 @@ namespace FileSharingApp_Desktop
 
         private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage)
         {
-            // Dispatcher
-            if (!IPCode.Equals(""))
+            Dispatcher.Invoke(() =>
             {
-                txt_IpCode.Text = IPCode;
+                if (!IPCode.Equals(""))
+                {
+                    txt_IpCode.Text = IPCode;
+                }
+                if(!HostName.Equals(""))
+                {
+                    lbl_Hostname.Content = HostName;
+                }
+                if(TransferVerified)
+                {
 
-            }
-
+                }
+                pbStatus.Value = _completedPercentage;
+                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00");
+            });
         }
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
@@ -57,14 +70,13 @@ namespace FileSharingApp_Desktop
 
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
-            string FileURL = SelectFile();
+            FileURL = GetFolder();
             if (FileURL == null)
             {
                 //show wrong url message
                 return;
             }
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
-
         }
 
         /// <summary>
@@ -88,6 +100,37 @@ namespace FileSharingApp_Desktop
 
             return null;
         }
+        private string GetFolder()
+        {
+            var dlg = new CommonOpenFileDialog();
+            dlg.Title = "My Title";
+            dlg.IsFolderPicker = true;
+            dlg.InitialDirectory = "c:\\";
 
+            dlg.AddToMostRecentlyUsedList = false;
+            dlg.AllowNonFileSystemItems = false;
+            dlg.DefaultDirectory = "c:\\";
+            dlg.EnsureFileExists = true;
+            dlg.EnsurePathExists = true;
+            dlg.EnsureReadOnly = false;
+            dlg.EnsureValidNames = true;
+            dlg.Multiselect = false;
+            dlg.ShowPlacesList = true;
+
+            if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                var folder = dlg.FileName;
+                System.Diagnostics.Debug.WriteLine("Selected Folder: " + folder);
+                return folder;
+            }
+            return null;
+        }
+
+        private void btn_Confirm_Click(object sender, RoutedEventArgs e)
+        {
+            string code = txt_IpCode.Text;
+            Main.EnterTheCode(code);
+            Main.SetFilePathToSave(FileURL);
+        }
     }
 }
