@@ -100,7 +100,7 @@ class FileOperations
         this.FilePath = FilePath;                                       /// Assign path to FilePath variable
         if (transferMode == TransferMode.Receive)
         {
-            Fs = File.OpenWrite(FilePath);
+            Fs = File.OpenWrite(FilePath+FileName);
             return;
         }
         Fs = File.OpenRead(FilePath);                                   /// Open File

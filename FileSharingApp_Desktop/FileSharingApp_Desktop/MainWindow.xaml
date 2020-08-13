@@ -93,15 +93,15 @@
 
                         <Border Grid.Row="0" Padding="2" HorizontalAlignment="Center">
 
-                            <TextBlock x:Name="txt_IpCode" VerticalAlignment="Center" Text=" DUMMY CODE" FontSize="35" FontWeight="Bold" />
+                            <TextBox x:Name="txt_IpCode" VerticalAlignment="Center" Text=" DUMMY CODE" FontSize="25" FontWeight="Bold" />
 
                         </Border>
 
-                        <Label Grid.Row="1" Content=" Host Name      : " VerticalAlignment="Center" Background="#eee"/>
+                        <Label x:Name="lbl_Hostname" Grid.Row="1" Content=" Host Name      : " VerticalAlignment="Center" Background="#eee"/>
 
                         <Border Grid.Row="2" Padding="2">
                             <Grid   >
-                                <Button x:Name="btn_Confirm" Content="Confirm" FontWeight="Bold"/>
+                                <Button x:Name="btn_Confirm" Content="Confirm" FontWeight="Bold" Click="btn_Confirm_Click"/>
 
                             </Grid>
 
@@ -142,7 +142,7 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content=" Speed : " VerticalAlignment="Center"/>
-                                <TextBlock VerticalAlignment="Center" Text=" dummy speed MB/s" />
+                                <TextBlock x:Name="txt_TransferSpeed" VerticalAlignment="Center" Text=" dummy speed MB/s" />
 
                             </StackPanel>
                             
