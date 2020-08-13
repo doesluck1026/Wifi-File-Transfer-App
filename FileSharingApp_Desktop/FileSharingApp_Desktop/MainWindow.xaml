@@ -45,7 +45,7 @@
         </Border>
 
         <!-- Step 2, Confirmation of the file to be sent or received  -->
-        <Border Grid.Row="1" Padding="10" IsEnabled="False" >
+        <Border Grid.Row="1" Padding="10" IsEnabled="True" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width = "1*" />
@@ -88,15 +88,18 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height = "*" />
                             <RowDefinition Height = "*" />
+                            <RowDefinition Height = "*" />
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0"  HorizontalAlignment="Center">
+                        <Border Grid.Row="0" Padding="2" HorizontalAlignment="Center">
 
-                            <TextBlock VerticalAlignment="Center" Text=" DUMMY KOD" FontSize="40" FontWeight="Bold" />
+                            <TextBlock x:Name="txt_IpCode" VerticalAlignment="Center" Text=" DUMMY CODE" FontSize="35" FontWeight="Bold" />
 
-                        </Grid>
+                        </Border>
 
-                        <Border Grid.Row="1" Padding="8">
+                        <Label Grid.Row="1" Content=" Host Name      : " VerticalAlignment="Center" Background="#eee"/>
+
+                        <Border Grid.Row="2" Padding="2">
                             <Grid   >
                                 <Button x:Name="btn_Confirm" Content="Confirm" FontWeight="Bold"/>
 

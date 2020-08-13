@@ -32,8 +32,16 @@ namespace FileSharingApp_Desktop
         private static Thread receivingThread;
         private static object speedLock = new object();
         private static object completedLock = new object();
+
+
+        public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage);
+        public static event Delegate_UpdateUI event_UpdateUI;
+        private static string _IpCode = "";
+        private static string _HostName = "";
+        private static bool _TransferVerified = false;
         private static double _transferSpeed = 0;
         private static int _completedPercentage = 0;
+
         public static double TransferSpeed
         {
 
@@ -87,11 +95,14 @@ namespace FileSharingApp_Desktop
             URL = url;                                                  /// assign URL
             FileOps = new FileOperations(url,FileOperations.TransferMode.Send);
             string  clientHostname= WaitForConnection();                /// Setup the server and accept connection
-            if (clientHostname!=null || clientHostname!="")             /// if connection succeed
+            if (clientHostname!=null && clientHostname!= "")             /// if connection succeed
             {
                 bool isVerified = Communication.VerifyCode();
                 if (isVerified)
                 {
+                    _TransferVerified = isVerified;
+                    _HostName = clientHostname;
+                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
                     // display hostname here
                     // Ask User if still wants to transfer file to connected client.
                 }
@@ -138,6 +149,9 @@ namespace FileSharingApp_Desktop
         private static string WaitForConnection()
         {
             string IpCode=Communication.CreateServer();                     /// setup the server and start listening to port
+            _IpCode = IpCode;
+            event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+
             // display the "IpCode" in ui here
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
             return clientHostname; 
@@ -266,6 +280,8 @@ namespace FileSharingApp_Desktop
             }
         }
         #endregion
+
+
 
     }
 }
