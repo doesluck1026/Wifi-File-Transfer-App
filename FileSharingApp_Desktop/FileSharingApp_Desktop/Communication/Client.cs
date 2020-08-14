@@ -7,18 +7,18 @@ using System.Text;
 
 class Client
 {
-    private  int HeaderLen = 7;
-    private  int TimeoutTime = 50;
-    private  int BufferSize = 1024 * 64;
-    private  TcpClient client;
-    public  byte StartByte = (byte)('J');
-    public  bool _isClientConnected = false;
+    private int HeaderLen = 7;
+    private int TimeoutTime = 50;
+    private int BufferSize = 1024 * 64;
+    private TcpClient client;
+    public byte StartByte = (byte)('J');
+    public bool _isClientConnected = false;
     private string IP;
     private int Port;
 
-    public Client(string IP,int port=41000)
+    public Client(int port = 41000)
     {
-        this.IP = IP;
+        //this.IP = IP;
         this.Port = port;
     }
 
@@ -27,13 +27,14 @@ class Client
     /// </summary>
     /// <param name="IP"></param>
     /// <returns></returns>
-    public  bool ConnectToServer()
+    public bool ConnectToServer(string IP)
     {
         bool success;
         try
         {
             client = new TcpClient();           ///  create client object
             client.Connect(IP, Port);           /// Connect
+            Debug.WriteLine("trying to connect + " + IP + " at Port " + Port);
             success = true;
             _isClientConnected = true;
             client.ReceiveBufferSize = BufferSize;
@@ -47,7 +48,7 @@ class Client
         }
         return success;
     }
-    public  bool DisconnectFromServer()
+    public bool DisconnectFromServer()
     {
         bool success = false;
         if (client != null)
@@ -69,7 +70,7 @@ class Client
         }
         return success;
     }
-    public  bool SendDataServer(byte[] Data)
+    public bool SendDataServer(byte[] Data)
     {
         bool success = false;
         if (client != null)
@@ -118,7 +119,7 @@ class Client
     /// Gets Data from server and retuns byte array as fuction code, in first byte, and data
     /// </summary>
     /// <returns></returns>
-    public  byte[] GetData()
+    public byte[] GetData()
     {
         try
         {
@@ -228,16 +229,15 @@ class Client
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
         string localAddr = "";
+
         foreach (var ip in host.AddressList)
         {
-            Debug.WriteLine("ip : " );
             if (ip.AddressFamily == AddressFamily.InterNetwork)
             {
                 localAddr = ip.ToString();
-                Debug.WriteLine("ip : "+ localAddr);
-
             }
         }
+        Debug.WriteLine("Server IP: " + localAddr);
         return localAddr;
     }
 }

@@ -61,7 +61,7 @@ class Server
                 }
             }
             server = new TcpListener(localAddr, Port);
-            Console.WriteLine("IP: " + localAddr);
+            Debug.WriteLine("IP: " + localAddr+" Port: "+Port);
             this.IP = localAddr.ToString();
             server.Start();
             return localAddr.ToString();

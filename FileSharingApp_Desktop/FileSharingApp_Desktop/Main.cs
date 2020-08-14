@@ -120,7 +120,10 @@ namespace FileSharingApp_Desktop
         }
         #endregion
 
-
+        public static void Init()
+        {
+            Communication.Init();
+        }
 
         #region Server Functions
 
@@ -172,6 +175,7 @@ namespace FileSharingApp_Desktop
         private static void WaitForConnection()
         {
             string IpCode=Communication.CreateServer();                     /// setup the server and start listening to port
+            Debug.WriteLine("IpCode: "+IpCode);
             _IpCode = IpCode;
             event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
             bool isTransferStarted = StartFileTransfer();                     /// Start File Transfer
@@ -186,29 +190,37 @@ namespace FileSharingApp_Desktop
                 string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
                 _HostName = clientHostname;
                 event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                Main.TransferApproved = true;
                 while (!TransferApproved && !TransferAborted);
                 if(TransferAborted)
                 {
+                    Debug.WriteLine("Transfer is aborted by user!");
                     sendingThread.Abort();
                     return;
                 }
+
                 if (clientHostname != null && clientHostname != "")             /// if connection succeed
                 {
+                    Debug.WriteLine("Receiving Verification!");
                     bool isVerified = Communication.VerifyCode();
+                    Debug.WriteLine("isVerified: " + isVerified);
                     if (isVerified)
                     {
+                        QueryForTransfer();
                         _TransferVerified = isVerified;
                         _HostName = clientHostname;
                         event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
                     }
                     else
                     {
+                        Debug.WriteLine("isVerified: "+ isVerified+" Aborting!");
                         sendingThread.Abort();
                         return;
                     }
                 }
                 else
                 {
+                    Debug.WriteLine("clientHostname was null. Aborting!");
                     sendingThread.Abort();
                     return;
                 }
@@ -329,9 +341,7 @@ namespace FileSharingApp_Desktop
 
             }
         }
+
         #endregion
-
-
-
     }
 }

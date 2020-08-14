@@ -26,7 +26,7 @@ class Communication
     private static Client client;
     private static readonly int HeaderLen = 7;
     private static readonly byte StartByte = (byte)'J';
-    private static int Port = 41000;
+    private static int Port = 4142;
 
 
     public static bool isClientConnected = false;
@@ -52,7 +52,11 @@ class Communication
         FileSent=4,
         TransferStatus=5,
     }
-
+    public static void Init()
+    {
+        //server = new Server();
+        client = new Client();
+    }
     #region Server Functions
     /// <summary>
     /// Creates a server and starts listening to port. This is used to send file to another device.
@@ -238,7 +242,7 @@ class Communication
             string[] IpParts = currentIP.Split(splitterUsta);                       /// split the ip string. this will return four different strings. for Example: if ip is "192.168.1.100"
             char[] splitterZero = { '0' };                                          /// define target chars to be searched in string
             string IpEnd = ipEndWithZeros.TrimStart(splitterZero);                  /// Remove Zeros at the beginning in th ipEnd.
-            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;        /// Sum all ip parts to get the servers ip
+            string ServersIP = IpParts[0] + "." + IpParts[1] + "." + IpParts[2] + "." + IpEnd;        /// Sum all ip parts to get the servers ip
             return ServersIP;                                                       /// return ip
         }
         else
@@ -268,8 +272,8 @@ class Communication
     /// <returns></returns>
     public static bool ConnectToServer(string ip)
     {
-        client = new Client(ip, Port);
-        isConnectedToServer = client.ConnectToServer();
+        client = new Client(Port);
+        isConnectedToServer = client.ConnectToServer(ip);
         return isConnectedToServer;
     }
     /// <summary>
