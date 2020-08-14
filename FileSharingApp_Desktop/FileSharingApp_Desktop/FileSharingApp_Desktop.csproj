@@ -64,7 +64,6 @@
     </ApplicationDefinition>
     <Compile Include="Communication\Communication.cs" />
     <Compile Include="Communication\Server.cs" />
-    <Compile Include="DialogResult.cs" />
     <Compile Include="System\Windows\Forms.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

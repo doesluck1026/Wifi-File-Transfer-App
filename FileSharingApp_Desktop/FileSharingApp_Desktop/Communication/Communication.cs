@@ -26,7 +26,7 @@ class Communication
     private static Client client;
     private static readonly int HeaderLen = 7;
     private static readonly byte StartByte = (byte)'J';
-    private static int Port = 41000;
+    private static int Port = 4142;
 
 
     public static bool isClientConnected = false;
@@ -52,7 +52,11 @@ class Communication
         FileSent=4,
         TransferStatus=5,
     }
-
+    public static void Init()
+    {
+        //server = new Server();
+        client = new Client();
+    }
     #region Server Functions
     /// <summary>
     /// Creates a server and starts listening to port. This is used to send file to another device.
@@ -238,7 +242,7 @@ class Communication
             string[] IpParts = currentIP.Split(splitterUsta);                       /// split the ip string. this will return four different strings. for Example: if ip is "192.168.1.100"
             char[] splitterZero = { '0' };                                          /// define target chars to be searched in string
             string IpEnd = ipEndWithZeros.TrimStart(splitterZero);                  /// Remove Zeros at the beginning in th ipEnd.
-            string ServersIP = IpParts[0] + IpParts[1] + IpParts[2] + IpEnd;        /// Sum all ip parts to get the servers ip
+            string ServersIP = IpParts[0] + "." + IpParts[1] + "." + IpParts[2] + "." + IpEnd;        /// Sum all ip parts to get the servers ip
             return ServersIP;                                                       /// return ip
         }
         else
@@ -268,8 +272,8 @@ class Communication
     /// <returns></returns>
     public static bool ConnectToServer(string ip)
     {
-        client = new Client(ip, Port);
-        isConnectedToServer = client.ConnectToServer();
+        client = new Client(Port);
+        isConnectedToServer = client.ConnectToServer(ip);
         return isConnectedToServer;
     }
     /// <summary>
@@ -296,7 +300,8 @@ class Communication
                     int IndexSize = HeaderLen + 2 + nameLen;
                     fileSize = BitConverter.ToDouble(receivedData, IndexSize);
                     sizeType = (SizeTypes)receivedData[IndexSize + sizeof(double)];
-                    NumberOfPacks = BitConverter.ToInt32(receivedData,IndexSize+1);
+                    NumberOfPacks = BitConverter.ToInt32(receivedData,IndexSize+9);
+                    Debug.WriteLine("NumberOfPacks: " + NumberOfPacks);
                     Debug.WriteLine("Sending request received: Filename:" + fileName + " size:" + fileSize + sizeType.ToString());
                 }
                 else
@@ -346,16 +351,16 @@ class Communication
             {   
                 uint dataLen = BitConverter.ToUInt32(receivedData, 3);              /// Get the length of the data bytes (index bytes are included to this number)
                 uint packIndex = BitConverter.ToUInt32(receivedData, HeaderLen);    /// Get the index of data pack
-                if (packIndex == LastPackNumberReceived - 1)                        /// Check if the index is correct
+                //if (packIndex == LastPackNumberReceived - 1)                        /// Check if the index is correct
                 {
                     LastPackNumberReceived = packIndex;                             /// update the index
                     SendAckToServer(true);                                          /// Send Ack to Server
                 }
-                else
-                {
-                    SendAckToServer(false);                                         /// Send Nack to Server
-                    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
-                }
+                //else
+                //{
+                //    SendAckToServer(false);                                         /// Send Nack to Server
+                //    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
+                //}
                 byte[] dataPack = new byte[dataLen-4];                              /// Create data pack variable to store file bytes 
                 Array.Copy(receivedData, HeaderLen+4, dataPack, 0, dataLen-4);      /// Copy array to data packs byte
                 return dataPack;                                                    /// return data pack
@@ -383,8 +388,8 @@ class Communication
     /// <param name="isreceived"></param>
     private static void SendAckToServer(bool isreceived)
     {
-        byte[] header = PrepareDataHeader(Functions.TransferStatus, 1);     /// Prepare Data Header 
-        byte[] dataToSend = new byte[HeaderLen + 1];                        /// Prepare Carrier Pack
+        byte[] header = PrepareDataHeader(Functions.TransferStatus, 5);     /// Prepare Data Header 
+        byte[] dataToSend = new byte[HeaderLen + 5];                        /// Prepare Carrier Pack
         Array.Copy(header, 0, dataToSend, 0, HeaderLen);                    /// Copy header to Carrier Pack
         if (isreceived)                                                     /// if transfer is accepted
         {
@@ -394,6 +399,7 @@ class Communication
         {
             dataToSend[HeaderLen] = 0;                                      /// write zero to state byte  
         }
+        Array.Copy(BitConverter.GetBytes(LastPackNumberReceived),0, dataToSend, HeaderLen + 1, 4);
         client.SendDataServer(dataToSend);                                  /// Send pack to the server
     }
     /// <summary>
@@ -432,7 +438,7 @@ class Communication
             PackageSize = (int)(fileSize * 1024 * 1024 * 1024);
         else if (sizeType == SizeTypes.TB)
             PackageSize = (int)(fileSize * 1024 * 1024 * 1024 * 1024);
-        int packageCount = (int)Math.Ceiling(PackageSize / (server.BufferSize - HeaderLen));
+        int packageCount = (int)Math.Ceiling(PackageSize / (Main.PackSize));
         return packageCount;
     }
     #endregion

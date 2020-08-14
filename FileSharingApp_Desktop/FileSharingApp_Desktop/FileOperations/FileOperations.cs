@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 class FileOperations
 {
-
-    private static string _FilePath;
-    private static string _FileName;
+    private static object lock_FileName = new object();
+    private string _FilePath;
+    private string _FileName;
     private double _FileSize;
     private long _FileSizeAsBytes;
     private FileStream Fs;
@@ -41,11 +42,17 @@ class FileOperations
     {
         get
         {
-            return _FileName;
+            lock (lock_FileName)
+            {
+                return _FileName;
+            }
         }
         set
         {
-            _FileName = value;
+            lock (lock_FileName)
+            {
+                _FileName = value;
+            }
         }
     }
     /// <summary>
@@ -90,21 +97,24 @@ class FileOperations
             _sizeTypes = value;
         }
     }
-
     /// <summary>
     /// Create File Operation
     /// </summary>
     /// <param name="FilePath">Reading address of the file to be sent or the address to save the received file</param>
-    public FileOperations(string FilePath, TransferMode transferMode)
+    public FileOperations()
+    {
+    }
+    public void Init(string FilePath, TransferMode transferMode)
     {
         this.FilePath = FilePath;                                       /// Assign path to FilePath variable
         if (transferMode == TransferMode.Receive)
         {
-            Fs = File.OpenWrite(FilePath+FileName);
+            Debug.WriteLine("File is Created: " + (FilePath + "\\" + FileName));
+            Fs = File.OpenWrite(FilePath +"\\"+ FileName);
             return;
         }
         Fs = File.OpenRead(FilePath);                                   /// Open File
-        char[] splitterUsta= {'\\','/'};                                     /// Define splitter array that will be used to find file name
+        char[] splitterUsta = { '\\', '/' };                                     /// Define splitter array that will be used to find file name
         string[] nameArray = FilePath.Split(splitterUsta);              /// Split path string to array by '/' sign
         this.FileName = nameArray[nameArray.Length - 1];                /// Get the last string which will be the file name as "filename.extension"
         long fileSizeAsByte = Fs.Length;                                /// Get the Total length of the file as bytes
@@ -129,9 +139,7 @@ class FileOperations
                 FilesizeType = Communication.SizeTypes.TB;
                 break;
         }
-
     }
-
     public void FileReadAtByteIndex(long BufferIndx, out int BytesRead, out byte[] Buffer, int chunkSize = 1024)
     {
         Buffer = new byte[chunkSize];
@@ -142,6 +150,10 @@ class FileOperations
     {
         Fs.Position = BufferIndx;
         Fs.Write(Buffer, 0, Buffer.Length);
+    }
+    public void CloseFile()
+    {
+        Fs.Close();
     }
     /// <summary>
     /// The file at the given address is taken to the Ram piece by piece and sent by the server
@@ -168,7 +180,6 @@ class FileOperations
                 //Console.WriteLine(" cnt = " + cnt++ + " bytesRead = " + bytesRead + " totalBytes  = " + totalBytes);
 
                 server.SendDataToClient(buffer); /// send data to Client 
-
             }
         }
     }
