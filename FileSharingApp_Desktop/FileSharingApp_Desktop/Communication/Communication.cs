@@ -300,7 +300,8 @@ class Communication
                     int IndexSize = HeaderLen + 2 + nameLen;
                     fileSize = BitConverter.ToDouble(receivedData, IndexSize);
                     sizeType = (SizeTypes)receivedData[IndexSize + sizeof(double)];
-                    NumberOfPacks = BitConverter.ToInt32(receivedData,IndexSize+1);
+                    NumberOfPacks = BitConverter.ToInt32(receivedData,IndexSize+9);
+                    Debug.WriteLine("NumberOfPacks: " + NumberOfPacks);
                     Debug.WriteLine("Sending request received: Filename:" + fileName + " size:" + fileSize + sizeType.ToString());
                 }
                 else
@@ -350,16 +351,16 @@ class Communication
             {   
                 uint dataLen = BitConverter.ToUInt32(receivedData, 3);              /// Get the length of the data bytes (index bytes are included to this number)
                 uint packIndex = BitConverter.ToUInt32(receivedData, HeaderLen);    /// Get the index of data pack
-                if (packIndex == LastPackNumberReceived - 1)                        /// Check if the index is correct
+                //if (packIndex == LastPackNumberReceived - 1)                        /// Check if the index is correct
                 {
                     LastPackNumberReceived = packIndex;                             /// update the index
                     SendAckToServer(true);                                          /// Send Ack to Server
                 }
-                else
-                {
-                    SendAckToServer(false);                                         /// Send Nack to Server
-                    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
-                }
+                //else
+                //{
+                //    SendAckToServer(false);                                         /// Send Nack to Server
+                //    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
+                //}
                 byte[] dataPack = new byte[dataLen-4];                              /// Create data pack variable to store file bytes 
                 Array.Copy(receivedData, HeaderLen+4, dataPack, 0, dataLen-4);      /// Copy array to data packs byte
                 return dataPack;                                                    /// return data pack
@@ -387,8 +388,8 @@ class Communication
     /// <param name="isreceived"></param>
     private static void SendAckToServer(bool isreceived)
     {
-        byte[] header = PrepareDataHeader(Functions.TransferStatus, 1);     /// Prepare Data Header 
-        byte[] dataToSend = new byte[HeaderLen + 1];                        /// Prepare Carrier Pack
+        byte[] header = PrepareDataHeader(Functions.TransferStatus, 5);     /// Prepare Data Header 
+        byte[] dataToSend = new byte[HeaderLen + 5];                        /// Prepare Carrier Pack
         Array.Copy(header, 0, dataToSend, 0, HeaderLen);                    /// Copy header to Carrier Pack
         if (isreceived)                                                     /// if transfer is accepted
         {
@@ -398,6 +399,7 @@ class Communication
         {
             dataToSend[HeaderLen] = 0;                                      /// write zero to state byte  
         }
+        Array.Copy(BitConverter.GetBytes(LastPackNumberReceived),0, dataToSend, HeaderLen + 1, 4);
         client.SendDataServer(dataToSend);                                  /// Send pack to the server
     }
     /// <summary>
@@ -436,7 +438,7 @@ class Communication
             PackageSize = (int)(fileSize * 1024 * 1024 * 1024);
         else if (sizeType == SizeTypes.TB)
             PackageSize = (int)(fileSize * 1024 * 1024 * 1024 * 1024);
-        int packageCount = (int)Math.Ceiling(PackageSize / (server.BufferSize - HeaderLen));
+        int packageCount = (int)Math.Ceiling(PackageSize / (Main.PackSize));
         return packageCount;
     }
     #endregion
