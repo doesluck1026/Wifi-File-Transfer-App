@@ -93,7 +93,7 @@
 
                         <Border Grid.Row="0" Padding="2" HorizontalAlignment="Center">
 
-                            <TextBox x:Name="txt_IpCode" VerticalAlignment="Center" Text=" DUMMY CODE" FontSize="25" FontWeight="Bold" />
+                            <TextBox x:Name="txt_IpCode" Padding="-10" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" DUMMY CODE" FontSize="35" FontWeight="Bold" />
 
                         </Border>
 
