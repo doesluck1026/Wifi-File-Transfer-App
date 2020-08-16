@@ -119,10 +119,11 @@ class Main
     }
     #endregion
 
-    public static void Init()
+    public static void Init(bool isFirstTime)
     {
         Communication.Init();
-        FileOps = new FileOperations();
+        if(isFirstTime)
+            FileOps = new FileOperations();
     }
 
     #region Server Functions

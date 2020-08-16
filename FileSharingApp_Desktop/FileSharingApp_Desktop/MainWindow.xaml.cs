@@ -31,7 +31,7 @@ namespace FileSharingApp_Desktop
 
             System.Diagnostics.Debug.WriteLine("push yapıyorum");
             Main.event_UpdateUI += UpdateUI;
-            Main.Init();
+            Main.Init(true);
         }
 
         private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage)
@@ -67,7 +67,6 @@ namespace FileSharingApp_Desktop
             Main.SetFileURL(FileURL);
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
-
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
             FileURL = GetFolder();
@@ -127,7 +126,8 @@ namespace FileSharingApp_Desktop
             return null;
         }
         private void btn_Confirm_Click(object sender, RoutedEventArgs e)
-        {            
+        {
+            Main.Init(false);
             string code = txt_IpCode.Text;
             Main.EnterTheCode(code);
             Main.SetFilePathToSave(FileURL);
