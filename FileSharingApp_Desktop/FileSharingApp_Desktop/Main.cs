@@ -191,7 +191,6 @@ class Main
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
             _HostName = clientHostname;
             event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
-            Main.TransferApproved = true;
             while (!TransferApproved && !TransferAborted) ;
             if (TransferAborted)
             {
@@ -233,6 +232,7 @@ class Main
             byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
             long numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
+            double mb = 1024.0 * 1024;
             Stopwatch stopwatch = Stopwatch.StartNew();
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
@@ -243,9 +243,14 @@ class Main
                     numPack++;                                                                      /// increase the number of package sent variable
                     bytesSent += BytesRead;                                                         /// update the number of bytes sent to client.
                 }
+                else
+                {
+                    Debug.WriteLine("Last Package Sent: "+Communication.LastPackNumberSent+"  Last pack received: "+Communication.LastPackNumberReceived);
+                    Debug.WriteLine("Could not send Last Package! Retrying...");
+                }
                 if (stopwatch.ElapsedMilliseconds > 1000)
                 {
-                    TransferSpeed = (bytesSent - checkPoint) / (1024.0 * 1024);                     ///
+                    TransferSpeed = ((bytesSent - checkPoint) / mb )/ (stopwatch.ElapsedMilliseconds/1000.0);                     ///
                     checkPoint = bytesSent;
                     stopwatch.Restart();
                 }
@@ -335,15 +340,15 @@ class Main
                 BytesToWrite = Communication.ReceiveFilePacks();
                 if(BytesToWrite==null)
                 {
+                    Debug.WriteLine("BytesToWrite is null");
                     break;
                 }
                 FileOps.FileWriteAtByteIndex(bytesWritten, BytesToWrite);                                /// read file and copy to carrier array.
-                //Debug.WriteLine(" numPack: "+ numPack + "  BytesToWrite.len"+ BytesToWrite.Length);
-                numPack++;                                                                      /// increase the number of package sent variable
-                bytesWritten += BytesToWrite.Length;                                                         /// update the number of bytes sent to client.
+                numPack++;                                                                              /// increase the number of package sent variable
+                bytesWritten += BytesToWrite.Length;                                                    /// update the number of bytes sent to client.
                 if (stopwatch.ElapsedMilliseconds > 1000)
                 {
-                    TransferSpeed = (bytesWritten - checkPoint) / mb;                     ///
+                    TransferSpeed = ((bytesWritten - checkPoint) / mb )/ (stopwatch.ElapsedMilliseconds / 1000.0);  ///
                     checkPoint = bytesWritten;
                     stopwatch.Restart();
                 }

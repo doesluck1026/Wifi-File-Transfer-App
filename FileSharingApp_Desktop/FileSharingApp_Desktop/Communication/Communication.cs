@@ -54,6 +54,8 @@ class Communication
     }
     public static void Init()
     {
+        LastPackNumberSent = 0;
+        LastPackNumberReceived = -1;
         //server = new Server();
         client = new Client();
     }
@@ -118,10 +120,10 @@ class Communication
     public static bool GetResponse()
     {
         bool isAccepted = false;                                                                /// define return value
-        byte[] ReceivedData=server.GetData();                                                   /// Get Received Data from buffer
-        if(ReceivedData[1]==(byte)Functions.QueryTransfer)                                      /// Check if Function byte is about query for Transfer
+        byte[] ReceivedData = server.GetData();                                                   /// Get Received Data from buffer
+        if (ReceivedData[1] == (byte)Functions.QueryTransfer)                                      /// Check if Function byte is about query for Transfer
         {
-            if(ReceivedData[HeaderLen]==1)                                                      /// Get the response byte. 1 = True ; 0=false
+            if (ReceivedData[HeaderLen] == 1)                                                      /// Get the response byte. 1 = True ; 0=false
             {
                 Debug.WriteLine("Starting transfer");
                 isAccepted = true;
@@ -135,12 +137,12 @@ class Communication
         {
             if (ReceivedData[HeaderLen] == 1)                                               /// 1=True
             {
-                uint LastPackReceived = BitConverter.ToUInt32(ReceivedData,HeaderLen+1);    /// Get Get the index of the last package that client has received
+                uint LastPackReceived = BitConverter.ToUInt32(ReceivedData, HeaderLen + 1);    /// Get Get the index of the last package that client has received
                 LastPackNumberReceived = LastPackReceived;                                  /// Store it in a global value.
                 isAccepted = true;
             }
         }
-            return isAccepted;
+        return isAccepted;
     }
     /// <summary>
     /// Sends File packs to the client and gets the acknowledge
@@ -361,16 +363,16 @@ class Communication
             {   
                 uint dataLen = BitConverter.ToUInt32(receivedData, 3);              /// Get the length of the data bytes (index bytes are included to this number)
                 uint packIndex = BitConverter.ToUInt32(receivedData, HeaderLen);    /// Get the index of data pack
-                //if (packIndex == LastPackNumberReceived - 1)                        /// Check if the index is correct
+                if (packIndex == (LastPackNumberReceived + 1))                        /// Check if the index is correct
                 {
                     LastPackNumberReceived = packIndex;                             /// update the index
                     SendAckToServer(true);                                          /// Send Ack to Server
                 }
-                //else
-                //{
-                //    SendAckToServer(false);                                         /// Send Nack to Server
-                //    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
-                //}
+                else
+                {
+                    SendAckToServer(false);                                         /// Send Nack to Server
+                    Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
+                }
                 byte[] dataPack = new byte[dataLen-4];                              /// Create data pack variable to store file bytes 
                 Array.Copy(receivedData, HeaderLen+4, dataPack, 0, dataLen-4);      /// Copy array to data packs byte
                 return dataPack;                                                    /// return data pack

@@ -48,7 +48,11 @@ namespace FileSharingApp_Desktop
                 }
                 if(TransferVerified)
                 {
-
+                    lbl_SecondStep.Background = Brushes.Green; 
+                }
+                else
+                {
+                    lbl_SecondStep.Background = Brushes.AliceBlue;
                 }
                 pbStatus.Value = _completedPercentage;
                 txt_TransferSpeed.Text = _transferSpeed.ToString("0.00");
@@ -57,8 +61,9 @@ namespace FileSharingApp_Desktop
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
+            Main.TransferApproved = false;
             string FileURL = SelectFile();
-            if(FileURL == null)
+            if (FileURL == null)
             {
                 //show wrong url message
                 return;
@@ -127,10 +132,17 @@ namespace FileSharingApp_Desktop
         }
         private void btn_Confirm_Click(object sender, RoutedEventArgs e)
         {
-            Main.Init(false);
-            string code = txt_IpCode.Text;
-            Main.EnterTheCode(code);
-            Main.SetFilePathToSave(FileURL);
+            if (TransferMode == FileOperations.TransferMode.Receive)
+            {
+                Main.Init(false);
+                string code = txt_IpCode.Text;
+                Main.EnterTheCode(code);
+                Main.SetFilePathToSave(FileURL);
+            }
+            else if (TransferMode == FileOperations.TransferMode.Send)
+            {
+                Main.TransferApproved = true;
+            }
         }
     }
 }
