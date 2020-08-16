@@ -33,7 +33,7 @@ class Communication
     public static bool isConnectedToServer = false;
     public static long LastPackNumberReceived {get; private set;}
     public static long LastPackNumberSent {get; private set; }
-    public static int NumberOfPacks { get; private set; }
+    public static uint NumberOfPacks { get; private set; }
     public static bool isFileReceived { get; private set; }
     public static string TransferCode { get; private set; }
 
@@ -107,7 +107,7 @@ class Communication
         Array.Copy(sizeBytes, 0, DataToSend, IndexSize, lenSize);                           /// Copy Size Bytes to DData Pack
         int IndexType = IndexSize + lenSize;                                                /// Calculate the Index of sizeType
         DataToSend[IndexType] = (byte)sizeType;                                             /// Write Size Type to Data pack as enum
-        int packageCount= CalculatePackageCount(fileSize, sizeType);                        /// Calculaate the number of Data Packs rewuired to send all of the file to the client.
+        uint packageCount= CalculatePackageCount(fileSize, sizeType);                        /// Calculaate the number of Data Packs rewuired to send all of the file to the client.
         NumberOfPacks = packageCount;                                                       /// Store this value for later use
         byte[] packageCountBytes = BitConverter.GetBytes(packageCount);                     /// Write the number of packs to dataa pack
         Array.Copy(packageCountBytes, 0, DataToSend, IndexType + 1, packageCountBytes.Length);  
@@ -320,7 +320,7 @@ class Communication
                     int IndexSize = HeaderLen + 2 + nameLen;
                     fileSize = BitConverter.ToDouble(receivedData, IndexSize);
                     sizeType = (SizeTypes)receivedData[IndexSize + sizeof(double)];
-                    NumberOfPacks = BitConverter.ToInt32(receivedData,IndexSize+9);
+                    NumberOfPacks = BitConverter.ToUInt32(receivedData,IndexSize+9);
                     Debug.WriteLine("NumberOfPacks: " + NumberOfPacks);
                     Debug.WriteLine("Sending request received: Filename:" + fileName + " size:" + fileSize + sizeType.ToString());
                 }
@@ -460,7 +460,7 @@ class Communication
         Array.Copy(lenBytes, 0, HeaderBytes, 3, lenBytes.Length);
         return HeaderBytes;
     }
-    private static int CalculatePackageCount(double fileSize, SizeTypes sizeType)
+    private static uint CalculatePackageCount(double fileSize, SizeTypes sizeType)
     {
         double PackageSize = 0;
         if (sizeType == SizeTypes.KB)
@@ -471,7 +471,7 @@ class Communication
             PackageSize = (int)(fileSize * 1024 * 1024 * 1024);
         else if (sizeType == SizeTypes.TB)
             PackageSize = (int)(fileSize * 1024 * 1024 * 1024 * 1024);
-        int packageCount = (int)Math.Ceiling(PackageSize / (Main.PackSize));
+        uint packageCount = (uint)Math.Ceiling(PackageSize / (Main.PackSize));
         return packageCount;
     }
     #endregion
