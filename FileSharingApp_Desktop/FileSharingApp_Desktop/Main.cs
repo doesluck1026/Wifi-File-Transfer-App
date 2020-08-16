@@ -212,14 +212,14 @@ class Main
                 else
                 {
                     Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
-                    sendingThread.Abort();
+                    Communication.CloseServer();
                     return;
                 }
             }
             else
             {
+                Communication.CloseServer();
                 Debug.WriteLine("clientHostname was null. Aborting!");
-                sendingThread.Abort();
                 return;
             }
             /// define variables

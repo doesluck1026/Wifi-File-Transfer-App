@@ -109,6 +109,11 @@ class FileOperations
         this.FilePath = FilePath;                                       /// Assign path to FilePath variable
         if (transferMode == TransferMode.Receive)
         {
+            if(FileName== null || FileName=="")
+            {
+                Debug.WriteLine("Init File Ops: Filename is null!");
+                return;
+            }
             Debug.WriteLine("File is Created: " + (FilePath + "\\" + FileName));
             Fs = File.OpenWrite(FilePath +"\\"+ FileName);
             return;
