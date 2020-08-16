@@ -59,13 +59,13 @@ class Client
                 client.Dispose();           /// remove client object
                 _isClientConnected = false;
                 client = null;
-                Console.WriteLine("Disconnected!");
+                Debug.WriteLine("Disconnected!");
                 success = true;
             }
             catch
             {
 
-                Console.WriteLine("Failed to Disconnect!");
+                Debug.WriteLine("Failed to Disconnect!");
             }
         }
         return success;
@@ -148,7 +148,7 @@ class Client
                         }
                         else
                         {
-                            Console.WriteLine("Missing Header Bytes!");
+                            Debug.WriteLine("Missing Header Bytes!");
                             break;
                         }
                     }
@@ -191,7 +191,7 @@ class Client
                                 }
                                 else
                                 {
-                                    Console.WriteLine("Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - HeaderLen));
+                                    Debug.WriteLine("Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - HeaderLen));
                                     stream.Flush();
                                     return null;
                                 }

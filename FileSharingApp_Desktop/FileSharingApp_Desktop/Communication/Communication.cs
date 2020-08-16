@@ -223,6 +223,11 @@ class Communication
         }
         return isVerified;
     }
+    public static void CloseServer()
+    {
+        server.CloseServer();
+        server = null;
+    }
     #endregion
 
     #region Client Functions
@@ -345,6 +350,11 @@ class Communication
     public static byte[] ReceiveFilePacks()
     {
         byte[] receivedData = client.GetData();                                     /// Get Data From Buffer
+        if(receivedData==null)
+        {
+            Debug.WriteLine("received data is null!");
+            return null;
+        }
         if(receivedData[0]==StartByte)                                              /// check if start byte is correct
         {
             if(receivedData[1]==(byte)Functions.SendingFile)                        /// Check the function byte
@@ -413,6 +423,11 @@ class Communication
         dataToSend[HeaderLen] = 1;
         client.SendDataServer(dataToSend);
         isFileReceived = true;
+    }
+    public static void CloseClient()
+    {
+        client.DisconnectFromServer();
+        client = null;
     }
 
     #endregion

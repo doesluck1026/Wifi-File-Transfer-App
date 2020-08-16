@@ -260,6 +260,7 @@ class Main
             else
                 Debug.WriteLine("File Transfer Failed!");
             FileOps.CloseFile();
+            Communication.CloseServer();
         }
     }
 
@@ -331,6 +332,10 @@ class Main
             while (numPack < numberOfPacks)                                           /// while the number of bytes sent to client is smaller than the total file length
             {
                 BytesToWrite = Communication.ReceiveFilePacks();
+                if(BytesToWrite==null)
+                {
+                    break;
+                }
                 FileOps.FileWriteAtByteIndex(bytesWritten, BytesToWrite);                                /// read file and copy to carrier array.
                 //Debug.WriteLine(" numPack: "+ numPack + "  BytesToWrite.len"+ BytesToWrite.Length);
                 numPack++;                                                                      /// increase the number of package sent variable
@@ -345,8 +350,10 @@ class Main
                 event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
                 //Debug.WriteLine("Completed : % " + CompletedPercentage+"  Speed: "+TransferSpeed+" mb/s");
             }
+            if(numPack==numberOfPacks)
+                Debug.WriteLine("File is Succesfully Received");
             FileOps.CloseFile();
-            Debug.WriteLine("File is Succesfully Received");
+            Communication.CloseClient();
         }
     }
 
