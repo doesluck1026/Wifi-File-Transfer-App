@@ -24,6 +24,7 @@ namespace FileSharingApp_Desktop
     public partial class MainWindow : Window
     {
         private string FileURL = "";
+        private FileOperations.TransferMode TransferMode;
         public MainWindow()
         {
             InitializeComponent();
@@ -62,10 +63,9 @@ namespace FileSharingApp_Desktop
                 //show wrong url message
                 return;
             }
+            TransferMode = FileOperations.TransferMode.Send;
             Main.SetFileURL(FileURL);
-
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
-
         }
 
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
@@ -76,6 +76,7 @@ namespace FileSharingApp_Desktop
                 System.Diagnostics.Debug.WriteLine("File Url is null");
                 return;
             }
+            TransferMode = FileOperations.TransferMode.Receive;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
 
@@ -125,7 +126,6 @@ namespace FileSharingApp_Desktop
             }
             return null;
         }
-
         private void btn_Confirm_Click(object sender, RoutedEventArgs e)
         {            
             string code = txt_IpCode.Text;
