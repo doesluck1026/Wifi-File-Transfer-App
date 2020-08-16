@@ -368,6 +368,7 @@ class Communication
         if(receivedData==null)
         {
             Debug.WriteLine("ReceiveFilePacks: Received data is null!");
+            SendAckToServer(false);                                         /// Send Nack to Server
             return null;
         }
         if(receivedData[0]==StartByte)                                              /// check if start byte is correct

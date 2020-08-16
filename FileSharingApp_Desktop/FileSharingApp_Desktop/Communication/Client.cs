@@ -212,12 +212,12 @@ class Client
         catch
         {
             Console.WriteLine("Receive Data Failed!");
-            _isClientConnected = false;
-            if (client != null)
-            {
-                client.Close();
-                client.Dispose();
-            }
+            //_isClientConnected = false;
+            //if (client != null)
+            //{
+            //    client.Close();
+            //    client.Dispose();
+            //}
             return null;
         }
     }

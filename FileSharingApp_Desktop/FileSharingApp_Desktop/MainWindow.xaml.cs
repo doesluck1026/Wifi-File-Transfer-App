@@ -55,7 +55,7 @@ namespace FileSharingApp_Desktop
                     lbl_SecondStep.Background = Brushes.AliceBlue;
                 }
                 pbStatus.Value = _completedPercentage;
-                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00");
+                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s" ;
             });
         }
 

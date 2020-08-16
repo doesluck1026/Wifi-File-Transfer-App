@@ -243,6 +243,8 @@ class Main
                 }
                 else
                 {
+                    numPack = Communication.LastPackNumberReceived;
+                    bytesSent = numPack * PackSize;
                     Debug.WriteLine("Last Package Sent: "+Communication.LastPackNumberSent+"  Last pack received: "+Communication.LastPackNumberReceived);
                     Debug.WriteLine("Could not send Last Package! Retrying...");
                 }

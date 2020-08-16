@@ -247,9 +247,9 @@ class Server
         catch
         {
             Debug.WriteLine("Receive Data Failed!");
-            _isClientConnected = false;
-            client.Close();
-            client.Dispose();
+            //_isClientConnected = false;
+            //client.Close();
+            //client.Dispose();
             return null;
         }
     }
