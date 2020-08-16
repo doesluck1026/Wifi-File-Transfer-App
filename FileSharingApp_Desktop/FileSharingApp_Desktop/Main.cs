@@ -176,7 +176,6 @@ class Main
     private static void WaitForConnection()
     {
         string IpCode = Communication.CreateServer();                     /// setup the server and start listening to port
-        Debug.WriteLine("IpCode: " + IpCode);
         _IpCode = IpCode;
         event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
         bool isTransferStarted = StartFileTransfer();                     /// Start File Transfer
@@ -201,7 +200,6 @@ class Main
 
             if (clientHostname != null && clientHostname != "")             /// if connection succeed
             {
-                Debug.WriteLine("Receiving Verification!");
                 bool isVerified = Communication.VerifyCode();
                 Debug.WriteLine("isVerified: " + isVerified);
                 if (isVerified)
@@ -341,7 +339,7 @@ class Main
                 if(BytesToWrite==null)
                 {
                     Debug.WriteLine("BytesToWrite is null");
-                    break;
+                    continue;
                 }
                 FileOps.FileWriteAtByteIndex(bytesWritten, BytesToWrite);                                /// read file and copy to carrier array.
                 numPack++;                                                                              /// increase the number of package sent variable

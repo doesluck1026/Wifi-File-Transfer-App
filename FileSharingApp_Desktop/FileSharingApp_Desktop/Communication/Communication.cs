@@ -121,6 +121,11 @@ class Communication
     {
         bool isAccepted = false;                                                                /// define return value
         byte[] ReceivedData = server.GetData();                                                   /// Get Received Data from buffer
+        if(ReceivedData==null)
+        {
+            Debug.WriteLine("GetResponse: Received Data is null!");
+            return false;
+        }
         if (ReceivedData[1] == (byte)Functions.QueryTransfer)                                      /// Check if Function byte is about query for Transfer
         {
             if (ReceivedData[HeaderLen] == 1)                                                      /// Get the response byte. 1 = True ; 0=false
@@ -187,7 +192,6 @@ class Communication
                 ipEnd = "00" + ipEnd;               /// add 2 zeros to string 
         else if (ipEnd.Length == 2)                 /// so on
             ipEnd = "0" + ipEnd;
-        Debug.WriteLine("ipend=" + ipEnd);
         Random random = new Random();
         int head = random.Next(100, 1000);          /// Get random  3 digits integer
         string code = head.ToString() + ipEnd;      /// put the ip part and the random number together.    
@@ -201,6 +205,11 @@ class Communication
     {
         byte[] receivedData = server.GetData();
         bool isVerified = false;
+        if(receivedData==null)
+        {
+            Debug.WriteLine("VerifyCode: ReceivedData is null!");
+            return false;
+        }
         if(receivedData[0]==StartByte)
         {
             if(receivedData[1]==(byte)Functions.QueryTransfer)
@@ -208,7 +217,6 @@ class Communication
                 string code = Encoding.ASCII.GetString(receivedData, HeaderLen, 6);
                 if (code.CompareTo(TransferCode) == 0)
                 {
-                    Debug.WriteLine("Code is verified!");
                     isVerified = true;
                 }
                 else
@@ -295,6 +303,11 @@ class Communication
         fileSize = 0;
         sizeType = SizeTypes.Byte;
         byte[] receivedData = client.GetData();
+        if(receivedData==null)
+        {
+            Debug.WriteLine("Get File Specs: received data is null!");
+            return;
+        }
         if (receivedData[0] == StartByte)
         {
             if (receivedData[1] == (byte)Functions.QueryTransfer)
@@ -354,7 +367,7 @@ class Communication
         byte[] receivedData = client.GetData();                                     /// Get Data From Buffer
         if(receivedData==null)
         {
-            Debug.WriteLine("received data is null!");
+            Debug.WriteLine("ReceiveFilePacks: Received data is null!");
             return null;
         }
         if(receivedData[0]==StartByte)                                              /// check if start byte is correct
@@ -367,15 +380,17 @@ class Communication
                 {
                     LastPackNumberReceived = packIndex;                             /// update the index
                     SendAckToServer(true);                                          /// Send Ack to Server
+                    byte[] dataPack = new byte[dataLen - 4];                              /// Create data pack variable to store file bytes 
+                    Array.Copy(receivedData, HeaderLen + 4, dataPack, 0, dataLen - 4);      /// Copy array to data packs byte
+                    return dataPack;
                 }
                 else
                 {
                     SendAckToServer(false);                                         /// Send Nack to Server
                     Debug.WriteLine("Index of the last package was incorrect. Do something about it!");
+                    return null;
                 }
-                byte[] dataPack = new byte[dataLen-4];                              /// Create data pack variable to store file bytes 
-                Array.Copy(receivedData, HeaderLen+4, dataPack, 0, dataLen-4);      /// Copy array to data packs byte
-                return dataPack;                                                    /// return data pack
+                                                                  /// return data pack
             }
             else if (receivedData[1]==(byte)Functions.FileSent)
             {
