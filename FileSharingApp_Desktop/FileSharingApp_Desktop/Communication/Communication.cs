@@ -135,7 +135,7 @@ class Communication
         {
             if (ReceivedData[HeaderLen] == 1)                                               /// 1=True
             {
-                uint LastPackReceived = BitConverter.ToUInt32(ReceivedData,HeaderLen+2);    /// Get Get the index of the last package that client has received
+                uint LastPackReceived = BitConverter.ToUInt32(ReceivedData,HeaderLen+1);    /// Get Get the index of the last package that client has received
                 LastPackNumberReceived = LastPackReceived;                                  /// Store it in a global value.
                 isAccepted = true;
             }
