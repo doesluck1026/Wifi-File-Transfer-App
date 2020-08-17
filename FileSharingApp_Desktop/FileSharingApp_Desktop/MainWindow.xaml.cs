@@ -33,7 +33,7 @@ namespace FileSharingApp_Desktop
             Main.event_UpdateUI += UpdateUI;
             Main.Init(true);
         }
-        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage,int ETA=0,int TimePassed=0)
+        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed,uint numPack=0,int TimePassed=0)
         {
             Dispatcher.Invoke(() =>
             {
@@ -53,8 +53,11 @@ namespace FileSharingApp_Desktop
                 {
                     lbl_SecondStep.Background = Brushes.AliceBlue;
                 }
+                uint NumberOfPacks = Communication.NumberOfPacks;
+                int _completedPercentage = (int)(((double)numPack / NumberOfPacks) * 100);
                 pbStatus.Value = _completedPercentage;
-                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed:"+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
+                uint ETA = (uint)((NumberOfPacks - numPack) / (1024 * 1024) / _transferSpeed);
+                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed: "+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
             });
         }
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
