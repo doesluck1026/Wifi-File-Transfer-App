@@ -228,7 +228,7 @@ class Main
             long numPack = 0;
             bool isSent = false;
             byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
-            long numberOfPacks = Communication.NumberOfPacks;
+            uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
             double mb = 1024.0 * 1024;
             Stopwatch stopwatch = Stopwatch.StartNew();
@@ -330,7 +330,7 @@ class Main
             long bytesWritten = 0;
             long numPack = 0;
             byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
-            long numberOfPacks = Communication.NumberOfPacks;
+            uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
             Debug.WriteLine(" Communication.NumberOfPacks: " + numberOfPacks);
