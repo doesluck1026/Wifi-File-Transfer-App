@@ -26,7 +26,7 @@ class Communication
     private static Client client;
     private static readonly int HeaderLen = 7;
     private static readonly byte StartByte = (byte)'J';
-    private static int Port = 4142;
+    private static int Port = 41001;
 
 
     public static bool isClientConnected = false;
