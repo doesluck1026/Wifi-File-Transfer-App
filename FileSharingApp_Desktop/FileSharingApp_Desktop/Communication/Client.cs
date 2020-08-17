@@ -191,7 +191,7 @@ class Client
                                 }
                                 else
                                 {
-                                    Debug.WriteLine("Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - HeaderLen));
+                                    Debug.WriteLine(DateTime.Now + "  :Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - HeaderLen));
                                     stream.Flush();
                                     return null;
                                 }
@@ -211,7 +211,7 @@ class Client
         }
         catch
         {
-            Console.WriteLine("Receive Data Failed!");
+            Console.WriteLine(DateTime.Now+ "  : Receive Data Failed!");
             //_isClientConnected = false;
             //if (client != null)
             //{

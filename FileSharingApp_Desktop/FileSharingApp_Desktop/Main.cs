@@ -35,7 +35,7 @@ class Main
     private static object transferabortedLock = new object();
 
 
-    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage);
+    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage,int ETA=0,int TimePassed=0);
     public static event Delegate_UpdateUI event_UpdateUI;
     private static string _IpCode = "";
     private static string _HostName = "";
@@ -231,6 +231,9 @@ class Main
             uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
             double mb = 1024.0 * 1024;
+            double timeAsSec = 0;
+            double TimePassed = 0;
+            double ETA = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
@@ -250,12 +253,15 @@ class Main
                 }
                 if (stopwatch.ElapsedMilliseconds > 1000)
                 {
-                    TransferSpeed = ((bytesSent - checkPoint) / mb )/ (stopwatch.ElapsedMilliseconds/1000.0);                     ///
+                    timeAsSec = (stopwatch.ElapsedMilliseconds / 1000.0);
+                    TimePassed += timeAsSec;
+                    TransferSpeed = TransferSpeed*0.9+0.1*((bytesSent - checkPoint) / mb )/ timeAsSec;                     ///
+                    ETA = ((numberOfPacks - numPack) * PackSize/mb) / TransferSpeed;
                     checkPoint = bytesSent;
                     stopwatch.Restart();
                 }
                 CompletedPercentage = (int)(((double)numPack / numberOfPacks) * 100);
-                event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, CompletedPercentage,(int)ETA,(int)TimePassed);      /// display event
 
             }
             if (isSent)                                                                             /// if all file is sent
@@ -276,6 +282,7 @@ class Main
     public static void SetFilePathToSave(string path)
     {
         FileOps.Init(path, FileOperations.TransferMode.Receive);
+        RespondToTransferRequest(true);
     }
     public static bool EnterTheCode(string code)
     {
@@ -294,7 +301,6 @@ class Main
                 FileOps.FileName = fileName;
                 Debug.WriteLine("fileName: " + fileName + "   FileOps.FileName: " + FileOps.FileName);
                 // Show Specs to user and ask for permission
-                RespondToTransferRequest(true);
             }
         }
         return success;
@@ -332,6 +338,9 @@ class Main
             byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
             uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
+            double timeAsSec = 0;
+            double TimePassed = 0;
+            double ETA = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
             Debug.WriteLine(" Communication.NumberOfPacks: " + numberOfPacks);
             double mb = 1024.0 * 1024;
@@ -348,15 +357,18 @@ class Main
                 bytesWritten += BytesToWrite.Length;                                                    /// update the number of bytes sent to client.
                 if (stopwatch.ElapsedMilliseconds > 1000)
                 {
-                    TransferSpeed = ((bytesWritten - checkPoint) / mb )/ (stopwatch.ElapsedMilliseconds / 1000.0);  ///
+                    timeAsSec = (stopwatch.ElapsedMilliseconds / 1000.0);
+                    TimePassed += timeAsSec;
+                    TransferSpeed = TransferSpeed * 0.9 + 0.1 * ((bytesWritten - checkPoint) / mb) / timeAsSec;                     ///
+                    ETA = ((numberOfPacks - numPack) * PackSize / mb) / TransferSpeed;
                     checkPoint = bytesWritten;
                     stopwatch.Restart();
                 }
                 CompletedPercentage = (int)(((double)numPack / numberOfPacks) * 100);
-                event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, CompletedPercentage, (int)ETA, (int)TimePassed);      /// display event
                 //Debug.WriteLine("Completed : % " + CompletedPercentage+"  Speed: "+TransferSpeed+" mb/s");
             }
-            if(numPack==numberOfPacks)
+            if (numPack==numberOfPacks)
                 Debug.WriteLine("File is Succesfully Received");
             FileOps.CloseFile();
             Communication.CloseClient();

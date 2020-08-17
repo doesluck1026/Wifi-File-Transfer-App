@@ -246,7 +246,7 @@ class Server
         }
         catch
         {
-            Debug.WriteLine("Receive Data Failed!");
+            Debug.WriteLine(DateTime.Now+"  :Receive Data Failed!");
             //_isClientConnected = false;
             //client.Close();
             //client.Dispose();

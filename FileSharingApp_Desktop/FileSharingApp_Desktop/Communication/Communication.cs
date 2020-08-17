@@ -464,15 +464,18 @@ class Communication
     private static uint CalculatePackageCount(double fileSize, SizeTypes sizeType)
     {
         long PackageSize = 0;
-        if (sizeType == SizeTypes.KB)
-            PackageSize = (int)(fileSize * 1024);
+        if (sizeType == SizeTypes.Byte)
+            PackageSize = (uint)fileSize;
+        else if (sizeType == SizeTypes.KB)
+            PackageSize = (uint)(fileSize * 1024);
         else if (sizeType == SizeTypes.MB)
-            PackageSize = (int)(fileSize * 1024 * 1024);
+            PackageSize = (uint)(fileSize * 1024 * 1024);
         else if (sizeType == SizeTypes.GB)
-            PackageSize = (int)(fileSize * 1024 * 1024 * 1024);
+            PackageSize = (uint)(fileSize * 1024 * 1024 * 1024);
         else if (sizeType == SizeTypes.TB)
-            PackageSize = (int)(fileSize * 1024 * 1024 * 1024 * 1024);
-        uint packageCount = (uint)Math.Ceiling((double)(PackageSize / Main.PackSize));
+            PackageSize = (uint)(fileSize * 1024 * 1024 * 1024 * 1024);
+        uint packageCount = (uint)Math.Ceiling(PackageSize / (double)Main.PackSize);
+        Debug.WriteLine("fileSize: " + fileSize + " " + sizeType);
         return packageCount;
     }
     #endregion

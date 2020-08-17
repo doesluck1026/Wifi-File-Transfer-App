@@ -33,7 +33,7 @@ namespace FileSharingApp_Desktop
             Main.event_UpdateUI += UpdateUI;
             Main.Init(true);
         }
-        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage)
+        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage,int ETA=0,int TimePassed=0)
         {
             Dispatcher.Invoke(() =>
             {
@@ -54,7 +54,7 @@ namespace FileSharingApp_Desktop
                     lbl_SecondStep.Background = Brushes.AliceBlue;
                 }
                 pbStatus.Value = _completedPercentage;
-                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s" ;
+                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed:"+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
             });
         }
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
@@ -78,7 +78,6 @@ namespace FileSharingApp_Desktop
                 System.Diagnostics.Debug.WriteLine("File Url is null");
                 return;
             }
-            Main.SetFilePathToSave(FileURL);
             TransferMode = FileOperations.TransferMode.Receive;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
@@ -136,6 +135,7 @@ namespace FileSharingApp_Desktop
                 Main.Init(false);
                 string code = txt_IpCode.Text;
                 Main.EnterTheCode(code);
+                Main.SetFilePathToSave(FileURL);
             }
             else if (TransferMode == FileOperations.TransferMode.Send)
             {
