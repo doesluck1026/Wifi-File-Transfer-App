@@ -109,6 +109,7 @@ class Communication
         DataToSend[IndexType] = (byte)sizeType;                                             /// Write Size Type to Data pack as enum
         uint packageCount= CalculatePackageCount(fileSize, sizeType);                        /// Calculaate the number of Data Packs rewuired to send all of the file to the client.
         NumberOfPacks = packageCount;                                                       /// Store this value for later use
+        Debug.WriteLine("NumberOfPacks: " + NumberOfPacks);
         byte[] packageCountBytes = BitConverter.GetBytes(packageCount);                     /// Write the number of packs to dataa pack
         Array.Copy(packageCountBytes, 0, DataToSend, IndexType + 1, packageCountBytes.Length);  
         return server.SendDataToClient(DataToSend);                                         /// Send Data pack to the client.
