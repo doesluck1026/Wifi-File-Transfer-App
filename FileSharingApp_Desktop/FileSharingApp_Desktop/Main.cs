@@ -35,7 +35,7 @@ class Main
     private static object transferabortedLock = new object();
 
 
-    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed,uint packCount=0,int TimePassed=0);
+    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=0,uint packCount=0,uint TimePassed=0);
     public static event Delegate_UpdateUI event_UpdateUI;
     private static string _IpCode = "";
     private static string _HostName = "";
@@ -177,7 +177,7 @@ class Main
     {
         string IpCode = Communication.CreateServer();                     /// setup the server and start listening to port
         _IpCode = IpCode;
-        event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed);      /// display event
+        event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
         bool isTransferStarted = StartFileTransfer();                     /// Start File Transfer
     }
     /// <summary>
@@ -189,7 +189,7 @@ class Main
         {
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
             _HostName = clientHostname;
-            event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed);      /// display event
+            event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
             while (!TransferApproved && !TransferAborted) ;
             if (TransferAborted)
             {
@@ -207,7 +207,7 @@ class Main
                     QueryForTransfer();
                     _TransferVerified = isVerified;
                     _HostName = clientHostname;
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed);      /// display event
+                    event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
                 }
                 else
                 {
@@ -230,9 +230,9 @@ class Main
             byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
             uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
-            double mb = 1024.0 * 1024;
-            double timeAsSec = 0;
-            double TimePassed = 0;
+            uint TimePassed = 0;
+            uint elapsedTime = 0;
+            long numBytesSent = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
             TransferSpeed = 3;
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
@@ -251,13 +251,13 @@ class Main
                     Debug.WriteLine("Last Package Sent: "+Communication.LastPackNumberSent+"  Last pack received: "+Communication.LastPackNumberReceived);
                     Debug.WriteLine("Could not send Last Package! Retrying...");
                 }
-                if (stopwatch.ElapsedMilliseconds >= 1000)
+                elapsedTime = (uint)stopwatch.ElapsedMilliseconds;
+                if (elapsedTime >= 1000)
                 {
-                    timeAsSec = (stopwatch.ElapsedMilliseconds / 1000.0);
-                    TimePassed += timeAsSec;
-                    TransferSpeed = TransferSpeed * 0.9 + 0.1 * ((bytesSent - checkPoint) / mb )/ timeAsSec;                     /// 
+                    TimePassed += elapsedTime;
+                    numBytesSent = bytesSent - checkPoint;
                     checkPoint = bytesSent;
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
+                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
                     stopwatch.Restart();
                 }
 
@@ -336,12 +336,11 @@ class Main
             byte[] BytesToWrite;                                                                     /// Define byte array to carry file bytes
             uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
-            double timeAsSec = 0;
-            double TimePassed = 0;
+            uint TimePassed = 0;
+            uint elapsedTime = 0;
+            long numBytesSent = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
             Debug.WriteLine(" Communication.NumberOfPacks: " + numberOfPacks);
-            double mb = 1024.0 * 1024;
-            TransferSpeed = 3;
             while (numPack < numberOfPacks)                                           /// while the number of bytes sent to client is smaller than the total file length
             {
                 BytesToWrite = Communication.ReceiveFilePacks();
@@ -353,14 +352,14 @@ class Main
                 FileOps.FileWriteAtByteIndex(bytesWritten, BytesToWrite);                                /// read file and copy to carrier array.
                 numPack++;                                                                              /// increase the number of package sent variable
                 bytesWritten += BytesToWrite.Length;                                                    /// update the number of bytes sent to client.
-                if (stopwatch.ElapsedMilliseconds > 1000)
+                elapsedTime = (uint)stopwatch.ElapsedMilliseconds;
+                if (elapsedTime >= 1000)
                 {
-                    timeAsSec = (stopwatch.ElapsedMilliseconds / 1000.0);
-                    TimePassed += timeAsSec;
-                    TransferSpeed = TransferSpeed * 0.9 + 0.1 * ((bytesWritten - checkPoint) / mb) / timeAsSec;                     ///
+                    TimePassed += elapsedTime;
+                    numBytesSent = bytesWritten - checkPoint;
                     checkPoint = bytesWritten;
+                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
                     stopwatch.Restart();
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
                 }
             }
             if (numPack==numberOfPacks)

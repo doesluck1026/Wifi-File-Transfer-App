@@ -25,6 +25,8 @@ namespace FileSharingApp_Desktop
     {
         private string FileURL = "";
         private FileOperations.TransferMode TransferMode;
+        private uint prev_timePassed=0;
+        private double _transferSpeed = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace FileSharingApp_Desktop
             Main.event_UpdateUI += UpdateUI;
             Main.Init(true);
         }
-        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed,uint numPack=0,int TimePassed=0)
+        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=0,uint numPack=0,uint TimePassed=0)
         {
             Dispatcher.Invoke(() =>
             {
@@ -54,8 +56,15 @@ namespace FileSharingApp_Desktop
                     lbl_SecondStep.Background = Brushes.AliceBlue;
                 }
                 uint NumberOfPacks = Communication.NumberOfPacks;
-                double _completedPercentage = (((double)numPack / NumberOfPacks) * 100);
-                pbStatus.Value = _completedPercentage;
+                if (NumberOfPacks != 0)
+                {
+                    double _completedPercentage = (((double)numPack / NumberOfPacks) * 100);
+                    pbStatus.Value = _completedPercentage;
+                }
+                TimePassed /= 1000;
+                uint deltaTime = TimePassed - prev_timePassed;
+                prev_timePassed = TimePassed;
+                _transferSpeed = _transferSpeed*0.9+0.1*((double)numBytes / (1024.0 * 1024.0))/deltaTime;
                 uint ETA = (uint)((NumberOfPacks - numPack)*Main.PackSize / (1024 * 1024) / _transferSpeed);
                 txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed: "+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
             });

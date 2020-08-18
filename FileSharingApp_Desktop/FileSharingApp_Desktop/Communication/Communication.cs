@@ -27,7 +27,7 @@ class Communication
     private static readonly int HeaderLen = 7;
     private static readonly byte StartByte = (byte)'J';
     private static int Port = 41001;
-    private static int BufferSize = 1024 * 8;
+    private static int BufferSize = 1024 * 64;
 
     public static bool isClientConnected = false;
     public static bool isConnectedToServer = false;
