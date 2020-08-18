@@ -27,7 +27,7 @@ class Communication
     private static readonly int HeaderLen = 7;
     private static readonly byte StartByte = (byte)'J';
     private static int Port = 41001;
-
+    private static int BufferSize = 1024 * 8;
 
     public static bool isClientConnected = false;
     public static bool isConnectedToServer = false;
@@ -66,7 +66,7 @@ class Communication
     /// <returns></returns>
     public static string CreateServer()
     {
-        server = new Server(Port);                      /// Create server instance
+        server = new Server(Port,BufferSize);                      /// Create server instance
         string serverIP=server.SetupServer();           /// Setup Server on default port. this Function will return device ip as string.
        
         string code = GenerateTransferCode(serverIP);   /// Generate a code to secure transfer
@@ -288,7 +288,7 @@ class Communication
     /// <returns></returns>
     public static bool ConnectToServer(string ip)
     {
-        client = new Client(Port);
+        client = new Client(Port,BufferSize);
         isConnectedToServer = client.ConnectToServer(ip);
         return isConnectedToServer;
     }

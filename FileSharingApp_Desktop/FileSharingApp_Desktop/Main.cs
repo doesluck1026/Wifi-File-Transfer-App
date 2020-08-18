@@ -362,7 +362,6 @@ class Main
                     stopwatch.Restart();
                     event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
                 }
-                //Debug.WriteLine("Completed : % " + CompletedPercentage+"  Speed: "+TransferSpeed+" mb/s");
             }
             if (numPack==numberOfPacks)
                 Debug.WriteLine("File is Succesfully Received");

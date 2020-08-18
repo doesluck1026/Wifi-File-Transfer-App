@@ -16,10 +16,11 @@ class Client
     private string IP;
     private int Port;
 
-    public Client(int port = 41000)
+    public Client(int port = 41000,int bufferSize= 1024 * 64)
     {
         //this.IP = IP;
         this.Port = port;
+        this.BufferSize = bufferSize;
     }
 
     /// <summary>

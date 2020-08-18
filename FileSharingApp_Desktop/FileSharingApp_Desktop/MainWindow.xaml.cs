@@ -54,7 +54,7 @@ namespace FileSharingApp_Desktop
                     lbl_SecondStep.Background = Brushes.AliceBlue;
                 }
                 uint NumberOfPacks = Communication.NumberOfPacks;
-                int _completedPercentage = (int)(((double)numPack / NumberOfPacks) * 100);
+                double _completedPercentage = (((double)numPack / NumberOfPacks) * 100);
                 pbStatus.Value = _completedPercentage;
                 uint ETA = (uint)((NumberOfPacks - numPack)*Main.PackSize / (1024 * 1024) / _transferSpeed);
                 txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed: "+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";

@@ -9,7 +9,7 @@ class Server
 {
     #region "Definitions"
     private int TimeoutTime = 50;
-    public int BufferSize = 1024 * 16;
+    public int BufferSize = 1024 * 64;
     private TcpListener server = null;
     public bool ServerStarted = false;
     public int HeaderLen = 7;
@@ -21,9 +21,10 @@ class Server
     public string IP = "";
     #endregion
 
-    public Server(int port=41000)
+    public Server(int port=41000, int bufferSize = 1024 * 64)
     {
         this.Port = port;
+        this.BufferSize = bufferSize;
     }
     public IPEndPoint StartListener()
     {
