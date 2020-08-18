@@ -19,7 +19,7 @@ class Main
 
     #region Parameters
 
-    public static int PackSize = 1024 * 32;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB
+    public static int PackSize = 1024 * 256;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB
 
     #endregion
 
@@ -234,6 +234,7 @@ class Main
             double timeAsSec = 0;
             double TimePassed = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
+            TransferSpeed = 3;
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
                 FileOps.FileReadAtByteIndex(bytesSent, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
@@ -250,16 +251,15 @@ class Main
                     Debug.WriteLine("Last Package Sent: "+Communication.LastPackNumberSent+"  Last pack received: "+Communication.LastPackNumberReceived);
                     Debug.WriteLine("Could not send Last Package! Retrying...");
                 }
-                if (stopwatch.ElapsedMilliseconds > 1000)
+                if (stopwatch.ElapsedMilliseconds >= 1000)
                 {
                     timeAsSec = (stopwatch.ElapsedMilliseconds / 1000.0);
                     TimePassed += timeAsSec;
-                    TransferSpeed = TransferSpeed*0.9+0.1*((bytesSent - checkPoint) / mb )/ timeAsSec;                     ///
+                    TransferSpeed = TransferSpeed * 0.9 + 0.1 * ((bytesSent - checkPoint) / mb )/ timeAsSec;                     /// 
                     checkPoint = bytesSent;
+                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
                     stopwatch.Restart();
                 }
-                CompletedPercentage = (int)(((double)numPack / numberOfPacks) * 100);
-                event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
 
             }
             if (isSent)                                                                             /// if all file is sent
@@ -341,6 +341,7 @@ class Main
             Stopwatch stopwatch = Stopwatch.StartNew();
             Debug.WriteLine(" Communication.NumberOfPacks: " + numberOfPacks);
             double mb = 1024.0 * 1024;
+            TransferSpeed = 3;
             while (numPack < numberOfPacks)                                           /// while the number of bytes sent to client is smaller than the total file length
             {
                 BytesToWrite = Communication.ReceiveFilePacks();
@@ -359,8 +360,8 @@ class Main
                     TransferSpeed = TransferSpeed * 0.9 + 0.1 * ((bytesWritten - checkPoint) / mb) / timeAsSec;                     ///
                     checkPoint = bytesWritten;
                     stopwatch.Restart();
+                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
                 }
-                event_UpdateUI(_IpCode, _HostName, _TransferVerified, TransferSpeed, (uint)numPack, (int)TimePassed);      /// display event
                 //Debug.WriteLine("Completed : % " + CompletedPercentage+"  Speed: "+TransferSpeed+" mb/s");
             }
             if (numPack==numberOfPacks)

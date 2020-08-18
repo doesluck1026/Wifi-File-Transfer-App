@@ -9,7 +9,7 @@ class Server
 {
     #region "Definitions"
     private int TimeoutTime = 50;
-    public int BufferSize = 1024 * 64;
+    public int BufferSize = 1024 * 16;
     private TcpListener server = null;
     public bool ServerStarted = false;
     public int HeaderLen = 7;
