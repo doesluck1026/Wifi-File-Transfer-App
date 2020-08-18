@@ -70,7 +70,7 @@ namespace FileSharingApp_Desktop
                 prev_timePassed = TimePassed;
                 TimePassed /= 1000;
                 _transferSpeed = _transferSpeed*0.5+0.5*(((double)numBytes / mb) /deltaTime);
-                ETA = (uint)(ETA*0.9+0.1*(((NumberOfPacks - numPack)*Main.PackSize / mb) / _transferSpeed));
+                ETA = (uint)((((NumberOfPacks - numPack)*Main.PackSize / mb) / _transferSpeed));
                 txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed: "+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
             });
         }

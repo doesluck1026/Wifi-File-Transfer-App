@@ -19,7 +19,7 @@ class Main
 
     #region Parameters
 
-    public static int PackSize = 1024 * 256;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB
+    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB
 
     #endregion
 
@@ -260,7 +260,7 @@ class Main
                     stopwatch.Restart();
                 }
             }
-            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount:(uint)numPack);      /// display event
+            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack, TimePassed: TimePassed);      /// display event
             if (isSent)                                                                             /// if all file is sent
             {
                 Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
@@ -361,7 +361,7 @@ class Main
                     stopwatch.Restart();
                 }
             }
-            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack);      /// display event
+            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack,TimePassed: TimePassed);      /// display event
             if (numPack==numberOfPacks)
                 Debug.WriteLine("File is Succesfully Received");
             FileOps.CloseFile();
