@@ -35,7 +35,7 @@ class Main
     private static object transferabortedLock = new object();
 
 
-    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=0,uint packCount=0,uint TimePassed=0);
+    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=1,uint packCount=0,uint TimePassed=0);
     public static event Delegate_UpdateUI event_UpdateUI;
     private static string _IpCode = "";
     private static string _HostName = "";
@@ -234,7 +234,6 @@ class Main
             uint elapsedTime = 0;
             long numBytesSent = 0;
             Stopwatch stopwatch = Stopwatch.StartNew();
-            TransferSpeed = 3;
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
                 FileOps.FileReadAtByteIndex(bytesSent, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
@@ -260,8 +259,8 @@ class Main
                     event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
                     stopwatch.Restart();
                 }
-
             }
+            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount:(uint)numPack);      /// display event
             if (isSent)                                                                             /// if all file is sent
             {
                 Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
@@ -362,6 +361,7 @@ class Main
                     stopwatch.Restart();
                 }
             }
+            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack);      /// display event
             if (numPack==numberOfPacks)
                 Debug.WriteLine("File is Succesfully Received");
             FileOps.CloseFile();

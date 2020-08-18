@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Diagnostics;
 
 namespace FileSharingApp_Desktop
 {
@@ -27,6 +28,8 @@ namespace FileSharingApp_Desktop
         private FileOperations.TransferMode TransferMode;
         private uint prev_timePassed=0;
         private double _transferSpeed = 0;
+        private uint mb = 1024*1024;
+        private uint ETA = 0;
         public MainWindow()
         {
             InitializeComponent();
@@ -35,8 +38,10 @@ namespace FileSharingApp_Desktop
             Main.event_UpdateUI += UpdateUI;
             Main.Init(true);
         }
-        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=0,uint numPack=0,uint TimePassed=0)
+        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=1,uint numPack=0,uint TimePassed=0)
         {
+            if (_transferSpeed > 500 || _transferSpeed < 0)
+                _transferSpeed = 0;
             Dispatcher.Invoke(() =>
             {
                 if (!IPCode.Equals(""))
@@ -61,11 +66,11 @@ namespace FileSharingApp_Desktop
                     double _completedPercentage = (((double)numPack / NumberOfPacks) * 100);
                     pbStatus.Value = _completedPercentage;
                 }
-                TimePassed /= 1000;
-                uint deltaTime = TimePassed - prev_timePassed;
+                double deltaTime = (TimePassed - prev_timePassed)/1000.0;
                 prev_timePassed = TimePassed;
-                _transferSpeed = _transferSpeed*0.9+0.1*((double)numBytes / (1024.0 * 1024.0))/deltaTime;
-                uint ETA = (uint)((NumberOfPacks - numPack)*Main.PackSize / (1024 * 1024) / _transferSpeed);
+                TimePassed /= 1000;
+                _transferSpeed = _transferSpeed*0.5+0.5*(((double)numBytes / mb) /deltaTime);
+                ETA = (uint)(ETA*0.9+0.1*(((NumberOfPacks - numPack)*Main.PackSize / mb) / _transferSpeed));
                 txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed: "+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
             });
         }
