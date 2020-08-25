@@ -56,7 +56,6 @@ class Communication
     {
         LastPackNumberSent = 0;
         LastPackNumberReceived = -1;
-        //server = new Server();
         client = new Client();
     }
     #region Server Functions
