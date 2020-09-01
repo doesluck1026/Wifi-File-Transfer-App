@@ -158,7 +158,6 @@ class FileOperations
     }
     public void FileWriteAtByteIndex(long BufferIndx, byte[] Buffer)
     {
-        Debug.WriteLine("Buffer Len: " + Buffer.Length);
         Fs.Position = BufferIndx;
         Fs.Write(Buffer, 0, Buffer.Length);
     }
