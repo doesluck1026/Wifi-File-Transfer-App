@@ -150,12 +150,15 @@ class FileOperations
     }
     public void FileReadAtByteIndex(long BufferIndx, out int BytesRead, out byte[] Buffer, int chunkSize = 1024)
     {
-        Buffer = new byte[chunkSize];
+        byte[] chunk = new byte[chunkSize];
         Fs.Position = BufferIndx;
-        BytesRead = Fs.Read(Buffer, 0, chunkSize);
+        BytesRead = Fs.Read(chunk, 0, chunkSize);
+        Buffer = new byte[BytesRead];
+        Array.Copy(chunk, 0, Buffer, 0, BytesRead);
     }
     public void FileWriteAtByteIndex(long BufferIndx, byte[] Buffer)
     {
+        Debug.WriteLine("Buffer Len: " + Buffer.Length);
         Fs.Position = BufferIndx;
         Fs.Write(Buffer, 0, Buffer.Length);
     }
