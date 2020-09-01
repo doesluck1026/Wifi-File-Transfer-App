@@ -19,7 +19,7 @@ class Main
 
     #region Parameters
 
-    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 32 kB and should be smaller than 64 kB
+    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should be smaller than 64 kB
 
     #endregion
 

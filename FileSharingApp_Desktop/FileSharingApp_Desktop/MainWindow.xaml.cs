@@ -34,7 +34,6 @@ namespace FileSharingApp_Desktop
         {
             InitializeComponent();
 
-            System.Diagnostics.Debug.WriteLine("push yapıyorum");
             Main.event_UpdateUI += UpdateUI;
             Main.Init(true);
         }
@@ -80,7 +79,7 @@ namespace FileSharingApp_Desktop
             string FileURL = SelectFile();
             if (FileURL == null)
             {
-                //show wrong url message
+                MessageBox.Show("Please Select a Valid File");
                 return;
             }
             TransferMode = FileOperations.TransferMode.Send;
@@ -120,10 +119,14 @@ namespace FileSharingApp_Desktop
 
             return null;
         }
+        /// <summary>
+        /// this function is used to select a folder on current machine and returns folder path
+        /// </summary>
+        /// <returns>Folder path</returns>
         private string GetFolder()
         {
             var dlg = new CommonOpenFileDialog();
-            dlg.Title = "My Title";
+            dlg.Title = "Select Target Folder";
             dlg.IsFolderPicker = true;
             dlg.InitialDirectory = "c:\\";
 
