@@ -5,16 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileSharingApp_Desktop"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height = "*" />
-            <RowDefinition Height = "*" />
-            <RowDefinition Height = "*" />
+            <RowDefinition Height = "1*" />
+            <RowDefinition Height = "3*" />
+            <RowDefinition Height = "3*" />
+            <RowDefinition Height = "3*" />
         </Grid.RowDefinitions>
 
+        <!-- Information bar  -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="AliceBlue">
+            <Label Content=" ==> : " VerticalAlignment="Center" />
+            <TextBlock x:Name="txt_StatusInfo" VerticalAlignment="Center" Text="" />
+        </StackPanel>
+
         <!-- Step 1, choice of transaction type  -->
-        <Border Grid.Row="0" Padding="10" >
+        <Border Grid.Row="1" Padding="10" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width = "1*" />
@@ -22,7 +30,11 @@
                     <ColumnDefinition Width = "3*" />
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column = "0" Padding = "10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Column = "0" Padding = "10" Grid.RowSpan="2">
                     <Label x:Name="lbl_FirstStep" Background="Green" />
 
                 </Border>
@@ -41,11 +53,17 @@
 
                 </Border>
 
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" >
+                    <Label Content=" File Path  : " VerticalAlignment="Center" />
+                    <TextBlock x:Name="txt_FilePath" VerticalAlignment="Center" Text="" />
+
+                </StackPanel>
+
             </Grid>
         </Border>
 
         <!-- Step 2, Confirmation of the file to be sent or received  -->
-        <Border Grid.Row="1" Padding="10" IsEnabled="True" >
+        <Border x:Name="bdr_Step2" Grid.Row="2" Padding="10" IsEnabled="True" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width = "1*" />
@@ -69,13 +87,13 @@
                         <Label Grid.Row="0" Content=" File Info      : " VerticalAlignment="Center" Background="#eee"/>
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
                             <Label Content=" File Name  : " VerticalAlignment="Center" />
-                            <TextBlock VerticalAlignment="Center" Text=" dummy File" />
+                            <TextBlock x:Name="txt_FileName" VerticalAlignment="Center" Text="" />
 
                         </StackPanel>
 
                         <StackPanel Grid.Row="2" Orientation="Horizontal">
                             <Label Content=" File Size      : " VerticalAlignment="Center" />
-                            <TextBlock VerticalAlignment="Center" Text=" dummy Size " />
+                            <TextBlock x:Name="txt_FileSize" VerticalAlignment="Center" Text="" />
 
                         </StackPanel>
                         
@@ -93,14 +111,18 @@
 
                         <Border Grid.Row="0" Padding="2" HorizontalAlignment="Center">
 
-                            <TextBox x:Name="txt_IpCode" Padding="-10" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" DUMMY CODE" FontSize="35" FontWeight="Bold" />
+                            <TextBox x:Name="txt_IpCode" Padding="-10" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="35" FontWeight="Bold" />
 
                         </Border>
 
-                        <Label x:Name="lbl_Hostname" Grid.Row="1" Content=" Host Name      : " VerticalAlignment="Center" Background="#eee"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" >
+                            <Label Content="Host Name  : " VerticalAlignment="Center" />
+                            <TextBlock x:Name="txt_HostName" VerticalAlignment="Center" Text="" />
 
-                        <Border Grid.Row="2" Padding="2">
-                            <Grid   >
+                        </StackPanel>
+
+                        <Border Grid.Row="2" Padding="1">
+                            <Grid>
                                 <Button x:Name="btn_Confirm" Content="Confirm" FontWeight="Bold" Click="btn_Confirm_Click"/>
 
                             </Grid>
@@ -114,7 +136,7 @@
         </Border>
 
         <!-- Step 3, tracking the sending or receiving process -->
-        <Border Grid.Row="2" Padding="10" IsEnabled="False" >
+        <Border x:Name="bdr_Step3" Grid.Row="3" Padding="10" IsEnabled="False" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width = "1*" />
@@ -134,7 +156,7 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row = "0" Margin="15">
-                        <ProgressBar Minimum="0" Maximum="100" Value="75" Name="pbStatus" />
+                        <ProgressBar Minimum="0" Maximum="100" Value="0" Name="pbStatus" />
                         <TextBlock Text="{Binding ElementName=pbStatus, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Grid>
 
@@ -142,7 +164,7 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content=" Speed : " VerticalAlignment="Center"/>
-                                <TextBlock x:Name="txt_TransferSpeed" VerticalAlignment="Center" Text=" dummy speed MB/s" />
+                                <TextBlock x:Name="txt_TransferSpeed" VerticalAlignment="Center" Text="" />
 
                             </StackPanel>
                             
