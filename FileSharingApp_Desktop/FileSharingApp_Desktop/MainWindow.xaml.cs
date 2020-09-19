@@ -41,24 +41,13 @@ namespace FileSharingApp_Desktop
         public MainWindow()
         {
             InitializeComponent();
-<<<<<<< HEAD
         }
       
         private void UpdateUI()
-=======
-            Main.event_UpdateUI_FileInfo += event_UpdateUI_FileInfo;
-            Main.event_UpdateUI_HostInfo += event_UpdateUI_HostInfo;
-            Main.event_UpdateUI_ClientInfo += event_UpdateUI_ClientInfo;
-            Main.event_UpdateUI_TransferInfo += event_UpdateUI_TransferInfo;
-        }
-
-        private void event_UpdateUI_FileInfo(string FilePath, string FileName, double FileSize)
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
         {
             Stopwatch UpdateWatch = new Stopwatch();
             while (UIUpdate_Start)
             {
-<<<<<<< HEAD
                 UpdateWatch.Restart();
                 Dispatcher.Invoke(() =>
                 {
@@ -109,94 +98,12 @@ namespace FileSharingApp_Desktop
 
 
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
-=======
-                if (!FilePath.Equals(""))
                 {
-                    txt_FilePath.Text= FilePath;
-                }
-                if (!FileName.Equals(""))
-                {
-                    txt_FileName.Text = FileName;
-                }
-                if (!FileSize.Equals(""))
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
-                {
-                    txt_FileSize.Text = FileSize.ToString();
-                }
-            });
-        }
 
-        private void event_UpdateUI_HostInfo(string HostIpCode, string HostName, bool TransferVerified, string ConnectionMsg)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (!HostIpCode.Equals(""))
-                {
-                    txt_IpCode.Text = HostIpCode;
                 }
-                if (!HostName.Equals(""))
-                {
-                    txt_HostName.Text = HostName;
-                }
-                if (!ConnectionMsg.Equals(""))
-                {
-                    txt_StatusInfo.Text = ConnectionMsg;
-                }
-<<<<<<< HEAD
 
             }
         
-=======
-            });
-        }
-
-        private void event_UpdateUI_TransferInfo(double _transferSpeed, int _completedPercentage)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                pbStatus.Value = _completedPercentage;
-                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00");
-            });
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
-        }
-
-        private void event_UpdateUI_ClientInfo(bool isConnected,string FileName, double FileSize)
-        {
-            Dispatcher.Invoke(() =>
-            {
-                if (isConnected)
-                {
-                    string QuestionMsg = "Do you approve to receive the " + FileName + ", " + FileSize + " ?";
-                    MessageBoxResult result = MessageBox.Show(QuestionMsg, "My App", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
-                    switch (result)
-                    {
-                        case MessageBoxResult.Yes:
-                            txt_FileName.Text = FileName;
-                            txt_FileName.Text = FileName;
-
-                            Main.RespondToTransferRequest(true);
-                            break;
-                        case MessageBoxResult.No:
-                            Main.RespondToTransferRequest(false);
-                            break;
-                    }
-                }
-                else
-                {
-                    string QuestionMsg = "Connection failed";
-                    MessageBox.Show(QuestionMsg);
-
-                }
-
-            });
-        }
-        
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            bdr_Step2.IsEnabled = false;
-            btn_Confirm.IsEnabled = false;
-            txt_StatusInfo.Text = "Choose what kind of action you will take.";
-            Main.Init();
         }
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
@@ -205,22 +112,11 @@ namespace FileSharingApp_Desktop
             string FileURL = SelectFile();
             if (FileURL == null)
             {
-<<<<<<< HEAD
                 MessageBox.Show("Please Select a Valid File");
-=======
-                //show wrong url message
-                MessageBox.Show("File is invalid");
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
                 return;
             }
             TransferMode = FileOperations.TransferMode.Send;
             Main.SetFileURL(FileURL);
-<<<<<<< HEAD
-=======
-            bdr_Step2.IsEnabled = true;
-
-            // Update file info
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
@@ -228,27 +124,12 @@ namespace FileSharingApp_Desktop
             FileURL = GetFolder();
             if (FileURL == null)
             {
-                MessageBox.Show("File is invalid");
                 System.Diagnostics.Debug.WriteLine("File Url is null");
                 return;
             }
-<<<<<<< HEAD
             TransferMode = FileOperations.TransferMode.Receive;
             Main.FirstStep = true;
-=======
-            txt_FilePath.Text = FileURL;
-            txt_StatusInfo.Text = "Now, enter the code, from the sender. ";
-            btn_Confirm.IsEnabled = true;
-            bdr_Step2.IsEnabled = true;
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
-        }
-
-        private void btn_Confirm_Click(object sender, RoutedEventArgs e)
-        {
-            string code = txt_IpCode.Text;
-            Main.EnterTheCode(code);
-            Main.SetFilePathToSave(FileURL);
         }
 
         /// <summary>
@@ -301,7 +182,6 @@ namespace FileSharingApp_Desktop
             }
             return null;
         }
-<<<<<<< HEAD
         private void btn_Confirm_Click(object sender, RoutedEventArgs e)
         {
             if (TransferMode == FileOperations.TransferMode.Receive)
@@ -370,8 +250,6 @@ namespace FileSharingApp_Desktop
 
 
         }
-=======
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
 
     }
 }

@@ -31,7 +31,6 @@ C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.dll
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
-<<<<<<< HEAD
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.exe.config
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.exe
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.pdb
@@ -58,5 +57,3 @@ C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop
 C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.pdb
 C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.baml
-=======
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba

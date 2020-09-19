@@ -128,7 +128,7 @@ class FileOperations
         long fileSizeAsByte = Fs.Length;                                /// Get the Total length of the file as bytes
         _FileSizeAsBytes = fileSizeAsByte;                              /// Store File Length as bytes in a global variable
         int pow = (int)Math.Log(fileSizeAsByte, 1024);                  /// calculate the greatest type ( byte megabyte gigabyte etc...) the filesize can be respresent as integer variable
-        this.FileSize = fileSizeAsByte / Math.Pow(1024, pow);                /// Convert file size from bytes to the greatest type
+        FileSize = fileSizeAsByte / Math.Pow(1024, pow);                /// Convert file size from bytes to the greatest type
         switch (pow)                                                    /// to assign type:
         {
             case 0:                                                     /// if pow equals to 0
@@ -147,7 +147,6 @@ class FileOperations
                 FilesizeType = Communication.SizeTypes.TB;
                 break;
         }
-
     }
     public void FileReadAtByteIndex(long BufferIndx, out int BytesRead, out byte[] Buffer, int chunkSize = 1024)
     {

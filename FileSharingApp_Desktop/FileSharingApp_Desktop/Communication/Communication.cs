@@ -147,11 +147,7 @@ class Communication
                 isAccepted = true;
             }
         }
-<<<<<<< HEAD
         return isAccepted;
-=======
-            return isAccepted; 
->>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
     }
     /// <summary>
     /// Sends File packs to the client and gets the acknowledge
