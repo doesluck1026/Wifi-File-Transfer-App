@@ -59,7 +59,4 @@ C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop
 C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.baml
 =======
-C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.dll
-C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
-C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
 >>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
