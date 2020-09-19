@@ -47,8 +47,25 @@ class Main
     private static object SecondStep_Lock = new object();
     private static object ThirdStep_Lock = new object();
 
+<<<<<<< HEAD
     public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=1,uint packCount=0,uint TimePassed=0);
+=======
+    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, double _transferSpeed, int _completedPercentage);
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
     public static event Delegate_UpdateUI event_UpdateUI;
+
+    public delegate void Delegate_UpdateUI_FileInfo(string FilePath, string FileName, double FileSize);
+    public static event Delegate_UpdateUI_FileInfo event_UpdateUI_FileInfo;
+
+    public delegate void Delegate_UpdateUI_HostInfo(string HostIpCode, string HostName, bool TransferVerified, string ConnectionMsg);
+    public static event Delegate_UpdateUI_HostInfo event_UpdateUI_HostInfo;
+
+    public delegate void Delegate_UpdateUI_ClientInfo(bool isConnected, string fileName, double fileSize);
+    public static event Delegate_UpdateUI_ClientInfo event_UpdateUI_ClientInfo;
+
+    public delegate void Delegate_UpdateUI_TransferInfo(double _transferSpeed, int _completedPercentage);
+    public static event Delegate_UpdateUI_TransferInfo event_UpdateUI_TransferInfo;
+
     private static string _IpCode = "";
     private static string _HostName = "";
     private static bool _TransferVerified = false;
@@ -421,6 +438,11 @@ class Main
         PassedSec = TimePassed % 60;
     }
 
+    public static FileOperations getFileInfo()
+    {
+        return FileOps;
+    }
+
     #region Server Functions
 
     /// <summary>
@@ -430,12 +452,17 @@ class Main
     /// <returns></returns>
     public static void SetFileURL(string url)
     {
-        URL = url;                                                  /// assign URL
+        URL = url;                                                              /// assign URL
         FileOps.Init(url, FileOperations.TransferMode.Send);
+<<<<<<< HEAD
         FileName = FileOps.FileName;
         FileSize = FileOps.FileSize;
         FirstStep = true;
         WaitForConnection();                /// Setup the server and accept connection
+=======
+        event_UpdateUI_FileInfo(URL, FileOps.FileName, FileOps.FileSize);       /// Throw the evet to notify the File is ready 
+        WaitForConnection();                                                    /// Setup the server and accept connection
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
 
     }
     /// <summary>
@@ -480,9 +507,17 @@ class Main
     /// <returns>returns true if a client successfully connected</returns>
     private static void WaitForConnection()
     {
+<<<<<<< HEAD
         string IpCode_ = Communication.CreateServer();                     /// setup the server and start listening to port
         IpCode = IpCode_;
         //event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
+=======
+        string IpCode = Communication.CreateServer();                     /// setup the server and start listening to port
+        Debug.WriteLine("IpCode: " + IpCode);
+        _IpCode = IpCode;
+        event_UpdateUI_HostInfo(_IpCode, _HostName, _TransferVerified, " Waiting  client! ");
+        //event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
         bool isTransferStarted = StartFileTransfer();                     /// Start File Transfer
     }
     /// <summary>
@@ -493,9 +528,17 @@ class Main
         if (FileOps != null)
         {
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
+<<<<<<< HEAD
             HostName = clientHostname;
             ThirdStep = true;
             //event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
+=======
+            _HostName = clientHostname;
+            //event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+            event_UpdateUI_HostInfo(_IpCode, _HostName, _TransferVerified, " Client is connected, awaiting verification! ");
+
+            Main.TransferApproved = true;
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
             while (!TransferApproved && !TransferAborted) ;
             if (TransferAborted)
             {
@@ -503,6 +546,7 @@ class Main
                 string Msg = "Transfer is aborted by user!";
                 InfoMsg = Msg;
                 Debug.WriteLine("Transfer is aborted by user!");
+                event_UpdateUI_HostInfo(_IpCode, _HostName, _TransferVerified, " Transfer is aborted by user! ");
                 sendingThread.Abort();
                 return;
             }
@@ -515,28 +559,49 @@ class Main
                 {
                     QueryForTransfer();
                     _TransferVerified = isVerified;
+<<<<<<< HEAD
                     HostName = clientHostname;
                     string Msg = "isVerified: " + isVerified;
                     InfoMsg = Msg;
                     event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
+=======
+                    _HostName = clientHostname;
+                    event_UpdateUI_HostInfo(_IpCode, _HostName, _TransferVerified, " Client is verified");
+                    //event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
                 }
                 else
                 {
                     string Msg = "isVerified: " + isVerified + " aborting!";
                     InfoMsg = Msg;
                     Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
+<<<<<<< HEAD
                     Communication.CloseServer();
+=======
+                    event_UpdateUI_HostInfo(_IpCode, _HostName, _TransferVerified, " Client verification is wrong, aborting!");
+
+                    sendingThread.Abort();
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
                     return;
                 }
             }
             else
             {
+<<<<<<< HEAD
                 string Msg = "ClientHostname was null. Aborting!";
                 InfoMsg = Msg;
                 Communication.CloseServer();
                 Debug.WriteLine("clientHostname was null. Aborting!");
+=======
+                Debug.WriteLine("client Hostname was null. Aborting!");
+                event_UpdateUI_HostInfo(_IpCode, _HostName, _TransferVerified, " Client Hostname was null. Aborting!");
+                sendingThread.Abort();
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
                 return;
             }
+
+
+
             /// define variables
             long bytesSent = 0;
             int BytesRead = 0;
@@ -577,6 +642,12 @@ class Main
                     CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
                 }
+<<<<<<< HEAD
+=======
+                CompletedPercentage = (int)(((double)numPack / numberOfPacks) * 100);
+                //event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                event_UpdateUI_TransferInfo(_transferSpeed, _completedPercentage);
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
             }
             CalculateCompletedPercentage((uint)numPack);
             CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
@@ -615,12 +686,12 @@ class Main
         string serverIP = Communication.DecodeTransferCode(code);
         if (serverIP != null && serverIP != "")
         {
+            string fileName = "";
+            double fileSize = -1;
             bool isConnected = Communication.ConnectToServer(serverIP);
             if (isConnected)
             {
                 Communication.SendVerification(code);
-                string fileName;
-                double fileSize;
                 Communication.SizeTypes sizeType;
                 Communication.GetFileSpecs(out fileName, out fileSize, out sizeType);
                 FileOps.FileName = fileName;
@@ -628,7 +699,13 @@ class Main
                 FileSize = fileSize;
                 Debug.WriteLine("fileName: " + fileName + "   FileOps.FileName: " + FileOps.FileName);
                 // Show Specs to user and ask for permission
+<<<<<<< HEAD
+=======
+                //RespondToTransferRequest(true);
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
             }
+            event_UpdateUI_ClientInfo(isConnected, fileName, fileSize);
+
         }
         return success;
     }
@@ -693,6 +770,7 @@ class Main
                     CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
                 }
+<<<<<<< HEAD
             }
             CalculateCompletedPercentage((uint)numPack);
             CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
@@ -704,6 +782,13 @@ class Main
                 Debug.WriteLine("File is Succesfully Received");
                 ThirdStep = true;
 
+=======
+                CompletedPercentage = (int)(((double)numPack / numberOfPacks) * 100);
+                //event_UpdateUI(_IpCode, _HostName, _TransferVerified, _transferSpeed, _completedPercentage);      /// display event
+                event_UpdateUI_TransferInfo(_transferSpeed, _completedPercentage);
+
+                //Debug.WriteLine("Completed : % " + CompletedPercentage+"  Speed: "+TransferSpeed+" mb/s");
+>>>>>>> 5ce8e82e0af99626f70fe02d8f3369367a6506ba
             }
             FileOps.CloseFile();
             Communication.CloseClient();
