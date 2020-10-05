@@ -85,7 +85,7 @@ namespace FileSharingApp_Desktop
 
 
                     txt_StatusInfo.Text = Main.InfoMsg;
-                    txt_IpCode.Text = Main.IpCode;
+                   // txt_IpCode.Text = Main.IpCode;
                     txt_FilePath.Text = Main.URL;
                     txt_FileName.Text = Main.FileName;
                     txt_HostName.Text = Main.HostName;

@@ -106,7 +106,7 @@
 
                         <Border Grid.Row="0" Padding="2" HorizontalAlignment="Center">
 
-                            <TextBox x:Name="txt_IpCode" Padding="-10" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="35" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" />
+                            <TextBox x:Name="txt_IpCode" Padding="-10" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="30" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" />
 
                         </Border>
 
