@@ -25,7 +25,7 @@ class Main
 
     #region Variables
 
-    private static string URL;                          /// File Path
+    private static string _URL;                          /// File Path
     private static Thread sendingThread;
     private static FileOperations FileOps;
     private static Thread receivingThread;
@@ -33,7 +33,19 @@ class Main
     private static object completedLock = new object();
     private static object transferApprovedLock = new object();
     private static object transferabortedLock = new object();
-
+    private static object HostName_Lock = new object();
+    private static object IpCode_Lock = new object();
+    private static object URL_Lock = new object();
+    private static object InfoMsg_Lock = new object();
+    private static object EstimatedMin_Lock = new object();
+    private static object EstimatedSec_Lock = new object();
+    private static object PassedMin_Lock = new object();
+    private static object PassedSec_Lock = new object();
+    private static object FileName_Lock = new object();
+    private static object FileSize_Lock = new object();
+    private static object FirstStep_Lock = new object();
+    private static object SecondStep_Lock = new object();
+    private static object ThirdStep_Lock = new object();
 
     public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=1,uint packCount=0,uint TimePassed=0);
     public static event Delegate_UpdateUI event_UpdateUI;
@@ -41,9 +53,21 @@ class Main
     private static string _HostName = "";
     private static bool _TransferVerified = false;
     private static double _transferSpeed = 0;
-    private static int _completedPercentage = 0;
+    private static double _completedPercentage = 0;
     private static bool _transferApproved = false;
     private static bool _transferAborted = false;
+    private static string _InfoMsg = "Select an action!";
+    private static uint prev_timePassed = 0;
+    private static double _estimatedMin = 0;
+    private static double _estimatedSec = 0;
+    private static double _passedMin = 0;
+    private static double _passedSec = 0;
+    private static string _FileName = "";
+    private static double _FileSize = 0;
+    private static bool _FirstStep_Action = false;
+    private static bool _SecondStep_Action = false;
+    private static bool _ThirdStep_Action = false;
+
 
     public static double TransferSpeed
     {
@@ -63,7 +87,7 @@ class Main
             }
         }
     }
-    public static int CompletedPercentage
+    public static double CompletedPercentage
     {
 
         get
@@ -117,6 +141,244 @@ class Main
             }
         }
     }
+    public static string HostName
+    {
+
+        get
+        {
+            lock (HostName_Lock)
+            {
+                return _HostName;
+            }
+        }
+        set
+        {
+            lock (HostName_Lock)
+            {
+                _HostName = value;
+            }
+        }
+    }
+    public static string IpCode
+    {
+
+        get
+        {
+            lock (IpCode_Lock)
+            {
+                return _IpCode;
+            }
+        }
+        set
+        {
+            lock (IpCode_Lock)
+            {
+                _IpCode = value;
+            }
+        }
+    }
+    public static string URL
+    {
+
+        get
+        {
+            lock (URL_Lock)
+            {
+                return _URL;
+            }
+        }
+        set
+        {
+            lock (URL_Lock)
+            {
+                _URL = value;
+            }
+        }
+    }
+    public static string FileName
+    {
+
+        get
+        {
+            lock (FileName_Lock)
+            {
+                return _FileName;
+            }
+        }
+        set
+        {
+            lock (FileName_Lock)
+            {
+                _FileName = value;
+            }
+        }
+    }
+    public static double FileSize
+    {
+
+        get
+        {
+            lock (FileSize_Lock)
+            {
+                return _FileSize;
+            }
+        }
+        set
+        {
+            lock (FileSize_Lock)
+            {
+                _FileSize = value;
+            }
+        }
+    }
+    public static string InfoMsg
+    {
+
+        get
+        {
+            lock (InfoMsg_Lock)
+            {
+                return _InfoMsg;
+            }
+        }
+        set
+        {
+            lock (InfoMsg_Lock)
+            {
+                _InfoMsg = value;
+            }
+        }
+    }
+    public static double EstimatedMin
+    {
+
+        get
+        {
+            lock (EstimatedMin_Lock)
+            {
+                return _estimatedMin;
+            }
+        }
+        set
+        {
+            lock (EstimatedMin_Lock)
+            {
+                _estimatedMin = value;
+            }
+        }
+    }
+    public static double EstimatedSec
+    {
+
+        get
+        {
+            lock (EstimatedSec_Lock)
+            {
+                return _estimatedSec;
+            }
+        }
+        set
+        {
+            lock (EstimatedSec_Lock)
+            {
+                _estimatedSec = value;
+            }
+        }
+    }
+    public static double PassedMin
+    {
+
+        get
+        {
+            lock (PassedMin_Lock)
+            {
+                return _passedMin;
+            }
+        }
+        set
+        {
+            lock (PassedMin_Lock)
+            {
+                _passedMin = value;
+            }
+        }
+    }
+    public static double PassedSec
+    {
+
+        get
+        {
+            lock (PassedSec_Lock)
+            {
+                return _passedSec;
+            }
+        }
+        set
+        {
+            lock (PassedSec_Lock)
+            {
+                _passedSec = value;
+            }
+        }
+    }
+
+    public static bool ThirdStep
+    {
+
+        get
+        {
+            lock (ThirdStep_Lock)
+            {
+                return _ThirdStep_Action;
+            }
+        }
+        set
+        {
+            lock (ThirdStep_Lock)
+            {
+                _ThirdStep_Action = value;
+            }
+        }
+    }
+
+    public static bool SecondStep
+    {
+
+        get
+        {
+            lock (SecondStep_Lock)
+            {
+                return _SecondStep_Action;
+            }
+        }
+        set
+        {
+            lock (SecondStep_Lock)
+            {
+                _SecondStep_Action = value;
+            }
+        }
+    }
+
+    public static bool FirstStep
+    {
+
+        get
+        {
+            lock (FirstStep_Lock)
+            {
+                return _FirstStep_Action;
+            }
+        }
+        set
+        {
+            lock (FirstStep_Lock)
+            {
+                _FirstStep_Action = value;
+            }
+        }
+    }
+
     #endregion
 
     public static void Init(bool isFirstTime)
@@ -124,6 +386,39 @@ class Main
         Communication.Init();
         if(isFirstTime)
             FileOps = new FileOperations();
+    }
+
+    private static void CalculateCompletedPercentage(uint numPack = 0)
+    {
+        uint NumberOfPacks = Communication.NumberOfPacks;
+        if (NumberOfPacks != 0)
+        {
+            double _completedPercentage = (((double)numPack / NumberOfPacks) * 100);
+            CompletedPercentage = _completedPercentage;
+        }
+        return;
+    }
+
+
+    private static void CalculateEstablishedTime(long numBytes, uint numPack, uint TimePassed)
+    {
+        uint MB = 1024 * 1024;
+        uint ETA;
+        uint NumberOfPacks = Communication.NumberOfPacks;
+
+        if (_transferSpeed > 500 || _transferSpeed < 0)
+            _transferSpeed = 0;
+
+        double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
+        prev_timePassed = TimePassed;
+        TimePassed /= 1000;
+        _transferSpeed = _transferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
+        ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
+
+        EstimatedMin = ETA / 60.0;
+        EstimatedSec = ETA % 60;
+        PassedMin = TimePassed / 60.0;
+        PassedSec = TimePassed % 60;
     }
 
     #region Server Functions
@@ -137,6 +432,9 @@ class Main
     {
         URL = url;                                                  /// assign URL
         FileOps.Init(url, FileOperations.TransferMode.Send);
+        FileName = FileOps.FileName;
+        FileSize = FileOps.FileSize;
+        FirstStep = true;
         WaitForConnection();                /// Setup the server and accept connection
 
     }
@@ -160,12 +458,19 @@ class Main
         {
             sendingThread = new Thread(SendingCoreFcn);                             /// Start Sending File
             sendingThread.Start();
-            Debug.WriteLine("File Transfer is Started");
+            //string Msg = "File transfer is started.";
+            //InfoMsg = Msg;    
+            //Debug.WriteLine("File transfer is started");
+            string Msg = "Wait for Client.";
+            InfoMsg = Msg;
+            Debug.WriteLine("Wait for Client.");
             return true;
         }
         catch (Exception e)
         {
-            Debug.WriteLine("Failed to Start sending thread! \n " + e.ToString());
+            string Msg = "Failed to start sending thread!";
+            InfoMsg = Msg;
+            Debug.WriteLine("Failed to start sending thread! \n " + e.ToString());
             return false;
         }
     }
@@ -175,9 +480,9 @@ class Main
     /// <returns>returns true if a client successfully connected</returns>
     private static void WaitForConnection()
     {
-        string IpCode = Communication.CreateServer();                     /// setup the server and start listening to port
-        _IpCode = IpCode;
-        event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
+        string IpCode_ = Communication.CreateServer();                     /// setup the server and start listening to port
+        IpCode = IpCode_;
+        //event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
         bool isTransferStarted = StartFileTransfer();                     /// Start File Transfer
     }
     /// <summary>
@@ -188,11 +493,15 @@ class Main
         if (FileOps != null)
         {
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
-            _HostName = clientHostname;
-            event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
+            HostName = clientHostname;
+            ThirdStep = true;
+            //event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
             while (!TransferApproved && !TransferAborted) ;
             if (TransferAborted)
             {
+
+                string Msg = "Transfer is aborted by user!";
+                InfoMsg = Msg;
                 Debug.WriteLine("Transfer is aborted by user!");
                 sendingThread.Abort();
                 return;
@@ -206,11 +515,15 @@ class Main
                 {
                     QueryForTransfer();
                     _TransferVerified = isVerified;
-                    _HostName = clientHostname;
+                    HostName = clientHostname;
+                    string Msg = "isVerified: " + isVerified;
+                    InfoMsg = Msg;
                     event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
                 }
                 else
                 {
+                    string Msg = "isVerified: " + isVerified + " aborting!";
+                    InfoMsg = Msg;
                     Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
                     Communication.CloseServer();
                     return;
@@ -218,6 +531,8 @@ class Main
             }
             else
             {
+                string Msg = "ClientHostname was null. Aborting!";
+                InfoMsg = Msg;
                 Communication.CloseServer();
                 Debug.WriteLine("clientHostname was null. Aborting!");
                 return;
@@ -233,6 +548,7 @@ class Main
             uint TimePassed = 0;
             uint elapsedTime = 0;
             long numBytesSent = 0;
+            SecondStep = true;
             Stopwatch stopwatch = Stopwatch.StartNew();
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
@@ -256,18 +572,29 @@ class Main
                     TimePassed += elapsedTime;
                     numBytesSent = bytesSent - checkPoint;
                     checkPoint = bytesSent;
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
+                    //event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
+                    CalculateCompletedPercentage((uint)numPack);
+                    CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
                 }
             }
-            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack, TimePassed: TimePassed);      /// display event
+            CalculateCompletedPercentage((uint)numPack);
+            CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
+            //event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack, TimePassed: TimePassed);      /// display event
             if (isSent)                                                                             /// if all file is sent
             {
+                string Msg = "ClientHostname was null. Aborting!";
+                InfoMsg = Msg;
                 Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
+                ThirdStep = true;
                 Debug.WriteLine("File is Succesfully Sent");
             }
             else
+            {
+                string Msg = "ClientHostname was null. Aborting!";
+                InfoMsg = Msg;
                 Debug.WriteLine("File Transfer Failed!");
+            }
             FileOps.CloseFile();
             Communication.CloseServer();
         }
@@ -278,8 +605,9 @@ class Main
     #region Client Functions
     public static void SetFilePathToSave(string path)
     {
+        URL = path;
         FileOps.Init(path, FileOperations.TransferMode.Receive);
-        RespondToTransferRequest(true);
+        //RespondToTransferRequest(true);
     }
     public static bool EnterTheCode(string code)
     {
@@ -296,6 +624,8 @@ class Main
                 Communication.SizeTypes sizeType;
                 Communication.GetFileSpecs(out fileName, out fileSize, out sizeType);
                 FileOps.FileName = fileName;
+                FileName = fileName;
+                FileSize = fileSize;
                 Debug.WriteLine("fileName: " + fileName + "   FileOps.FileName: " + FileOps.FileName);
                 // Show Specs to user and ask for permission
             }
@@ -312,6 +642,7 @@ class Main
     }
     private static bool StartReceiving()
     {
+        SecondStep = true;
         try
         {
             receivingThread = new Thread(ReceivingCoreFcn);
@@ -357,13 +688,23 @@ class Main
                     TimePassed += elapsedTime;
                     numBytesSent = bytesWritten - checkPoint;
                     checkPoint = bytesWritten;
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
+                    //event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
+                    CalculateCompletedPercentage((uint)numPack);
+                    CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
                 }
             }
-            event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack,TimePassed: TimePassed);      /// display event
-            if (numPack==numberOfPacks)
+            CalculateCompletedPercentage((uint)numPack);
+            CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
+            //event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack,TimePassed: TimePassed);      /// display event
+            if (numPack == numberOfPacks)
+            {
+                string Msg = "File is succesfully received!";
+                InfoMsg = Msg;
                 Debug.WriteLine("File is Succesfully Received");
+                ThirdStep = true;
+
+            }
             FileOps.CloseFile();
             Communication.CloseClient();
         }

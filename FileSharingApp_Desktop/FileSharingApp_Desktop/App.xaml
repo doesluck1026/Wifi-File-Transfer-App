@@ -4,6 +4,33 @@
              xmlns:local="clr-namespace:FileSharingApp_Desktop"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Resources for the entire application can be defined here. -->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="LightBlue" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="Border" CornerRadius="8" BorderThickness="2" Background="#353536" BorderBrush="#2275d0">
+                    <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+                    </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#5dbcd2" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#5dbcd2" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="LightGray" />
+                            </Trigger >
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="DarkBlue" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 </Application>

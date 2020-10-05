@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
+using System.Threading;
 
 namespace FileSharingApp_Desktop
 {
@@ -30,49 +31,81 @@ namespace FileSharingApp_Desktop
         private double _transferSpeed = 0;
         private uint mb = 1024*1024;
         private uint ETA = 0;
+        private Thread UIUpdate_thread;
+        private bool UIUpdate_Start = false;
+        private int UIUpdate_Period = 100;      // in ms
+        private Brush CompletedStep = Brushes.LimeGreen;
+        private Brush CurrentStep = Brushes.LightSkyBlue;
+        private Brush UnCompletedStep = Brushes.LightBlue;
+
         public MainWindow()
         {
             InitializeComponent();
-
-            Main.event_UpdateUI += UpdateUI;
-            Main.Init(true);
         }
-        private void UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=1,uint numPack=0,uint TimePassed=0)
+      
+        private void UpdateUI()
         {
-            if (_transferSpeed > 500 || _transferSpeed < 0)
-                _transferSpeed = 0;
-            Dispatcher.Invoke(() =>
+            Stopwatch UpdateWatch = new Stopwatch();
+            while (UIUpdate_Start)
             {
-                if (!IPCode.Equals(""))
+                UpdateWatch.Restart();
+                Dispatcher.Invoke(() =>
                 {
-                    txt_IpCode.Text = IPCode;
-                }
-                if(!HostName.Equals(""))
+
+
+                    if (Main.FirstStep)
+                    {
+                        lbl_FirstStep.Fill = CompletedStep;
+                        lbl_SecondStep.Fill = CurrentStep;
+                        border_SecondStep.IsEnabled = true;
+                        System.Diagnostics.Debug.WriteLine("first");
+                        Main.FirstStep = false;
+                    }
+                    else if (Main.SecondStep)
+                    {
+                        lbl_SecondStep.Fill = CompletedStep;
+                        lbl_ThirdStep.Fill = CurrentStep;
+                        border_ThirdStep.IsEnabled = true;
+                        System.Diagnostics.Debug.WriteLine("second");
+                        if(TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
+                                                                             // ********************* Ayrıca receive ve send modları için ayrı UI güncelleme fonksiyonları yazılmalı. bu şekilde olmaz
+                        {
+                            btn_Confirm.IsEnabled = false;
+                        }
+                        Main.SecondStep = false;
+                    }
+                    else if (Main.ThirdStep)
+                    {
+                        lbl_ThirdStep.Fill = CompletedStep;
+                        System.Diagnostics.Debug.WriteLine("third");
+                        Main.ThirdStep = false;
+
+                    }
+ 
+
+
+                    txt_StatusInfo.Text = Main.InfoMsg;
+                    txt_IpCode.Text = Main.IpCode;
+                    txt_FilePath.Text = Main.URL;
+                    txt_FileName.Text = Main.FileName;
+                    txt_HostName.Text = Main.HostName;
+                    txt_FileSize.Text = Main.FileSize.ToString("0.00");
+                    txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00");
+
+                    pbStatus.Value = Main.CompletedPercentage;
+
+                });
+
+
+                while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
                 {
-                    lbl_Hostname.Content = HostName;
+
                 }
-                if(TransferVerified)
-                {
-                    lbl_SecondStep.Background = Brushes.Green; 
-                }
-                else
-                {
-                    lbl_SecondStep.Background = Brushes.AliceBlue;
-                }
-                uint NumberOfPacks = Communication.NumberOfPacks;
-                if (NumberOfPacks != 0)
-                {
-                    double _completedPercentage = (((double)numPack / NumberOfPacks) * 100);
-                    pbStatus.Value = _completedPercentage;
-                }
-                double deltaTime = (TimePassed - prev_timePassed)/1000.0;
-                prev_timePassed = TimePassed;
-                TimePassed /= 1000;
-                _transferSpeed = _transferSpeed*0.5+0.5*(((double)numBytes / mb) /deltaTime);
-                ETA = (uint)((((NumberOfPacks - numPack)*Main.PackSize / mb) / _transferSpeed));
-                txt_TransferSpeed.Text = _transferSpeed.ToString("0.00")+" MB/s       " +" Estimated Time: "+(ETA/60)+" min "+ETA%60+" sec        TimePassed: "+(TimePassed / 60) + " min " + TimePassed % 60 + " sec";
-            });
+
+            }
+        
         }
+
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
             Main.TransferApproved = false;
@@ -95,6 +128,7 @@ namespace FileSharingApp_Desktop
                 return;
             }
             TransferMode = FileOperations.TransferMode.Receive;
+            Main.FirstStep = true;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
 
@@ -154,13 +188,68 @@ namespace FileSharingApp_Desktop
             {
                 Main.Init(false);
                 string code = txt_IpCode.Text;
-                Main.EnterTheCode(code);
-                Main.SetFilePathToSave(FileURL);
+                bool success = Main.EnterTheCode(code);
+                if (success)
+                {
+                    Main.SetFilePathToSave(FileURL);
+                    string FileName = Main.FileName;
+                    string fileSize = Main.FileSize.ToString("0.00");
+                    MessageBoxResult result = MessageBox.Show("Do you want to import "+ FileName + " file of" + fileSize + " size?", "Confirmation", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Yes code here  
+                        Main.RespondToTransferRequest(true);
+
+                    }
+                    else if(result == MessageBoxResult.No)
+                    {
+                        // No code here  
+                        Main.RespondToTransferRequest(false);
+                    }
+
+                    // Gönderimin alınıp alınmaması durmu burada sorulur
+                }
+                else
+                {
+                    MessageBox.Show("Entered code is incorrect!");
+                    // kodun hatalı olduğu ise burada gösterilri
+                }
             }
             else if (TransferMode == FileOperations.TransferMode.Send)
             {
                 Main.TransferApproved = true;
             }
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Main.Init(true);
+            UI_Init();
+            UIUpdate_thread = new Thread(UpdateUI);
+            UIUpdate_thread.IsBackground = true;
+            UIUpdate_Start = true;
+            UIUpdate_thread.Start();
+
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            UIUpdate_Start = false;
+            Thread.Sleep(10);
+        }
+
+        private void UI_Init()
+        {
+            border_FirstStep.IsEnabled = true;
+            border_SecondStep.IsEnabled = false;
+            border_ThirdStep.IsEnabled = false;
+
+            lbl_FirstStep.Fill = CurrentStep;
+            lbl_SecondStep.Fill = UnCompletedStep;
+            lbl_ThirdStep.Fill = UnCompletedStep;
+
+
+        }
+
     }
 }

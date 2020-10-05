@@ -48,3 +48,12 @@ C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\Fil
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.exe
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.pdb
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignColors.dll
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Umur Yasin Alper\Documents\GitHub\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.baml
