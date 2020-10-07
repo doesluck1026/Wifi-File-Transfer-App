@@ -47,8 +47,6 @@ class Main
     private static object SecondStep_Lock = new object();
     private static object ThirdStep_Lock = new object();
 
-    public delegate void Delegate_UpdateUI(string IPCode, string HostName, bool TransferVerified, long numBytes=1,uint packCount=0,uint TimePassed=0);
-    public static event Delegate_UpdateUI event_UpdateUI;
     private static string _IpCode = "";
     private static string _HostName = "";
     private static bool _TransferVerified = false;
@@ -458,9 +456,6 @@ class Main
         {
             sendingThread = new Thread(SendingCoreFcn);                             /// Start Sending File
             sendingThread.Start();
-            //string Msg = "File transfer is started.";
-            //InfoMsg = Msg;    
-            //Debug.WriteLine("File transfer is started");
             string Msg = "Wait for Client.";
             InfoMsg = Msg;
             Debug.WriteLine("Wait for Client.");
@@ -518,7 +513,6 @@ class Main
                     HostName = clientHostname;
                     string Msg = "isVerified: " + isVerified;
                     InfoMsg = Msg;
-                    event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
                 }
                 else
                 {
@@ -628,6 +622,7 @@ class Main
                 FileSize = fileSize;
                 Debug.WriteLine("fileName: " + fileName + "   FileOps.FileName: " + FileOps.FileName);
                 // Show Specs to user and ask for permission
+                success = true;
             }
         }
         return success;

@@ -86,7 +86,7 @@ namespace FileSharingApp_Desktop
                     txt_FileName.Text = Main.FileName;
                     txt_HostName.Text = Main.HostName;
                     txt_FileSize.Text = Main.FileSize.ToString("0.00");
-                    txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00");
+                    txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00")+" MB/s";
                     pbStatus.Value = Main.CompletedPercentage;
                 });
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
