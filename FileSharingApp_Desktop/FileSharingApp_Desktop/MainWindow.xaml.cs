@@ -55,7 +55,9 @@ namespace FileSharingApp_Desktop
                     {
                         lbl_FirstStep.Fill = CompletedStep;
                         lbl_SecondStep.Fill = CurrentStep;
+                        lbl_ThirdStep.Fill = UnCompletedStep;
                         border_SecondStep.IsEnabled = true;
+                        btn_Confirm.IsEnabled = true;
                         System.Diagnostics.Debug.WriteLine("first");
                         Main.FirstStep = false;
                     }
@@ -78,29 +80,30 @@ namespace FileSharingApp_Desktop
                         Main.ThirdStep = false;
 
                     }
-
                     if (TransferMode == FileOperations.TransferMode.Send)
                         txt_IpCode.Text = Main.IpCode;
                     txt_StatusInfo.Text = Main.InfoMsg;
                     txt_FilePath.Text = Main.URL;
-                    txt_FileName.Text = Main.FileName+" "+Main.FileSizeType.ToString();
+                    txt_FileName.Text = Main.FileName;
                     txt_HostName.Text = Main.HostName;
-                    txt_FileSize.Text = Main.FileSize.ToString("0.00");
+                    txt_FileSize.Text = Main.FileSize.ToString("0.00") + " " + Main.FileSizeType.ToString();
                     txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00")+" MB/s";
+                    txt_EstimatedTime.Text = Main.EstimatedMin.ToString() + " : " + Main.EstimatedSec.ToString();
+                    txt_PassedTime.Text = Main.PassedMin.ToString() + " : " + Main.PassedSec.ToString();
                     pbStatus.Value = Main.CompletedPercentage;
                 });
+                
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
                 {
 
                 }
-
             }
         
         }
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
-            Main.TransferApproved = false;
+            Reset();
             string FileURL = SelectFile();
             if (FileURL == null)
             {
@@ -113,6 +116,7 @@ namespace FileSharingApp_Desktop
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
+            Reset();
             FileURL = GetFolder();
             if (FileURL == null)
             {
@@ -123,7 +127,18 @@ namespace FileSharingApp_Desktop
             Main.FirstStep = true;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
-
+        private void Reset()
+        {
+            Main.TransferApproved = false;
+            Main.FirstStep = true;
+            Main.SecondStep = false;
+            Main.ThirdStep = false;
+            Main.CompletedPercentage = 0;
+            Main.PassedMin = 0;
+            Main.PassedSec = 0;
+            Main.EstimatedMin = 0;
+            Main.EstimatedSec = 0;
+        }
         /// <summary>
         /// The address of the file to be processed is selected
         /// </summary>
@@ -186,7 +201,7 @@ namespace FileSharingApp_Desktop
                     string FileName = Main.FileName;
                     string fileSizeType = Main.FileSizeType.ToString();
                     string fileSize = Main.FileSize.ToString("0.00")+ " "+fileSizeType;
-                    MessageBoxResult result = MessageBox.Show("Do you want to import "+ FileName + " file of" + fileSize + " size?", "Confirmation", MessageBoxButton.YesNo);
+                    MessageBoxResult result = MessageBox.Show("Do you want to import "+ FileName + " file of " + fileSize + " size?", "Confirmation", MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
                     {
                         // Yes code here  
@@ -206,7 +221,7 @@ namespace FileSharingApp_Desktop
                     // kodun hatalı olduğu ise burada gösterilri
                 }
             }
-            else if (TransferMode == FileOperations.TransferMode.Send)
+            else if (TransferMode == FileOperations.TransferMode.Send && Communication.isClientConnected)
             {
                 Main.TransferApproved = true;
             }

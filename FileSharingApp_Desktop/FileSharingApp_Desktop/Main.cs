@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Windows;
 
 class Main
 {
@@ -57,10 +57,10 @@ class Main
     private static bool _transferAborted = false;
     private static string _InfoMsg = "Select an action!";
     private static uint prev_timePassed = 0;
-    private static double _estimatedMin = 0;
-    private static double _estimatedSec = 0;
-    private static double _passedMin = 0;
-    private static double _passedSec = 0;
+    private static int _estimatedMin = 0;
+    private static int _estimatedSec = 0;
+    private static int _passedMin = 0;
+    private static int _passedSec = 0;
     private static string _FileName = "";
     private static double _FileSize = 0;
     private static Communication.SizeTypes _FileSizeType;
@@ -267,7 +267,7 @@ class Main
             }
         }
     }
-    public static double EstimatedMin
+    public static int EstimatedMin
     {
 
         get
@@ -285,7 +285,7 @@ class Main
             }
         }
     }
-    public static double EstimatedSec
+    public static int EstimatedSec
     {
 
         get
@@ -303,7 +303,7 @@ class Main
             }
         }
     }
-    public static double PassedMin
+    public static int PassedMin
     {
 
         get
@@ -321,7 +321,7 @@ class Main
             }
         }
     }
-    public static double PassedSec
+    public static int PassedSec
     {
 
         get
@@ -433,10 +433,10 @@ class Main
         ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
         if (_transferSpeed > 500 || _transferSpeed < 0)
             _transferSpeed = 0;
-        EstimatedMin = ETA / 60.0;
-        EstimatedSec = ETA % 60;
-        PassedMin = TimePassed / 60.0;
-        PassedSec = TimePassed % 60;
+        EstimatedMin =(int)(ETA / 60);
+        EstimatedSec = (int)(ETA % 60);
+        PassedMin = (int)(TimePassed / 60.0);
+        PassedSec = (int)TimePassed % 60;
     }
 
     #region Server Functions
@@ -510,12 +510,12 @@ class Main
         {
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
             HostName = clientHostname;
-            ThirdStep = true;
-            //event_UpdateUI(_IpCode, _HostName, _TransferVerified);      /// display event
+            MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                TransferApproved = true;
             while (!TransferApproved && !TransferAborted) ;
             if (TransferAborted)
             {
-
                 string Msg = "Transfer is aborted by user!";
                 InfoMsg = Msg;
                 Debug.WriteLine("Transfer is aborted by user!");
@@ -582,12 +582,11 @@ class Main
                     Debug.WriteLine("Could not send Last Package! Retrying...");
                 }
                 elapsedTime = (uint)stopwatch.ElapsedMilliseconds;
-                if (elapsedTime >= 1000)
+                if (elapsedTime >= 50)
                 {
                     TimePassed += elapsedTime;
                     numBytesSent = bytesSent - checkPoint;
                     checkPoint = bytesSent;
-                    //event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
                     CalculateCompletedPercentage((uint)numPack);
                     CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
@@ -595,10 +594,9 @@ class Main
             }
             CalculateCompletedPercentage((uint)numPack);
             CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
-            //event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack, TimePassed: TimePassed);      /// display event
             if (isSent)                                                                             /// if all file is sent
             {
-                string Msg = "ClientHostname was null. Aborting!";
+                string Msg = "File is Succesfully Sent";
                 InfoMsg = Msg;
                 Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
                 ThirdStep = true;
@@ -606,7 +604,7 @@ class Main
             }
             else
             {
-                string Msg = "ClientHostname was null. Aborting!";
+                string Msg = "File Transfer Failed!";
                 InfoMsg = Msg;
                 Debug.WriteLine("File Transfer Failed!");
             }
@@ -700,7 +698,7 @@ class Main
                 numPack++;                                                                              /// increase the number of package sent variable
                 bytesWritten += BytesToWrite.Length;                                                    /// update the number of bytes sent to client.
                 elapsedTime = (uint)stopwatch.ElapsedMilliseconds;
-                if (elapsedTime >= 1000)
+                if (elapsedTime >= 50)
                 {
                     TimePassed += elapsedTime;
                     numBytesSent = bytesWritten - checkPoint;
