@@ -104,9 +104,9 @@
                             <RowDefinition Height = "*" />
                         </Grid.RowDefinitions>
 
-                        <Border Grid.Row="0" Padding="2" HorizontalAlignment="Center">
+                        <Border Grid.Row="0" Padding="2" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center">
 
-                            <TextBox x:Name="txt_IpCode" Padding="-10" VerticalAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="35" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" />
+                            <TextBox x:Name="txt_IpCode" VerticalAlignment="Center" Width="250" Height="30" TextAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="25" BorderThickness="0" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" />
 
                         </Border>
 
@@ -166,7 +166,11 @@
                         <Grid>
                             <StackPanel Orientation="Horizontal">
                                 <Label Content=" Speed : " VerticalAlignment="Center" Foreground="LightBlue" />
-                                <TextBlock x:Name="txt_TransferSpeed" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
+                                <TextBlock x:Name="txt_TransferSpeed" Width="75" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
+                                <Label Content=" Time Passed : " VerticalAlignment="Center" Foreground="LightBlue" />
+                                <TextBlock x:Name="txt_PassedTime" Width="150" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
+                                <Label Content=" Estimated Time : " VerticalAlignment="Center" Foreground="LightBlue" />
+                                <TextBlock x:Name="txt_EstimatedTime" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
 
                             </StackPanel>
 

@@ -164,7 +164,7 @@ class Communication
         Array.Copy(data, 0, DataToSend, HeaderLen+4, data.Length);                                  /// Copy given data bytes to carrier pack
         server.SendDataToClient(DataToSend);                                                        /// Send data to client.
         LastPackNumberSent = numPackage;                                                            /// Update Index
-        return GetResponse();                                                                       /// Get the Ack from client.
+        return true;//GetResponse();                                                                       /// Get the Ack from client.
     }
     /// <summary>
     /// Let the receiver know that all of the file bytes has been sent
