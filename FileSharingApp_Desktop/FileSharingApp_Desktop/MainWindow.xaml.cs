@@ -83,7 +83,7 @@ namespace FileSharingApp_Desktop
                         txt_IpCode.Text = Main.IpCode;
                     txt_StatusInfo.Text = Main.InfoMsg;
                     txt_FilePath.Text = Main.URL;
-                    txt_FileName.Text = Main.FileName;
+                    txt_FileName.Text = Main.FileName+" "+Main.FileSizeType.ToString();
                     txt_HostName.Text = Main.HostName;
                     txt_FileSize.Text = Main.FileSize.ToString("0.00");
                     txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00")+" MB/s";
@@ -184,7 +184,8 @@ namespace FileSharingApp_Desktop
                 {
                     Main.SetFilePathToSave(FileURL);
                     string FileName = Main.FileName;
-                    string fileSize = Main.FileSize.ToString("0.00");
+                    string fileSizeType = Main.FileSizeType.ToString();
+                    string fileSize = Main.FileSize.ToString("0.00")+ " "+fileSizeType;
                     MessageBoxResult result = MessageBox.Show("Do you want to import "+ FileName + " file of" + fileSize + " size?", "Confirmation", MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
                     {

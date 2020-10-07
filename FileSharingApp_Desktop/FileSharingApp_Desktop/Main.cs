@@ -43,6 +43,7 @@ class Main
     private static object PassedSec_Lock = new object();
     private static object FileName_Lock = new object();
     private static object FileSize_Lock = new object();
+    private static object FileSizeType_Lock = new object();
     private static object FirstStep_Lock = new object();
     private static object SecondStep_Lock = new object();
     private static object ThirdStep_Lock = new object();
@@ -62,6 +63,7 @@ class Main
     private static double _passedSec = 0;
     private static string _FileName = "";
     private static double _FileSize = 0;
+    private static Communication.SizeTypes _FileSizeType;
     private static bool _FirstStep_Action = false;
     private static bool _SecondStep_Action = false;
     private static bool _ThirdStep_Action = false;
@@ -226,6 +228,24 @@ class Main
             lock (FileSize_Lock)
             {
                 _FileSize = value;
+            }
+        }
+    }
+    public static Communication.SizeTypes FileSizeType
+    {
+
+        get
+        {
+            lock (FileSizeType_Lock)
+            {
+                return _FileSizeType;
+            }
+        }
+        set
+        {
+            lock (FileSizeType_Lock)
+            {
+                _FileSizeType = value;
             }
         }
     }
@@ -404,15 +424,15 @@ class Main
         uint ETA;
         uint NumberOfPacks = Communication.NumberOfPacks;
 
-        if (_transferSpeed > 500 || _transferSpeed < 0)
-            _transferSpeed = 0;
+        
 
         double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
         _transferSpeed = _transferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
         ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
-
+        if (_transferSpeed > 500 || _transferSpeed < 0)
+            _transferSpeed = 0;
         EstimatedMin = ETA / 60.0;
         EstimatedSec = ETA % 60;
         PassedMin = TimePassed / 60.0;
@@ -432,6 +452,7 @@ class Main
         FileOps.Init(url, FileOperations.TransferMode.Send);
         FileName = FileOps.FileName;
         FileSize = FileOps.FileSize;
+        FileSizeType = FileOps.FilesizeType;
         FirstStep = true;
         WaitForConnection();                /// Setup the server and accept connection
 
@@ -620,6 +641,7 @@ class Main
                 FileOps.FileName = fileName;
                 FileName = fileName;
                 FileSize = fileSize;
+                FileSizeType = sizeType;
                 Debug.WriteLine("fileName: " + fileName + "   FileOps.FileName: " + FileOps.FileName);
                 // Show Specs to user and ask for permission
                 success = true;
