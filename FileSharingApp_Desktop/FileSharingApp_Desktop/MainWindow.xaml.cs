@@ -51,8 +51,6 @@ namespace FileSharingApp_Desktop
                 UpdateWatch.Restart();
                 Dispatcher.Invoke(() =>
                 {
-
-
                     if (Main.FirstStep)
                     {
                         lbl_FirstStep.Fill = CompletedStep;
@@ -68,7 +66,6 @@ namespace FileSharingApp_Desktop
                         border_ThirdStep.IsEnabled = true;
                         System.Diagnostics.Debug.WriteLine("second");
                         if(TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
-                                                                             // ********************* Ayrıca receive ve send modları için ayrı UI güncelleme fonksiyonları yazılmalı. bu şekilde olmaz
                         {
                             btn_Confirm.IsEnabled = false;
                         }
@@ -81,22 +78,17 @@ namespace FileSharingApp_Desktop
                         Main.ThirdStep = false;
 
                     }
- 
 
-
+                    if (TransferMode == FileOperations.TransferMode.Send)
+                        txt_IpCode.Text = Main.IpCode;
                     txt_StatusInfo.Text = Main.InfoMsg;
-                   // txt_IpCode.Text = Main.IpCode;
                     txt_FilePath.Text = Main.URL;
                     txt_FileName.Text = Main.FileName;
                     txt_HostName.Text = Main.HostName;
                     txt_FileSize.Text = Main.FileSize.ToString("0.00");
                     txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00");
-
                     pbStatus.Value = Main.CompletedPercentage;
-
                 });
-
-
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
                 {
 
@@ -150,7 +142,6 @@ namespace FileSharingApp_Desktop
                 string selectedFileName = openFileDialog1.FileName;
                 return selectedFileName;
             }
-
             return null;
         }
         /// <summary>
@@ -199,7 +190,6 @@ namespace FileSharingApp_Desktop
                     {
                         // Yes code here  
                         Main.RespondToTransferRequest(true);
-
                     }
                     else if(result == MessageBoxResult.No)
                     {
@@ -247,8 +237,6 @@ namespace FileSharingApp_Desktop
             lbl_FirstStep.Fill = CurrentStep;
             lbl_SecondStep.Fill = UnCompletedStep;
             lbl_ThirdStep.Fill = UnCompletedStep;
-
-
         }
 
     }
