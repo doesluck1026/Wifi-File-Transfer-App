@@ -88,8 +88,8 @@ namespace FileSharingApp_Desktop
                     txt_HostName.Text = Main.HostName;
                     txt_FileSize.Text = Main.FileSize.ToString("0.00") + " " + Main.FileSizeType.ToString();
                     txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00")+" MB/s";
-                    txt_EstimatedTime.Text = Main.EstimatedMin.ToString() + " : " + Main.EstimatedSec.ToString();
-                    txt_PassedTime.Text = Main.PassedMin.ToString() + " : " + Main.PassedSec.ToString();
+                    txt_EstimatedTime.Text = Main.EstimatedMin.ToString() + " min " + Main.EstimatedSec.ToString()+" sec";
+                    txt_PassedTime.Text = Main.PassedMin.ToString() + " min " + Main.PassedSec.ToString() + " sec";
                     pbStatus.Value = Main.CompletedPercentage;
                 });
                 
@@ -126,6 +126,7 @@ namespace FileSharingApp_Desktop
             TransferMode = FileOperations.TransferMode.Receive;
             Main.FirstStep = true;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
+            Main.InfoMsg = "Please enter the generated code...";
         }
         private void Reset()
         {
@@ -206,6 +207,7 @@ namespace FileSharingApp_Desktop
                     {
                         // Yes code here  
                         Main.RespondToTransferRequest(true);
+                        Main.InfoMsg = "File Transfer is Started";
                     }
                     else if(result == MessageBoxResult.No)
                     {
@@ -242,6 +244,7 @@ namespace FileSharingApp_Desktop
         {
             UIUpdate_Start = false;
             Thread.Sleep(10);
+            Environment.Exit(0);
         }
 
         private void UI_Init()

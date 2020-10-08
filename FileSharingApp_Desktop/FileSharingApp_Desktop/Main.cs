@@ -19,7 +19,7 @@ class Main
 
     #region Parameters
 
-    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should be smaller than 64 kB
+    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should not be smaller than 64 kB
 
     #endregion
 
@@ -424,12 +424,13 @@ class Main
         uint ETA;
         uint NumberOfPacks = Communication.NumberOfPacks;
 
-        
-
         double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
-        _transferSpeed = _transferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
+        if(_transferSpeed<=1)
+            _transferSpeed=Math.Min(((double)numBytes / MB) / deltaTime,500);
+        else
+            _transferSpeed = _transferSpeed * 0.95 + 0.05 * (((double)numBytes / MB) / deltaTime);
         ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
         if (_transferSpeed > 500 || _transferSpeed < 0)
             _transferSpeed = 0;
@@ -477,16 +478,16 @@ class Main
         {
             sendingThread = new Thread(SendingCoreFcn);                             /// Start Sending File
             sendingThread.Start();
-            string Msg = "Wait for Client.";
+            string Msg = "Waiting for Client.";
             InfoMsg = Msg;
-            Debug.WriteLine("Wait for Client.");
+            Debug.WriteLine(Msg);
             return true;
         }
         catch (Exception e)
         {
             string Msg = "Failed to start sending thread!";
             InfoMsg = Msg;
-            Debug.WriteLine("Failed to start sending thread! \n " + e.ToString());
+            Debug.WriteLine(Msg+" \n " + e.ToString());
             return false;
         }
     }
@@ -508,6 +509,7 @@ class Main
     {
         if (FileOps != null)
         {
+            InfoMsg = "Please tell receiver to enter the generated code... ";
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
             HostName = clientHostname;
             MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
@@ -530,10 +532,22 @@ class Main
                 if (isVerified)
                 {
                     QueryForTransfer();
-                    _TransferVerified = isVerified;
-                    HostName = clientHostname;
-                    string Msg = "isVerified: " + isVerified;
-                    InfoMsg = Msg;
+                   bool response=Communication.GetResponse();
+                    if (response)
+                    {
+                        _TransferVerified = isVerified;
+                        HostName = clientHostname;
+                        string Msg = "File Transfer has started";
+                        InfoMsg = Msg;
+                    }
+                    else
+                    {
+                        string Msg = "isVerified: " + isVerified + " aborting!";
+                        InfoMsg = Msg;
+                        Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
+                        Communication.CloseServer();
+                        return;
+                    }
                 }
                 else
                 {
@@ -608,6 +622,7 @@ class Main
                 InfoMsg = Msg;
                 Debug.WriteLine("File Transfer Failed!");
             }
+            prev_timePassed = 0;
             FileOps.CloseFile();
             Communication.CloseServer();
         }
@@ -720,6 +735,7 @@ class Main
                 ThirdStep = true;
 
             }
+            prev_timePassed = 0;
             FileOps.CloseFile();
             Communication.CloseClient();
         }
