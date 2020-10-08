@@ -19,7 +19,7 @@ class Main
 
     #region Parameters
 
-    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should be smaller than 64 kB
+    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should not be smaller than 64 kB
 
     #endregion
 
@@ -424,12 +424,13 @@ class Main
         uint ETA;
         uint NumberOfPacks = Communication.NumberOfPacks;
 
-        
-
         double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
-        _transferSpeed = _transferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
+        if(_transferSpeed<=0.1)
+            _transferSpeed= (((double)numBytes / MB) / deltaTime);
+        else
+            _transferSpeed = _transferSpeed * 0.95 + 0.05 * (((double)numBytes / MB) / deltaTime);
         ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
         if (_transferSpeed > 500 || _transferSpeed < 0)
             _transferSpeed = 0;
