@@ -126,6 +126,7 @@ namespace FileSharingApp_Desktop
             TransferMode = FileOperations.TransferMode.Receive;
             Main.FirstStep = true;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
+            Main.InfoMsg = "Please enter the generated code...";
         }
         private void Reset()
         {
@@ -206,6 +207,7 @@ namespace FileSharingApp_Desktop
                     {
                         // Yes code here  
                         Main.RespondToTransferRequest(true);
+                        Main.InfoMsg = "File Transfer is Started";
                     }
                     else if(result == MessageBoxResult.No)
                     {
