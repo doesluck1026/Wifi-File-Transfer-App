@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Diagnostics;
 using System.Threading;
+using System.Globalization;
+using System.Resources;
+using System.Reflection;
 
 namespace FileSharingApp_Desktop
 {
@@ -27,9 +30,9 @@ namespace FileSharingApp_Desktop
     {
         private string FileURL = "";
         private FileOperations.TransferMode TransferMode;
-        private uint prev_timePassed=0;
+        private uint prev_timePassed = 0;
         private double _transferSpeed = 0;
-        private uint mb = 1024*1024;
+        private uint mb = 1024 * 1024;
         private uint ETA = 0;
         private Thread UIUpdate_thread;
         private bool UIUpdate_Start = false;
@@ -37,15 +40,19 @@ namespace FileSharingApp_Desktop
         private Brush CompletedStep = Brushes.LimeGreen;
         private Brush CurrentStep = Brushes.LightSkyBlue;
         private Brush UnCompletedStep = Brushes.LightBlue;
+        ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
+        CultureInfo cul;            //declare culture info
 
         public MainWindow()
         {
             InitializeComponent();
+
         }
-      
+
         private void UpdateUI()
         {
             Stopwatch UpdateWatch = new Stopwatch();
+
             while (UIUpdate_Start)
             {
                 UpdateWatch.Restart();
@@ -67,7 +74,7 @@ namespace FileSharingApp_Desktop
                         lbl_ThirdStep.Fill = CurrentStep;
                         border_ThirdStep.IsEnabled = true;
                         System.Diagnostics.Debug.WriteLine("second");
-                        if(TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
+                        if (TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
                         {
                             btn_Confirm.IsEnabled = false;
                         }
@@ -80,25 +87,38 @@ namespace FileSharingApp_Desktop
                         Main.ThirdStep = false;
 
                     }
+
+                    if (Main.ExportingVerification)
+                    {
+                        string sExportingVerification = res_man.GetString("sExportingVerification", cul);
+                        string sConfirmation = res_man.GetString("sConfirmation", cul);
+                        MessageBoxResult result = MessageBox.Show(sExportingVerification, sConfirmation, MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                            Main.TransferApproved = true;
+                    }
+             
+
                     if (TransferMode == FileOperations.TransferMode.Send)
                         txt_IpCode.Text = Main.IpCode;
-                    txt_StatusInfo.Text = Main.InfoMsg;
+                    string MainStatus = Main.InfoMsg;
+                    if(!MainStatus.Equals(""))
+                        txt_StatusInfo.Text = res_man.GetString(MainStatus, cul);
                     txt_FilePath.Text = Main.URL;
                     txt_FileName.Text = Main.FileName;
                     txt_HostName.Text = Main.HostName;
                     txt_FileSize.Text = Main.FileSize.ToString("0.00") + " " + Main.FileSizeType.ToString();
-                    txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00")+" MB/s";
+                    txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00") + " MB/s";
                     txt_EstimatedTime.Text = Main.EstimatedMin.ToString() + " : " + Main.EstimatedSec.ToString();
                     txt_PassedTime.Text = Main.PassedMin.ToString() + " : " + Main.PassedSec.ToString();
                     pbStatus.Value = Main.CompletedPercentage;
                 });
-                
+
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
                 {
 
                 }
             }
-        
+
         }
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
@@ -107,7 +127,8 @@ namespace FileSharingApp_Desktop
             string FileURL = SelectFile();
             if (FileURL == null)
             {
-                MessageBox.Show("Please Select a Valid File");
+                string sSelectionValidFile = res_man.GetString("sSelectionValidFile", cul);
+                MessageBox.Show(sSelectionValidFile);
                 return;
             }
             TransferMode = FileOperations.TransferMode.Send;
@@ -151,7 +172,7 @@ namespace FileSharingApp_Desktop
             openFileDialog1.Filter = " All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
-            
+
             if (openFileDialog1.ShowDialog() == true)
             {
                 string selectedFileName = openFileDialog1.FileName;
@@ -200,14 +221,17 @@ namespace FileSharingApp_Desktop
                     Main.SetFilePathToSave(FileURL);
                     string FileName = Main.FileName;
                     string fileSizeType = Main.FileSizeType.ToString();
-                    string fileSize = Main.FileSize.ToString("0.00")+ " "+fileSizeType;
-                    MessageBoxResult result = MessageBox.Show("Do you want to import "+ FileName + " file of " + fileSize + " size?", "Confirmation", MessageBoxButton.YesNo);
+                    string fileSize = Main.FileSize.ToString("0.00") + " " + fileSizeType;
+
+                    string sImportingVerification = res_man.GetString("sImportingVerification", cul);
+                    string sConfirmation = res_man.GetString("sConfirmation", cul);
+                    MessageBoxResult result = MessageBox.Show(sImportingVerification + "\n" + FileName + " file of " + fileSize + " size?", sConfirmation, MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
                     {
                         // Yes code here  
                         Main.RespondToTransferRequest(true);
                     }
-                    else if(result == MessageBoxResult.No)
+                    else if (result == MessageBoxResult.No)
                     {
                         // No code here  
                         Main.RespondToTransferRequest(false);
@@ -231,10 +255,17 @@ namespace FileSharingApp_Desktop
         {
             Main.Init(true);
             UI_Init();
+
+            res_man = new ResourceManager("FileSharingApp_Desktop.Resource.resource", Assembly.GetExecutingAssembly());
+            cul = CultureInfo.CreateSpecificCulture("en");        //create culture for english
+
             UIUpdate_thread = new Thread(UpdateUI);
             UIUpdate_thread.IsBackground = true;
             UIUpdate_Start = true;
             UIUpdate_thread.Start();
+
+            //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
+            //switch_language();
 
         }
 
@@ -255,5 +286,41 @@ namespace FileSharingApp_Desktop
             lbl_ThirdStep.Fill = UnCompletedStep;
         }
 
+        private void switch_language()
+        {
+            if(res_man != null)
+            {
+                btn_SendFile.Content = res_man.GetString("sSendFile", cul);
+                btn_ReceiveFile.Content = res_man.GetString("sReceiveFile", cul);
+                btn_Confirm.Content = res_man.GetString("sConfirmation", cul);
+
+                lbl_FilePath.Content = res_man.GetString("sFilePath", cul);
+                lbl_FileName.Content = res_man.GetString("sFileName", cul);
+                lbl_FileSize.Content = res_man.GetString("sFilePath", cul);
+                lbl_HostName.Content = res_man.GetString("sHostName", cul);
+
+                lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
+                lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
+                lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
+            }
+
+        }
+
+        private void combo_LanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string SelectedLanguage = ((ComboBoxItem)combo_LanguageSelection.SelectedItem).Tag.ToString();
+
+            if (SelectedLanguage.Equals("TR"))
+            {
+                cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
+
+            }
+            else if (SelectedLanguage.Equals("EN"))
+            {
+                cul = CultureInfo.CreateSpecificCulture("en");        //create culture for english
+            }
+
+            switch_language();
+        }
     }
 }

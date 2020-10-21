@@ -19,7 +19,19 @@
         <!-- Information bar  -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Transparent">
             <Label Content=" ==> : " Foreground="GreenYellow" VerticalAlignment="Center" />
-            <TextBlock x:Name="txt_StatusInfo" VerticalAlignment="Center" Text="" Foreground="GreenYellow" />
+            <TextBlock x:Name="txt_StatusInfo" VerticalAlignment="Center" Width="675" Text="" Foreground="GreenYellow" />
+            <ComboBox x:Name="combo_LanguageSelection" SelectedIndex="1" HorizontalAlignment="Left" Width="50" Margin="10, 5" SelectionChanged="combo_LanguageSelection_SelectionChanged" >
+                <ComboBoxItem Tag="TR">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Icons/TR_flag.png" Margin="2" Width="20" Height="20"/>
+                    </StackPanel>
+                </ComboBoxItem>
+                <ComboBoxItem Tag="EN">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Icons/UK_flag.png" Margin="2" Width="20" Height="20"/>
+                    </StackPanel>
+                </ComboBoxItem>
+            </ComboBox>
         </StackPanel>
 
         <!-- Step 1, choice of transaction type  -->
@@ -51,7 +63,7 @@
                 </Border>
 
                 <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2" >
-                    <Label Content=" File Path  : " VerticalAlignment="Center" Foreground="LightBlue" />
+                    <Label x:Name="lbl_FilePath" Content=" File Path  : " VerticalAlignment="Center" Foreground="LightBlue" />
                     <TextBlock x:Name="txt_FilePath" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
 
                 </StackPanel>
@@ -81,13 +93,13 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <Label Content=" File Name  : " VerticalAlignment="Center" Foreground="LightBlue"/>
+                            <Label x:Name="lbl_FileName" Content=" File Name  : " VerticalAlignment="Center" Foreground="LightBlue"/>
                             <TextBlock x:Name="txt_FileName" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
 
                         </StackPanel>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal">
-                            <Label Content=" File Size      : " VerticalAlignment="Center" Foreground="LightBlue" />
+                            <Label x:Name="lbl_FileSize" Content=" File Size      : " VerticalAlignment="Center" Foreground="LightBlue" />
                             <TextBlock x:Name="txt_FileSize" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
 
                         </StackPanel>
@@ -111,7 +123,7 @@
                         </Border>
 
                         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" >
-                            <Label Content="Host Name  : " VerticalAlignment="Center" Foreground="LightBlue" />
+                            <Label x:Name="lbl_HostName" Content="Host Name  : " VerticalAlignment="Center" Foreground="LightBlue" />
                             <TextBlock x:Name="txt_HostName" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
 
                         </StackPanel>
@@ -165,11 +177,11 @@
                     <Grid Grid.Row = "1" Margin="10">
                         <Grid>
                             <StackPanel Orientation="Horizontal">
-                                <Label Content=" Speed : " VerticalAlignment="Center" Foreground="LightBlue" />
+                                <Label x:Name="lbl_TransferSpeed" Content=" Speed : " VerticalAlignment="Center" Foreground="LightBlue" />
                                 <TextBlock x:Name="txt_TransferSpeed" Width="75" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
-                                <Label Content=" Time Passed : " VerticalAlignment="Center" Foreground="LightBlue" />
+                                <Label x:Name="lbl_PassedTime" Content=" Time Passed : " VerticalAlignment="Center" Foreground="LightBlue" />
                                 <TextBlock x:Name="txt_PassedTime" Width="150" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
-                                <Label Content=" Estimated Time : " VerticalAlignment="Center" Foreground="LightBlue" />
+                                <Label x:Name="lbl_EstimatedTime"  Content=" Estimated Time : " VerticalAlignment="Center" Foreground="LightBlue" />
                                 <TextBlock x:Name="txt_EstimatedTime" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue"/>
 
                             </StackPanel>
