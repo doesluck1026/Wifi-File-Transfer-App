@@ -538,9 +538,9 @@ class Main
             HostName = clientHostname;
 
             ExportingVerification = true;
-            MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                TransferApproved = true;
+            //MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
+            //if (result == MessageBoxResult.Yes)
+            //    TransferApproved = true;
 
 
             while (!TransferApproved && !TransferAborted) ;
