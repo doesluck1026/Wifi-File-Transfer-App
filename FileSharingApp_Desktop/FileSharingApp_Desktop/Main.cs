@@ -431,6 +431,10 @@ class Main
         InfoMsg = "sSelectAction";
 
     }
+    public static void CloseServer()
+    {
+        Communication.CloseServer();
+    }
 
     private static void CalculateCompletedPercentage(uint numPack = 0)
     {
@@ -444,7 +448,7 @@ class Main
     }
 
 
-    private static void CalculateEstablishedTime(long numBytes, uint numPack, uint TimePassed)
+    private static void CalculateEstimatedTime(long numBytes, uint numPack, uint TimePassed)
     {
         uint MB = 1024 * 1024;
         uint ETA;
@@ -618,12 +622,12 @@ class Main
                     numBytesSent = bytesSent - checkPoint;
                     checkPoint = bytesSent;
                     CalculateCompletedPercentage((uint)numPack);
-                    CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
+                    CalculateEstimatedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
                 }
             }
             CalculateCompletedPercentage((uint)numPack);
-            CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
+            CalculateEstimatedTime(numBytesSent, (uint)numPack, TimePassed);
             if (isSent)                                                                             /// if all file is sent
             {
                 string Msg = "sSendingSuccess"; //"File is Succesfully Sent";
@@ -735,12 +739,12 @@ class Main
                     checkPoint = bytesWritten;
                     //event_UpdateUI(_IpCode, _HostName, _TransferVerified, numBytesSent, (uint)numPack, TimePassed);      /// display event
                     CalculateCompletedPercentage((uint)numPack);
-                    CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
+                    CalculateEstimatedTime(numBytesSent, (uint)numPack, TimePassed);
                     stopwatch.Restart();
                 }
             }
             CalculateCompletedPercentage((uint)numPack);
-            CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
+            CalculateEstimatedTime(numBytesSent, (uint)numPack, TimePassed);
             //event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack,TimePassed: TimePassed);      /// display event
             if (numPack == numberOfPacks)
             {

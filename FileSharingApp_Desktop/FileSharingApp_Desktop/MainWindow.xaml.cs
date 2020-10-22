@@ -48,7 +48,6 @@ namespace FileSharingApp_Desktop
             InitializeComponent();
 
         }
-
         private void UpdateUI()
         {
             Stopwatch UpdateWatch = new Stopwatch();
@@ -272,6 +271,8 @@ namespace FileSharingApp_Desktop
         private void Window_Closed(object sender, EventArgs e)
         {
             UIUpdate_Start = false;
+            Main.CloseServer();
+            Environment.Exit(0);
             Thread.Sleep(10);
         }
 
@@ -296,14 +297,13 @@ namespace FileSharingApp_Desktop
 
                 lbl_FilePath.Content = res_man.GetString("sFilePath", cul);
                 lbl_FileName.Content = res_man.GetString("sFileName", cul);
-                lbl_FileSize.Content = res_man.GetString("sFilePath", cul);
+                lbl_FileSize.Content = res_man.GetString("sFileSize", cul);
                 lbl_HostName.Content = res_man.GetString("sHostName", cul);
 
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
             }
-
         }
 
         private void combo_LanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
