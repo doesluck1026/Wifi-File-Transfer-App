@@ -91,6 +91,7 @@ namespace FileSharingApp_Desktop
                         MessageBoxResult result = MessageBox.Show(sExportingVerification, sConfirmation, MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                             Main.TransferApproved = true;
+                        Main.ExportingVerification = false;
                     }
              
 
