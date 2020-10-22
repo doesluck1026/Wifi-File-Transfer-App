@@ -240,6 +240,8 @@ class Communication
     }
     public static void CloseServer()
     {
+        if (server == null)
+            return;
         server.CloseServer();
         server = null;
     }

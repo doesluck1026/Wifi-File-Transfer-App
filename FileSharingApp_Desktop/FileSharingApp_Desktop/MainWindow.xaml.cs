@@ -38,7 +38,7 @@ namespace FileSharingApp_Desktop
         private bool UIUpdate_Start = false;
         private int UIUpdate_Period = 100;      // in ms
         private Brush CompletedStep = Brushes.LimeGreen;
-        private Brush CurrentStep = Brushes.LightSkyBlue;
+        private Brush CurrentStep = Brushes.Orange;
         private Brush UnCompletedStep = Brushes.LightBlue;
         ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         CultureInfo cul;            //declare culture info
