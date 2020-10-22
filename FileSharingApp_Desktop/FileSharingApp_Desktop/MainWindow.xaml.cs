@@ -64,7 +64,6 @@ namespace FileSharingApp_Desktop
                         lbl_ThirdStep.Fill = UnCompletedStep;
                         border_SecondStep.IsEnabled = true;
                         btn_Confirm.IsEnabled = true;
-                        System.Diagnostics.Debug.WriteLine("first");
                         Main.FirstStep = false;
                     }
                     else if (Main.SecondStep)
@@ -72,7 +71,6 @@ namespace FileSharingApp_Desktop
                         lbl_SecondStep.Fill = CompletedStep;
                         lbl_ThirdStep.Fill = CurrentStep;
                         border_ThirdStep.IsEnabled = true;
-                        System.Diagnostics.Debug.WriteLine("second");
                         if (TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
                         {
                             btn_Confirm.IsEnabled = false;
@@ -82,7 +80,6 @@ namespace FileSharingApp_Desktop
                     else if (Main.ThirdStep)
                     {
                         lbl_ThirdStep.Fill = CompletedStep;
-                        System.Diagnostics.Debug.WriteLine("third");
                         Main.ThirdStep = false;
 
                     }
@@ -122,7 +119,6 @@ namespace FileSharingApp_Desktop
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
-            Reset();
             string FileURL = SelectFile();
             if (FileURL == null)
             {
@@ -130,19 +126,20 @@ namespace FileSharingApp_Desktop
                 MessageBox.Show(sSelectionValidFile);
                 return;
             }
+            Reset();
             TransferMode = FileOperations.TransferMode.Send;
             Main.SetFileURL(FileURL);
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
-            Reset();
             FileURL = GetFolder();
             if (FileURL == null)
             {
                 System.Diagnostics.Debug.WriteLine("File Url is null");
                 return;
             }
+            Reset();
             TransferMode = FileOperations.TransferMode.Receive;
             Main.FirstStep = true;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
@@ -303,6 +300,7 @@ namespace FileSharingApp_Desktop
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
+                lbl_code.Content = res_man.GetString("sCode");
             }
         }
 
@@ -321,6 +319,11 @@ namespace FileSharingApp_Desktop
             }
 
             switch_language();
+        }
+
+        private void txt_IpCode_MouseEnter(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
