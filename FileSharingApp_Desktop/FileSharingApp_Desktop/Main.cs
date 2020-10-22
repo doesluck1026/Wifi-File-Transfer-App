@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
@@ -19,7 +21,7 @@ class Main
 
     #region Parameters
 
-    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should not be smaller than 64 kB
+    public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should be smaller than 64 kB
 
     #endregion
 
@@ -47,6 +49,7 @@ class Main
     private static object FirstStep_Lock = new object();
     private static object SecondStep_Lock = new object();
     private static object ThirdStep_Lock = new object();
+    private static object ExportingVerification_Lock = new object();
 
     private static string _IpCode = "";
     private static string _HostName = "";
@@ -55,7 +58,7 @@ class Main
     private static double _completedPercentage = 0;
     private static bool _transferApproved = false;
     private static bool _transferAborted = false;
-    private static string _InfoMsg = "Select an action!";
+    private static string _InfoMsg = "";
     private static uint prev_timePassed = 0;
     private static int _estimatedMin = 0;
     private static int _estimatedSec = 0;
@@ -67,7 +70,7 @@ class Main
     private static bool _FirstStep_Action = false;
     private static bool _SecondStep_Action = false;
     private static bool _ThirdStep_Action = false;
-
+    private static bool _ExportingVerification = false;
 
     public static double TransferSpeed
     {
@@ -397,13 +400,36 @@ class Main
         }
     }
 
+    public static bool ExportingVerification
+    {
+
+        get
+        {
+            lock (ExportingVerification_Lock)
+            {
+                return _ExportingVerification;
+            }
+        }
+        set
+        {
+            lock (ExportingVerification_Lock)
+            {
+                _ExportingVerification = value;
+            }
+        }
+    }
+
     #endregion
+
 
     public static void Init(bool isFirstTime)
     {
         Communication.Init();
         if(isFirstTime)
             FileOps = new FileOperations();
+
+        InfoMsg = "sSelectAction";
+
     }
 
     private static void CalculateCompletedPercentage(uint numPack = 0)
@@ -424,13 +450,12 @@ class Main
         uint ETA;
         uint NumberOfPacks = Communication.NumberOfPacks;
 
+        
+
         double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
-        if(_transferSpeed<=1)
-            _transferSpeed=Math.Min(((double)numBytes / MB) / deltaTime,500);
-        else
-            _transferSpeed = _transferSpeed * 0.95 + 0.05 * (((double)numBytes / MB) / deltaTime);
+        _transferSpeed = _transferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
         ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
         if (_transferSpeed > 500 || _transferSpeed < 0)
             _transferSpeed = 0;
@@ -478,16 +503,16 @@ class Main
         {
             sendingThread = new Thread(SendingCoreFcn);                             /// Start Sending File
             sendingThread.Start();
-            string Msg = "Waiting for Client.";
+            string Msg = "sWaitClient"; //resMng.GetString("sWaitClient", culInfo);  // "Wait for Client.";
             InfoMsg = Msg;
-            Debug.WriteLine(Msg);
+            Debug.WriteLine("Wait for Client.");
             return true;
         }
         catch (Exception e)
         {
-            string Msg = "Failed to start sending thread!";
+            string Msg = "sFailedClient"; // "Failed to start sending thread!";
             InfoMsg = Msg;
-            Debug.WriteLine(Msg+" \n " + e.ToString());
+            Debug.WriteLine("Failed to start sending thread! \n " + e.ToString());
             return false;
         }
     }
@@ -509,16 +534,19 @@ class Main
     {
         if (FileOps != null)
         {
-            InfoMsg = "Please tell receiver to enter the generated code... ";
             string clientHostname = Communication.startServer();            /// Wait for Client to connect and return the hostname of connected client.
             HostName = clientHostname;
-            MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                TransferApproved = true;
+
+            ExportingVerification = true;
+            //MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
+            //if (result == MessageBoxResult.Yes)
+            //    TransferApproved = true;
+
+
             while (!TransferApproved && !TransferAborted) ;
             if (TransferAborted)
             {
-                string Msg = "Transfer is aborted by user!";
+                string Msg = "sTransferAborted"; // "Transfer is aborted by user!";
                 InfoMsg = Msg;
                 Debug.WriteLine("Transfer is aborted by user!");
                 sendingThread.Abort();
@@ -532,26 +560,14 @@ class Main
                 if (isVerified)
                 {
                     QueryForTransfer();
-                   bool response=Communication.GetResponse();
-                    if (response)
-                    {
-                        _TransferVerified = isVerified;
-                        HostName = clientHostname;
-                        string Msg = "File Transfer has started";
-                        InfoMsg = Msg;
-                    }
-                    else
-                    {
-                        string Msg = "isVerified: " + isVerified + " aborting!";
-                        InfoMsg = Msg;
-                        Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
-                        Communication.CloseServer();
-                        return;
-                    }
+                    _TransferVerified = isVerified;
+                    HostName = clientHostname;
+                    string Msg = "sVerifiedSuccess"; //"isVerified: " + isVerified;
+                    InfoMsg = Msg;
                 }
                 else
                 {
-                    string Msg = "isVerified: " + isVerified + " aborting!";
+                    string Msg = "sVerifiedFailed"; // "isVerified: " + isVerified + " aborting!";
                     InfoMsg = Msg;
                     Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
                     Communication.CloseServer();
@@ -560,7 +576,7 @@ class Main
             }
             else
             {
-                string Msg = "ClientHostname was null. Aborting!";
+                string Msg = "sClientHostNameNull"; // "Client host name was null. Aborting!";
                 InfoMsg = Msg;
                 Communication.CloseServer();
                 Debug.WriteLine("clientHostname was null. Aborting!");
@@ -610,7 +626,7 @@ class Main
             CalculateEstablishedTime(numBytesSent, (uint)numPack, TimePassed);
             if (isSent)                                                                             /// if all file is sent
             {
-                string Msg = "File is Succesfully Sent";
+                string Msg = "sSendingSuccess"; //"File is Succesfully Sent";
                 InfoMsg = Msg;
                 Communication.CompleteTransfer();                                                   /// stop data transfer and let client know that the transfer is successfully done.
                 ThirdStep = true;
@@ -618,11 +634,10 @@ class Main
             }
             else
             {
-                string Msg = "File Transfer Failed!";
+                string Msg = "sSendingFailed"; // "File Transfer Failed!";
                 InfoMsg = Msg;
                 Debug.WriteLine("File Transfer Failed!");
             }
-            prev_timePassed = 0;
             FileOps.CloseFile();
             Communication.CloseServer();
         }
@@ -729,13 +744,12 @@ class Main
             //event_UpdateUI(_IpCode, _HostName, _TransferVerified, packCount: (uint)numPack,TimePassed: TimePassed);      /// display event
             if (numPack == numberOfPacks)
             {
-                string Msg = "File is succesfully received!";
+                string Msg = "sFileReceivingSuccess"; // "File is succesfully received!";
                 InfoMsg = Msg;
                 Debug.WriteLine("File is Succesfully Received");
                 ThirdStep = true;
 
             }
-            prev_timePassed = 0;
             FileOps.CloseFile();
             Communication.CloseClient();
         }
