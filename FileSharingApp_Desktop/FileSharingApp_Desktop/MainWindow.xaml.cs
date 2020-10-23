@@ -265,7 +265,8 @@ namespace FileSharingApp_Desktop
             UIUpdate_thread.Start();
 
             //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
-            //switch_language();
+            switch_language();
+            
 
         }
 
@@ -302,6 +303,9 @@ namespace FileSharingApp_Desktop
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
+
+
+
             }
 
         }
