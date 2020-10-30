@@ -121,6 +121,9 @@
     <value>Client host name was null. Aborting!</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sCode" xml:space="preserve">
+    <value>Code:</value>
+  </data>
   <data name="sConfirmation" xml:space="preserve">
     <value>Confirm</value>
   </data>

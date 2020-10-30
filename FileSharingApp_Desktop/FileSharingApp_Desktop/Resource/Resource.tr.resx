@@ -121,6 +121,9 @@
     <value>Alıcı işlemi geçersiz, işlem iptal ediliyor!</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sCode" xml:space="preserve">
+    <value>Şifre:</value>
+  </data>
   <data name="sConfirmation" xml:space="preserve">
     <value>Onayla</value>
   </data>

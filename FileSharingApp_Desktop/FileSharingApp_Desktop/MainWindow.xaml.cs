@@ -38,7 +38,7 @@ namespace FileSharingApp_Desktop
         private bool UIUpdate_Start = false;
         private int UIUpdate_Period = 100;      // in ms
         private Brush CompletedStep = Brushes.LimeGreen;
-        private Brush CurrentStep = Brushes.LightSkyBlue;
+        private Brush CurrentStep = Brushes.Orange;
         private Brush UnCompletedStep = Brushes.LightBlue;
         ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         CultureInfo cul;            //declare culture info
@@ -48,7 +48,6 @@ namespace FileSharingApp_Desktop
             InitializeComponent();
 
         }
-
         private void UpdateUI()
         {
             Stopwatch UpdateWatch = new Stopwatch();
@@ -65,7 +64,6 @@ namespace FileSharingApp_Desktop
                         lbl_ThirdStep.Fill = UnCompletedStep;
                         border_SecondStep.IsEnabled = true;
                         btn_Confirm.IsEnabled = true;
-                        System.Diagnostics.Debug.WriteLine("first");
                         Main.FirstStep = false;
                     }
                     else if (Main.SecondStep)
@@ -73,7 +71,6 @@ namespace FileSharingApp_Desktop
                         lbl_SecondStep.Fill = CompletedStep;
                         lbl_ThirdStep.Fill = CurrentStep;
                         border_ThirdStep.IsEnabled = true;
-                        System.Diagnostics.Debug.WriteLine("second");
                         if (TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
                         {
                             btn_Confirm.IsEnabled = false;
@@ -83,7 +80,6 @@ namespace FileSharingApp_Desktop
                     else if (Main.ThirdStep)
                     {
                         lbl_ThirdStep.Fill = CompletedStep;
-                        System.Diagnostics.Debug.WriteLine("third");
                         Main.ThirdStep = false;
 
                     }
@@ -95,6 +91,7 @@ namespace FileSharingApp_Desktop
                         MessageBoxResult result = MessageBox.Show(sExportingVerification, sConfirmation, MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)
                             Main.TransferApproved = true;
+                        Main.ExportingVerification = false;
                     }
              
 
@@ -123,7 +120,6 @@ namespace FileSharingApp_Desktop
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
-            Reset();
             string FileURL = SelectFile();
             if (FileURL == null)
             {
@@ -131,19 +127,20 @@ namespace FileSharingApp_Desktop
                 MessageBox.Show(sSelectionValidFile);
                 return;
             }
+            Reset();
             TransferMode = FileOperations.TransferMode.Send;
             Main.SetFileURL(FileURL);
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
-            Reset();
             FileURL = GetFolder();
             if (FileURL == null)
             {
                 System.Diagnostics.Debug.WriteLine("File Url is null");
                 return;
             }
+            Reset();
             TransferMode = FileOperations.TransferMode.Receive;
             Main.FirstStep = true;
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
@@ -265,14 +262,18 @@ namespace FileSharingApp_Desktop
             UIUpdate_thread.Start();
 
             //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
-            switch_language();
-            
+            //switch_language();
 
+            lbl_FilePath.ToolTip = "Send File";
+
+            
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
             UIUpdate_Start = false;
+            Main.CloseServer();
+            Environment.Exit(0);
             Thread.Sleep(10);
         }
 
@@ -297,17 +298,14 @@ namespace FileSharingApp_Desktop
 
                 lbl_FilePath.Content = res_man.GetString("sFilePath", cul);
                 lbl_FileName.Content = res_man.GetString("sFileName", cul);
-                lbl_FileSize.Content = res_man.GetString("sFilePath", cul);
+                lbl_FileSize.Content = res_man.GetString("sFileSize", cul);
                 lbl_HostName.Content = res_man.GetString("sHostName", cul);
 
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
-
-
-
+                lbl_code.Content = res_man.GetString("sCode",cul);
             }
-
         }
 
         private void combo_LanguageSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -325,6 +323,11 @@ namespace FileSharingApp_Desktop
             }
 
             switch_language();
+        }
+
+        private void txt_IpCode_MouseEnter(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

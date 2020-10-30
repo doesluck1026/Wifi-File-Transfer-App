@@ -78,9 +78,14 @@ class Communication
     {
         IPEndPoint  hostname = server.StartListener();      /// Start Listener for possible clients.
         if (hostname != null)
+        {
             isClientConnected = true;
-        return hostname.Address.ToString();                        /// return connection status
+            return hostname.Address.ToString();                        /// return connection status
+        }
+        else
+            return null;
     }
+
     /// <summary>
     /// Sends the file specs to the receiver. the receiver will send a response after receiving tihs query.
     /// </summary>
@@ -235,6 +240,8 @@ class Communication
     }
     public static void CloseServer()
     {
+        if (server == null)
+            return;
         server.CloseServer();
         server = null;
     }
