@@ -264,6 +264,9 @@ namespace FileSharingApp_Desktop
             //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             //switch_language();
 
+            lbl_FilePath.ToolTip = "Send File";
+
+            
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -301,7 +304,7 @@ namespace FileSharingApp_Desktop
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
-                lbl_code.Content = res_man.GetString("sCode");
+                lbl_code.Content = res_man.GetString("sCode",cul);
             }
         }
 
