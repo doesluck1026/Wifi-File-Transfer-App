@@ -264,8 +264,6 @@ namespace FileSharingApp_Desktop
             //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             //switch_language();
 
-            lbl_FilePath.ToolTip = "Send File";
-
             
         }
 
