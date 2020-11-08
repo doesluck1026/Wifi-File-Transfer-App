@@ -158,7 +158,7 @@
     <value>Dosya Al</value>
   </data>
   <data name="sSelectAction" xml:space="preserve">
-    <value>Yapmak istediğin işlemi seç!</value>
+    <value>Yapmak istediğin işlemi seç! Ve adımları takip et...</value>
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sSendFile" xml:space="preserve">
@@ -175,12 +175,25 @@
   <data name="sSpeed" xml:space="preserve">
     <value>Gönderim Hızı</value>
   </data>
+  <data name="sstCode" xml:space="preserve">
+    <value>Gönderici : Güvenli dosya aktarımı için buradaki kodu alıcı tarafına iletiniz.
+Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu buraya giriniz.</value>
+  </data>
+  <data name="sstFilePath" xml:space="preserve">
+    <value>İşlem yapılan dosyanın konumu burada gösterilir.</value>
+  </data>
   <data name="sTimePassed" xml:space="preserve">
     <value>Geçen Zaman</value>
   </data>
   <data name="sTransferAborted" xml:space="preserve">
     <value>Gönderim alıcı tarafından reddedildi!</value>
     <comment>Status of "Main.cs"</comment>
+  </data>
+  <data name="sttReceiveFile" xml:space="preserve">
+    <value>Dosya gönderisi almak için kullan ve gönderinin nereye kaydedileceğini seç!</value>
+  </data>
+  <data name="sttSendFile" xml:space="preserve">
+    <value>Dosya gönderme işlemi yapmak için kullan ve göndermek istediğin dosyayı seç!</value>
   </data>
   <data name="sVerifiedFailed" xml:space="preserve">
     <value>Doğrulama işlemi başarısız, işlem iptal ediliyor!</value>

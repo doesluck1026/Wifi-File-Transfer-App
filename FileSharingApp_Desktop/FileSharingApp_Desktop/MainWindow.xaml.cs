@@ -51,7 +51,7 @@ namespace FileSharingApp_Desktop
         private void UpdateUI()
         {
             Stopwatch UpdateWatch = new Stopwatch();
-
+            BitmapImage btm_checked = new BitmapImage(new Uri(@"/Icons/checked.png", UriKind.Relative));
             while (UIUpdate_Start)
             {
                 UpdateWatch.Restart();
@@ -59,17 +59,21 @@ namespace FileSharingApp_Desktop
                 {
                     if (Main.FirstStep)
                     {
-                        lbl_FirstStep.Fill = CompletedStep;
-                        lbl_SecondStep.Fill = CurrentStep;
-                        lbl_ThirdStep.Fill = UnCompletedStep;
+                        //lbl_FirstStep.Fill = CompletedStep;
+                        //lbl_SecondStep.Fill = CurrentStep;
+                        //lbl_ThirdStep.Fill = UnCompletedStep;
+                        Img_FirstStep.Source = btm_checked;
+
                         border_SecondStep.IsEnabled = true;
                         btn_Confirm.IsEnabled = true;
                         Main.FirstStep = false;
                     }
                     else if (Main.SecondStep)
                     {
-                        lbl_SecondStep.Fill = CompletedStep;
-                        lbl_ThirdStep.Fill = CurrentStep;
+                        //lbl_SecondStep.Fill = CompletedStep;
+                        //lbl_ThirdStep.Fill = CurrentStep;
+                        Img_SecondStep.Source = btm_checked;
+
                         border_ThirdStep.IsEnabled = true;
                         if (TransferMode == FileOperations.TransferMode.Send) // ********************* Main içerisinde de proses tipi var biri seçilmeli
                         {
@@ -79,7 +83,8 @@ namespace FileSharingApp_Desktop
                     }
                     else if (Main.ThirdStep)
                     {
-                        lbl_ThirdStep.Fill = CompletedStep;
+                        //lbl_ThirdStep.Fill = CompletedStep;
+                        Img_ThirdStep.Source = btm_checked;
                         Main.ThirdStep = false;
 
                     }
@@ -156,6 +161,11 @@ namespace FileSharingApp_Desktop
             Main.PassedSec = 0;
             Main.EstimatedMin = 0;
             Main.EstimatedSec = 0;
+
+            Img_FirstStep.Source = new BitmapImage(new Uri(@"/Icons/number-1.png", UriKind.Relative));
+            Img_SecondStep.Source = new BitmapImage(new Uri(@"/Icons/number-2.png", UriKind.Relative));
+            Img_ThirdStep.Source = new BitmapImage(new Uri(@"/Icons/number-3.png", UriKind.Relative));
+
         }
         /// <summary>
         /// The address of the file to be processed is selected
@@ -254,7 +264,7 @@ namespace FileSharingApp_Desktop
             UI_Init();
 
             res_man = new ResourceManager("FileSharingApp_Desktop.Resource.resource", Assembly.GetExecutingAssembly());
-            cul = CultureInfo.CreateSpecificCulture("en");        //create culture for english
+            cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
 
             UIUpdate_thread = new Thread(UpdateUI);
             UIUpdate_thread.IsBackground = true;
@@ -262,7 +272,9 @@ namespace FileSharingApp_Desktop
             UIUpdate_thread.Start();
 
             //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
-            //switch_language();
+            switch_language();
+
+            
 
             
         }
@@ -281,9 +293,12 @@ namespace FileSharingApp_Desktop
             border_SecondStep.IsEnabled = false;
             border_ThirdStep.IsEnabled = false;
 
-            lbl_FirstStep.Fill = CurrentStep;
-            lbl_SecondStep.Fill = UnCompletedStep;
-            lbl_ThirdStep.Fill = UnCompletedStep;
+            //lbl_FirstStep.Fill = CurrentStep;
+            //lbl_SecondStep.Fill = UnCompletedStep;
+            //lbl_ThirdStep.Fill = UnCompletedStep;
+
+
+
         }
 
         private void switch_language()
@@ -303,6 +318,8 @@ namespace FileSharingApp_Desktop
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
                 lbl_code.Content = res_man.GetString("sCode",cul);
+
+                lbl_FilePath.ToolTip = res_man.GetString("sstCode", cul);
             }
         }
 

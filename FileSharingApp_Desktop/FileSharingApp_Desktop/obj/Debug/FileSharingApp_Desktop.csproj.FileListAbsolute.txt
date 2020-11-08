@@ -75,3 +75,33 @@ C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masa�
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\en\FileSharingApp_Desktop.resources.dll
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\tr\FileSharingApp_Desktop.resources.dll
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.exe.config
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.exe
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.pdb
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\en\FileSharingApp_Desktop.resources.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\tr\FileSharingApp_Desktop.resources.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignColors.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignColors.pdb
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.g.cs
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.g.cs
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop_MarkupCompile.cache
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop_MarkupCompile.lref
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.baml
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.baml
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.g.resources
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.resources
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Resource.Resource.en.resources
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Resource.Resource.tr.resources
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.GenerateResource.cache
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CoreCompileInputs.cache
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\en\FileSharingApp_Desktop.resources.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\tr\FileSharingApp_Desktop.resources.dll
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.exe
+C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.pdb
