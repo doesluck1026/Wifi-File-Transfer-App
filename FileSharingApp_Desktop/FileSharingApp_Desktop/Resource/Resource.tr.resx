@@ -131,8 +131,14 @@
     <value>Gönderme işlemi için emin misiniz?</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sEnterCode" xml:space="preserve">
+    <value>Lütfen göndericinin size verdiği kodu giriniz</value>
+  </data>
   <data name="sEstimatedTime" xml:space="preserve">
     <value>Kalan Zaman</value>
+  </data>
+  <data name="sExportingVerification" xml:space="preserve">
+    <value>Dosyayı göndermek istiyor musunuz?</value>
   </data>
   <data name="sFailedClient" xml:space="preserve">
     <value>Gönderme işlemi başlatılamadı!</value>
@@ -204,7 +210,7 @@ Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu bura
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sWaitClient" xml:space="preserve">
-    <value>Alıcı bekleniyor...</value>
+    <value>Kodu alıcıya veriniz.</value>
     <comment>Status of "Main.cs"</comment>
   </data>
 </root>

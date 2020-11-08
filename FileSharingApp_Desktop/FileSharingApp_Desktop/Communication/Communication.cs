@@ -451,6 +451,8 @@ class Communication
     }
     public static void CloseClient()
     {
+        if (client == null)
+            return;
         client.DisconnectFromServer();
         client = null;
     }

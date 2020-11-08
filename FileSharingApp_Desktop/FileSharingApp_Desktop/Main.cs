@@ -435,7 +435,10 @@ class Main
     {
         Communication.CloseServer();
     }
-
+    public static void CloseClient()
+    {
+        Communication.CloseClient();
+    }
     private static void CalculateCompletedPercentage(uint numPack = 0)
     {
         uint NumberOfPacks = Communication.NumberOfPacks;
@@ -447,7 +450,13 @@ class Main
         return;
     }
 
-
+    public static void Reset()
+    {
+        TransferAborted = true;
+        CloseServer();
+        CloseClient();
+        ExportingVerification = false;
+    }
     private static void CalculateEstimatedTime(long numBytes, uint numPack, uint TimePassed)
     {
         uint MB = 1024 * 1024;
@@ -554,6 +563,7 @@ class Main
                 InfoMsg = Msg;
                 Debug.WriteLine("Transfer is aborted by user!");
                 sendingThread.Abort();
+                sendingThread = null;
                 return;
             }
 

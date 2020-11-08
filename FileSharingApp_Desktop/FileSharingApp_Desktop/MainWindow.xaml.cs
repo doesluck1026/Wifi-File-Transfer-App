@@ -20,6 +20,7 @@ using System.Threading;
 using System.Globalization;
 using System.Resources;
 using System.Reflection;
+using System.Collections;
 
 namespace FileSharingApp_Desktop
 {
@@ -42,7 +43,7 @@ namespace FileSharingApp_Desktop
         private Brush UnCompletedStep = Brushes.LightBlue;
         ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         CultureInfo cul;            //declare culture info
-
+        BitmapImage btm_checked = new BitmapImage(new Uri(@"/Icons/checked.png", UriKind.Relative));
         public MainWindow()
         {
             InitializeComponent();
@@ -51,7 +52,7 @@ namespace FileSharingApp_Desktop
         private void UpdateUI()
         {
             Stopwatch UpdateWatch = new Stopwatch();
-            BitmapImage btm_checked = new BitmapImage(new Uri(@"/Icons/checked.png", UriKind.Relative));
+
             while (UIUpdate_Start)
             {
                 UpdateWatch.Restart();
@@ -80,6 +81,7 @@ namespace FileSharingApp_Desktop
                             btn_Confirm.IsEnabled = false;
                         }
                         Main.SecondStep = false;
+                        StopFlashing();
                     }
                     else if (Main.ThirdStep)
                     {
@@ -98,12 +100,12 @@ namespace FileSharingApp_Desktop
                             Main.TransferApproved = true;
                         Main.ExportingVerification = false;
                     }
-             
+
 
                     if (TransferMode == FileOperations.TransferMode.Send)
                         txt_IpCode.Text = Main.IpCode;
                     string MainStatus = Main.InfoMsg;
-                    if(!MainStatus.Equals(""))
+                    if (!MainStatus.Equals(""))
                         txt_StatusInfo.Text = res_man.GetString(MainStatus, cul);
                     txt_FilePath.Text = Main.URL;
                     txt_FileName.Text = Main.FileName;
@@ -135,6 +137,7 @@ namespace FileSharingApp_Desktop
             Reset();
             TransferMode = FileOperations.TransferMode.Send;
             Main.SetFileURL(FileURL);
+            FlashObject(txt_IpCode);
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
@@ -148,6 +151,8 @@ namespace FileSharingApp_Desktop
             Reset();
             TransferMode = FileOperations.TransferMode.Receive;
             Main.FirstStep = true;
+            Main.InfoMsg = "sEnterCode";
+            FlashObject(txt_IpCode);
             System.Diagnostics.Debug.WriteLine(" FileURL = " + FileURL);
         }
         private void Reset()
@@ -166,6 +171,7 @@ namespace FileSharingApp_Desktop
             Img_SecondStep.Source = new BitmapImage(new Uri(@"/Icons/number-2.png", UriKind.Relative));
             Img_ThirdStep.Source = new BitmapImage(new Uri(@"/Icons/number-3.png", UriKind.Relative));
 
+            Main.Reset();
         }
         /// <summary>
         /// The address of the file to be processed is selected
@@ -271,12 +277,12 @@ namespace FileSharingApp_Desktop
             UIUpdate_Start = true;
             UIUpdate_thread.Start();
 
-            //combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
+            combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             switch_language();
 
-            
 
-            
+
+
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -303,7 +309,7 @@ namespace FileSharingApp_Desktop
 
         private void switch_language()
         {
-            if(res_man != null)
+            if (res_man != null)
             {
                 btn_SendFile.Content = res_man.GetString("sSendFile", cul);
                 btn_ReceiveFile.Content = res_man.GetString("sReceiveFile", cul);
@@ -317,7 +323,7 @@ namespace FileSharingApp_Desktop
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
-                lbl_code.Content = res_man.GetString("sCode",cul);
+                lbl_code.Content = res_man.GetString("sCode", cul);
 
                 lbl_FilePath.ToolTip = res_man.GetString("sstCode", cul);
             }
@@ -343,6 +349,47 @@ namespace FileSharingApp_Desktop
         private void txt_IpCode_MouseEnter(object sender, MouseEventArgs e)
         {
 
+        }
+        private void FlashObject(TextBox obj)
+        {
+            Brush originalBrush = obj.Background;
+            isFlashing = true;
+            Task.Run(() => Flash(obj, originalBrush));
+        }
+        private void StopFlashing()
+        {
+            isFlashing = false;
+        }
+        private bool isFlashing = false;
+        private void Flash(TextBox obj, Brush origBrush)
+        {
+            while (isFlashing)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    obj.Background = Brushes.White;
+                });
+                Thread.Sleep(500);
+                Dispatcher.Invoke(() =>
+                {
+                    obj.Background = origBrush;
+                });
+                Thread.Sleep(500);
+            }
+        }
+        /// <summary>
+        /// This function is used to prevent the user to type more than 6 characters
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txt_IpCode_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = txt_IpCode.Text;
+            if(text.Length>6)
+            {
+                txt_IpCode.Text = text.Remove(6, 1);
+                txt_IpCode.CaretIndex = 6;
+            }
         }
     }
 }

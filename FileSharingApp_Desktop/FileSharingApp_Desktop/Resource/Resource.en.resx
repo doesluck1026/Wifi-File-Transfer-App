@@ -131,6 +131,9 @@
     <value>Do you want to export?</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sEnterCode" xml:space="preserve">
+    <value>Please enter the 6 digit code that sender gave you</value>
+  </data>
   <data name="sEstimatedTime" xml:space="preserve">
     <value>Estimated Time</value>
   </data>
@@ -185,6 +188,10 @@
   <data name="sSpeed" xml:space="preserve">
     <value>Speed</value>
   </data>
+  <data name="sstCode" xml:space="preserve">
+    <value>Gönderici : Güvenli dosya aktarımı için buradaki kodu alıcı tarafına iletiniz.
+Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu buraya giriniz.</value>
+  </data>
   <data name="sTimePassed" xml:space="preserve">
     <value>Time Passed</value>
   </data>
@@ -201,7 +208,7 @@
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sWaitClient" xml:space="preserve">
-    <value>Wait for Client...</value>
+    <value>Give the code to receiver</value>
     <comment>Status of "Main.cs"</comment>
   </data>
 </root>

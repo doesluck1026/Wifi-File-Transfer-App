@@ -119,7 +119,7 @@
                         <Label x:Name="lbl_code" Width="50" Margin="-269,0,0,0"  FontSize="14" Content="Code : " VerticalAlignment="Center" Foreground="LightBlue" />
                         <!--<Border Grid.Row="0" Padding="2" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center">-->
 
-                            <TextBox x:Name="txt_IpCode" VerticalAlignment="Center" Width="102" Height="30" TextAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="20" BorderThickness="1" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" MouseEnter="txt_IpCode_MouseEnter" />
+                            <TextBox x:Name="txt_IpCode" VerticalAlignment="Center" Width="102" Height="30" TextAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="20" BorderThickness="1" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" TextChanged="txt_IpCode_TextChanged" />
 
                         <!--</Border>-->
 
