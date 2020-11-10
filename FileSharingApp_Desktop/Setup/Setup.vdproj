@@ -184,6 +184,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
     }
@@ -529,15 +537,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:File Transfer App"
-        "ProductCode" = "8:{5A20FA04-92EB-4ED8-97FC-3E504E63B98D}"
-        "PackageCode" = "8:{E1F1E04B-9F89-442A-91BF-7B7CE6D365E2}"
+        "ProductCode" = "8:{9141377E-8148-48F2-80C9-CE472CD9828D}"
+        "PackageCode" = "8:{71447514-A930-4701-9E47-AEBBC89C84FA}"
         "UpgradeCode" = "8:{ABB47C56-3688-4CFA-9B98-E54139A133E4}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.4"
+        "ProductVersion" = "8:1.0.5"
         "Manufacturer" = "8:Umur-Yahya"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

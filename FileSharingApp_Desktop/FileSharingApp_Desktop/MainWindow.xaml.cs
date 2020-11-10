@@ -91,7 +91,7 @@ namespace FileSharingApp_Desktop
 
                     }
 
-                    if (Main.ExportingVerification)
+                    if (Main.ExportingVerification && Communication.isClientConnected)
                     {
                         string sExportingVerification = res_man.GetString("sExportingVerification", cul);
                         string sConfirmation = res_man.GetString("sConfirmation", cul);
