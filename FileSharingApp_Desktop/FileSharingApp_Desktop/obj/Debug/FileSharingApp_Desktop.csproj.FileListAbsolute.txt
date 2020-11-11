@@ -104,3 +104,4 @@ C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileShari
 C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
 C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.exe
 C:\Users\CDS_Software01\Documents\GitHub\FileSharingApp\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.pdb
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
