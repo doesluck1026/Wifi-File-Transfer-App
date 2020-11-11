@@ -189,8 +189,8 @@
     <value>Speed</value>
   </data>
   <data name="sstCode" xml:space="preserve">
-    <value>Gönderici : Güvenli dosya aktarımı için buradaki kodu alıcı tarafına iletiniz.
-Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu buraya giriniz.</value>
+    <value>Sender: Please pass this code to receiver for safe transfer
+Receiver:Please enter the code that sender gave you.</value>
   </data>
   <data name="sTimePassed" xml:space="preserve">
     <value>Time Passed</value>

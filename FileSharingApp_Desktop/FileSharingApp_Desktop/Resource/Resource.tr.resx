@@ -167,6 +167,9 @@
     <value>Yapmak istediğin işlemi seç! Ve adımları takip et...</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sSelectionValidFile" xml:space="preserve">
+    <value>Lütfen geçerli bir dosya seçin</value>
+  </data>
   <data name="sSendFile" xml:space="preserve">
     <value>Dosya Gönder</value>
   </data>

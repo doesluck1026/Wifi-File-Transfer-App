@@ -127,6 +127,7 @@ namespace FileSharingApp_Desktop
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
+            StopFlashing();
             string FileURL = SelectFile();
             if (FileURL == null)
             {
@@ -142,6 +143,7 @@ namespace FileSharingApp_Desktop
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
+            StopFlashing();
             FileURL = GetFolder();
             if (FileURL == null)
             {
@@ -172,6 +174,8 @@ namespace FileSharingApp_Desktop
             Img_ThirdStep.Source = new BitmapImage(new Uri(@"/Icons/number-3.png", UriKind.Relative));
 
             Main.Reset();
+            txt_IpCode.Text = "";
+            StopFlashing();
         }
         /// <summary>
         /// The address of the file to be processed is selected
@@ -231,6 +235,7 @@ namespace FileSharingApp_Desktop
                 bool success = Main.EnterTheCode(code);
                 if (success)
                 {
+                    StopFlashing();
                     Main.SetFilePathToSave(FileURL);
                     string FileName = Main.FileName;
                     string fileSizeType = Main.FileSizeType.ToString();
@@ -261,6 +266,7 @@ namespace FileSharingApp_Desktop
             else if (TransferMode == FileOperations.TransferMode.Send && Communication.isClientConnected)
             {
                 Main.TransferApproved = true;
+                StopFlashing();
             }
         }
 
@@ -279,10 +285,6 @@ namespace FileSharingApp_Desktop
 
             combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             switch_language();
-
-
-
-
         }
 
         private void Window_Closed(object sender, EventArgs e)
@@ -325,7 +327,8 @@ namespace FileSharingApp_Desktop
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
                 lbl_code.Content = res_man.GetString("sCode", cul);
 
-                lbl_FilePath.ToolTip = res_man.GetString("sstCode", cul);
+                txt_IpCode.ToolTip = res_man.GetString("sstCode", cul);
+
             }
         }
 
@@ -336,46 +339,56 @@ namespace FileSharingApp_Desktop
             if (SelectedLanguage.Equals("TR"))
             {
                 cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
-
             }
             else if (SelectedLanguage.Equals("EN"))
             {
                 cul = CultureInfo.CreateSpecificCulture("en");        //create culture for english
             }
-
             switch_language();
         }
-
-        private void txt_IpCode_MouseEnter(object sender, MouseEventArgs e)
-        {
-
-        }
+        Task FlashTask;
         private void FlashObject(TextBox obj)
         {
             Brush originalBrush = obj.Background;
             isFlashing = true;
-            Task.Run(() => Flash(obj, originalBrush));
+            FlashTask=Task.Run(() => Flash(obj, originalBrush));
+            Debug.WriteLine("Flashing is started!");
+
         }
         private void StopFlashing()
         {
             isFlashing = false;
+            Debug.WriteLine("Flashing is stopped!");
         }
-        private bool isFlashing = false;
+        private bool isFlashing
+        {
+            get
+            {
+                lock (lck_isFlashing)
+                    return _isFlashing;
+            }
+            set
+            {
+                lock (lck_isFlashing)
+                    _isFlashing = value;
+            }
+        }
+        private bool _isFlashing;
+        private object lck_isFlashing = new object();
         private void Flash(TextBox obj, Brush origBrush)
         {
-            while (isFlashing)
+            Dispatcher.Invoke(() =>
             {
-                Dispatcher.Invoke(() =>
-                {
-                    obj.Background = Brushes.White;
-                });
-                Thread.Sleep(500);
-                Dispatcher.Invoke(() =>
-                {
-                    obj.Background = origBrush;
-                });
-                Thread.Sleep(500);
-            }
+                obj.Background = Brushes.White;
+            });
+            Thread.Sleep(500);
+            Dispatcher.Invoke(() =>
+            {
+                obj.Background = origBrush;
+            });
+            Thread.Sleep(500);
+            if (isFlashing)
+                Flash(obj, origBrush);
         }
         /// <summary>
         /// This function is used to prevent the user to type more than 6 characters
