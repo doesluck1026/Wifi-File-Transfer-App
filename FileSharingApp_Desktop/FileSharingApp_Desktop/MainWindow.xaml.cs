@@ -379,14 +379,15 @@ namespace FileSharingApp_Desktop
         {
             Dispatcher.Invoke(() =>
             {
-                obj.Background = Brushes.White;
+                obj.BorderBrush= Brushes.CornflowerBlue;
             });
             Thread.Sleep(500);
             Dispatcher.Invoke(() =>
             {
-                obj.Background = origBrush;
+                obj.BorderBrush = origBrush;
             });
             Thread.Sleep(500);
+            
             if (isFlashing)
                 Flash(obj, origBrush);
         }
