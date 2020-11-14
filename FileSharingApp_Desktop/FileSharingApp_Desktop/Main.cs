@@ -452,7 +452,7 @@ class Main
 
     public static void Reset()
     {
-        TransferAborted = true;
+        
         CloseServer();
         CloseClient();
         ExportingVerification = false;

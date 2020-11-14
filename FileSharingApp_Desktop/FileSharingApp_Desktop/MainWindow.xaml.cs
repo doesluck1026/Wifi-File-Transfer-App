@@ -144,6 +144,7 @@ namespace FileSharingApp_Desktop
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
             StopFlashing();
+            Main.TransferAborted = true;
             FileURL = GetFolder();
             if (FileURL == null)
             {

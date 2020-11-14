@@ -160,6 +160,9 @@
   <data name="sHostName" xml:space="preserve">
     <value>Gönderen Adı</value>
   </data>
+  <data name="sImportingVerification" xml:space="preserve">
+    <value>Dosyayı almak istiyor musunuz?</value>
+  </data>
   <data name="sReceiveFile" xml:space="preserve">
     <value>Dosya Al</value>
   </data>
