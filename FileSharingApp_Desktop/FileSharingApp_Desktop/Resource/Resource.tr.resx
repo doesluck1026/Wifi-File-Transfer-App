@@ -138,7 +138,7 @@
     <value>Kalan Zaman</value>
   </data>
   <data name="sExportingVerification" xml:space="preserve">
-    <value>Dosyayı göndermek istiyor musunuz?</value>
+    <value>Dosyayı göndermek istiyor musunuz?\n Alıcı:</value>
   </data>
   <data name="sFailedClient" xml:space="preserve">
     <value>Gönderme işlemi başlatılamadı!</value>

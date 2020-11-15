@@ -93,7 +93,7 @@ namespace FileSharingApp_Desktop
 
                     if (Main.ExportingVerification && Communication.isClientConnected)
                     {
-                        string sExportingVerification = res_man.GetString("sExportingVerification", cul);
+                        string sExportingVerification = res_man.GetString("sExportingVerification", cul)+":"+Main.HostName.ToString();
                         string sConfirmation = res_man.GetString("sConfirmation", cul);
                         MessageBoxResult result = MessageBox.Show(sExportingVerification, sConfirmation, MessageBoxButton.YesNo);
                         if (result == MessageBoxResult.Yes)

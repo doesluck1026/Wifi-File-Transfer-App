@@ -138,7 +138,7 @@
     <value>Estimated Time</value>
   </data>
   <data name="sExportingVerification" xml:space="preserve">
-    <value>Do you want to export?</value>
+    <value>Do you want to export?\n Receiver :</value>
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sFailedClient" xml:space="preserve">
