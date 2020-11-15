@@ -175,6 +175,12 @@ namespace FileSharingApp_Desktop
             Img_ThirdStep.Source = new BitmapImage(new Uri(@"/Icons/number-3.png", UriKind.Relative));
 
             Main.Reset();
+            txt_FilePath.Text = "";
+            txt_FileName.Text = "";
+            txt_FileSize.Text = "";
+            txt_HostName.Text = "";
+            txt_EstimatedTime.Text = "";
+            txt_PassedTime.Text = "";
             txt_IpCode.Text = "";
             StopFlashing();
         }
