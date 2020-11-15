@@ -99,6 +99,7 @@ namespace FileSharingApp_Desktop
                         if (result == MessageBoxResult.Yes)
                             Main.TransferApproved = true;
                         Main.ExportingVerification = false;
+                        Main.InfoMsg= res_man.GetString("sFileBeingSent", cul); 
                     }
 
 
@@ -251,6 +252,7 @@ namespace FileSharingApp_Desktop
                     string sImportingVerification = res_man.GetString("sImportingVerification", cul);
                     string sConfirmation = res_man.GetString("sConfirmation", cul);
                     MessageBoxResult result = MessageBox.Show(sImportingVerification + "\n" + FileName + " file of " + fileSize + " size?", sConfirmation, MessageBoxButton.YesNo);
+                    Main.InfoMsg= res_man.GetString("sFileBeingReceived", cul); 
                     if (result == MessageBoxResult.Yes)
                     {
                         // Yes code here  

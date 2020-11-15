@@ -144,6 +144,12 @@
     <value>Gönderme işlemi başlatılamadı!</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sFileBeingReceived" xml:space="preserve">
+    <value>Dosya alınıyor. Biraz sabır.</value>
+  </data>
+  <data name="sFileBeingSent" xml:space="preserve">
+    <value>Dosya gönderiliyor. Az kaldı</value>
+  </data>
   <data name="sFileName" xml:space="preserve">
     <value>Dosya Adı</value>
   </data>

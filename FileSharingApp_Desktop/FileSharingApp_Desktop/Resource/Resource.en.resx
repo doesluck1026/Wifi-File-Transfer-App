@@ -145,6 +145,12 @@
     <value>Failed to start sending operation!</value>
     <comment>Status of "Main.cs"</comment>
   </data>
+  <data name="sFileBeingReceived" xml:space="preserve">
+    <value>File is being received. Just be patient.OK?</value>
+  </data>
+  <data name="sFileBeingSent" xml:space="preserve">
+    <value>File is being sent.</value>
+  </data>
   <data name="sFileName" xml:space="preserve">
     <value>File Name</value>
   </data>
