@@ -163,6 +163,7 @@ class FileOperations
     }
     public void CloseFile()
     {
-        Fs.Close();
+        if(Fs!=null)
+            Fs.Close();
     }
 }

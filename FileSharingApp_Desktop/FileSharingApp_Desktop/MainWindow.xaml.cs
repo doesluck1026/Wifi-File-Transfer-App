@@ -88,6 +88,7 @@ namespace FileSharingApp_Desktop
                         //lbl_ThirdStep.Fill = CompletedStep;
                         Img_ThirdStep.Source = btm_checked;
                         Main.ThirdStep = false;
+                        Main.InfoMsg = "sFileBeingSent";
 
                     }
 
@@ -99,7 +100,7 @@ namespace FileSharingApp_Desktop
                         if (result == MessageBoxResult.Yes)
                             Main.TransferApproved = true;
                         Main.ExportingVerification = false;
-                        Main.InfoMsg = "sFileBeingSent";
+                        
                     }
 
 
@@ -145,7 +146,6 @@ namespace FileSharingApp_Desktop
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
             StopFlashing();
-            Main.TransferAborted = true;
             FileURL = GetFolder();
             if (FileURL == null)
             {

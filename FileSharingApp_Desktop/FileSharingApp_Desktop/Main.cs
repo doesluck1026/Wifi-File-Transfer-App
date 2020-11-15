@@ -455,7 +455,18 @@ class Main
         
         CloseServer();
         CloseClient();
+        if(sendingThread!=null)
+        {
+            if (sendingThread.IsAlive)
+            {
+                TransferAborted = true;
+                Thread.Sleep(5);
+                sendingThread.Abort();
+            }
+        }
         ExportingVerification = false;
+        TransferAborted = false;
+        FileOps.CloseFile();
     }
     private static void CalculateEstimatedTime(long numBytes, uint numPack, uint TimePassed)
     {
