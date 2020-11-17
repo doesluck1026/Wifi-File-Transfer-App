@@ -152,20 +152,20 @@
     <value>File is being sent.</value>
   </data>
   <data name="sFileName" xml:space="preserve">
-    <value>File Name</value>
+    <value>File Name:</value>
   </data>
   <data name="sFilePath" xml:space="preserve">
-    <value>File Path</value>
+    <value>File Path:</value>
   </data>
   <data name="sFileReceivingSuccess" xml:space="preserve">
     <value>File is succesfully received!</value>
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sFileSize" xml:space="preserve">
-    <value>File Size</value>
+    <value>File Size:</value>
   </data>
   <data name="sHostName" xml:space="preserve">
-    <value>Host Name</value>
+    <value>Host Name:</value>
   </data>
   <data name="sImportingVerification" xml:space="preserve">
     <value>Do you want to import?</value>

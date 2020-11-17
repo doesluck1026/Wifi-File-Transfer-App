@@ -151,20 +151,20 @@
     <value>Dosya gönderiliyor. Az kaldı</value>
   </data>
   <data name="sFileName" xml:space="preserve">
-    <value>Dosya Adı</value>
+    <value>Dosya Adı:</value>
   </data>
   <data name="sFilePath" xml:space="preserve">
-    <value>Dosya Adresi</value>
+    <value>Dosya Adresi:</value>
   </data>
   <data name="sFileReceivingSuccess" xml:space="preserve">
     <value>Dosya başarılı bir şekilde alındı.</value>
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sFileSize" xml:space="preserve">
-    <value>Dosya Boyutu</value>
+    <value>Dosya Boyutu:</value>
   </data>
   <data name="sHostName" xml:space="preserve">
-    <value>Gönderen Adı</value>
+    <value>Gönderen Adı:</value>
   </data>
   <data name="sImportingVerification" xml:space="preserve">
     <value>Dosyayı almak istiyor musunuz?</value>

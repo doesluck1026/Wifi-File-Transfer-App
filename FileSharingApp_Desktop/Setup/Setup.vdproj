@@ -537,15 +537,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Wifi File Transfer"
-        "ProductCode" = "8:{5B42AB6C-D37E-40C4-96F4-FF0DDE28DEC5}"
-        "PackageCode" = "8:{6A84B751-6FFB-425B-9D7E-63B67A74E8F2}"
+        "ProductCode" = "8:{C47D1260-812C-4B18-A804-12214C8C88A2}"
+        "PackageCode" = "8:{892836ED-3D6F-40AC-9605-A353C25422F7}"
         "UpgradeCode" = "8:{ABB47C56-3688-4CFA-9B98-E54139A133E4}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.3"
+        "ProductVersion" = "8:1.1.4"
         "Manufacturer" = "8:Umur-Yahya"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -660,7 +660,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_1DE6EA0B950849C49D87E66051B3D2B9"
             {
-            "Name" = "8:File Transfer App"
+            "Name" = "8:Wifi File Transfer"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
