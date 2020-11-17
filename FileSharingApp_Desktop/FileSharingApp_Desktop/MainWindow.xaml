@@ -7,7 +7,12 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Closed="Window_Closed"
-        Title="File Sharing " Height="450" Width="800">
+        Title="Wifi File Transfer " 
+        Height="450" 
+        Width="800"
+        ResizeMode="NoResize" >
+   
+
     <Grid Background="#353536" >
         <Grid.RowDefinitions>
             <RowDefinition Height = "1*" />
