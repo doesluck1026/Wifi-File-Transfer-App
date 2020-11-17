@@ -577,7 +577,7 @@ class Main
                 sendingThread = null;
                 return;
             }
-
+            InfoMsg = "sFileBeingSent";
             if (clientHostname != null && clientHostname != "")             /// if connection succeed
             {
                 bool isVerified = Communication.VerifyCode();
@@ -739,6 +739,7 @@ class Main
             uint TimePassed = 0;
             uint elapsedTime = 0;
             long numBytesSent = 0;
+            Main.InfoMsg = "sFileBeingReceived";
             Stopwatch stopwatch = Stopwatch.StartNew();
             Debug.WriteLine(" Communication.NumberOfPacks: " + numberOfPacks);
             while (numPack < numberOfPacks)                                           /// while the number of bytes sent to client is smaller than the total file length

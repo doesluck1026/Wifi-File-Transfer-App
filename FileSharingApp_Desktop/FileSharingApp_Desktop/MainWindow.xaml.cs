@@ -88,7 +88,7 @@ namespace FileSharingApp_Desktop
                         //lbl_ThirdStep.Fill = CompletedStep;
                         Img_ThirdStep.Source = btm_checked;
                         Main.ThirdStep = false;
-                        Main.InfoMsg = "sFileBeingSent";
+                        
 
                     }
 
@@ -252,7 +252,6 @@ namespace FileSharingApp_Desktop
                     string sImportingVerification = res_man.GetString("sImportingVerification", cul);
                     string sConfirmation = res_man.GetString("sConfirmation", cul);
                     MessageBoxResult result = MessageBox.Show(sImportingVerification + "\n" + FileName + " file of " + fileSize + " size?", sConfirmation, MessageBoxButton.YesNo);
-                    Main.InfoMsg = "sFileBeingReceived";
                     if (result == MessageBoxResult.Yes)
                     {
                         // Yes code here  
