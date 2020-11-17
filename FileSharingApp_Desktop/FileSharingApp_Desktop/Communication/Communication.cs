@@ -43,7 +43,8 @@ class Communication
         KB=1,
         MB,
         GB,
-        TB
+        TB,
+        none
     }
     private enum  Functions
     {

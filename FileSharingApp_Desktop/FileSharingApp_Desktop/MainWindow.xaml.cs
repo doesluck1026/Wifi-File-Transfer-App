@@ -112,7 +112,8 @@ namespace FileSharingApp_Desktop
                     txt_FilePath.Text = Main.URL;
                     txt_FileName.Text = Main.FileName;
                     txt_HostName.Text = Main.HostName;
-                    txt_FileSize.Text = Main.FileSize.ToString("0.00") + " " + Main.FileSizeType.ToString();
+                    if(Main.FileSizeType!=Communication.SizeTypes.none)
+                        txt_FileSize.Text = Main.FileSize.ToString("0.00") + " " + Main.FileSizeType.ToString();
                     txt_TransferSpeed.Text = Main.TransferSpeed.ToString("0.00") + " MB/s";
                     txt_EstimatedTime.Text = Main.EstimatedMin.ToString() + " : " + Main.EstimatedSec.ToString();
                     txt_PassedTime.Text = Main.PassedMin.ToString() + " : " + Main.PassedSec.ToString();

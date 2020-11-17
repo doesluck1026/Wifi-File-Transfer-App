@@ -467,6 +467,11 @@ class Main
         ExportingVerification = false;
         TransferAborted = false;
         FileOps.CloseFile();
+        FileName = "";
+        URL = "";
+        HostName = "";
+        FileSize = 0;
+        FileSizeType = Communication.SizeTypes.none;
     }
     private static void CalculateEstimatedTime(long numBytes, uint numPack, uint TimePassed)
     {
@@ -577,7 +582,7 @@ class Main
                 sendingThread = null;
                 return;
             }
-            InfoMsg = "sFileBeingSent";
+            
             if (clientHostname != null && clientHostname != "")             /// if connection succeed
             {
                 bool isVerified = Communication.VerifyCode();
@@ -619,6 +624,7 @@ class Main
             uint elapsedTime = 0;
             long numBytesSent = 0;
             SecondStep = true;
+            InfoMsg = "sFileBeingSent";
             Stopwatch stopwatch = Stopwatch.StartNew();
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
