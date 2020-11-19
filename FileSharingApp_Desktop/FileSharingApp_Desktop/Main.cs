@@ -484,10 +484,10 @@ class Main
         double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
-        _transferSpeed = _transferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
-        ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / _transferSpeed));
-        if (_transferSpeed > 500 || _transferSpeed < 0)
-            _transferSpeed = 0;
+        TransferSpeed = TransferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
+        ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / TransferSpeed));
+        if (TransferSpeed > 500 || TransferSpeed < 0)
+            TransferSpeed = 0;
         EstimatedMin =(int)(ETA / 60);
         EstimatedSec = (int)(ETA % 60);
         PassedMin = (int)(TimePassed / 60.0);
