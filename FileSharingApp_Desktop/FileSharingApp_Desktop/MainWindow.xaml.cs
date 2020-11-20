@@ -294,8 +294,32 @@ namespace FileSharingApp_Desktop
 
             combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             switch_language();
-        }
+            var t = Task.Run(() => CheckUpdate());
 
+        }
+        private void CheckUpdate()
+        {
+            Debug.WriteLine("cehk");
+            axcsCheck4Update.axMain oCheckClient = new axcsCheck4Update.axMain("https://app.box.com/s/xe52z9a68rl50xjxphc6kmawnftq53wq/file/743627574743");
+
+            int nMajor = oCheckClient.GetVersion(axcsCheck4Update.enVerion.EMajor);
+            int nMinor = oCheckClient.GetVersion(axcsCheck4Update.enVerion.EMinor);
+            int nBuild = oCheckClient.GetVersion(axcsCheck4Update.enVerion.EBuild);
+
+            string strPath = oCheckClient.GetNewVersionPath();
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+            int nAppMajor = fileVersionInfo.FileMajorPart;
+            int nAppMinor = fileVersionInfo.FileMinorPart;
+            int nAppBuild = fileVersionInfo.FileBuildPart;
+
+            if ((nMajor != nAppMajor) || (nMinor != nAppMinor) || (nBuild != nAppBuild))
+            {
+                MessageBox.Show("There is a new update!");
+            }
+        }
         private void Window_Closed(object sender, EventArgs e)
         {
             UIUpdate_Start = false;
