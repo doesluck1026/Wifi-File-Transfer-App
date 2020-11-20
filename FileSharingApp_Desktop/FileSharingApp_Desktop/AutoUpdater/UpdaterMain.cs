@@ -18,7 +18,7 @@ namespace FileSharingApp_Desktop.AutoUpdater
 			downloadToPath = Environment.CurrentDirectory;
 			System.Diagnostics.Debug.WriteLine("Directory: " + downloadToPath);
 			string localVersion = ApplicationUpdate.Versions.LocalVersion(downloadToPath + "\\version.txt");
-			string remoteURL = "https://www.dropbox.com/sh/0olsbcuy836j6g8/AAAQWzP6IHUXWzffLcih4Mzga?dl=0";
+			string remoteURL = "https://github.com/doesluck1026/Wifi-File-Transfer-App/blob/master/FileSharingApp_Desktop/FileSharingApp_Desktop/bin/Debug";
 		    remoteVersion = ApplicationUpdate.Versions.RemoteVersion(remoteURL + "\\updateVersion.txt");
 			remoteFile = remoteURL + remoteVersion + ".zip";
 

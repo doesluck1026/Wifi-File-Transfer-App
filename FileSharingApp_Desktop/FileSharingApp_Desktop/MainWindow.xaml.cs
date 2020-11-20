@@ -294,7 +294,7 @@ namespace FileSharingApp_Desktop
 
             combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             switch_language();
-            var t = Task.Run(() => CheckUpdate());
+           // var t = Task.Run(() => CheckUpdate());
 
         }
         private void CheckUpdate()

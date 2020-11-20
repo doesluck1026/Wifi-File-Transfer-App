@@ -17,7 +17,7 @@ namespace FileSharingApp_Desktop.AutoUpdater.ApplicationUpdate
 				System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)req.GetResponse();
 				System.IO.Stream receiveStream = response.GetResponseStream();
 				System.IO.StreamReader readStream = new System.IO.StreamReader(receiveStream, Encoding.UTF8);
-				string s = readStream.ReadLine();
+				string s = readStream.ReadToEnd();
 				response.Close();
 				if (ValidateFile(s))
 				{
@@ -31,6 +31,7 @@ namespace FileSharingApp_Desktop.AutoUpdater.ApplicationUpdate
 				// from using the application.
 				rv = null;
 			}
+			rv = "2.0.0.0";
 			return rv;
 		}
 
