@@ -44,6 +44,9 @@
     <Reference Include="axcsCheck4Update">
       <HintPath>..\..\..\..\..\..\..\axcsCheck4Update.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zip.Reduced">
+      <HintPath>..\..\..\..\..\..\..\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.6.1513, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.6\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -58,6 +61,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,6 +80,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AutoUpdater\ApplicationUpdate\Versions.cs" />
+    <Compile Include="AutoUpdater\SingleInstance.cs" />
+    <Compile Include="AutoUpdater\UpdaterMain.cs" />
     <Compile Include="Communication\Communication.cs" />
     <Compile Include="Communication\Server.cs" />
     <Compile Include="Resource\Resource.tr.Designer.cs">

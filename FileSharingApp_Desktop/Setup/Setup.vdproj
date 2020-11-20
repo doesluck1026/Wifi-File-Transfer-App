@@ -39,6 +39,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_487BAE75AABECE7C2BDF26246C04C65E"
+        "OwnerKey" = "8:_F972AF672F5B438882276B76D2F1AD3F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_531447D59A0E5B635B47D761BD71C515"
         "OwnerKey" = "8:_F972AF672F5B438882276B76D2F1AD3F"
         "MsmSig" = "8:_UNDEFINED"
@@ -119,6 +125,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_17C8EFF64B787D37D5B77B067127BACA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_487BAE75AABECE7C2BDF26246C04C65E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -313,6 +325,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_487BAE75AABECE7C2BDF26246C04C65E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:axcsCheck4Update, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_487BAE75AABECE7C2BDF26246C04C65E"
+                    {
+                    "Name" = "8:axcsCheck4Update.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:axcsCheck4Update.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_94CDFD2389F642C4BB8A661E4804C4CC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_531447D59A0E5B635B47D761BD71C515"
@@ -537,15 +580,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Wifi File Transfer"
-        "ProductCode" = "8:{C4F92397-C288-480B-A10C-BD15C4E01FB4}"
-        "PackageCode" = "8:{FC8AF6EE-9DCF-4F65-AFF5-F697992CA45F}"
+        "ProductCode" = "8:{5548E3DD-DD16-4041-B05C-8CAC310869B9}"
+        "PackageCode" = "8:{A7799532-C762-4039-8615-5541EFB48E2E}"
         "UpgradeCode" = "8:{ABB47C56-3688-4CFA-9B98-E54139A133E4}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.6"
+        "ProductVersion" = "8:1.1.8"
         "Manufacturer" = "8:Umur-Yahya"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
