@@ -97,7 +97,8 @@ class Communication
     {
         if (fileName == null || fileName.Length == 0)                                       /// Check if file is selected correctly
             return false;
-        byte[] nameBytes = Encoding.ASCII.GetBytes(fileName);                               /// Get the byte array of file name
+        Encoding cp437 = Encoding.GetEncoding(437);
+        byte[] nameBytes = cp437.GetBytes(fileName);                                        /// Get the byte array of file name
         int lenName = nameBytes.Length;                                                     /// Calculate the length of name bytes 
         byte[] sizeBytes = BitConverter.GetBytes(fileSize);                                 /// Get the byte array of file
         int lenSize = sizeBytes.Length;                                                     /// Calculate the length of file size
@@ -323,8 +324,9 @@ class Communication
                 int dataLen = BitConverter.ToInt32(receivedData, 3);
                 if (dataLen == receivedData.Length - HeaderLen)
                 {
+                    Encoding cp437 = Encoding.GetEncoding(437);
                     int nameLen = receivedData[HeaderLen] | (receivedData[HeaderLen + 1] << 8);
-                    fileName = Encoding.ASCII.GetString(receivedData, HeaderLen + 2, nameLen);
+                    fileName = cp437.GetString(receivedData, HeaderLen + 2, nameLen);
                     int IndexSize = HeaderLen + 2 + nameLen;
                     fileSize = BitConverter.ToDouble(receivedData, IndexSize);
                     sizeType = (SizeTypes)receivedData[IndexSize + sizeof(double)];

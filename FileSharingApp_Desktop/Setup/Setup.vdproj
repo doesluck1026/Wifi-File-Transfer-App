@@ -81,6 +81,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_F527D80796EE8291A9E0524DCD1A44FE"
+        "OwnerKey" = "8:_F972AF672F5B438882276B76D2F1AD3F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F972AF672F5B438882276B76D2F1AD3F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -125,6 +131,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_17C8EFF64B787D37D5B77B067127BACA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F527D80796EE8291A9E0524DCD1A44FE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -502,6 +514,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F527D80796EE8291A9E0524DCD1A44FE"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Ionic.Zip.Reduced, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F527D80796EE8291A9E0524DCD1A44FE"
+                    {
+                    "Name" = "8:Ionic.Zip.Reduced.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Ionic.Zip.Reduced.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_94CDFD2389F642C4BB8A661E4804C4CC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -580,15 +623,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Wifi File Transfer"
-        "ProductCode" = "8:{5548E3DD-DD16-4041-B05C-8CAC310869B9}"
-        "PackageCode" = "8:{A7799532-C762-4039-8615-5541EFB48E2E}"
+        "ProductCode" = "8:{896AF853-5777-484F-86CA-A68B3B60C317}"
+        "PackageCode" = "8:{7CE367EE-F3D7-4D63-9BE9-C7F573DECE8A}"
         "UpgradeCode" = "8:{ABB47C56-3688-4CFA-9B98-E54139A133E4}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.8"
+        "ProductVersion" = "8:1.1.9"
         "Manufacturer" = "8:Umur-Yahya"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
