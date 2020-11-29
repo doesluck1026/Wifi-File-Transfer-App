@@ -485,7 +485,7 @@ class Main
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
         double averageSpeed = TotalMegaBytesSent / TimePassed;
-        TransferSpeed = TransferSpeed * 0.5 + 0.5 * (numMegaBytes / deltaTime);
+        TransferSpeed = TransferSpeed * 0.8 + 0.2 * (numMegaBytes / deltaTime);
         ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / averageSpeed));
         if (TransferSpeed > 500 || TransferSpeed < 0)
             TransferSpeed = 0;
@@ -629,10 +629,7 @@ class Main
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
                 FileOps.FileReadAtByteIndex(bytesSent, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
-                double readingTime = stopwatch.Elapsed.TotalMilliseconds;
-                Debug.WriteLine("reading file time: " + readingTime + "  ms");
                 isSent = Communication.SendFilePacks(BytesToSend, numPack);                         /// send the bytes
-                Debug.WriteLine("sending packs time: " + (stopwatch.Elapsed.TotalMilliseconds - readingTime )+ "  ms");
                 if (isSent)
                 {
                     numPack++;                                                                      /// increase the number of package sent variable
