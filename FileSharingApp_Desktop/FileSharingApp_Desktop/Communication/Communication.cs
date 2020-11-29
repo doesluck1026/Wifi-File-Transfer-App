@@ -247,6 +247,15 @@ class Communication
         server.CloseServer();
         server = null;
     }
+    public static void RejectClient()
+    {
+        int dataLen = 1;
+        byte[] dataHeader = PrepareDataHeader(Functions.TransferStatus, 1);
+        byte[] dataToSend = new byte[dataHeader.Length + dataLen];
+        dataHeader.CopyTo(dataToSend,0);
+        dataToSend[dataHeader.Length] = 0;
+        server.SendDataToClient(dataToSend);
+    }
     #endregion
 
     #region Client Functions
@@ -306,11 +315,12 @@ class Communication
     /// <param name="fileName">name of the file icluding extension</param>
     /// <param name="fileSize">size of the file which is a double and can be in any type (mb,kb,gb...)</param>
     /// <param name="sizeType">type of the size</param>
-    public static void GetFileSpecs(out string fileName, out double fileSize, out SizeTypes sizeType)
+    public static void GetFileSpecs(out string fileName, out double fileSize, out SizeTypes sizeType,out bool isCodeIncorrect)
     {
         fileName = "";
         fileSize = 0;
         sizeType = SizeTypes.Byte;
+        isCodeIncorrect = false;
         byte[] receivedData = client.GetData();
         if(receivedData==null)
         {
@@ -337,6 +347,15 @@ class Communication
                 else
                 {
                     Debug.WriteLine("GetFileSpecs function: data length does not match! told:" + dataLen + " but received: " + (receivedData.Length - HeaderLen));
+                }
+            }
+            else if(receivedData[1]==(byte)Functions.TransferStatus)
+            {
+                if(receivedData[HeaderLen]==0)
+                {
+                    Debug.WriteLine("Transfer Code was incorrect!");
+                    client.DisconnectFromServer();
+                    isCodeIncorrect = true;
                 }
             }
             else
@@ -474,17 +493,8 @@ class Communication
     }
     private static uint CalculatePackageCount(double fileSize, SizeTypes sizeType)
     {
-        long PackageSize = 0;
-        if (sizeType == SizeTypes.Byte)
-            PackageSize = (uint)fileSize;
-        else if (sizeType == SizeTypes.KB)
-            PackageSize = (uint)(fileSize * 1024);
-        else if (sizeType == SizeTypes.MB)
-            PackageSize = (uint)(fileSize * 1024 * 1024);
-        else if (sizeType == SizeTypes.GB)
-            PackageSize = (uint)(fileSize * 1024 * 1024 * 1024);
-        else if (sizeType == SizeTypes.TB)
-            PackageSize = (uint)(fileSize * 1024 * 1024 * 1024 * 1024);
+        long PackageSize = (uint)Math.Pow(fileSize, (double)sizeType);
+        Main.PackSize =Main.BasePackSize+ Main.BasePackSize * (int)(((double)sizeType+3)*fileSize/50.0);
         uint packageCount = (uint)Math.Ceiling(PackageSize / (double)Main.PackSize);
         Debug.WriteLine("fileSize: " + fileSize + " " + sizeType);
         return packageCount;

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="sClientHostNameNull" xml:space="preserve">
-    <value>Alıcı işlemi geçersiz, işlem iptal ediliyor!</value>
+    <value>Alıcı ismi geçersiz, işlem iptal ediliyor!</value>
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sCode" xml:space="preserve">
@@ -132,7 +132,7 @@
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sEnterCode" xml:space="preserve">
-    <value>Lütfen göndericinin size verdiği kodu giriniz</value>
+    <value>Lütfen göndericinin size verdiği kodu girin.</value>
   </data>
   <data name="sEstimatedTime" xml:space="preserve">
     <value>Kalan Zaman</value>
@@ -145,10 +145,10 @@
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sFileBeingReceived" xml:space="preserve">
-    <value>Dosya alınıyor. Biraz sabır.</value>
+    <value>Dosya alınıyor. Lütfen bekleyin...</value>
   </data>
   <data name="sFileBeingSent" xml:space="preserve">
-    <value>Dosya gönderiliyor. Az kaldı</value>
+    <value>Dosya gönderiliyor. Lütfen bekleyin...</value>
   </data>
   <data name="sFileName" xml:space="preserve">
     <value>Dosya Adı:</value>
@@ -173,7 +173,7 @@
     <value>Dosya Al</value>
   </data>
   <data name="sSelectAction" xml:space="preserve">
-    <value>Yapmak istediğin işlemi seç! Ve adımları takip et...</value>
+    <value>Yapmak istediğiniz işlemi seçin ve adımları takip edin...</value>
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sSelectionValidFile" xml:space="preserve">
@@ -194,8 +194,8 @@
     <value>Gönderme Hızı</value>
   </data>
   <data name="sstCode" xml:space="preserve">
-    <value>Gönderici : Güvenli dosya aktarımı için buradaki kodu alıcı tarafına iletiniz.
-Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu buraya giriniz.</value>
+    <value>Gönderici : Güvenli dosya aktarımı için buradaki kodu alıcı tarafına iletin.
+Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu buraya girin.</value>
   </data>
   <data name="sstFilePath" xml:space="preserve">
     <value>İşlem yapılan dosyanın konumu burada gösterilir.</value>
@@ -208,10 +208,10 @@ Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu bura
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sttReceiveFile" xml:space="preserve">
-    <value>Dosya gönderisi almak için kullan ve gönderinin nereye kaydedileceğini seç</value>
+    <value>Dosya almak için buraya basın ve gönderinin nereye kaydedileceğini seçin</value>
   </data>
   <data name="sttSendFile" xml:space="preserve">
-    <value>Dosya gönderme işlemi yapmak için kullan ve göndermek istediğin dosyayı seç</value>
+    <value>Dosya göndermek için buraya basın ve göndermek istediğiniz dosyayı seçin</value>
   </data>
   <data name="sVerifiedFailed" xml:space="preserve">
     <value>Doğrulama işlemi başarısız, işlem iptal ediliyor!</value>
@@ -222,7 +222,7 @@ Alıcı          : Güvenli dosya aktarımı için göndericiden gelen kodu bura
     <comment>Status of "Main.cs"</comment>
   </data>
   <data name="sWaitClient" xml:space="preserve">
-    <value>Kodu alıcıya veriniz.</value>
+    <value>Kodu alıcıya verin.</value>
     <comment>Status of "Main.cs"</comment>
   </data>
 </root>

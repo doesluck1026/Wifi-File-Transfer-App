@@ -20,7 +20,7 @@ class Main
     }
 
     #region Parameters
-
+    public readonly static int BasePackSize = 1024 * 1024;
     public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should be smaller than 64 kB
 
     #endregion
@@ -473,19 +473,21 @@ class Main
         FileSize = 0;
         FileSizeType = Communication.SizeTypes.none;
     }
+    private static double TotalMegaBytesSent = 0;
     private static void CalculateEstimatedTime(long numBytes, uint numPack, uint TimePassed)
     {
         uint MB = 1024 * 1024;
         uint ETA;
         uint NumberOfPacks = Communication.NumberOfPacks;
-
-        
+        double numMegaBytes = (double)numBytes / MB;
+        TotalMegaBytesSent += numMegaBytes;
 
         double deltaTime = (TimePassed - prev_timePassed) / 1000.0;
         prev_timePassed = TimePassed;
         TimePassed /= 1000;
-        TransferSpeed = TransferSpeed * 0.5 + 0.5 * (((double)numBytes / MB) / deltaTime);
-        ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / TransferSpeed));
+        double averageSpeed = TotalMegaBytesSent / TimePassed;
+        TransferSpeed = TransferSpeed * 0.5 + 0.5 * (numMegaBytes / deltaTime);
+        ETA = (uint)((((NumberOfPacks - numPack) * Main.PackSize / MB) / averageSpeed));
         if (TransferSpeed > 500 || TransferSpeed < 0)
             TransferSpeed = 0;
         EstimatedMin =(int)(ETA / 60);
@@ -503,6 +505,7 @@ class Main
     /// <returns></returns>
     public static void SetFileURL(string url)
     {
+        TotalMegaBytesSent = 0;
         URL = url;                                                  /// assign URL
         FileOps.Init(url, FileOperations.TransferMode.Send);
         FileName = FileOps.FileName;
@@ -600,6 +603,7 @@ class Main
                     string Msg = "sVerifiedFailed"; // "isVerified: " + isVerified + " aborting!";
                     InfoMsg = Msg;
                     Debug.WriteLine("isVerified: " + isVerified + " Aborting!");
+                    Communication.RejectClient();
                     Communication.CloseServer();
                     return;
                 }
@@ -681,6 +685,7 @@ class Main
     {
         URL = path;
         FileOps.Init(path, FileOperations.TransferMode.Receive);
+        TotalMegaBytesSent = 0;
         //RespondToTransferRequest(true);
     }
     public static bool EnterTheCode(string code)
@@ -695,8 +700,11 @@ class Main
                 Communication.SendVerification(code);
                 string fileName;
                 double fileSize;
+                bool isCodeIncorrect;
                 Communication.SizeTypes sizeType;
-                Communication.GetFileSpecs(out fileName, out fileSize, out sizeType);
+                Communication.GetFileSpecs(out fileName, out fileSize, out sizeType,out isCodeIncorrect);
+                if (isCodeIncorrect)
+                    return false;
                 FileOps.FileName = fileName;
                 FileName = fileName;
                 FileSize = fileSize;
