@@ -118,4 +118,3 @@ C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\Fil
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CoreCompileInputs.cache
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\en\FileSharingApp_Desktop.resources.dll
 C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\tr\FileSharingApp_Desktop.resources.dll
-C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
