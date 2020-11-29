@@ -493,10 +493,9 @@ class Communication
     }
     private static uint CalculatePackageCount(double fileSize, SizeTypes sizeType)
     {
-        long PackageSize = (uint)Math.Pow(fileSize, (double)sizeType);
-        Main.PackSize =Main.BasePackSize+ Main.BasePackSize * (int)(((double)sizeType+3)*fileSize/50.0);
+        long PackageSize = (uint)(fileSize*Math.Pow(1024, (double)sizeType));
         uint packageCount = (uint)Math.Ceiling(PackageSize / (double)Main.PackSize);
-        Debug.WriteLine("fileSize: " + fileSize + " " + sizeType);
+        Debug.WriteLine("fileSize: " + fileSize + " " + sizeType+" package count: "+packageCount+"packSize: "+Main.PackSize);
         return packageCount;
     }
     #endregion

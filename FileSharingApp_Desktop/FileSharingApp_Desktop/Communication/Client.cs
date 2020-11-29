@@ -40,6 +40,7 @@ class Client
             _isClientConnected = true;
             client.ReceiveBufferSize = BufferSize;
             client.SendBufferSize = BufferSize;
+            client.NoDelay = true;
             Debug.WriteLine("Connected to: " + IP + " on Port: " + Port);
         }
         catch

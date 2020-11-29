@@ -20,7 +20,6 @@ class Main
     }
 
     #region Parameters
-    public readonly static int BasePackSize = 1024 * 1024;
     public static int PackSize = 1024 * 1024*3;            /// this represents the maximum length of bytes to be transfered to client in one package. default is 3 MB and should be smaller than 64 kB
 
     #endregion
@@ -570,9 +569,6 @@ class Main
             HostName = clientHostname;
 
             ExportingVerification = true;
-            //MessageBoxResult result = MessageBox.Show("Do you want to export?", "Confirmation", MessageBoxButton.YesNo);
-            //if (result == MessageBoxResult.Yes)
-            //    TransferApproved = true;
 
 
             while (!TransferApproved && !TransferAborted) ;
@@ -620,7 +616,7 @@ class Main
             long bytesSent = 0;
             int BytesRead = 0;
             long numPack = 0;
-            bool isSent = false;
+            bool isSent = true;
             byte[] BytesToSend;                                                                     /// Define byte array to carry file bytes
             uint numberOfPacks = Communication.NumberOfPacks;
             long checkPoint = 0;
@@ -633,7 +629,10 @@ class Main
             while (bytesSent < FileOps.FileSizeAsBytes)                                               /// while the number of bytes sent to client is smaller than the total file length
             {
                 FileOps.FileReadAtByteIndex(bytesSent, out BytesRead, out BytesToSend, PackSize);     /// read file and copy to carrier array.
+                double readingTime = stopwatch.Elapsed.TotalMilliseconds;
+                Debug.WriteLine("reading file time: " + readingTime + "  ms");
                 isSent = Communication.SendFilePacks(BytesToSend, numPack);                         /// send the bytes
+                Debug.WriteLine("sending packs time: " + (stopwatch.Elapsed.TotalMilliseconds - readingTime )+ "  ms");
                 if (isSent)
                 {
                     numPack++;                                                                      /// increase the number of package sent variable
