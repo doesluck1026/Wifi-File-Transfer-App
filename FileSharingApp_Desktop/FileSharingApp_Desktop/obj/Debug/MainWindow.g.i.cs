@@ -161,7 +161,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 127 "..\..\MainWindow.xaml"
+        #line 126 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox txt_IpCode;
         
@@ -169,7 +169,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 132 "..\..\MainWindow.xaml"
+        #line 130 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl_HostName;
         
@@ -177,7 +177,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 133 "..\..\MainWindow.xaml"
+        #line 131 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock txt_HostName;
         
@@ -185,7 +185,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 139 "..\..\MainWindow.xaml"
+        #line 137 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button btn_Confirm;
         
@@ -193,7 +193,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 152 "..\..\MainWindow.xaml"
+        #line 150 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Border border_ThirdStep;
         
@@ -201,7 +201,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 161 "..\..\MainWindow.xaml"
+        #line 159 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Image Img_ThirdStep;
         
@@ -209,7 +209,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 172 "..\..\MainWindow.xaml"
+        #line 170 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ProgressBar pbStatus;
         
@@ -217,7 +217,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 186 "..\..\MainWindow.xaml"
+        #line 184 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl_TransferSpeed;
         
@@ -225,7 +225,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 187 "..\..\MainWindow.xaml"
+        #line 185 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock txt_TransferSpeed;
         
@@ -233,7 +233,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 188 "..\..\MainWindow.xaml"
+        #line 186 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl_PassedTime;
         
@@ -241,7 +241,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 189 "..\..\MainWindow.xaml"
+        #line 187 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock txt_PassedTime;
         
@@ -249,7 +249,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 190 "..\..\MainWindow.xaml"
+        #line 188 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label lbl_EstimatedTime;
         
@@ -257,7 +257,7 @@ namespace FileSharingApp_Desktop {
         #line hidden
         
         
-        #line 191 "..\..\MainWindow.xaml"
+        #line 189 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock txt_EstimatedTime;
         
@@ -374,7 +374,7 @@ namespace FileSharingApp_Desktop {
             case 17:
             this.txt_IpCode = ((System.Windows.Controls.TextBox)(target));
             
-            #line 127 "..\..\MainWindow.xaml"
+            #line 126 "..\..\MainWindow.xaml"
             this.txt_IpCode.TextChanged += new System.Windows.Controls.TextChangedEventHandler(this.txt_IpCode_TextChanged);
             
             #line default
@@ -389,7 +389,7 @@ namespace FileSharingApp_Desktop {
             case 20:
             this.btn_Confirm = ((System.Windows.Controls.Button)(target));
             
-            #line 139 "..\..\MainWindow.xaml"
+            #line 137 "..\..\MainWindow.xaml"
             this.btn_Confirm.Click += new System.Windows.RoutedEventHandler(this.btn_Confirm_Click);
             
             #line default
