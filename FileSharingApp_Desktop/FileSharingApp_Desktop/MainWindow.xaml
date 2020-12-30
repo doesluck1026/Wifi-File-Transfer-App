@@ -10,7 +10,7 @@
         Title="Wifi File Transfer " 
         Height="450" 
         Width="800"
-        ResizeMode="NoResize" >
+        ResizeMode="CanMinimize" >
    
 
     <Grid Background="#353536" >
