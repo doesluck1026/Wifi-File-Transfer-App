@@ -83,7 +83,7 @@
     <Compile Include="AutoUpdater\ApplicationUpdate\Versions.cs" />
     <Compile Include="AutoUpdater\SingleInstance.cs" />
     <Compile Include="AutoUpdater\UpdaterMain.cs" />
-    <Compile Include="Communication\Communication.cs" />
+    <Compile Include="Communication\NetworkScanner.cs" />
     <Compile Include="Communication\Server.cs" />
     <Compile Include="FileOperations\RecentClientListBag.cs" />
     <Compile Include="Resource\Resource.tr.Designer.cs">

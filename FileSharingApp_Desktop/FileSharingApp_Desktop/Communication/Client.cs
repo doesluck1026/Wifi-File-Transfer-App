@@ -114,6 +114,8 @@ class Client
         {
             Debug.WriteLine("Unable to send message to client!" + e.ToString());
             IsConnectedToServer = false;
+            if (client == null)
+                return false;
             client.Close();
             client = null;
             return false;

@@ -17,6 +17,10 @@ class Server
     private string IP;
     private byte StartByte;
     public bool IsCLientConnected = false;
+    public bool IsServerStarted = false;
+
+    public delegate void ClientConnectedDelegate(string clientIP);
+    public event ClientConnectedDelegate OnClientConnected;
     #endregion
 
     public Server(int port = 38000, string ip = "", int bufferSize = 1024 * 64, byte StartByte = (byte)'A')
@@ -30,7 +34,7 @@ class Server
     {
         try
         {
-                IPAddress localAddr = null;
+            IPAddress localAddr = null;
             if (string.IsNullOrEmpty(IP))
             {
                 var ipAddresses = GetAllInternetworkIPs();
@@ -52,8 +56,9 @@ class Server
                 localAddr = IPAddress.Parse(IP);
             Listener = new TcpListener(localAddr, Port);
             Listener.Start();
-            IP = Listener.LocalEndpoint.ToString();
-            Debug.WriteLine("Server is ready");
+            IsServerStarted = true;
+            IP = localAddr.ToString();
+            Debug.WriteLine("Server is ready:  IP: " + IP);
             return localAddr.ToString();
         }
         catch (Exception e)
@@ -62,26 +67,33 @@ class Server
             return null;
         }
     }
-    public string StartListener()
+    public void StartListener()
     {
         try
         {
             if (Listener == null)
-                return null;
+                return;
             Debug.WriteLine("Listener is Started IP:  " + IP + "  Port: " + Port);
-            Client = Listener.AcceptTcpClient();        /// this Line is Blocking
-            IsCLientConnected = true;
-            IPEndPoint endPoint = (IPEndPoint)Client.Client.RemoteEndPoint;
-            var ipAddress = endPoint.Address;
-            Client.ReceiveBufferSize = BufferSize;
-            Client.SendBufferSize = BufferSize;
-            Debug.WriteLine(ipAddress + " is connected");
-            return ipAddress.ToString();
+            Listener.BeginAcceptTcpClient(new AsyncCallback(DoAcceptTcpClientCallback), Listener);
         }
         catch
         {
-            return null;
         }
+    }
+    public void DoAcceptTcpClientCallback(IAsyncResult ar)
+    {
+
+        TcpListener listener = (TcpListener)ar.AsyncState;
+        if (listener.Server.LocalEndPoint == null)
+            return;
+        Client = listener.EndAcceptTcpClient(ar);
+        IsCLientConnected = true;
+        IPEndPoint endPoint = (IPEndPoint)Client.Client.RemoteEndPoint;
+        var ipAddress = endPoint.Address;
+        Client.ReceiveBufferSize = BufferSize;
+        Client.SendBufferSize = BufferSize;
+        Debug.WriteLine(ipAddress + " is connected");
+        OnClientConnected(ipAddress.ToString());
     }
     public void CloseServer()
     {
@@ -92,10 +104,11 @@ class Server
                 Client.Close();
                 Client = null;
             }
+            IsCLientConnected = false;
+            IsServerStarted = false;
             if (Listener == null)
                 return;
             Listener.Stop();
-            IsCLientConnected = false;
             Listener = null;
         }
         catch (Exception e)
@@ -105,6 +118,7 @@ class Server
     }
     public bool SendDataToClient(byte[] data)
     {
+        Debug.WriteLine("Function:: " + data[0] + " len: " + data.Length);
         bool success = false;
         byte[] headerBytes = PrepareDataHeader(data.Length);
         int DataLength = headerBytes.Length + data.Length;
@@ -149,9 +163,11 @@ class Server
         {
             Debug.WriteLine("Unable to send message to client!" + e.ToString());
             IsCLientConnected = false;
+            if (Client == null)
+                return false;
             Client.Close();
             Client = null;
-            var t = Task.Run(() => StartListener());
+            //var t = Task.Run(() => StartListener());
             return false;
         }
     }
@@ -218,7 +234,7 @@ class Server
                 }
                 else
                 {
-                    Debug.WriteLine("number of received bytes are incorrect");
+                    Debug.WriteLine("number of received bytes are incorrect: TotalBytesReceived: " + TotalBytesReceived + " DataLength: " + DataLength + " First byte::" + ms.ToArray()[0] + " second first byte:" + ms.ToArray()[DataLength]);
                     return null;
                 }
             }
@@ -232,7 +248,7 @@ class Server
                 Client.Close();
                 Client = null;
             }
-            var t = Task.Run(() => StartListener());
+            //var t = Task.Run(() => StartListener());
             return null;
         }
     }
@@ -251,10 +267,10 @@ class Server
         foreach (var i in interfaces)
             foreach (var ua in i.GetIPProperties().UnicastAddresses)
             {
-                if (ua.Address.AddressFamily == AddressFamily.InterNetwork && i.OperationalStatus==System.Net.NetworkInformation.OperationalStatus.Up && i.Name.Equals("Wi-Fi"))
+                if (ua.Address.AddressFamily == AddressFamily.InterNetwork && i.OperationalStatus == System.Net.NetworkInformation.OperationalStatus.Up && i.Name.Equals("Wi-Fi"))
                 {
                     addressList.Add(ua.Address);
-                    Debug.WriteLine("name: " + i.Name + " ip: " + ua.Address+"  type: ") ;
+                    Debug.WriteLine("name: " + i.Name + " ip: " + ua.Address + "  type: ");
                 }
             }
         return addressList.ToArray();
