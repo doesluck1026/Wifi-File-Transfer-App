@@ -85,6 +85,7 @@
     <Compile Include="AutoUpdater\UpdaterMain.cs" />
     <Compile Include="Communication\Communication.cs" />
     <Compile Include="Communication\Server.cs" />
+    <Compile Include="FileOperations\RecentClientListBag.cs" />
     <Compile Include="Resource\Resource.tr.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

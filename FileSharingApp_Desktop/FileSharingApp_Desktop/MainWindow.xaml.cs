@@ -122,7 +122,7 @@ namespace FileSharingApp_Desktop
 
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
                 {
-
+                    Thread.Sleep(1);
                 }
             }
 
@@ -194,7 +194,7 @@ namespace FileSharingApp_Desktop
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
-            openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             openFileDialog1.Filter = " All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
@@ -215,7 +215,7 @@ namespace FileSharingApp_Desktop
             var dlg = new CommonOpenFileDialog();
             dlg.Title = "Select Target Folder";
             dlg.IsFolderPicker = true;
-            dlg.InitialDirectory = "c:\\";
+            dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
             dlg.AddToMostRecentlyUsedList = false;
             dlg.AllowNonFileSystemItems = false;
@@ -226,7 +226,6 @@ namespace FileSharingApp_Desktop
             dlg.EnsureValidNames = true;
             dlg.Multiselect = false;
             dlg.ShowPlacesList = true;
-
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 var folder = dlg.FileName;

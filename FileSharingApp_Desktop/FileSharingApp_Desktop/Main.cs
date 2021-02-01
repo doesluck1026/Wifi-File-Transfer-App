@@ -13,6 +13,7 @@ using System.Windows;
 
 class Main
 {
+    private string URL_ClientList = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/JuniorVersusBug/WifiFileTransfer/";
     public enum ProccessType
     {
         SendFile,

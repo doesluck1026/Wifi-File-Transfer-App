@@ -66,7 +66,7 @@ class Communication
     /// <returns></returns>
     public static string CreateServer()
     {
-        server = new Server(Port,BufferSize);                      /// Create server instance
+        server = new Server(port:Port,bufferSize: BufferSize,StartByte: StartByte);                      /// Create server instance
         string serverIP=server.SetupServer();           /// Setup Server on default port. this Function will return device ip as string.
        
         string code = GenerateTransferCode(serverIP);   /// Generate a code to secure transfer
@@ -77,11 +77,11 @@ class Communication
     }
     public static string startServer()
     {
-        IPEndPoint  hostname = server.StartListener();      /// Start Listener for possible clients.
+        var  hostname = server.StartListener();      /// Start Listener for possible clients.
         if (hostname != null)
         {
             isClientConnected = true;
-            return hostname.Address.ToString();                        /// return connection status
+            return hostname;                             /// return connection status
         }
         else
             return null;
@@ -303,10 +303,12 @@ class Communication
     /// <param name="ip"></param>
     /// <param name="port"></param>
     /// <returns></returns>
-    public static bool ConnectToServer(string ip)
+    public static bool ConnectToServer(string IP)
     {
-        client = new Client(Port,BufferSize);
-        isConnectedToServer = client.ConnectToServer(ip);
+        client = new Client(port:Port,ip: IP, bufferSize: BufferSize, StartByte:StartByte);
+        string ServerHostname=client.ConnectToServer();
+        if(!string.IsNullOrEmpty(ServerHostname))
+            isConnectedToServer = true;
         return isConnectedToServer;
     }
     /// <summary>

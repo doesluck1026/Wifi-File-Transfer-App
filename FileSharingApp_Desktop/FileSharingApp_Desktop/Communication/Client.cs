@@ -7,47 +7,44 @@ using System.Text;
 
 class Client
 {
-    private int HeaderLen = 7;
-    private int TimeoutTime = 50;
-    private int BufferSize = 1024 * 64;
+    private int BufferSize;
     private TcpClient client;
-    public byte StartByte = (byte)('J');
-    public bool _isClientConnected = false;
+    public byte StartByte;
+    public bool IsConnectedToServer = false;
     private string IP;
     private int Port;
 
-    public Client(int port = 41000,int bufferSize= 1024 * 64)
+    public Client(int port = 38000, string ip = "", int bufferSize = 1024 * 64, byte StartByte = (byte)'A')
     {
-        //this.IP = IP;
         this.Port = port;
+        this.IP = ip;
         this.BufferSize = bufferSize;
+        this.StartByte = StartByte;
     }
 
     /// <summary>
     /// Connects to server with specified IP.
     /// </summary>
-    /// <param name="IP"></param>
-    /// <returns></returns>
-    public bool ConnectToServer(string IP)
+    /// <returns>Hostname of server</returns>
+    public string ConnectToServer()
     {
-        bool success;
         try
         {
-            client = new TcpClient();           ///  create client object
-            client.Connect(IP, Port);           /// Connect
-            Debug.WriteLine("trying to connect + " + IP + " at Port " + Port);
-            success = true;
-            _isClientConnected = true;
-            client.ReceiveBufferSize = BufferSize;
+            client = new TcpClient();
+            client.Connect(IP, Port);
+            IsConnectedToServer = true;
             client.SendBufferSize = BufferSize;
-            Debug.WriteLine("Connected to: " + IP + " on Port: " + Port);
+            client.ReceiveBufferSize = BufferSize;
+            Debug.WriteLine("Succesfully Connected to: " + IP + " on Port: " + Port);
+            var host = Dns.GetHostEntry(IP);
+            return host.HostName;
         }
-        catch
+
+        catch (Exception e)
         {
-            success = false;
-            Debug.WriteLine("Connection failed!");
+            Debug.WriteLine("Connection Failed: " + e.ToString());
+            return "";
         }
-        return success;
     }
     public bool DisconnectFromServer()
     {
@@ -58,7 +55,7 @@ class Client
             {
                 client.Close();
                 client.Dispose();           /// remove client object
-                _isClientConnected = false;
+                IsConnectedToServer = false;
                 client = null;
                 Debug.WriteLine("Disconnected!");
                 success = true;
@@ -71,50 +68,56 @@ class Client
         }
         return success;
     }
-    public bool SendDataServer(byte[] Data)
+    public bool SendDataServer(byte[] data)
     {
         bool success = false;
-        if (client != null)
+        byte[] headerBytes = PrepareDataHeader(data.Length);
+        int DataLength = headerBytes.Length + data.Length;
+        byte[] dataToSend = new byte[DataLength];
+        headerBytes.CopyTo(dataToSend, 0);
+        data.CopyTo(dataToSend, headerBytes.Length);
+        try
         {
+            if (client == null)
+                return false;
             if (client.Connected)
             {
-                try
+                NetworkStream stream = client.GetStream();
+                if (DataLength < BufferSize)
                 {
-                    var stream = client.GetStream();
-                    int DataLength = Data.Length;
-                    if (DataLength <= BufferSize)
-                    {
-                        stream.Write(Data, 0, DataLength);
-                    }
-                    else
-                    {
-                        int numBytesRead = 0;
-                        int totalbytesSent = 0;
-                        int Len = BufferSize;
-                        while (true)
-                        {
-                            byte[] _data = new byte[Len];
-                            Array.Copy(Data, totalbytesSent, _data, 0, Len);
-                            numBytesRead = Len;
-                            stream.Write(_data, 0, Len);
-                            totalbytesSent += numBytesRead;
-                            Len = Math.Min(DataLength - totalbytesSent, BufferSize);
-                            if (totalbytesSent >= DataLength)
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    stream.Flush();
+                    stream.Write(dataToSend, 0, DataLength);
                     success = true;
                 }
-                catch
+                else
                 {
-                    Debug.WriteLine("Failed to send Data in Client.cs");
+                    int NumBytesLeft = DataLength;
+                    int TotalBytesSent = 0;
+                    byte[] tempData;
+                    int len = BufferSize;
+                    while (NumBytesLeft > 0)
+                    {
+                        tempData = new byte[len];
+                        Array.Copy(dataToSend, TotalBytesSent, tempData, 0, len);
+                        stream.Write(tempData, 0, len);
+                        NumBytesLeft -= len;
+                        TotalBytesSent += len;
+                        len = Math.Min(NumBytesLeft, BufferSize);
+                    }
+                    success = true;
                 }
             }
+            else
+                success = false;
+            return success;
         }
-        return success;
+        catch (Exception e)
+        {
+            Debug.WriteLine("Unable to send message to client!" + e.ToString());
+            IsConnectedToServer = false;
+            client.Close();
+            client = null;
+            return false;
+        }
     }
     /// <summary>
     /// Gets Data from server and retuns byte array as fuction code, in first byte, and data
@@ -124,103 +127,86 @@ class Client
     {
         try
         {
-            var stream = client.GetStream();
-            Stopwatch watchdog = new Stopwatch();
-            watchdog.Restart();
-            byte[] data = new byte[BufferSize];
+            if (client == null)
+                return null;
+            NetworkStream stream = client.GetStream();
+            byte[] tempData = new byte[BufferSize];
+            byte[] dataHeader = new byte[5];
             using (MemoryStream ms = new MemoryStream())
             {
-                int numBytesRead;
-                bool _isfirstSampleReceived = false;
-                int totalbytesReceived = 0;
-                byte[] Header = new byte[BufferSize];
+                int numBytesRead = 0;
+                int TotalBytesReceived = 0;
+                bool isFirstsSampleReceived = false;
                 int DataLength = 0;
-                while (watchdog.ElapsedMilliseconds < TimeoutTime)
+                while (true)
                 {
-                    if (!_isfirstSampleReceived)
+                    if (!isFirstsSampleReceived)
                     {
-                        numBytesRead = stream.Read(data, 0, HeaderLen);
-                        if (numBytesRead == HeaderLen)
+                        numBytesRead = stream.Read(dataHeader, 0, dataHeader.Length);
+                        if (numBytesRead == dataHeader.Length)
                         {
-                            DataLength = data[3] | (data[4] << 8) | (data[5] << 16) | (data[6] << 24);
-                            _isfirstSampleReceived = true;
-                            ms.Write(data, 0, numBytesRead);
-                            watchdog.Restart();
+                            if (dataHeader[0] != StartByte)
+                                break;
+                            DataLength = BitConverter.ToInt32(dataHeader, 1);
+                            isFirstsSampleReceived = true;
                         }
                         else
-                        {
-                            Debug.WriteLine("Missing Header Bytes!");
                             break;
-                        }
                     }
                     else
                     {
-                        if (DataLength <= BufferSize)
+                        if (DataLength < BufferSize)
                         {
-                            numBytesRead = stream.Read(data, 0, DataLength);
-                            totalbytesReceived += numBytesRead;
-                            ms.Write(data, 0, numBytesRead);
-                            watchdog.Restart();
+                            numBytesRead = stream.Read(tempData, 0, DataLength);
+                            TotalBytesReceived += numBytesRead;
+                            ms.Write(tempData, 0, numBytesRead);
+
                         }
                         else
                         {
-                            int Len = BufferSize;
-                            while (true)
+                            int len = BufferSize;
+                            while (TotalBytesReceived < DataLength)
                             {
-                                numBytesRead = stream.Read(data, 0, Len);
-                                watchdog.Restart();
-                                ms.Write(data, 0, numBytesRead);
-                                totalbytesReceived += numBytesRead;
-                                Len = Math.Min(DataLength - totalbytesReceived, BufferSize);
-                                if ((totalbytesReceived) >= DataLength)
-                                {
-                                    break;
-                                }
+                                numBytesRead = stream.Read(tempData, 0, len);
+                                TotalBytesReceived += numBytesRead;
+                                ms.Write(tempData, 0, numBytesRead);
+                                len = Math.Min(DataLength - TotalBytesReceived, BufferSize);
                             }
                         }
-                        if ((totalbytesReceived) >= DataLength)
-                        {
-                            byte[] ReceivedData = new byte[ms.Length];
-                            ReceivedData = ms.ToArray();
-                            if (ReceivedData[0] == StartByte)
-                            {
-                                int DataLen = ReceivedData[3] | (ReceivedData[4] << 8) | (ReceivedData[5] << 16) | (ReceivedData[6] << 24);
-                                if (DataLen == ReceivedData.Length - HeaderLen)
-                                {
-                                    stream.Flush();
-                                    return ReceivedData;
-                                }
-                                else
-                                {
-                                    Debug.WriteLine(DateTime.Now + "  :Data Length does not match! Told: " + DataLen + " But received: " + (ReceivedData.Length - HeaderLen));
-                                    stream.Flush();
-                                    return null;
-                                }
-                            }
-                            else
-                            {
-                                Console.WriteLine("Start byte was Wrong! received: " + ReceivedData[0]);
-                                stream.Flush();
-                                return null;
-                            }
-                        }
+                        if (TotalBytesReceived >= DataLength)
+                            break;
                     }
                 }
-                Debug.WriteLine("Timeout : ");
-                return null;
+                if (TotalBytesReceived == DataLength)
+                {
+                    byte[] receivedData = ms.ToArray();
+                    return receivedData;
+                }
+                else
+                {
+                    Debug.WriteLine("number of received bytes are incorrect");
+                    return null;
+                }
             }
         }
-        catch
+        catch (Exception e)
         {
-            Console.WriteLine(DateTime.Now+ "  : Receive Data Failed!");
-            //_isClientConnected = false;
-            //if (client != null)
-            //{
-            //    client.Close();
-            //    client.Dispose();
-            //}
+            Debug.WriteLine("Failed to Receive Data From Client! :" + e.ToString());
+            IsConnectedToServer = false;
+            if (client == null)
+                return null;
+            client.Close();
+            client = null;
             return null;
         }
+    }
+    private byte[] PrepareDataHeader(int len)
+    {
+        byte[] header = new byte[5];
+        header[0] = StartByte;
+        byte[] lengthBytes = BitConverter.GetBytes(len);
+        lengthBytes.CopyTo(header, 1);
+        return header;
     }
     /// <summary>
     /// Gets current device's ip4 address.
