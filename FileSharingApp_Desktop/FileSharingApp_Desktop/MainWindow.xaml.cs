@@ -44,6 +44,12 @@ namespace FileSharingApp_Desktop
         ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         CultureInfo cul;            //declare culture info
         BitmapImage btm_checked = new BitmapImage(new Uri(@"/Icons/checked.png", UriKind.Relative));
+
+
+        private string DeviceIP;
+        private string DeviceHostName;
+        private bool isScanned = false;
+        public List<string> AvailableDeviceList = new List<string>();
         public MainWindow()
         {
             InitializeComponent();
@@ -71,7 +77,8 @@ namespace FileSharingApp_Desktop
 
         private void btn_SendFile_Click(object sender, RoutedEventArgs e)
         {
-           
+            string[] filepaths = SelectFiles();
+            Main.SetFilePaths(filepaths);
         }
         private void btn_ReceiveFile_Click(object sender, RoutedEventArgs e)
         {
@@ -81,7 +88,7 @@ namespace FileSharingApp_Desktop
         /// The address of the file to be processed is selected
         /// </summary>
         /// <returns>the address of the file in memory</returns>
-        private string SelectFile()
+        private string[] SelectFiles()
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
@@ -89,10 +96,11 @@ namespace FileSharingApp_Desktop
             openFileDialog1.Filter = " All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = true;
 
             if (openFileDialog1.ShowDialog() == true)
             {
-                string selectedFileName = openFileDialog1.FileName;
+                string[] selectedFileName = openFileDialog1.FileNames;
                 return selectedFileName;
             }
             return null;
@@ -138,6 +146,20 @@ namespace FileSharingApp_Desktop
             res_man = new ResourceManager("FileSharingApp_Desktop.Resource.resource", Assembly.GetExecutingAssembly());
             cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
 
+            NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
+            Debug.WriteLine("Save file path: " + Main.FileSaveURL);
+            Main.OnClientRequested += Main_OnClientRequested;
+            Main.StartServer();
+            Dispatcher.Invoke(() =>
+            {
+                lbl_HostName.Content = DeviceIP;
+            });
+            if (!isScanned)
+            {
+                ScanNetwork();
+                isScanned = true;
+            }
+
             UIUpdate_thread = new Thread(UpdateUI);
             UIUpdate_thread.IsBackground = true;
             UIUpdate_Start = true;
@@ -146,24 +168,48 @@ namespace FileSharingApp_Desktop
             combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
             switch_language();
         }
-        private void CheckUpdate()
+        private void Main_OnClientRequested(string totalTransferSize)
         {
-            bool isLatestVersion = AutoUpdater.UpdaterMain.CompareVersions();
-            if (!isLatestVersion)
-            {
-               var res= MessageBox.Show("There is a new update! \n Would you like to download the new version?","Version Check",MessageBoxButton.YesNo);
-                if(res==MessageBoxResult.Yes)
-                {
-                    AutoUpdater.UpdaterMain.BeginDownload();
-                    MessageBox.Show("Download started!");
-                }
-            }
+            /// Show file transfer request and ask for permission here
+            Main.ResponseToTransferRequest(true);
         }
         private void Window_Closed(object sender, EventArgs e)
         {
             UIUpdate_Start = false;
             Environment.Exit(0);
             Thread.Sleep(10);
+        }
+        private async void ScanNetwork()
+        {
+           // NetworkScanner.BeginSearch();
+            await Task.Run(() => PartialScan(2, 100));
+        }
+        private void PartialScan(int startx, int endx)
+        {
+            for (int i = startx; i < endx; i++)
+            {
+                try
+                {
+                    PingADevice(i);
+                    Debug.WriteLine("pinged: " + i);
+                }
+                catch
+                {
+                    Debug.WriteLine("failed: " + i);
+
+                }
+            }
+        }
+        private void PingADevice(int ipend)
+        {
+            var dummyDevice = new NetworkScanner(ipend);
+            dummyDevice.OnScanCompleted += DummyDevice_OnScanCompleted;
+            dummyDevice.ScanAvailableDevices();
+        }
+        private void DummyDevice_OnScanCompleted(string IPandHostName)
+        {
+            if (!AvailableDeviceList.Contains(IPandHostName))
+                AvailableDeviceList.Add(IPandHostName);
         }
 
         private void UI_Init()
