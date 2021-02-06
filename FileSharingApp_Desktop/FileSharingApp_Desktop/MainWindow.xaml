@@ -8,7 +8,7 @@
         Loaded="Window_Loaded"
         Closed="Window_Closed"
         Title="Wifi File Transfer " 
-        Height="450" 
+        Height="600" 
         Width="800"
         ResizeMode="CanMinimize" >
    
@@ -16,9 +16,9 @@
     <Grid Background="#353536" >
         <Grid.RowDefinitions>
             <RowDefinition Height = "1*" />
+            <RowDefinition Height = "2*" />
             <RowDefinition Height = "3*" />
-            <RowDefinition Height = "3*" />
-            <RowDefinition Height = "3*" />
+            <RowDefinition Height = "2*" />
         </Grid.RowDefinitions>
 
         <!-- Information bar  -->
@@ -95,6 +95,8 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height = "*" />
                             <RowDefinition Height = "*" />
+                            <RowDefinition Height = "*" />
+                            <RowDefinition Height = "*" />
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
@@ -108,7 +110,20 @@
                             <TextBlock x:Name="txt_FileSize" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
 
                         </StackPanel>
-
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" >
+                            <Label x:Name="lbl_HostName" FontSize="14" Content="Host Name  : " VerticalAlignment="Center" Foreground="LightBlue" />
+                            <TextBlock x:Name="txt_HostName" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
+                        </StackPanel>
+                        <Grid Grid.Row="3" Grid.Column="1">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label FontSize="14" Content="Save Path: "  Grid.Column="0" VerticalAlignment="Center" Foreground="LightBlue" />
+                            <Label x:Name="lbl_SavePath" VerticalAlignment="Center" Grid.Column="1"  Content="" Foreground="CornflowerBlue" />
+                            <Button x:Name="btn_SelectFolder" Click="btn_SelectFolder_Click" Content="..." Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
+                        </Grid>
                     </Grid>
 
                 </Border>
@@ -116,32 +131,18 @@
                 <Border  Grid.Column = "3" Padding = "5">
                     <Grid >
                         <Grid.RowDefinitions>
-                            <RowDefinition Height = "*" />
-                            <RowDefinition Height = "*" />
+                            <RowDefinition Height = "5*" />
                             <RowDefinition Height = "*" />
                         </Grid.RowDefinitions>
-
-                        <Label x:Name="lbl_code" Width="50" Margin="-269,0,0,0"  FontSize="14" Content="Code : " VerticalAlignment="Center" Foreground="LightBlue" />
-                        <!--<Border Grid.Row="0" Padding="2" Height="50"  VerticalAlignment="Center" HorizontalAlignment="Center">-->
-
-                            <TextBox x:Name="txt_IpCode" VerticalAlignment="Center" Width="102" Height="30" TextAlignment="Center" HorizontalAlignment="Center" Text=" CODE" FontSize="20" BorderThickness="2" FontWeight="Bold" Background="Transparent" Foreground="CornflowerBlue" TextChanged="txt_IpCode_TextChanged" />
-
-                        <!--</Border>-->
-
-                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" >
-                            <Label x:Name="lbl_HostName" FontSize="14" Content="Host Name  : " VerticalAlignment="Center" Foreground="LightBlue" />
-                            <TextBlock x:Name="txt_HostName" VerticalAlignment="Center" Text="" Foreground="CornflowerBlue" />
-
-                        </StackPanel>
-
-                        <Border Grid.Row="2" Padding="1">
-                            <Grid>
-                                <Button x:Name="btn_Confirm" Width="250"  Content="Confirm" FontSize="16" Click="btn_Confirm_Click" />
-
-                            </Grid>
-
-                        </Border>
-
+                        <ListBox x:Name="list_Clients" Grid.Row="0" SelectionChanged="list_Clients_SelectionChanged" />
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions >
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="txt_ServerIP" Grid.Column="0" Text="192.168.1.56"  FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <Button x:Name="btn_StartSending" Click="btn_StartSending_Click" Grid.Column="1" Content="SEND" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
                     </Grid>
 
                 </Border>

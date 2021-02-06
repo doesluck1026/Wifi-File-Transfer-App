@@ -55,6 +55,36 @@ namespace FileSharingApp_Desktop
             InitializeComponent();
 
         }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            UI_Init();
+
+            res_man = new ResourceManager("FileSharingApp_Desktop.Resource.resource", Assembly.GetExecutingAssembly());
+            cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
+
+            NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
+            Debug.WriteLine("Save file path: " + Main.FileSaveURL);
+            Main.OnClientRequested += Main_OnClientRequested;
+            Main.StartServer();
+            Dispatcher.Invoke(() =>
+            {
+                lbl_HostName.Content = DeviceIP;
+            });
+            if (!isScanned)
+            {
+                ScanNetwork();
+                isScanned = true;
+            }
+
+            UIUpdate_thread = new Thread(UpdateUI);
+            UIUpdate_thread.IsBackground = true;
+            UIUpdate_Start = true;
+            UIUpdate_thread.Start();
+
+            combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
+            switch_language();
+        }
         private void UpdateUI()
         {
             Stopwatch UpdateWatch = new Stopwatch();
@@ -64,7 +94,17 @@ namespace FileSharingApp_Desktop
                 UpdateWatch.Restart();
                 Dispatcher.Invoke(() =>
                 {
-                    
+                    list_Clients.ItemsSource = AvailableDeviceList.ToArray();
+                    lbl_SavePath.Content = Main.FileSaveURL;
+                    pbStatus.Value = Main.TransferMetrics.Progress;
+                    txt_FileName.Text= Main.TransferMetrics.CurrentFile.FileName;
+                    txt_FileSize.Text = Main.TransferMetrics.CurrentFile.FileSize.ToString() + " " + Main.TransferMetrics.CurrentFile.SizeUnit.ToString();
+                    txt_PassedTime.Text= ((int)Main.TransferMetrics.TotalElapsedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.TotalElapsedTime % 3600) / 60).ToString("00") + ":" +
+                    (((int)Main.TransferMetrics.TotalElapsedTime % 3600) % 60).ToString("00");
+                    txt_EstimatedTime.Text = ((int)Main.TransferMetrics.EstimatedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.EstimatedTime % 3600) / 60).ToString("00") + ":" +
+                    (((int)Main.TransferMetrics.EstimatedTime % 3600) % 60).ToString("00");
+                    txt_TransferSpeed.Text = Main.TransferMetrics.TransferSpeed.ToString("0.00") + " MB/s";
+
                 });
 
                 while (UpdateWatch.ElapsedMilliseconds < UIUpdate_Period)
@@ -84,6 +124,11 @@ namespace FileSharingApp_Desktop
         {
             
         }
+        private void btn_SelectFolder_Click(object sender, RoutedEventArgs e)
+        {
+            Main.FileSaveURL = GetFolder();
+        }
+
         /// <summary>
         /// The address of the file to be processed is selected
         /// </summary>
@@ -127,47 +172,12 @@ namespace FileSharingApp_Desktop
             dlg.ShowPlacesList = true;
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                var folder = dlg.FileName;
+                var folder = dlg.FileName+"/";
                 System.Diagnostics.Debug.WriteLine("Selected Folder: " + folder);
                 return folder;
             }
             return null;
-        }
-        private void btn_Confirm_Click(object sender, RoutedEventArgs e)
-        {
-           
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-           
-            UI_Init();
-
-            res_man = new ResourceManager("FileSharingApp_Desktop.Resource.resource", Assembly.GetExecutingAssembly());
-            cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
-
-            NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
-            Debug.WriteLine("Save file path: " + Main.FileSaveURL);
-            Main.OnClientRequested += Main_OnClientRequested;
-            Main.StartServer();
-            Dispatcher.Invoke(() =>
-            {
-                lbl_HostName.Content = DeviceIP;
-            });
-            if (!isScanned)
-            {
-                ScanNetwork();
-                isScanned = true;
-            }
-
-            UIUpdate_thread = new Thread(UpdateUI);
-            UIUpdate_thread.IsBackground = true;
-            UIUpdate_Start = true;
-            UIUpdate_thread.Start();
-
-            combo_LanguageSelection.SelectedItem = combo_LanguageSelection.Items.GetItemAt(0);
-            switch_language();
-        }
+        }        
         private void Main_OnClientRequested(string totalTransferSize)
         {
             /// Show file transfer request and ask for permission here
@@ -222,7 +232,6 @@ namespace FileSharingApp_Desktop
             {
                 btn_SendFile.Content = res_man.GetString("sSendFile", cul);
                 btn_ReceiveFile.Content = res_man.GetString("sReceiveFile", cul);
-                btn_Confirm.Content = res_man.GetString("sConfirmation", cul);
 
                 lbl_FilePath.Content = res_man.GetString("sFilePath", cul);
                 lbl_FileName.Content = res_man.GetString("sFileName", cul);
@@ -232,9 +241,6 @@ namespace FileSharingApp_Desktop
                 lbl_TransferSpeed.Content = res_man.GetString("sSpeed", cul);
                 lbl_PassedTime.Content = res_man.GetString("sTimePassed", cul);
                 lbl_EstimatedTime.Content = res_man.GetString("sEstimatedTime", cul);
-                lbl_code.Content = res_man.GetString("sCode", cul);
-
-                txt_IpCode.ToolTip = res_man.GetString("sstCode", cul);
 
             }
         }
@@ -253,14 +259,21 @@ namespace FileSharingApp_Desktop
             }
             switch_language();
         }
-        /// <summary>
-        /// This function is used to prevent the user to type more than 6 characters
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txt_IpCode_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void btn_StartSending_Click(object sender, RoutedEventArgs e)
         {
-            
+            bool didDeviceAccept = Main.ConnectToTargetDevice(txt_ServerIP.Text);
+            Debug.WriteLine("Receiver Response: " + didDeviceAccept);
+            if (didDeviceAccept)
+            {
+                Main.BeginSendingFiles();
+                /// open the third page here
+            }
+        }
+
+        private void list_Clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txt_ServerIP.Text=list_Clients.SelectedItem.ToString();
         }
     }
 }
