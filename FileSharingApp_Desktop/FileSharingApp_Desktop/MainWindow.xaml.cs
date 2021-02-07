@@ -29,21 +29,11 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        private string FileURL = "";
-        private FileOperations.TransferMode TransferMode;
-        private uint prev_timePassed = 0;
-        private double _transferSpeed = 0;
-        private uint mb = 1024 * 1024;
-        private uint ETA = 0;
         private Thread UIUpdate_thread;
         private bool UIUpdate_Start = false;
         private int UIUpdate_Period = 100;      // in ms
-        private Brush CompletedStep = Brushes.LimeGreen;
-        private Brush CurrentStep = Brushes.Orange;
-        private Brush UnCompletedStep = Brushes.LightBlue;
         ResourceManager res_man;    // declare Resource manager to access to specific cultureinfo
         CultureInfo cul;            //declare culture info
-        BitmapImage btm_checked = new BitmapImage(new Uri(@"/Icons/checked.png", UriKind.Relative));
 
 
         private string DeviceIP;
@@ -224,6 +214,20 @@ namespace FileSharingApp_Desktop
 
         private void UI_Init()
         {
+            try
+            {
+                var paramBag = new ParametersBag();
+                paramBag.Load(" C:\\Users\\CDS_Software02\\Desktop/Parameters.dat");
+                Debug.WriteLine("path: " + paramBag.SavingPath);
+                Main.FileSaveURL = paramBag.SavingPath;
+            }
+            catch
+            {
+                Debug.WriteLine("Failed to Load parameters");
+                var paramBag = new ParametersBag();
+                paramBag.SavingPath="C:\\Users\\CDS_Software02\\Desktop/";
+                paramBag.Save(" C:\\Users\\CDS_Software02\\Desktop/Parameters.dat");
+            }
         }
 
         private void switch_language()
