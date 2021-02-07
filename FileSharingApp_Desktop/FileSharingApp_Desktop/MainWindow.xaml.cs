@@ -54,6 +54,7 @@ namespace FileSharingApp_Desktop
             cul = CultureInfo.CreateSpecificCulture("tr");        //create culture for english
 
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
+            NetworkScanner.PublishDevice();
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
             Main.OnClientRequested += Main_OnClientRequested;
             Main.StartServer();
@@ -179,10 +180,11 @@ namespace FileSharingApp_Desktop
             Environment.Exit(0);
             Thread.Sleep(10);
         }
-        private async void ScanNetwork()
+        private void ScanNetwork()
         {
+            NetworkScanner.ScanAvailableDevices();
            // NetworkScanner.BeginSearch();
-            await Task.Run(() => PartialScan(2, 100));
+           // await Task.Run(() => PartialScan(2, 100));
         }
         private void PartialScan(int startx, int endx)
         {
@@ -202,9 +204,9 @@ namespace FileSharingApp_Desktop
         }
         private void PingADevice(int ipend)
         {
-            var dummyDevice = new NetworkScanner(ipend);
-            dummyDevice.OnScanCompleted += DummyDevice_OnScanCompleted;
-            dummyDevice.ScanAvailableDevices();
+            //var dummyDevice = new NetworkScanner(ipend);
+            //dummyDevice.OnScanCompleted += DummyDevice_OnScanCompleted;
+            //dummyDevice.ScanAvailableDevices();
         }
         private void DummyDevice_OnScanCompleted(string IPandHostName)
         {

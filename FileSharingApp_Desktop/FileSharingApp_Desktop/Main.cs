@@ -17,7 +17,7 @@ public class Main
 
     private static readonly byte StartByte = (byte)'J';
     private static readonly int BufferSize = 64 * 1024 - 1;
-    private static readonly int Port = 32001;
+    private static readonly int Port = 42009;
 
     #endregion
 

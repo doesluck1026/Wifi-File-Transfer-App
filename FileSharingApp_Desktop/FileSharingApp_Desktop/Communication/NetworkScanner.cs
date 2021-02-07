@@ -4,29 +4,92 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Rssdp;
 
 class NetworkScanner
 {
     public delegate void ScanCompleteDelegate(string IPandHostName);
     public event ScanCompleteDelegate OnScanCompleted;
 
-    private int IPend;
-    public NetworkScanner(int ipend)
+    private static string IP;
+    private static readonly int PublishPort=42019;
+    private static Server publisherServer;
+    private static Client client;
+    public static void ScanAvailableDevices()
     {
-        IPend = ipend;
+        Thread.Sleep(500);
+        string deviceIP, deviceHostname;
+        GetDeviceAddress(out deviceIP,out deviceHostname);
+        char[] splitter = new char[] { '.' };
+        var ipStack = deviceIP.Split(splitter);
+        string ipHeader = "";
+        for(int i=0;i<3;i++)
+        {
+            ipHeader += ipStack[i] + ".";
+        }
+        Debug.WriteLine("ipHeader=" + ipHeader);
+        for (int i=20;i<50;i++)
+        {
+            try
+            {
+                Debug.WriteLine("Pinging: " + ipHeader + i.ToString());
+                GetDeviceData(ipHeader + i.ToString());
+            }
+            catch
+            {
+
+            }
+        }
     }
-    public void ScanAvailableDevices()
+    private static void GetDeviceData(string IP)
     {
-        string gate_ip = "192.168.1.1";
-        string[] array = gate_ip.Split('.');
-        string ping_var = array[0] + "." + array[1] + "." + array[2] + "." + IPend;
-        //if(ping_var!= thisIP)
-        Ping(ping_var, 1, 100);
-        //OnScanCompleted(DeviceList.ToArray());
+        client = new Client(port: PublishPort,ip: IP);
+        var t=Task.Run(()=>
+        {
+            client.ConnectToServer();
+           
+        });
+        bool isConnected = t.Wait(TimeSpan.FromMilliseconds(1000));
+        if(!isConnected)
+        {
+
+            Debug.WriteLine("Connection Failed on: " + IP);
+        }
+        else
+        {
+            var data = client.GetData();
+            if (data == null)
+            {
+                Debug.WriteLine("Data was null: " + IP);
+                return;
+            }
+            Debug.WriteLine(Encoding.ASCII.GetString(data));
+            client.SendDataServer(Encoding.ASCII.GetBytes("Gotcha"));
+            client.DisconnectFromServer();
+        }
     }
+    public static void PublishDevice()
+    {
+        publisherServer = new Server(port: PublishPort);
+        publisherServer.SetupServer();
+        publisherServer.StartListener();
+        publisherServer.OnClientConnected += PublisherServer_OnClientConnected;
+    }
+
+    private static void PublisherServer_OnClientConnected(string clientIP)
+    {
+        Debug.WriteLine("Client IP: " + clientIP);
+        publisherServer.SendDataToClient(Encoding.ASCII.GetBytes("Selam Arkadaslar"));
+
+        publisherServer.GetData();
+
+        publisherServer.CloseServer();
+        PublishDevice();
+    }
+
     public static void GetDeviceAddress(out string deviceIP, out string deviceHostname)
     {
         IPAddress localAddr = null;
@@ -40,42 +103,7 @@ class NetworkScanner
         }
         deviceIP = localAddr.ToString();
         deviceHostname = host.HostName;
-    }
-
-    private void Ping(string host, int attempts, int timeout)
-    {
-        for (int i = 0; i < attempts; i++)
-        {
-            new Thread(delegate ()
-            {
-                try
-                {
-                    System.Net.NetworkInformation.Ping ping = new System.Net.NetworkInformation.Ping();
-                    ping.PingCompleted += new PingCompletedEventHandler(PingCompleted);
-                    ping.SendAsync(host, timeout, host);
-                }
-                catch
-                {
-                    // Do nothing and let it try again until the attempts are exausted.
-                    // Exceptions are thrown for normal ping failurs like address lookup
-                    // failed.  For this reason we are supressing errors.
-                }
-            }).Start();
-        }
-    }
-    private void PingCompleted(object sender, PingCompletedEventArgs e)
-    {
-        string ip = (string)e.UserState;
-        if (e.Reply != null && e.Reply.Status == IPStatus.Success)
-        {
-            string hostname = GetHostName(ip);
-            Debug.WriteLine("found device: " + ip);
-            OnScanCompleted(ip);
-        }
-        else
-        {
-            // MessageBox.Show(e.Reply.Status.ToString());
-        }
+        IP = localAddr.ToString();
     }
     public string GetHostName(string ipAddress)
     {
@@ -94,40 +122,6 @@ class NetworkScanner
 
         return null;
     }
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="ipAddress"></param>
-    /// <returns></returns>
-    public string GetMacAddress(string ipAddress)
-    {
-        string macAddress = string.Empty;
-        System.Diagnostics.Process Process = new System.Diagnostics.Process();
-        Process.StartInfo.FileName = "arp";
-        Process.StartInfo.Arguments = "-a " + ipAddress;
-        Process.StartInfo.UseShellExecute = false;
-        Process.StartInfo.RedirectStandardOutput = true;
-        Process.StartInfo.CreateNoWindow = true;
-        Process.Start();
-        string strOutput = Process.StandardOutput.ReadToEnd();
-        string[] substrings = strOutput.Split('-');
-        if (substrings.Length >= 8)
-        {
-            macAddress = substrings[3].Substring(Math.Max(0, substrings[3].Length - 2))
-                     + "-" + substrings[4] + "-" + substrings[5] + "-" + substrings[6]
-                     + "-" + substrings[7] + "-"
-                     + substrings[8].Substring(0, 2);
-            return macAddress;
-        }
-        else
-        {
-            return "OWN Machine";
-        }
-    }
-    /// <summary>
-    /// Gets current device's hostname.
-    /// </summary>
-    /// <returns>ip as string</returns>
     public string GetDeviceHostName()
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
