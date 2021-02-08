@@ -31,7 +31,7 @@ class Client
         try
         {
             client = new TcpClient();
-            client.NoDelay = true;
+            //client.NoDelay = true;
             Stopwatch stp = Stopwatch.StartNew();
             if (timeout > 0)
             {

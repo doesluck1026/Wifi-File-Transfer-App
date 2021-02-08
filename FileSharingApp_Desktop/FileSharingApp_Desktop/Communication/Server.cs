@@ -86,7 +86,7 @@ class Server
         if (listener.Server.LocalEndPoint == null)
             return;
         Client = listener.EndAcceptTcpClient(ar);
-        Client.NoDelay = true;
+       // Client.NoDelay = true;
         IsCLientConnected = true;
         IPEndPoint endPoint = (IPEndPoint)Client.Client.RemoteEndPoint;
         var ipAddress = endPoint.Address;
