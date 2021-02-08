@@ -2,61 +2,68 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
-using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Rssdp;
 
 class NetworkScanner
 {
     public delegate void ScanCompleteDelegate(string IPandHostName);
     public event ScanCompleteDelegate OnScanCompleted;
 
-    private static string IP;
-    private static readonly int PublishPort=42019;
+    private static string DeviceIP;
+    public static string DeviceName;
+    private static readonly int PublishPort = 42019;
     private static Server publisherServer;
     private static Client client;
+    public static List<string> DeviceNames = new List<string>();
+    public static List<string> DeviceIPs = new List<string>();
     public static void ScanAvailableDevices()
     {
         Thread.Sleep(500);
         string deviceIP, deviceHostname;
-        GetDeviceAddress(out deviceIP,out deviceHostname);
+        GetDeviceAddress(out deviceIP, out deviceHostname);
+        DeviceIP = deviceIP;
+        DeviceNames.Clear();
+        DeviceIPs.Clear();
         char[] splitter = new char[] { '.' };
         var ipStack = deviceIP.Split(splitter);
         string ipHeader = "";
-        for(int i=0;i<3;i++)
+        for (int i = 0; i < 3; i++)
         {
             ipHeader += ipStack[i] + ".";
         }
-        Debug.WriteLine("ipHeader=" + ipHeader);
-        for (int i=20;i<50;i++)
+        IPHolder holder = new IPHolder(2,256,ipHeader);
+        Thread t = new Thread(new ParameterizedThreadStart(ParallelScan));
+        t.Start(holder);
+    }
+
+    private static void ParallelScan(object sender)
+    {
+        Stopwatch stp = Stopwatch.StartNew();
+        IPHolder holder = (IPHolder)sender;
+        for (int i = holder.StartIP; i < holder.StopIP; i++)
         {
             try
             {
-                Debug.WriteLine("Pinging: " + ipHeader + i.ToString());
-                GetDeviceData(ipHeader + i.ToString());
+                //Debug.WriteLine("Pinging: " + holder.IpHeader + i.ToString());
+                GetDeviceData(holder.IpHeader + i.ToString());
             }
             catch
             {
 
             }
         }
+        Debug.WriteLine("scanning time: " + stp.Elapsed.TotalSeconds + " s");
     }
     private static void GetDeviceData(string IP)
     {
-        client = new Client(port: PublishPort,ip: IP);
-        var t=Task.Run(()=>
+        //Stopwatch stp = Stopwatch.StartNew();
+        client = new Client(port: PublishPort, ip: IP);
+        string clientIP = client.ConnectToServer(25);
+        if (string.IsNullOrEmpty(clientIP))
         {
-            client.ConnectToServer();
-           
-        });
-        bool isConnected = t.Wait(TimeSpan.FromMilliseconds(1000));
-        if(!isConnected)
-        {
-
-            Debug.WriteLine("Connection Failed on: " + IP);
+            //Debug.WriteLine("Connection Failed on: " + IP);
         }
         else
         {
@@ -66,7 +73,14 @@ class NetworkScanner
                 Debug.WriteLine("Data was null: " + IP);
                 return;
             }
-            Debug.WriteLine(Encoding.ASCII.GetString(data));
+            string msg = Encoding.ASCII.GetString(data);
+            char[] splitter = new char[] { '&' };
+            string[] msgParts = msg.Split(splitter);
+            string ip = msgParts[0].Substring(3);
+            string deviceName = msgParts[1].Substring(11);
+            DeviceNames.Add(deviceName);
+            DeviceIPs.Add(ip);
+            Debug.WriteLine("data: "+ msg);
             client.SendDataServer(Encoding.ASCII.GetBytes("Gotcha"));
             client.DisconnectFromServer();
         }
@@ -82,7 +96,7 @@ class NetworkScanner
     private static void PublisherServer_OnClientConnected(string clientIP)
     {
         Debug.WriteLine("Client IP: " + clientIP);
-        publisherServer.SendDataToClient(Encoding.ASCII.GetBytes("Selam Arkadaslar"));
+        publisherServer.SendDataToClient(Encoding.ASCII.GetBytes("IP:"+ DeviceIP+"&DeviceName:"+DeviceName));
 
         publisherServer.GetData();
 
@@ -103,7 +117,7 @@ class NetworkScanner
         }
         deviceIP = localAddr.ToString();
         deviceHostname = host.HostName;
-        IP = localAddr.ToString();
+        DeviceIP = localAddr.ToString();
     }
     public string GetHostName(string ipAddress)
     {
@@ -126,5 +140,18 @@ class NetworkScanner
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
         return host.HostName;
+    }
+
+    private class IPHolder
+    {
+        public int StartIP;
+        public int StopIP;
+        public string IpHeader;
+        public IPHolder(int startIP,int stopIP,string ipHeader)
+        {
+            this.StartIP = startIP;
+            this.StopIP = stopIP;
+            this.IpHeader = ipHeader;
+        }
     }
 }

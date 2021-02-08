@@ -39,6 +39,7 @@ namespace FileSharingApp_Desktop
         private string DeviceIP;
         private string DeviceHostName;
         private bool isScanned = false;
+        private string TargetDeviceIP;
         public List<string> AvailableDeviceList = new List<string>();
         public MainWindow()
         {
@@ -58,10 +59,6 @@ namespace FileSharingApp_Desktop
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
             Main.OnClientRequested += Main_OnClientRequested;
             Main.StartServer();
-            Dispatcher.Invoke(() =>
-            {
-                lbl_HostName.Content = DeviceIP;
-            });
             if (!isScanned)
             {
                 ScanNetwork();
@@ -85,7 +82,7 @@ namespace FileSharingApp_Desktop
                 UpdateWatch.Restart();
                 Dispatcher.Invoke(() =>
                 {
-                    list_Clients.ItemsSource = AvailableDeviceList.ToArray();
+                    list_Clients.ItemsSource = NetworkScanner.DeviceNames.ToArray();
                     lbl_SavePath.Content = Main.FileSaveURL;
                     pbStatus.Value = Main.TransferMetrics.Progress;
                     txt_FileName.Text= Main.TransferMetrics.CurrentFile.FileName;
@@ -222,13 +219,15 @@ namespace FileSharingApp_Desktop
                 paramBag.Load(" C:\\Users\\CDS_Software02\\Desktop/Parameters.dat");
                 Debug.WriteLine("path: " + paramBag.SavingPath);
                 Main.FileSaveURL = paramBag.SavingPath;
+                NetworkScanner.DeviceName = paramBag.DeviceName;
             }
             catch
             {
                 Debug.WriteLine("Failed to Load parameters");
                 var paramBag = new ParametersBag();
-                paramBag.SavingPath="C:\\Users\\CDS_Software02\\Desktop/";
-                paramBag.Save(" C:\\Users\\CDS_Software02\\Desktop/Parameters.dat");
+                paramBag.SavingPath="C:\\Users\\CDS_Software02\\Desktop\\";
+                paramBag.DeviceName = "Yahyanin ki";
+                paramBag.Save(" C:\\Users\\CDS_Software02\\Desktop\\Parameters.dat");
             }
         }
 
@@ -268,7 +267,7 @@ namespace FileSharingApp_Desktop
 
         private void btn_StartSending_Click(object sender, RoutedEventArgs e)
         {
-            bool didDeviceAccept = Main.ConnectToTargetDevice(txt_ServerIP.Text);
+            bool didDeviceAccept = Main.ConnectToTargetDevice(TargetDeviceIP);
             Debug.WriteLine("Receiver Response: " + didDeviceAccept);
             if (didDeviceAccept)
             {
@@ -279,7 +278,8 @@ namespace FileSharingApp_Desktop
 
         private void list_Clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            txt_ServerIP.Text=list_Clients.SelectedItem.ToString();
+            TargetDeviceIP= NetworkScanner.DeviceIPs[list_Clients.SelectedIndex];
+            txt_ServerIP.Text = TargetDeviceIP;//list_Clients.SelectedItem.ToString();
         }
     }
 }

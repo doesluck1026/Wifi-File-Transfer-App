@@ -80,13 +80,13 @@ class Server
         {
         }
     }
-    public void DoAcceptTcpClientCallback(IAsyncResult ar)
+    private void DoAcceptTcpClientCallback(IAsyncResult ar)
     {
-
         TcpListener listener = (TcpListener)ar.AsyncState;
         if (listener.Server.LocalEndPoint == null)
             return;
         Client = listener.EndAcceptTcpClient(ar);
+        Client.NoDelay = true;
         IsCLientConnected = true;
         IPEndPoint endPoint = (IPEndPoint)Client.Client.RemoteEndPoint;
         var ipAddress = endPoint.Address;
@@ -118,7 +118,6 @@ class Server
     }
     public bool SendDataToClient(byte[] data)
     {
-        Debug.WriteLine("Function:: " + data[0] + " len: " + data.Length);
         bool success = false;
         byte[] headerBytes = PrepareDataHeader(data.Length);
         int DataLength = headerBytes.Length + data.Length;

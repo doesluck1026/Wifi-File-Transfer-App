@@ -26,23 +26,47 @@ class Client
     /// Connects to server with specified IP.
     /// </summary>
     /// <returns>Hostname of server</returns>
-    public string ConnectToServer()
+    public string ConnectToServer(int timeout=0)
     {
         try
         {
             client = new TcpClient();
-            client.Connect(IP, Port);
+            client.NoDelay = true;
+            Stopwatch stp = Stopwatch.StartNew();
+            if (timeout > 0)
+            {
+                var result = client.BeginConnect(IP, Port, null, null);
+                var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromMilliseconds(timeout));
+                if (!success)
+                {
+                    //client.EndConnect(result);
+                    client.Close();
+                    throw new Exception("Failed to connect.");
+                }
+                else
+                    client.EndConnect(result);
+            }
+            else
+                client.Connect(IP, Port);
+            stp.Restart();
             IsConnectedToServer = true;
             client.SendBufferSize = BufferSize;
             client.ReceiveBufferSize = BufferSize;
             Debug.WriteLine("Succesfully Connected to: " + IP + " on Port: " + Port);
-            var host = Dns.GetHostEntry(IP);
-            return host.HostName;
+            if(timeout==0)
+            {
+                var host = Dns.GetHostEntry(IP);
+                return host.HostName;
+            }
+            else
+            {
+                return IP;
+            }
         }
 
         catch (Exception e)
         {
-            Debug.WriteLine("Connection Failed: " + e.ToString());
+            //Debug.WriteLine("Connection Failed: " + e.ToString());
             return "";
         }
     }

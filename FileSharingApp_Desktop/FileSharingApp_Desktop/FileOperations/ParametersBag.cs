@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 class ParametersBag
 {
     public string SavingPath;
+    public string DeviceName;
     public void Save(string url)
     {
         FileStream writerFileStream = new FileStream(url, FileMode.Create, FileAccess.Write);
@@ -25,6 +26,7 @@ class ParametersBag
         BinaryFormatter formatter = new BinaryFormatter();
         bagFile = (ParametersBag)formatter.Deserialize(readerFileStream);
         this.SavingPath = bagFile.SavingPath;
+        this.DeviceName = bagFile.DeviceName;
         // Close the readerFileStream when we are done
         readerFileStream.Close();
     }
