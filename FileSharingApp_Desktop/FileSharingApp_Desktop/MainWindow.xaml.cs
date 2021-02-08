@@ -166,7 +166,7 @@ namespace FileSharingApp_Desktop
             }
             return null;
         }        
-        private void Main_OnClientRequested(string totalTransferSize)
+        private void Main_OnClientRequested(string totalTransferSize,string senderDevice)
         {
             /// Show file transfer request and ask for permission here
             Main.ResponseToTransferRequest(true);
@@ -267,7 +267,7 @@ namespace FileSharingApp_Desktop
 
         private void btn_StartSending_Click(object sender, RoutedEventArgs e)
         {
-            bool didDeviceAccept = Main.ConnectToTargetDevice(TargetDeviceIP);
+            bool didDeviceAccept = Main.ConnectToTargetDevice(txt_ServerIP.Text);
             Debug.WriteLine("Receiver Response: " + didDeviceAccept);
             if (didDeviceAccept)
             {

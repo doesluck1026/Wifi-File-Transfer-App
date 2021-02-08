@@ -27,10 +27,10 @@ public class Main
     /// </summary>
     /// <param name="files">files to be sent by client</param>
     /// <returns></returns>
-    public delegate void ClientRequestDelegate(string totalTransferSize);
+    public delegate void ClientRequestDelegate(string totalTransferSize, string senderDevice);
     public static event ClientRequestDelegate OnClientRequested;
 
-    public static string FileSaveURL = "";
+    public static string FileSaveURL = "/storage/emulated/0/Download/";
     public static string ServerIP;
     public static string ClientIP;
     public static Metrics TransferMetrics
@@ -101,7 +101,7 @@ public class Main
     #region Enums and structures definitions
     public enum Functions
     {
-        QueryTransfer,              /// ||Number of files || Size of All Data (8 bytes) || length of folder name (zero : if no folder given) || name of folder ==> AcceptFiles or RejectFiles as response
+        QueryTransfer,              /// || Number of files || Size of All Data (8 bytes) || length of deviceName(1 byte) || deviceNameBytes || length of folder name (zero : if no folder given) || name of folder ==> AcceptFiles or RejectFiles as response
         StartofFileTransfer,        /// || length of file name || name || size of file (8 bytes) ==> true when receiver is ready as response
         EndofFileTransfer,          /// || 4 bytes (spare) ==> no response expected   ( receiver should save the file)
         TransferMode,               /// || fileBytes
@@ -160,13 +160,15 @@ public class Main
         {
             int numberOfFiles = BitConverter.ToInt32(receivedData, 1);
             long transferSize = BitConverter.ToInt64(receivedData, 5);
+            int nameLen = receivedData[13];
+            string senderDevice = Encoding.ASCII.GetString(receivedData, 14, nameLen);
             FilePaths = new string[numberOfFiles];
             if (File == null)
                 File = new FileOperations();
             File.CalculateFileSize(transferSize);
             string fileSizeString = File.FileSize.ToString("0.00") + " " + File.FileSizeUnit.ToString();
-            Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString);
-            OnClientRequested(fileSizeString);
+            Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString + " device Name: " + senderDevice);
+            OnClientRequested(fileSizeString, senderDevice);
             _transferMetrics.TotalDataSizeAsBytes = transferSize;
         }
     }
@@ -324,12 +326,15 @@ public class Main
     private static void SendFirstFrame()
     {
         long totalTransferSize = GetTransferSize();
-        byte[] data = new byte[13];
+        int lenName = NetworkScanner.DeviceName.Length;
+        byte[] data = new byte[15 + lenName];
         data[0] = (byte)Functions.QueryTransfer;
         byte[] numFilesBytes = BitConverter.GetBytes(FilePaths.Length);
         numFilesBytes.CopyTo(data, 1);
         byte[] sizeBytes = BitConverter.GetBytes(totalTransferSize);
         sizeBytes.CopyTo(data, 5);
+        data[13] = (byte)lenName;
+        Encoding.ASCII.GetBytes(NetworkScanner.DeviceName).CopyTo(data, 14);
         client.SendDataServer(data);
         Debug.WriteLine("Sent First Frame:" + FilePaths.Length);
     }
