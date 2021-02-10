@@ -86,7 +86,7 @@ namespace FileSharingApp_Desktop
                     lbl_SavePath.Content = Main.FileSaveURL;
                     pbStatus.Value = Main.TransferMetrics.Progress;
                     txt_FileName.Text= Main.TransferMetrics.CurrentFile.FileName;
-                    txt_FileSize.Text = Main.TransferMetrics.CurrentFile.FileSize.ToString() + " " + Main.TransferMetrics.CurrentFile.SizeUnit.ToString();
+                    txt_FileSize.Text = Main.TransferMetrics.CurrentFile.FileSize.ToString("0.00") + " " + Main.TransferMetrics.CurrentFile.SizeUnit.ToString();
                     txt_PassedTime.Text= ((int)Main.TransferMetrics.TotalElapsedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.TotalElapsedTime % 3600) / 60).ToString("00") + ":" +
                     (((int)Main.TransferMetrics.TotalElapsedTime % 3600) % 60).ToString("00");
                     txt_EstimatedTime.Text = ((int)Main.TransferMetrics.EstimatedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.EstimatedTime % 3600) / 60).ToString("00") + ":" +
