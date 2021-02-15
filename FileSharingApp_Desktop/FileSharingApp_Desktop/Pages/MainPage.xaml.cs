@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,29 @@ namespace FileSharingApp_Desktop.Pages
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Btn_SelectFiles_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_ReceiveFiles_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Border_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+               for(int i=0;i<files.Length;i++)
+                {
+                    Debug.WriteLine("file " + i + " : " + files[i]);
+                }
+            }
         }
     }
 }
