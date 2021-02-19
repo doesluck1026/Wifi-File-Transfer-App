@@ -21,14 +21,63 @@ namespace FileSharingApp_Desktop.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        private string DeviceIP;
+        private string DeviceHostName;
+        private bool isScanned = false;
         public MainPage()
         {
             InitializeComponent();
+            Main.OnClientRequested += Main_OnClientRequested;
+            Main.StartServer();
         }
-
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Parameters.Init();
+            NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
+            NetworkScanner.PublishDevice();
+            Main.FileSaveURL = GetSaveFilePath();
+            Debug.WriteLine("Save file path: " + Main.FileSaveURL);
+            Dispatcher.BeginInvokeOnMainThread(() =>
+            {
+                lbl_IP.Text = DeviceIP;
+                lbl_HostName.Text = Parameters.DeviceName;
+            });
+            if (!isScanned)
+            {
+                ScanNetwork();
+                isScanned = true;
+            }
+        }
+        private void Main_OnClientRequested(string totalTransferSize, string deviceName)
+        {
+            /// Show file transfer request and ask for permission here
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                Navigation.PushModalAsync(new TransferPermissionPage(totalTransferSize, deviceName));
+            });
+        }
+        /// <summary>
+        /// The address of the file to be processed is selected
+        /// </summary>
+        /// <returns>the address of the file in memory</returns>
+        private async void SelectFile()
+        {
+            var pickResult = await FilePicker.PickMultipleAsync();
+            if (pickResult != null)
+            {
+                var results = pickResult.ToArray();
+                string[] filepaths = new string[results.Length];
+                for (int i = 0; i < filepaths.Length; i++)
+                {
+                    filepaths[i] = results[i].FullPath;
+                }
+                Main.SetFilePaths(filepaths);
+                await Navigation.PushModalAsync(new SendingPage());
+            }
+        }
         private void Btn_SelectFiles_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new DevicesPage());
+            SelectFile();
         }
         private void Grid_Drop(object sender, DragEventArgs e)
         {
@@ -42,5 +91,14 @@ namespace FileSharingApp_Desktop.Pages
                 }
             }
         }
+        private void ScanNetwork()
+        {
+            NetworkScanner.ScanAvailableDevices();
+        }
+        private string GetSaveFilePath()
+        {
+           
+        }
+
     }
 }

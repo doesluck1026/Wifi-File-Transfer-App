@@ -1,0 +1,36 @@
+﻿<Page x:Class="FileSharingApp_Desktop.Pages.TransferDonePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TransferDonePage">
+
+    <Grid Background="#353536" Margin="5,5,5,5" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Label Content="File Transfer is Succesful!" FontSize="25" Foreground="White" VerticalAlignment="Center"
+               HorizontalAlignment="Center" Grid.Row="0"/>
+        <ListView x:Name="list_Files" SelectionChanged="list_Files_ItemTapped" Grid.Row="1" VerticalAlignment="Center"
+                      HorizontalAlignment="Center" Background="White" Margin="5" Width="700" Height="300"/>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btn_MainMenu" Grid.Column="1" Content="Main Menu" Click="btn_MainMenu_Clicked" 
+                    FontSize="25" Foreground="White"/>
+            <Button x:Name="btn_OpenFolder" Grid.Column="3" Content="Open FILE" Click="btn_OpenFolder_Clicked" 
+                    FontSize="25" Foreground="White"/>
+        </Grid>
+    </Grid>
+</Page>

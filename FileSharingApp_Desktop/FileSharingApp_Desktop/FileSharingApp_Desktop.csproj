@@ -85,6 +85,7 @@
     <Compile Include="AutoUpdater\UpdaterMain.cs" />
     <Compile Include="Communication\NetworkScanner.cs" />
     <Compile Include="Communication\Server.cs" />
+    <Compile Include="FileOperations\Parameters.cs" />
     <Compile Include="FileOperations\ParametersBag.cs" />
     <Compile Include="FileOperations\RecentClientListBag.cs" />
     <Compile Include="Pages\DevicesPage.xaml.cs">
@@ -92,6 +93,12 @@
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TransferDonePage.xaml.cs">
+      <DependentUpon>TransferDonePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\TransferPage.xaml.cs">
+      <DependentUpon>TransferPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Resource\Resource.tr.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -119,6 +126,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TransferDonePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TransferPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

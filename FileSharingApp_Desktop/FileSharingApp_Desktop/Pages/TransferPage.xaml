@@ -1,0 +1,107 @@
+﻿<Page x:Class="FileSharingApp_Desktop.Pages.TransferPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TransferPage">
+
+    <Grid Background="#353536" Margin="5,5,5,5" >
+        <Grid.RowDefinitions >
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="AliceBlue" BorderThickness="2" CornerRadius="5" Margin="5">
+            <Label x:Name="lbl_info" Content="Your Files are being Transferred. be patient..." 
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"
+                   FontSize="25"/>
+        </Border>
+
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="File Name :" HorizontalAlignment="Left" VerticalAlignment="Center"
+               FontSize="25" Foreground="White" Grid.Column="0" />
+            <Label x:Name="lbl_FileName" HorizontalAlignment="Left" VerticalAlignment="Center"
+               FontSize="25" Foreground="White" Grid.Column="1" />
+        </Grid>
+        <Grid Grid.Row="2" >
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="File Size :" HorizontalAlignment="Left" VerticalAlignment="Center"
+               FontSize="25" Foreground="White" Grid.Column="0" />
+            <Label x:Name="lbl_FileSize" HorizontalAlignment="Left" VerticalAlignment="Center"
+               FontSize="25" Foreground="White" Grid.Column="1" />
+        </Grid>
+        <Grid Grid.Row="3" >
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Transfer Speed :" HorizontalAlignment="Left" VerticalAlignment="Center"
+               FontSize="25" Foreground="White" Grid.Column="0" />
+            <Label x:Name="lbl_TransferSpeed" HorizontalAlignment="Left" VerticalAlignment="Center"
+               FontSize="25" Foreground="White" Grid.Column="1" />
+        </Grid>
+        <Grid Grid.Row="4" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="32*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0">
+                <Label x:Name="lbl_totalSent" Content="125.56 MB" VerticalAlignment="Center" Foreground="White" FontSize="25"/>
+                <Label Content="/" Foreground="White" VerticalAlignment="Center" FontSize="25"/>
+                <Label x:Name="lbl_totalSize" Content="500.56 MB" VerticalAlignment="Center" Foreground="White" FontSize="25"/>
+            </StackPanel>
+            <Label x:Name="lbl_currentFileNumber" Content="10" Grid.Column="1" Foreground="White" FontSize="25" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Content="/" Grid.Column="2" Foreground="White" FontSize="25" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label x:Name="lbl_FileCount" Content="14" Grid.Column="3" Foreground="White" FontSize="25" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+        </Grid>
+        <ProgressBar x:Name="prg_Transfer" Margin="10" Grid.Row="5" FlowDirection="LeftToRight" HorizontalAlignment="Center" 
+                             VerticalAlignment="Center"   Height="50" Width="700" Value="50" Foreground="DarkGreen" Background="White" />
+        <Label x:Name="lbl_progress" Content="%50" Grid.Row="5" Foreground="Pink" Background="Transparent"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="5,0,5,0">
+                <Label Content="Time:" Foreground="White" Background="Transparent"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+                <Label x:Name="lbl_PassedTime" Foreground="White" Background="Transparent"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5,0,5,0">
+                <Label Content="Remaining:" Foreground="White" Background="Transparent"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+                <Label x:Name="lbl_RemainingTime" Foreground="White" Background="Transparent"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btn_AbortTransfer" Grid.Column="4" Content="Abort" Click="btn_AbortTransfer_Clicked" FontSize="30" 
+                        VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+        </Grid>
+    </Grid>
+</Page>
