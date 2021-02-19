@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 class Parameters
 {
-    private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BuggyCompany\\BuggyFileTransfer\\Parameters.dat";
+    //private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BuggyCompany\\BuggyFileTransfer\\Parameters.dat";
+    private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\FileTransferParameters.dat";
 
     public static string SavingPath;
     public static string DeviceName;
@@ -14,10 +15,19 @@ class Parameters
     public static void Init()
     {
         var param = new ParametersBag();
-        param.Load(parametersPath);
-        SavingPath = param.SavingPath;
-        DeviceName = param.DeviceName;
-        didInit = true;
+        try
+        {
+            param.Load(parametersPath);
+            SavingPath = param.SavingPath;
+            DeviceName = param.DeviceName;
+            didInit = true;
+        }
+        catch
+        {
+            SavingPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\";
+            DeviceName = "MyDevice";
+            Save();
+        }
     }
     public static void Save()
     {

@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="TransferDonePage">
+      Title="TransferDonePage"
+      Loaded="Page_Loaded">
 
     <Grid Background="#353536" Margin="5,5,5,5" >
         <Grid.RowDefinitions>
@@ -17,19 +18,21 @@
         </Grid.RowDefinitions>
         <Label Content="File Transfer is Succesful!" FontSize="25" Foreground="White" VerticalAlignment="Center"
                HorizontalAlignment="Center" Grid.Row="0"/>
-        <ListView x:Name="list_Files" SelectionChanged="list_Files_ItemTapped" Grid.Row="1" VerticalAlignment="Center"
+        <ListView x:Name="list_Files" SelectionChanged="list_Files_SelectionChanged" Grid.Row="1" VerticalAlignment="Center"
                       HorizontalAlignment="Center" Background="White" Margin="5" Width="700" Height="300"/>
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btn_MainMenu" Grid.Column="1" Content="Main Menu" Click="btn_MainMenu_Clicked" 
+            <Button x:Name="btn_MainMenu" Grid.Column="0" Content="Main Menu" Click="btn_MainMenu_Click" 
                     FontSize="25" Foreground="White"/>
-            <Button x:Name="btn_OpenFolder" Grid.Column="3" Content="Open FILE" Click="btn_OpenFolder_Clicked" 
+            <Button x:Name="btn_OpenFile" Grid.Column="2" Content="Open FILE" Click="btn_OpenFile_Click" 
+                    FontSize="25" Foreground="White"/>
+            <Button x:Name="btn_OpenFolder" Grid.Column="4" Content="Open Output Folder" Click="btn_OpenFolder_Click" 
                     FontSize="25" Foreground="White"/>
         </Grid>
     </Grid>

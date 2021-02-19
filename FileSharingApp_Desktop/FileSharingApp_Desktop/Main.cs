@@ -30,6 +30,9 @@ public class Main
     public delegate void ClientRequestDelegate(string totalTransferSize, string senderDevice);
     public static event ClientRequestDelegate OnClientRequested;
 
+    public delegate void TransferFinishedDelegate();
+    public static event TransferFinishedDelegate OnTransferFinished;
+
     public static string FileSaveURL = "/storage/emulated/0/Download/";
     public static string ServerIP;
     public static string ClientIP;
@@ -79,8 +82,8 @@ public class Main
     private static Client client;
     private static Server server;
     private static FileOperations File;
-    private static string[] FilePaths;
-    private static string[] FileNames;                     /// Name of Files
+    public static string[] FilePaths;
+    public static string[] FileNames;                     /// Name of Files
     private static long[] FileSizeAsBytes;                 /// Size of files as bytes
     private static double[] FileSizes;                     /// File Sizes as a double 
     private static FileOperations.SizeUnit[] SizeUnits;    /// Unit of filesizes
@@ -149,29 +152,6 @@ public class Main
         server.OnClientConnected += Server_OnClientConnected;
         IsTransferEnabled = true;
     }
-    private static void Server_OnClientConnected(string clientIP)
-    {
-        _transferMetrics = new Metrics();
-        ClientIP = clientIP;
-        byte[] receivedData = server.GetData();
-        if (receivedData == null)
-            return;
-        if (receivedData[0] == (byte)Functions.QueryTransfer)
-        {
-            int numberOfFiles = BitConverter.ToInt32(receivedData, 1);
-            long transferSize = BitConverter.ToInt64(receivedData, 5);
-            int nameLen = receivedData[13];
-            string senderDevice = Encoding.ASCII.GetString(receivedData, 14, nameLen);
-            FilePaths = new string[numberOfFiles];
-            if (File == null)
-                File = new FileOperations();
-            File.CalculateFileSize(transferSize);
-            string fileSizeString = File.FileSize.ToString("0.00") + " " + File.FileSizeUnit.ToString();
-            Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString + " device Name: " + senderDevice);
-            OnClientRequested(fileSizeString, senderDevice);
-            _transferMetrics.TotalDataSizeAsBytes = transferSize;
-        }
-    }
     #endregion
 
     #region Sender Functions
@@ -181,10 +161,14 @@ public class Main
     public static void SetFilePaths(string[] paths)
     {
         FilePaths = new string[paths.Length];
+        FileNames = new string[paths.Length];
         paths.CopyTo(FilePaths, 0);
-
+        var file = new FileOperations();
         for (int i = 0; i < FilePaths.Length; i++)
+        {
+            FileNames[i] = file.GetFileName(paths[i]);
             Debug.WriteLine(i + " : " + FilePaths[i]);
+        }
     }
     public static bool ConnectToTargetDevice(string IP)
     {
@@ -288,6 +272,8 @@ public class Main
         }
         IsTransfering = false;
         SendLastFrame();
+        if(OnTransferFinished!=null)
+            OnTransferFinished();
         client.DisconnectFromServer();
         client = null;
         server.CloseServer();
@@ -326,7 +312,7 @@ public class Main
     private static void SendFirstFrame()
     {
         long totalTransferSize = GetTransferSize();
-        int lenName = NetworkScanner.DeviceName.Length;
+        int lenName = Parameters.DeviceName.Length;
         byte[] data = new byte[15 + lenName];
         data[0] = (byte)Functions.QueryTransfer;
         byte[] numFilesBytes = BitConverter.GetBytes(FilePaths.Length);
@@ -334,7 +320,7 @@ public class Main
         byte[] sizeBytes = BitConverter.GetBytes(totalTransferSize);
         sizeBytes.CopyTo(data, 5);
         data[13] = (byte)lenName;
-        Encoding.ASCII.GetBytes(NetworkScanner.DeviceName).CopyTo(data, 14);
+        Encoding.ASCII.GetBytes(Parameters.DeviceName).CopyTo(data, 14);
         client.SendDataServer(data);
         Debug.WriteLine("Sent First Frame:" + FilePaths.Length);
     }
@@ -415,6 +401,29 @@ public class Main
     #endregion
 
     #region Private Functions
+    private static void Server_OnClientConnected(string clientIP)
+    {
+        _transferMetrics = new Metrics();
+        ClientIP = clientIP;
+        byte[] receivedData = server.GetData();
+        if (receivedData == null)
+            return;
+        if (receivedData[0] == (byte)Functions.QueryTransfer)
+        {
+            int numberOfFiles = BitConverter.ToInt32(receivedData, 1);
+            long transferSize = BitConverter.ToInt64(receivedData, 5);
+            int nameLen = receivedData[13];
+            string senderDevice = Encoding.ASCII.GetString(receivedData, 14, nameLen);
+            FilePaths = new string[numberOfFiles];
+            if (File == null)
+                File = new FileOperations();
+            File.CalculateFileSize(transferSize);
+            string fileSizeString = File.FileSize.ToString("0.00") + " " + File.FileSizeUnit.ToString();
+            Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString + " device Name: " + senderDevice);
+            OnClientRequested(fileSizeString, senderDevice);
+            _transferMetrics.TotalDataSizeAsBytes = transferSize;
+        }
+    }
 
     private static void BeginReceivingFiles()
     {
@@ -439,9 +448,12 @@ public class Main
         }
         Stopwatch watch = Stopwatch.StartNew();
         IsTransfering = true;
+        FileNames = new string[FilePaths.Length];
         for (int i = 0; i < FilePaths.Length; i++)
         {
             GetCurrentFileName();
+            FileNames[i] = CurrentFile.FileName;
+            FilePaths[i] = FileSaveURL + CurrentFile.FileName;
             SendReadySignal();
             File = new FileOperations();
             File.Init(FileSaveURL + CurrentFile.FileName, FileOperations.TransferMode.Receive);
@@ -492,6 +504,7 @@ public class Main
                     watch.Restart();
                     server.CloseServer();
                     IsTransfering = false;
+                    OnTransferFinished();
                     return;
                 }
                 else
@@ -507,6 +520,7 @@ public class Main
         if (server != null)
         {
             server.GetData();
+            OnTransferFinished();
             server.CloseServer();
         }
         IsTransfering = false;

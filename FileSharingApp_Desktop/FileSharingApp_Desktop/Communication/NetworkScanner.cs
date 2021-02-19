@@ -8,11 +8,9 @@ using System.Threading;
 
 class NetworkScanner
 {
-    public delegate void ScanCompleteDelegate(string IPandHostName);
-    public event ScanCompleteDelegate OnScanCompleted;
-
+    public delegate void ScanCompleteDelegate();
+    public static event ScanCompleteDelegate OnScanCompleted;
     private static string DeviceIP;
-    public static string DeviceName;
     private static readonly int PublishPort = 42019;
     private static Server publisherServer;
     private static Client client;
@@ -54,6 +52,8 @@ class NetworkScanner
 
             }
         }
+        if(OnScanCompleted!=null)
+            OnScanCompleted();
         Debug.WriteLine("scanning time: " + stp.Elapsed.TotalSeconds + " s");
     }
     private static void GetDeviceData(string IP)
@@ -96,7 +96,7 @@ class NetworkScanner
     private static void PublisherServer_OnClientConnected(string clientIP)
     {
         Debug.WriteLine("Client IP: " + clientIP);
-        publisherServer.SendDataToClient(Encoding.ASCII.GetBytes("IP:"+ DeviceIP+"&DeviceName:"+DeviceName));
+        publisherServer.SendDataToClient(Encoding.ASCII.GetBytes("IP:"+ DeviceIP+"&DeviceName:"+Parameters.DeviceName));
 
         publisherServer.GetData();
 

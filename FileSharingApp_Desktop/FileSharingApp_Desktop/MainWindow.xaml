@@ -11,6 +11,7 @@
         Width="800"
         ResizeMode="CanMinimize" 
         Background="#353536"
+        Closed="Window_Closed"
         >
 
     <Frame x:Name="MainFrame" HorizontalAlignment="Center" VerticalAlignment="Center" NavigationUIVisibility="Hidden" 

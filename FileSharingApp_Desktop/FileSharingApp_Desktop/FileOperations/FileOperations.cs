@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+
 public class FileOperations
 {
     #region Public Variables
@@ -163,6 +164,21 @@ public class FileOperations
         FileSize = fileSizeAsByte / Math.Pow(1024, pow);                /// Convert file size from bytes to the greatest type
         FileSizeUnit = (SizeUnit)pow;                                   /// Assign the unit
     }
+    public string GetFileName(string filePath)
+    {
+        this.FilePath = filePath;                                       /// Assign path to FilePath variable
+        if (string.IsNullOrEmpty(FilePath))
+        {
+            Debug.WriteLine("Init File Ops: FilePath is null!");
+            return null;
+        }
+        else
+        {
+            char[] splitterUsta = { '\\', '/' };                            /// Define splitter array that will be used to find file name
+            string[] nameArray = FilePath.Split(splitterUsta);              /// Split path string to array by '/' sign
+            return nameArray[nameArray.Length - 1];                /// Get the last string which will be the file name as "filename.extension"
+        }
+    }
     public void FileReadAtByteIndex(long BufferIndx, out int BytesRead, out byte[] Buffer, int chunkSize = 1024, byte functionByte = 0)
     {
         byte[] chunk = new byte[chunkSize];
@@ -182,6 +198,5 @@ public class FileOperations
         if (Fs != null)
             Fs.Close();
     }
-
     #endregion
 }

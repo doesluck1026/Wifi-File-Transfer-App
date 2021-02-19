@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace FileSharingApp_Desktop.Pages
             Parameters.Init();
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             NetworkScanner.PublishDevice();
-            Main.FileSaveURL = GetSaveFilePath();
+            Main.FileSaveURL = Parameters.SavingPath;
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
             Dispatcher.Invoke(() =>
             {
@@ -67,45 +68,50 @@ namespace FileSharingApp_Desktop.Pages
         /// The address of the file to be processed is selected
         /// </summary>
         /// <returns>the address of the file in memory</returns>
-        private async void SelectFile()
+        private string[] SelectFiles()
         {
-            var pickResult = await FilePicker.PickMultipleAsync();
-            if (pickResult != null)
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            openFileDialog1.Filter = " All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            openFileDialog1.Multiselect = true;
+
+            if (openFileDialog1.ShowDialog() == true)
             {
-                var results = pickResult.ToArray();
-                string[] filepaths = new string[results.Length];
-                for (int i = 0; i < filepaths.Length; i++)
-                {
-                    filepaths[i] = results[i].FullPath;
-                }
-                Main.SetFilePaths(filepaths);
-                await Navigation.PushModalAsync(new SendingPage());
+                string[] selectedFileName = openFileDialog1.FileNames;
+                return selectedFileName;
             }
+            return null;
         }
         private void Btn_SelectFiles_Click(object sender, RoutedEventArgs e)
         {
-            SelectFile();
+            string[] filePaths= SelectFiles();
+            if (filePaths == null)
+                return;
+            Main.SetFilePaths(filePaths);
+            NavigationService.Navigate(new DevicesPage());
         }
         private void Grid_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-                for (int i = 0; i < files.Length; i++)
+                for (int i = 0; i < filePaths.Length; i++)
                 {
-                    Debug.WriteLine("file " + i + " : " + files[i]);
+                    Debug.WriteLine("file " + i + " : " + filePaths[i]);
                 }
+                if (filePaths == null)
+                    return;
+                Main.SetFilePaths(filePaths);
+                NavigationService.Navigate(new DevicesPage());
             }
         }
         private void ScanNetwork()
         {
             NetworkScanner.ScanAvailableDevices();
         }
-        private string GetSaveFilePath()
-        {
-           
-        }
-
     }
 }
