@@ -37,10 +37,10 @@ namespace FileSharingApp_Desktop.Pages
             NetworkScanner.PublishDevice();
             Main.FileSaveURL = GetSaveFilePath();
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
-            Dispatcher.BeginInvokeOnMainThread(() =>
+            Dispatcher.Invoke(() =>
             {
-                lbl_IP.Text = DeviceIP;
-                lbl_HostName.Text = Parameters.DeviceName;
+                txt_DeviceIP.Content = DeviceIP;
+                txt_DeviceName.Text = Parameters.DeviceName;
             });
             if (!isScanned)
             {
@@ -51,9 +51,16 @@ namespace FileSharingApp_Desktop.Pages
         private void Main_OnClientRequested(string totalTransferSize, string deviceName)
         {
             /// Show file transfer request and ask for permission here
-            Device.BeginInvokeOnMainThread(() =>
+            Dispatcher.Invoke(() =>
             {
-                Navigation.PushModalAsync(new TransferPermissionPage(totalTransferSize, deviceName));
+                var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    NavigationService.Navigate(new TransferPage());
+                    Main.ResponseToTransferRequest(true);
+                }
+                else
+                    Main.ResponseToTransferRequest(false);
             });
         }
         /// <summary>
