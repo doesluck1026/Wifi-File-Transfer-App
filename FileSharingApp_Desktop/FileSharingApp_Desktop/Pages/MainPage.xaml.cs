@@ -28,21 +28,15 @@ namespace FileSharingApp_Desktop.Pages
 
         private void Btn_SelectFiles_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new DevicesPage());
         }
-
-        private void Btn_ReceiveFiles_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Border_Drop(object sender, DragEventArgs e)
+        private void Grid_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
-               for(int i=0;i<files.Length;i++)
+                for (int i = 0; i < files.Length; i++)
                 {
                     Debug.WriteLine("file " + i + " : " + files[i]);
                 }

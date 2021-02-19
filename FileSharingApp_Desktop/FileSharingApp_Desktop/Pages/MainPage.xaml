@@ -40,8 +40,8 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" BorderThickness="3" BorderBrush="AliceBlue" CornerRadius="10" AllowDrop="True" Drop="Border_Drop">
-                <Grid>
+            <Border Grid.Column="1" BorderThickness="3" BorderBrush="AliceBlue" CornerRadius="10">
+                <Grid AllowDrop="True" Drop="Grid_Drop">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"/>
                         <RowDefinition Height="*"/>
@@ -52,18 +52,10 @@
                 </Grid>
             </Border>
         </Grid>
-        <Grid Grid.Row="2" >
-            <Grid.ColumnDefinitions >
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button x:Name="Btn_SelectFiles" Content="Select Files" Grid.Column="0" HorizontalAlignment="Center" 
+        <Button x:Name="Btn_SelectFiles" Content="Select Files" Grid.Row="2" HorizontalAlignment="Center" 
                     VerticalAlignment="Center" Click="Btn_SelectFiles_Click" FontSize="40"
                     Foreground="White" Background="AliceBlue"/>
-            <Button x:Name="Btn_ReceiveFiles" Content="Receive Files" Grid.Column="1" HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" Click="Btn_ReceiveFiles_Click" FontSize="40"
-                    Foreground="White" Background="AliceBlue"/>
 
-        </Grid>
+        
     </Grid>
 </Page>

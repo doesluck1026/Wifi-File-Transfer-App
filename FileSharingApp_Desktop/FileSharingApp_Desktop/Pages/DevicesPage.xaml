@@ -1,0 +1,47 @@
+﻿<Page x:Class="FileSharingApp_Desktop.Pages.DevicesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="DevicesPage">
+
+        <Grid Background="#353536" Margin="5,5,5,5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+        <Label Content="Please Select Target Device from the list below." 
+               Grid.Row="0" Foreground="White"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="list_Devices" Grid.Column="0" VerticalAlignment="Center"
+                      HorizontalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="2"
+                      Margin="5" Background="White" Foreground="Black" MinWidth="300"
+                      MinHeight="300"
+                      SelectionChanged="list_Devices_SelectionChanged"/>
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button x:Name="btn_Scan" Content="Scan Devices" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Click="btn_Scan_Click" Grid.Row="0"
+                        Foreground="White" FontSize="35"/>
+                <TextBox x:Name="txt_DeviceIP" Grid.Row="2" Text="192.168.1.39" FontSize="25"
+                         VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <Button x:Name="btn_Send" Content="Send Files" HorizontalAlignment="Center"
+                        VerticalAlignment="Center" Click="btn_Send_Click" Grid.Row="3"
+                        Foreground="White" FontSize="35"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

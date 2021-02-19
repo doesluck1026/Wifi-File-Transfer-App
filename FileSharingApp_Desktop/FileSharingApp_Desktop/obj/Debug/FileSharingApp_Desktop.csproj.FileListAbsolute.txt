@@ -119,3 +119,5 @@ C:\Users\yhsvk\Desktop\Projeler\Github\FileSharingApp\FileSharingApp_Desktop\Fil
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\MainPage.g.cs
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\MainPage.baml
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\DevicesPage.g.cs
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\DevicesPage.baml
