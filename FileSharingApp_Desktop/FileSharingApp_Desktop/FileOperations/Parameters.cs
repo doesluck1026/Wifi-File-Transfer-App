@@ -31,8 +31,11 @@ class Parameters
     }
     public static void Save()
     {
-        if (didInit)
+        if (!didInit)
+        {
+            System.Diagnostics.Debug.WriteLine("Init parameters first!");
             return;
+        }
         var param = new ParametersBag();
         param.SavingPath = SavingPath;
         param.DeviceName = DeviceName;

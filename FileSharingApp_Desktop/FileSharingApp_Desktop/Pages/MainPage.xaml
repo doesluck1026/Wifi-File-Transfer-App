@@ -28,12 +28,17 @@
             <Label Content="Device Name: " Grid.Column="0" FontSize="25" HorizontalAlignment="Left" 
                    VerticalAlignment="center" Foreground="White"/>
             <TextBox x:Name="txt_DeviceName" Text="bişeyler" Grid.Column="1" FontSize="25" 
-                     HorizontalAlignment="Left" VerticalAlignment="center" Foreground="White" IsReadOnly="True" Background="Transparent"/>
+                     HorizontalAlignment="Left" VerticalAlignment="center" Foreground="White" 
+                     IsReadOnly="True" Background="Transparent" 
+                     MouseDoubleClick="txt_DeviceName_MouseDoubleClick"
+                     KeyDown="txt_DeviceName_KeyDown"/>
             <Label Content="Device IP: " Grid.Column="2" FontSize="25" HorizontalAlignment="Left" 
                    VerticalAlignment="center" Foreground="White"/>
             <Label x:Name="txt_DeviceIP" Content="192.168.1.25" Grid.Column="3" FontSize="25"
                    HorizontalAlignment="Left" VerticalAlignment="center" Foreground="White" 
                    Background="Transparent"/>
+            <Button x:Name="btn_Settings" Content="*" Click="btn_Settings_Click" FontSize="50"
+                    Grid.Column="4"/>
         </Grid> <!--info Bar-->
 
         <Grid Grid.Row="1">

@@ -28,11 +28,11 @@ namespace FileSharingApp_Desktop.Pages
         public MainPage()
         {
             InitializeComponent();
-            Main.OnClientRequested += Main_OnClientRequested;
             Main.StartServer();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Main.OnClientRequested += Main_OnClientRequested;
             Parameters.Init();
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             NetworkScanner.PublishDevice();
@@ -52,9 +52,10 @@ namespace FileSharingApp_Desktop.Pages
         private void Main_OnClientRequested(string totalTransferSize, string deviceName)
         {
             /// Show file transfer request and ask for permission here
+            Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
+            var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
             Dispatcher.Invoke(() =>
             {
-                var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     NavigationService.Navigate(new TransferPage());
@@ -112,6 +113,24 @@ namespace FileSharingApp_Desktop.Pages
         private void ScanNetwork()
         {
             NetworkScanner.ScanAvailableDevices();
+        }
+        private void txt_DeviceName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            txt_DeviceName.IsReadOnly = false;
+        }
+        private void txt_DeviceName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key==Key.Enter)
+            {
+                Parameters.DeviceName = txt_DeviceName.Text;
+                Parameters.Save();
+            }
+        }
+
+        private void btn_Settings_Click(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.Invoke(() => NavigationService.Navigate(new OptionsPage()));
+            NavigationService.RemoveBackEntry();
         }
     }
 }

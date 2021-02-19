@@ -146,6 +146,8 @@ public class Main
     /// </summary>
     public static void StartServer()
     {
+        if (server != null)
+            return;
         server = new Server(port: Port, bufferSize: BufferSize, StartByte: StartByte);
         ServerIP = server.SetupServer();
         server.StartListener();
@@ -277,6 +279,7 @@ public class Main
         client.DisconnectFromServer();
         client = null;
         server.CloseServer();
+        server = null;
         StartServer();
     }
     private static bool CheckAck(Functions func)
@@ -503,6 +506,7 @@ public class Main
                     UpdateMetrics(watch, byteCounter);
                     watch.Restart();
                     server.CloseServer();
+                    server = null;
                     IsTransfering = false;
                     OnTransferFinished();
                     return;
@@ -522,6 +526,7 @@ public class Main
             server.GetData();
             OnTransferFinished();
             server.CloseServer();
+            server = null;
         }
         IsTransfering = false;
         StartServer();
