@@ -14,7 +14,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>         
             <RowDefinition Height="5*"/>
-            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" >
@@ -48,21 +47,32 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border Grid.Column="1" BorderThickness="3" BorderBrush="AliceBlue" CornerRadius="10">
-                <Grid AllowDrop="True" Drop="Grid_Drop">
+                <Grid AllowDrop="True" Drop="Grid_Drop" MouseDown="Grid_MouseDown" Cursor="Hand" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label x:Name="lbl_DragDrop" Grid.Row="0" Content="+" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       FontSize="150" Foreground="White" Margin="0,-40,0,0"/>
-                    <Label Content="Drag Your Files Here" Grid.Row="1" FontSize="20" HorizontalAlignment="Center" Foreground="White"/>
+                    <Label x:Name="lbl_DragDrop" Grid.Row="0" Content="    +    " HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontSize="150" Foreground="White" Margin="0,0,0,0"/>
+                    <Label Content="Drag Your Files Here or Click to Select Files" Grid.Row="1"
+                           FontSize="20"  x:Name="lbl_Info" HorizontalAlignment="Center" 
+                           Foreground="White"/>
+                    <ListBox x:Name="list_Files" Grid.Row="0" Width="400" Height="200" Visibility="Hidden"
+                             SelectionChanged="list_Files_SelectionChanged"/>
+                    <Grid Grid.Row="1" x:Name="grid_AddRemove" Visibility="Hidden"  >
+                        <Grid.ColumnDefinitions >
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="btn_AddFiles" Content="Add"  FontSize="25" 
+                                Foreground="White" Click="btn_AddFiles_Click" Grid.Column="0"/>
+                        <Button x:Name="btn_RemoveFiles" Content="Remove"  FontSize="25" 
+                                Foreground="White" Click="btn_RemoveFiles_Click" Grid.Column="1"/>
+                    </Grid>
                 </Grid>
             </Border>
         </Grid>
-        <Button x:Name="Btn_SelectFiles" Content="Select Files" Grid.Row="2" HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" Click="Btn_SelectFiles_Click" FontSize="40"
-                    Foreground="White" Background="AliceBlue"/>
-
-        
+        <Button x:Name="btn_Send" Content="Send Files" FontSize="35" Grid.Row="2"
+                    VerticalAlignment="Center" HorizontalAlignment="Center" Click="btn_Send_Click"/>
     </Grid>
 </Page>

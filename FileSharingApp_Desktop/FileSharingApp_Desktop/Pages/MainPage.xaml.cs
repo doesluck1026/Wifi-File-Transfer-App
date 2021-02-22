@@ -25,6 +25,7 @@ namespace FileSharingApp_Desktop.Pages
         private string DeviceIP;
         private string DeviceHostName;
         private bool isScanned = false;
+        private List<string> FilePaths=new List<string>();
         public MainPage()
         {
             InitializeComponent();
@@ -32,6 +33,8 @@ namespace FileSharingApp_Desktop.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Main.OnClientRequested += Main_OnClientRequested;
+            ShowFileList(false);
+            FilePaths = new List<string>();
             Parameters.Init();
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             Main.FileSaveURL = Parameters.SavingPath;
@@ -63,6 +66,18 @@ namespace FileSharingApp_Desktop.Pages
                     Main.ResponseToTransferRequest(false);
             });
         }
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            string[] filePaths = SelectFiles();
+            if (filePaths == null)
+                return;
+            for(int i=0;i<filePaths.Length;i++)
+                FilePaths.Add(filePaths[i]);
+            list_Files.ItemsSource = FilePaths;
+            ShowFileList(true);
+            //Main.SetFilePaths(filePaths);
+            //Navigator.Navigate("Pages/DevicesPage.xaml");
+        }
         /// <summary>
         /// The address of the file to be processed is selected
         /// </summary>
@@ -84,14 +99,6 @@ namespace FileSharingApp_Desktop.Pages
             }
             return null;
         }
-        private void Btn_SelectFiles_Click(object sender, RoutedEventArgs e)
-        {
-            string[] filePaths= SelectFiles();
-            if (filePaths == null)
-                return;
-            Main.SetFilePaths(filePaths);
-            Navigator.Navigate("Pages/DevicesPage.xaml");
-        }
         private void Grid_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -104,9 +111,33 @@ namespace FileSharingApp_Desktop.Pages
                 }
                 if (filePaths == null)
                     return;
-                Main.SetFilePaths(filePaths);
-                Navigator.Navigate("Pages/DevicesPage.xaml");
+                for (int i = 0; i < filePaths.Length; i++)
+                    FilePaths.Add(filePaths[i]);
+                list_Files.ItemsSource = FilePaths;
+                ShowFileList(true);               
             }
+        }
+        private void ShowFileList(bool show)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                if (show)
+                {
+                    lbl_DragDrop.Visibility = Visibility.Hidden;
+                    list_Files.Visibility = Visibility.Visible;
+                    grid_AddRemove.Visibility = Visibility.Visible;
+                    lbl_Info.Visibility = Visibility.Hidden;
+                    list_Files.SelectedIndex = 0;
+                }
+                else
+                {
+                    lbl_DragDrop.Visibility = Visibility.Visible;
+                    list_Files.Visibility = Visibility.Hidden;
+                    grid_AddRemove.Visibility = Visibility.Hidden;
+                    lbl_Info.Visibility = Visibility.Visible;
+                }
+            });
+            
         }
         private void ScanNetwork()
         {
@@ -128,6 +159,49 @@ namespace FileSharingApp_Desktop.Pages
         private void btn_Settings_Click(object sender, RoutedEventArgs e)
         {
             Navigator.Navigate("Pages/OptionsPage.xaml");
+        }
+
+        private void list_Files_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btn_AddFiles_Click(object sender, RoutedEventArgs e)
+        {
+            string[] filePaths = SelectFiles();
+            if (filePaths == null)
+                return;
+            for (int i = 0; i < filePaths.Length; i++)
+                FilePaths.Add(filePaths[i]);
+            list_Files.ItemsSource = FilePaths.ToArray() ;
+            ShowFileList(true);
+        }
+
+        private void btn_RemoveFiles_Click(object sender, RoutedEventArgs e)
+        {
+            int index = list_Files.SelectedIndex;
+            if(FilePaths!=null && FilePaths.Count>0 && index<FilePaths.Count)
+            {
+                FilePaths.RemoveAt(index);
+                Dispatcher.Invoke(() =>
+                {
+                    list_Files.ItemsSource = FilePaths.ToArray();
+                    list_Files.SelectedIndex = Math.Min(index,FilePaths.Count-1);
+                    Debug.WriteLine("index: " + list_Files.SelectedIndex);
+                });
+            }
+
+        }
+
+        private void btn_Send_Click(object sender, RoutedEventArgs e)
+        {
+            if (FilePaths == null)
+                return;
+            if(FilePaths.Count>0)
+            {
+                Main.SetFilePaths(FilePaths.ToArray());
+                Navigator.Navigate("Pages/DevicesPage.xaml");
+            }
         }
     }
 }
