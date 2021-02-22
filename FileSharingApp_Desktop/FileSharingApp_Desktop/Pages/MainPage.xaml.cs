@@ -28,14 +28,12 @@ namespace FileSharingApp_Desktop.Pages
         public MainPage()
         {
             InitializeComponent();
-            Main.StartServer();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Main.OnClientRequested += Main_OnClientRequested;
             Parameters.Init();
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
-            NetworkScanner.PublishDevice();
             Main.FileSaveURL = Parameters.SavingPath;
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
             Dispatcher.Invoke(() =>
@@ -58,7 +56,7 @@ namespace FileSharingApp_Desktop.Pages
             {
                 if (result == MessageBoxResult.Yes)
                 {
-                    NavigationService.Navigate(new TransferPage());
+                    Navigator.Navigate("Pages/TransferPage.xaml");
                     Main.ResponseToTransferRequest(true);
                 }
                 else
@@ -92,7 +90,7 @@ namespace FileSharingApp_Desktop.Pages
             if (filePaths == null)
                 return;
             Main.SetFilePaths(filePaths);
-            NavigationService.Navigate(new DevicesPage());
+            Navigator.Navigate("Pages/DevicesPage.xaml");
         }
         private void Grid_Drop(object sender, DragEventArgs e)
         {
@@ -107,7 +105,7 @@ namespace FileSharingApp_Desktop.Pages
                 if (filePaths == null)
                     return;
                 Main.SetFilePaths(filePaths);
-                NavigationService.Navigate(new DevicesPage());
+                Navigator.Navigate("Pages/DevicesPage.xaml");
             }
         }
         private void ScanNetwork()
@@ -129,8 +127,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_Settings_Click(object sender, RoutedEventArgs e)
         {
-            Dispatcher.Invoke(() => NavigationService.Navigate(new OptionsPage()));
-            NavigationService.RemoveBackEntry();
+            Navigator.Navigate("Pages/OptionsPage.xaml");
         }
     }
 }

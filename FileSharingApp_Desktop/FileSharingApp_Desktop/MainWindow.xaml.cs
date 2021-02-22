@@ -10,13 +10,17 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance;
         public MainWindow()
         {
             InitializeComponent();
+            Instance = this;
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            MainFrame.NavigationService.Navigate(new MainPage());
+            Main.StartServer();
+            NetworkScanner.PublishDevice();
+            Navigator.Navigate("Pages/MainPage.xaml");
         }
         private void Window_Closed(object sender, EventArgs e)
         {

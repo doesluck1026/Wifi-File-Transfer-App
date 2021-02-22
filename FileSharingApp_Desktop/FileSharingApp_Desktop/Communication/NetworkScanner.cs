@@ -16,6 +16,7 @@ class NetworkScanner
     private static Client client;
     public static List<string> DeviceNames = new List<string>();
     public static List<string> DeviceIPs = new List<string>();
+    private static Thread scanThread;
     public static void ScanAvailableDevices()
     {
         Thread.Sleep(500);
@@ -32,8 +33,13 @@ class NetworkScanner
             ipHeader += ipStack[i] + ".";
         }
         IPHolder holder = new IPHolder(2,256,ipHeader);
-        Thread t = new Thread(new ParameterizedThreadStart(ParallelScan));
-        t.Start(holder);
+        if(scanThread!=null)
+        {
+            if (scanThread.IsAlive)
+                scanThread.Abort();
+        }
+        scanThread = new Thread(ParallelScan);
+        scanThread.Start(holder);
     }
 
     private static void ParallelScan(object sender)
@@ -60,7 +66,7 @@ class NetworkScanner
     {
         //Stopwatch stp = Stopwatch.StartNew();
         client = new Client(port: PublishPort, ip: IP);
-        string clientIP = client.ConnectToServer(30);
+        string clientIP = client.ConnectToServer(50);
         if (string.IsNullOrEmpty(clientIP))
         {
             //Debug.WriteLine("Connection Failed on: " + IP);

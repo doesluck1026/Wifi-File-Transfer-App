@@ -41,7 +41,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MainPage());
+            Navigator.Navigate("Pages/MainPage.xaml");
         }
         private void btn_OpenFile_Click(object sender, RoutedEventArgs e)
         {

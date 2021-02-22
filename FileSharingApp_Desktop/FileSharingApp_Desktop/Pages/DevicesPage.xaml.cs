@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,20 +23,43 @@ namespace FileSharingApp_Desktop.Pages
     public partial class DevicesPage : Page
     {
         private string TargetDeviceIP;
+        private bool isScanning = false;
         public DevicesPage()
         {
             InitializeComponent();
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Main.OnTransferResponded += Main_OnTransferResponded;
             if (NetworkScanner.DeviceNames != null)
             {
-                list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
+                Dispatcher.Invoke(() =>
+                {
+                    list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
+                });
             }
         }
+
+        private void Main_OnTransferResponded(bool isAccepted)
+        {
+            Debug.WriteLine("Receiver Response: " + isAccepted);
+            if (isAccepted)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Navigator.Navigate("Pages/TransferPage.xaml");
+                });
+                Main.BeginSendingFiles();
+                Main.OnTransferResponded -= Main_OnTransferResponded;
+            }
+        }
+
         private void list_Devices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TargetDeviceIP = NetworkScanner.DeviceIPs[NetworkScanner.DeviceNames.IndexOf(list_Devices.SelectedItem.ToString())];
+            if (NetworkScanner.DeviceNames.Count <= 0 || list_Devices.SelectedItem == null)
+                return;
+            int index = NetworkScanner.DeviceNames.IndexOf(list_Devices.SelectedItem.ToString());
+            TargetDeviceIP = NetworkScanner.DeviceIPs[index];
             txt_DeviceIP.Text = TargetDeviceIP;//list_Clients.SelectedItem.ToString();
         }
 
@@ -44,10 +68,26 @@ namespace FileSharingApp_Desktop.Pages
             NetworkScanner.DeviceNames = new List<string>();
             NetworkScanner.ScanAvailableDevices();
             NetworkScanner.OnScanCompleted += NetworkScanner_OnScanCompleted;
+            isScanning = true;
+            Task.Run(() =>
+            {
+                while (isScanning)
+                {
+                    if (NetworkScanner.DeviceNames != null)
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
+                        });
+                    }
+                    Thread.Sleep(100);
+                }
+            });
         }
 
         private void NetworkScanner_OnScanCompleted()
         {
+            isScanning = false;
             if (NetworkScanner.DeviceNames != null)
             {
                 Dispatcher.Invoke(() =>
@@ -59,13 +99,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
-            bool didDeviceAccept = Main.ConnectToTargetDevice(txt_DeviceIP.Text);
-            Debug.WriteLine("Receiver Response: " + didDeviceAccept);
-            if (didDeviceAccept)
-            {
-                Main.BeginSendingFiles();
-                NavigationService.Navigate(new TransferPage());
-            }
+            Main.ConnectToTargetDevice(txt_DeviceIP.Text);            
         }
     }
 }

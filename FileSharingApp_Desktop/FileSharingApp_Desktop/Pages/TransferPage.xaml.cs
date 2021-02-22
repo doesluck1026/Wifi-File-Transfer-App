@@ -40,16 +40,19 @@ namespace FileSharingApp_Desktop.Pages
                 StartUpdatingUI();
             });
         }
-
         private void Main_OnTransferFinished()
         {
-            Dispatcher.Invoke(() => NavigationService.Navigate(new TransferDonePage()));
+            
+            Dispatcher.Invoke(() => 
+            {
+                Navigator.Navigate("Pages/TransferDonePage.xaml");
+            });
         }
 
         private void btn_AbortTransfer_Click(object sender, RoutedEventArgs e)
         {
             Main.AbortTransfer();
-            NavigationService.Navigate(new MainPage());
+            Navigator.Navigate("Pages/MainPage.xaml");
         }
         private void StartUpdatingUI()
         {

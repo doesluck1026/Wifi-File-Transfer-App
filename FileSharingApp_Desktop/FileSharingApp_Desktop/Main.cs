@@ -33,6 +33,9 @@ public class Main
     public delegate void TransferFinishedDelegate();
     public static event TransferFinishedDelegate OnTransferFinished;
 
+    public delegate void TransferRespondedDelegate(bool isAccepted);
+    public static event TransferRespondedDelegate OnTransferResponded;
+
     public static string FileSaveURL = "/storage/emulated/0/Download/";
     public static string ServerIP;
     public static string ClientIP;
@@ -172,7 +175,7 @@ public class Main
             Debug.WriteLine(i + " : " + FilePaths[i]);
         }
     }
-    public static bool ConnectToTargetDevice(string IP)
+    public static void ConnectToTargetDevice(string IP)
     {
         IsTransferEnabled = true;
         client = new Client(port: Port, ip: IP, bufferSize: BufferSize, StartByte: StartByte);
@@ -180,13 +183,20 @@ public class Main
         Debug.WriteLine("Server IP: " + ServerIP);
         _transferMetrics = new Metrics();
         SendFirstFrame();
-        byte[] clientResponse = client.GetData();
-        if (clientResponse == null)
-            return false;
-        if ((Functions)clientResponse[0] == Functions.AcceptFiles)
-            return true;
-        else
-            return false;
+        Task.Run(() =>
+        {
+            byte[] clientResponse = client.GetData();
+            bool isAccepted=false;
+            if (clientResponse != null)
+            {
+                if ((Functions)clientResponse[0] == Functions.AcceptFiles)
+                    isAccepted = true;
+            }
+            Debug.WriteLine("Rising event");
+            if(OnTransferResponded!=null)
+                OnTransferResponded(isAccepted);
+        });
+        
     }
     public static void BeginSendingFiles()
     {

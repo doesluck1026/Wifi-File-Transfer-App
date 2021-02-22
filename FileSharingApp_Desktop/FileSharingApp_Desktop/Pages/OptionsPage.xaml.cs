@@ -55,7 +55,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            Dispatcher.Invoke(() => NavigationService.Navigate(new MainPage()));
+            Dispatcher.Invoke(() => Navigator.Navigate("Pages/MainPage.xaml"));
         }
         /// <summary>
         /// this function is used to select a folder on current machine and returns folder path
