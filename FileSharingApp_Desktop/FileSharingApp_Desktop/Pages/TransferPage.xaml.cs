@@ -88,7 +88,8 @@ namespace FileSharingApp_Desktop.Pages
                 lbl_FileSize.Content = Main.TransferMetrics.CurrentFile.FileSize.ToString("0.00") + " " + Main.TransferMetrics.CurrentFile.SizeUnit;
                 lbl_FileName.Content = Main.TransferMetrics.CurrentFile.FileName;
                 lbl_progress.Content = "%" + Main.TransferMetrics.Progress.ToString("0.0");
-                prg_Transfer.Value = Main.TransferMetrics.Progress;
+                int progress = (int)Math.Min(100, Main.TransferMetrics.Progress);
+                prg_Transfer.Value = Math.Max(0,progress);
                 lbl_TransferSpeed.Content = Main.TransferMetrics.TransferSpeed.ToString("0.00") + " MB/s";
                 lbl_PassedTime.Content = ((int)Main.TransferMetrics.TotalElapsedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.TotalElapsedTime % 3600) / 60).ToString("00") + ":" +
                     (((int)Main.TransferMetrics.TotalElapsedTime % 3600) % 60).ToString("00");
