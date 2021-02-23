@@ -28,7 +28,7 @@ namespace FileSharingApp_Desktop.Pages
         private List<string> FilePaths=new List<string>();
         public MainPage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -50,6 +50,7 @@ namespace FileSharingApp_Desktop.Pages
                 isScanned = true;
             }
         }
+        
         private void Main_OnClientRequested(string totalTransferSize, string deviceName)
         {
             /// Show file transfer request and ask for permission here
@@ -59,6 +60,7 @@ namespace FileSharingApp_Desktop.Pages
             {
                 if (result == MessageBoxResult.Yes)
                 {
+                    Main.OnClientRequested -= Main_OnClientRequested;
                     Navigator.Navigate("Pages/TransferPage.xaml");
                     Main.ResponseToTransferRequest(true);
                 }
