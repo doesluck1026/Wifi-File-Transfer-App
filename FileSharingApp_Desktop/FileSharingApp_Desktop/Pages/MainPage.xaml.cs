@@ -143,7 +143,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void ScanNetwork()
         {
-            NetworkScanner.ScanAvailableDevices();
+           Task.Run(()=> NetworkScanner.ScanAvailableDevices());
         }
         private void txt_DeviceName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
