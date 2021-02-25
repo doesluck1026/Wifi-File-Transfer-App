@@ -193,8 +193,10 @@ public class Main
                     isAccepted = true;
             }
             Debug.WriteLine("Rising event");
-            if(OnTransferResponded!=null)
+            if (OnTransferResponded != null)
                 OnTransferResponded(isAccepted);
+            else
+                ResponseToTransferRequest(false);
         });
         
     }

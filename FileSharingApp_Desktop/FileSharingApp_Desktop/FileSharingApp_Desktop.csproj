@@ -191,13 +191,10 @@
     <Resource Include="Icons\checked.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\number-1.png" />
+    <Resource Include="Pages\Options.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\number-2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\number-3.png" />
+    <Resource Include="Icons\Options.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.1.3\build\MaterialDesignThemes.targets')" />

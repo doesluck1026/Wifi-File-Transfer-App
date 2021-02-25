@@ -22,11 +22,21 @@
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
-            <ListView x:Name="list_Devices" Grid.Column="0" VerticalAlignment="Center"
+            <Grid Grid.Column="0" Margin="0,0,0,10">
+                <Grid.RowDefinitions >
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ListView x:Name="list_Devices" Grid.Column="0" VerticalAlignment="Center"
                       HorizontalAlignment="Center" BorderBrush="DarkBlue" BorderThickness="2"
                       Margin="5" Background="White" Foreground="Black" MinWidth="300"
                       MinHeight="300"
                       SelectionChanged="list_Devices_SelectionChanged"/>
+                <Button x:Name="btn_Back" Content="Back" HorizontalAlignment="Left" Margin="30,0,0,0"
+                        VerticalAlignment="Center" Click="btn_Back_Click" Grid.Row="3"
+                        Foreground="White" FontSize="35"/>
+
+            </Grid>
             <Grid Grid.Column="1" >
                 <Grid.RowDefinitions >
                     <RowDefinition Height="*"/>

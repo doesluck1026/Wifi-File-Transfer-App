@@ -24,7 +24,6 @@ namespace FileSharingApp_Desktop.Pages
     {
         private string DeviceIP;
         private string DeviceHostName;
-        private bool isScanned = false;
         private List<string> FilePaths=new List<string>();
         public MainPage()
         {
@@ -34,8 +33,19 @@ namespace FileSharingApp_Desktop.Pages
         {
             Main.OnClientRequested += Main_OnClientRequested;
             ShowFileList(false);
-            FilePaths = new List<string>();
-            Parameters.Init();
+            if(Main.FilePaths!=null)
+            {
+                FilePaths = Main.FilePaths.ToList();
+                ShowFileList(true);
+                list_Files.ItemsSource = FilePaths;
+            }
+            else
+                FilePaths = new List<string>();
+            if(!Parameters.DidInitParameters)
+            {
+                Parameters.Init();
+                ScanNetwork();
+            }
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             Main.FileSaveURL = Parameters.SavingPath;
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
@@ -44,11 +54,6 @@ namespace FileSharingApp_Desktop.Pages
                 txt_DeviceIP.Content = DeviceIP;
                 txt_DeviceName.Text = Parameters.DeviceName;
             });
-            if (!isScanned)
-            {
-                ScanNetwork();
-                isScanned = true;
-            }
         }
         
         private void Main_OnClientRequested(string totalTransferSize, string deviceName)
@@ -71,14 +76,7 @@ namespace FileSharingApp_Desktop.Pages
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             string[] filePaths = SelectFiles();
-            if (filePaths == null)
-                return;
-            for(int i=0;i<filePaths.Length;i++)
-                FilePaths.Add(filePaths[i]);
-            list_Files.ItemsSource = FilePaths;
-            ShowFileList(true);
-            //Main.SetFilePaths(filePaths);
-            //Navigator.Navigate("Pages/DevicesPage.xaml");
+            AddFilesToList(filePaths);
         }
         /// <summary>
         /// The address of the file to be processed is selected
@@ -106,17 +104,7 @@ namespace FileSharingApp_Desktop.Pages
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] filePaths = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-                for (int i = 0; i < filePaths.Length; i++)
-                {
-                    Debug.WriteLine("file " + i + " : " + filePaths[i]);
-                }
-                if (filePaths == null)
-                    return;
-                for (int i = 0; i < filePaths.Length; i++)
-                    FilePaths.Add(filePaths[i]);
-                list_Files.ItemsSource = FilePaths;
-                ShowFileList(true);               
+                AddFilesToList(filePaths);
             }
         }
         private void ShowFileList(bool show)
@@ -130,6 +118,8 @@ namespace FileSharingApp_Desktop.Pages
                     grid_AddRemove.Visibility = Visibility.Visible;
                     lbl_Info.Visibility = Visibility.Hidden;
                     list_Files.SelectedIndex = 0;
+                    btn_Send.Visibility = Visibility.Visible;
+                    lbl_ReceiveInfo.Visibility = Visibility.Hidden;
                 }
                 else
                 {
@@ -137,13 +127,30 @@ namespace FileSharingApp_Desktop.Pages
                     list_Files.Visibility = Visibility.Hidden;
                     grid_AddRemove.Visibility = Visibility.Hidden;
                     lbl_Info.Visibility = Visibility.Visible;
+                    btn_Send.Visibility = Visibility.Hidden;
+                    lbl_ReceiveInfo.Visibility = Visibility.Visible;
                 }
             });
             
         }
         private void ScanNetwork()
         {
+            Debug.WriteLine("Scanning Network");
            Task.Run(()=> NetworkScanner.ScanAvailableDevices());
+        }
+        private void AddFilesToList(string[] filePaths)
+        {
+            if (filePaths == null)
+                return;
+            for (int i = 0; i < filePaths.Length; i++)
+            {
+                Debug.WriteLine("file " + i + " : " + filePaths[i]);
+                if(!FilePaths.Contains(filePaths[i]))
+                    FilePaths.Add(filePaths[i]);
+            }
+            list_Files.ItemsSource = FilePaths.ToArray(); ;
+            Main.SetFilePaths(FilePaths.ToArray());
+            ShowFileList(true);
         }
         private void txt_DeviceName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -171,12 +178,7 @@ namespace FileSharingApp_Desktop.Pages
         private void btn_AddFiles_Click(object sender, RoutedEventArgs e)
         {
             string[] filePaths = SelectFiles();
-            if (filePaths == null)
-                return;
-            for (int i = 0; i < filePaths.Length; i++)
-                FilePaths.Add(filePaths[i]);
-            list_Files.ItemsSource = FilePaths.ToArray() ;
-            ShowFileList(true);
+            AddFilesToList(filePaths);
         }
 
         private void btn_RemoveFiles_Click(object sender, RoutedEventArgs e)
@@ -194,7 +196,6 @@ namespace FileSharingApp_Desktop.Pages
             }
 
         }
-
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
             if (FilePaths == null)

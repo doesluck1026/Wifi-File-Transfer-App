@@ -39,7 +39,6 @@ namespace FileSharingApp_Desktop.Pages
                 });
             }
         }
-
         private void Main_OnTransferResponded(bool isAccepted)
         {
             Debug.WriteLine("Receiver Response: " + isAccepted);
@@ -51,6 +50,10 @@ namespace FileSharingApp_Desktop.Pages
                 });
                 Main.BeginSendingFiles();
                 Main.OnTransferResponded -= Main_OnTransferResponded;
+            }
+            else
+            {
+                var result = MessageBox.Show("Transfer request is rejected by receiver", "Transfer Rejected", button: MessageBoxButton.OK);
             }
         }
 
@@ -100,6 +103,10 @@ namespace FileSharingApp_Desktop.Pages
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
             Main.ConnectToTargetDevice(txt_DeviceIP.Text);            
+        }
+        private void btn_Back_Click(object sender, RoutedEventArgs e)
+        {
+            Navigator.GoBack();
         }
     }
 }

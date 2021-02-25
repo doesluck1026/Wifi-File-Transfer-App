@@ -25,6 +25,7 @@ namespace FileSharingApp_Desktop.Pages
         public OptionsPage()
         {
             InitializeComponent();
+            Main.OnClientRequested += Main_OnClientRequested;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -32,6 +33,23 @@ namespace FileSharingApp_Desktop.Pages
             {
                 txt_DeviceName.Text = Parameters.DeviceName;
                 txt_OutputFolder.Text = Parameters.SavingPath;
+            });
+        }
+        private void Main_OnClientRequested(string totalTransferSize, string senderDevice)
+        {
+            /// Show file transfer request and ask for permission here
+            Debug.WriteLine(senderDevice + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
+            var result = MessageBox.Show(senderDevice + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
+            Dispatcher.Invoke(() =>
+            {
+                if (result == MessageBoxResult.Yes)
+                {
+                    Main.OnClientRequested -= Main_OnClientRequested;
+                    Navigator.Navigate("Pages/TransferPage.xaml");
+                    Main.ResponseToTransferRequest(true);
+                }
+                else
+                    Main.ResponseToTransferRequest(false);
             });
         }
         private void btn_SelectFolder_Click(object sender, RoutedEventArgs e)

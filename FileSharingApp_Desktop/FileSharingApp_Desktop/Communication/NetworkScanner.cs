@@ -66,7 +66,7 @@ class NetworkScanner
     {
         //Stopwatch stp = Stopwatch.StartNew();
         client = new Client(port: PublishPort, ip: IP);
-        string clientIP = client.ConnectToServer(50);
+        string clientIP = client.ConnectToServer(30);
         if (string.IsNullOrEmpty(clientIP))
         {
             //Debug.WriteLine("Connection Failed on: " + IP);

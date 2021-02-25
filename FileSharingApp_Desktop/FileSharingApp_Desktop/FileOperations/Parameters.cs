@@ -11,7 +11,8 @@ class Parameters
 
     public static string SavingPath;
     public static string DeviceName;
-    private static bool didInit = false;
+    public static bool DidInitParameters = false;
+    public static bool IsUsingFirstTime;
     public static void Init()
     {
         var param = new ParametersBag();
@@ -20,10 +21,11 @@ class Parameters
             param.Load(parametersPath);
             SavingPath = param.SavingPath;
             DeviceName = param.DeviceName;
-            didInit = true;
+            DidInitParameters = true;
         }
         catch
         {
+            IsUsingFirstTime = true;
             SavingPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\";
             DeviceName = "MyDevice";
             Save();
@@ -31,7 +33,7 @@ class Parameters
     }
     public static void Save()
     {
-        if (!didInit)
+        if (!DidInitParameters)
         {
             System.Diagnostics.Debug.WriteLine("Init parameters first!");
             return;
