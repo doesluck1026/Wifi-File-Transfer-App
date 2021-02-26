@@ -41,7 +41,7 @@ class Client
                 {
                     //client.EndConnect(result);
                     client.Close();
-                    throw new Exception("Failed to connect.");
+                    return "";  //throw new Exception("Failed to connect.");
                 }
                 else
                     client.EndConnect(result);

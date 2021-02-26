@@ -39,6 +39,10 @@ namespace FileSharingApp_Desktop.Pages
                 });
             }
         }
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnTransferResponded -= Main_OnTransferResponded;
+        }
         private void Main_OnTransferResponded(bool isAccepted)
         {
             Debug.WriteLine("Receiver Response: " + isAccepted);
@@ -49,7 +53,6 @@ namespace FileSharingApp_Desktop.Pages
                     Navigator.Navigate("Pages/TransferPage.xaml");
                 });
                 Main.BeginSendingFiles();
-                Main.OnTransferResponded -= Main_OnTransferResponded;
             }
             else
             {
@@ -107,6 +110,6 @@ namespace FileSharingApp_Desktop.Pages
         private void btn_Back_Click(object sender, RoutedEventArgs e)
         {
             Navigator.GoBack();
-        }
+        }        
     }
 }

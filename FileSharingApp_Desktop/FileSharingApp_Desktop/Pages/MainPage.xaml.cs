@@ -40,8 +40,11 @@ namespace FileSharingApp_Desktop.Pages
                 list_Files.ItemsSource = FilePaths;
             }
             else
+            {
                 FilePaths = new List<string>();
-            if(!Parameters.DidInitParameters)
+                ShowFileList(false);
+            }
+            if (!Parameters.DidInitParameters)
             {
                 Parameters.Init();
                 ScanNetwork();
@@ -55,7 +58,10 @@ namespace FileSharingApp_Desktop.Pages
                 txt_DeviceName.Text = Parameters.DeviceName;
             });
         }
-        
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
+        }
         private void Main_OnClientRequested(string totalTransferSize, string deviceName)
         {
             /// Show file transfer request and ask for permission here
@@ -65,7 +71,6 @@ namespace FileSharingApp_Desktop.Pages
             {
                 if (result == MessageBoxResult.Yes)
                 {
-                    Main.OnClientRequested -= Main_OnClientRequested;
                     Navigator.Navigate("Pages/TransferPage.xaml");
                     Main.ResponseToTransferRequest(true);
                 }
@@ -194,7 +199,6 @@ namespace FileSharingApp_Desktop.Pages
                     Debug.WriteLine("index: " + list_Files.SelectedIndex);
                 });
             }
-
         }
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
@@ -205,6 +209,6 @@ namespace FileSharingApp_Desktop.Pages
                 Main.SetFilePaths(FilePaths.ToArray());
                 Navigator.Navigate("Pages/DevicesPage.xaml");
             }
-        }
+        }       
     }
 }

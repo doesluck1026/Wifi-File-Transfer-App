@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 class NetworkScanner
 {
@@ -17,55 +18,58 @@ class NetworkScanner
     public static List<string> DeviceNames = new List<string>();
     public static List<string> DeviceIPs = new List<string>();
     private static Thread scanThread;
+    private static string IPHeader;
+    public static bool IsDevicePublished = false;
     public static void ScanAvailableDevices()
     {
-        Thread.Sleep(500);
         string deviceIP, deviceHostname;
         GetDeviceAddress(out deviceIP, out deviceHostname);
         DeviceIP = deviceIP;
         DeviceNames.Clear();
         DeviceIPs.Clear();
+        Debug.WriteLine("Scan Started: ");
         char[] splitter = new char[] { '.' };
         var ipStack = deviceIP.Split(splitter);
-        string ipHeader = "";
+        IPHeader = "";
         for (int i = 0; i < 3; i++)
         {
-            ipHeader += ipStack[i] + ".";
+            IPHeader += ipStack[i] + ".";
         }
-        IPHolder holder = new IPHolder(2,256,ipHeader);
         if(scanThread!=null)
         {
             if (scanThread.IsAlive)
                 scanThread.Abort();
         }
         scanThread = new Thread(ParallelScan);
-        scanThread.Start(holder);
+        scanThread.Start();
     }
 
-    private static void ParallelScan(object sender)
+    private static void ParallelScan()
     {
         Stopwatch stp = Stopwatch.StartNew();
-        IPHolder holder = (IPHolder)sender;
-        for (int i = holder.StartIP; i < holder.StopIP; i++)
+        for (int i = 2; i < 256; i++)
         {
             try
             {
                 //Debug.WriteLine("Pinging: " + holder.IpHeader + i.ToString());
-                GetDeviceData(holder.IpHeader + i.ToString());
+                string targetIP = IPHeader + i.ToString();
+                if (targetIP == DeviceIP)
+                    continue;
+                GetDeviceData(targetIP);
             }
             catch
             {
 
             }
         }
-        if(OnScanCompleted!=null)
+        if (OnScanCompleted != null)
             OnScanCompleted();
         Debug.WriteLine("scanning time: " + stp.Elapsed.TotalSeconds + " s");
     }
     private static void GetDeviceData(string IP)
     {
         //Stopwatch stp = Stopwatch.StartNew();
-        client = new Client(port: PublishPort, ip: IP);
+        var client = new Client(port: PublishPort, ip: IP);
         string clientIP = client.ConnectToServer(30);
         if (string.IsNullOrEmpty(clientIP))
         {
@@ -97,6 +101,7 @@ class NetworkScanner
         publisherServer.SetupServer();
         publisherServer.StartListener();
         publisherServer.OnClientConnected += PublisherServer_OnClientConnected;
+        IsDevicePublished = true;
     }
 
     private static void PublisherServer_OnClientConnected(string clientIP)
@@ -107,6 +112,7 @@ class NetworkScanner
         publisherServer.GetData();
 
         publisherServer.CloseServer();
+        Thread.Sleep(100);
         PublishDevice();
     }
 
@@ -146,18 +152,5 @@ class NetworkScanner
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());
         return host.HostName;
-    }
-
-    private class IPHolder
-    {
-        public int StartIP;
-        public int StopIP;
-        public string IpHeader;
-        public IPHolder(int startIP,int stopIP,string ipHeader)
-        {
-            this.StartIP = startIP;
-            this.StopIP = stopIP;
-            this.IpHeader = ipHeader;
-        }
     }
 }
