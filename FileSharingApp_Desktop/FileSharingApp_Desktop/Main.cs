@@ -196,7 +196,10 @@ public class Main
             if (OnTransferResponded != null)
                 OnTransferResponded(isAccepted);
             else
-                ResponseToTransferRequest(false);
+            {
+                 client.DisconnectFromServer();
+        client = null;
+            }
         });
         
     }
