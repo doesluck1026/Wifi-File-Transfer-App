@@ -44,7 +44,7 @@ class NetworkScanner
 
     private static int[] scanProgressArr;
     private static string DeviceIP;
-    private static readonly int PublishPort = 42019;
+    private static readonly int PublishPort = 41019;
     private static Server publisherServer;
 
     private static string IPHeader;
