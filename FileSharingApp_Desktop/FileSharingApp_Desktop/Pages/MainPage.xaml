@@ -11,12 +11,22 @@
       Unloaded="Page_Unloaded"
       >
 
-    <Grid Background="#353536" Margin="5,5,5,5" >
+    <Grid Background="#353536" Margin="5,5,5,5"  >
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>         
             <RowDefinition Height="6*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+
+        
+        <Image Source="BC_logo_1.png" Grid.RowSpan="3" Opacity="0.1" />
+
+
+        <Border Grid.Row="0" BorderThickness="0,0,0,2" 
+                Margin="10,0" BorderBrush="LightBlue" />
+        <Border Grid.Row="1" BorderThickness="0,0,0,2"
+                Margin="10,0" BorderBrush="LightBlue" />
+
         <Grid Grid.Row="0" >
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="4*"/>
@@ -27,8 +37,10 @@
             </Grid.ColumnDefinitions>
             <Label Content="Device Name: " Grid.Column="0" FontSize="25" HorizontalAlignment="Left" 
                    VerticalAlignment="center" Foreground="White"/>
-            <TextBox x:Name="txt_DeviceName" Text="bişeyler" Grid.Column="1" FontSize="25" 
-                     HorizontalAlignment="Left" VerticalAlignment="center" Foreground="White" 
+            <TextBox x:Name="txt_DeviceName" Text="bişeyler" 
+                     Grid.Column="1" FontSize="25" 
+                     HorizontalAlignment="Left" VerticalAlignment="center" 
+                     Foreground="White" BorderThickness="0"
                      IsReadOnly="True" Background="Transparent" 
                      MouseDoubleClick="txt_DeviceName_MouseDoubleClick"
                      KeyDown="txt_DeviceName_KeyDown"/>
@@ -37,13 +49,15 @@
             <Label x:Name="txt_DeviceIP" Content="192.168.1.25" Grid.Column="3" FontSize="25"
                    HorizontalAlignment="Left" VerticalAlignment="center" Foreground="White" 
                    Background="Transparent"/>
-            <Button x:Name="btn_Settings" Click="btn_Settings_Click" FontSize="50"
+            <Button x:Name="btn_Settings" Click="btn_Settings_Click" 
+                    FontSize="50" Background="Transparent"
+                    BorderThickness="0"
                     Grid.Column="4" Margin="0,5,0,5">
                 <Image x:Name="icon_Options" Width="30" Source="Options.png" />
             </Button>
         </Grid> <!--info Bar-->
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
@@ -67,17 +81,25 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="btn_AddFiles" Content="Add"  FontSize="25" 
-                                Foreground="White" Click="btn_AddFiles_Click" Grid.Column="0"/>
-                        <Button x:Name="btn_RemoveFiles" Content="Remove"  FontSize="25" 
-                                Foreground="White" Click="btn_RemoveFiles_Click" Grid.Column="1"/>
+                        <Button x:Name="btn_AddFiles" Content="Add" 
+                                FontSize="18" Foreground="White" 
+                                Style="{StaticResource Blue}" Margin="10"
+                                Click="btn_AddFiles_Click" Grid.Column="0"/>
+                        
+                        <Button x:Name="btn_RemoveFiles" Content="Remove" 
+                                Style="{StaticResource Red}" Margin="10"
+                                FontSize="18" Foreground="White" 
+                                Click="btn_RemoveFiles_Click" Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </Border>
         </Grid>
-        <Button x:Name="btn_Send" Content="Send Files" FontSize="35" Grid.Row="2"
-                    VerticalAlignment="Center" HorizontalAlignment="Center" 
+        <Button x:Name="btn_Send" Content="Send Files" 
+                FontSize="25" Grid.Row="2"
+                    Style="{StaticResource Green}" Margin="10"
+                VerticalAlignment="Center" HorizontalAlignment="Center" 
                 Click="btn_Send_Click" Visibility="Hidden"/>
+        
         <Label x:Name="lbl_ReceiveInfo" FontSize="25" Grid.Row="2" 
                Content="Or wait here to receive files"
                    HorizontalAlignment="Center" VerticalAlignment="center" Foreground="White" 
