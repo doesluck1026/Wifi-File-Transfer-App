@@ -23,13 +23,7 @@ namespace FileSharingApp_Desktop.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Main.OnTransferResponded += Main_OnTransferResponded;
-            if (NetworkScanner.DeviceNames != null)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
-                });
-            }
+            ShowDevices();
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -64,20 +58,14 @@ namespace FileSharingApp_Desktop.Pages
         private void btn_Scan_Click(object sender, RoutedEventArgs e)
         {
             NetworkScanner.DeviceNames = new List<string>();
-            NetworkScanner.ScanAvailableDevices();
             NetworkScanner.OnScanCompleted += NetworkScanner_OnScanCompleted;
+            Task.Run(()=> NetworkScanner.ScanAvailableDevices());
             isScanning = true;
             Task.Run(() =>
             {
                 while (isScanning)
                 {
-                    if (NetworkScanner.DeviceNames != null)
-                    {
-                        Dispatcher.Invoke(() =>
-                        {
-                            list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
-                        });
-                    }
+                    ShowDevices();
                     Thread.Sleep(100);
                 }
             });
@@ -86,13 +74,7 @@ namespace FileSharingApp_Desktop.Pages
         private void NetworkScanner_OnScanCompleted()
         {
             isScanning = false;
-            if (NetworkScanner.DeviceNames != null)
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
-                });
-            }
+            ShowDevices();
         }
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
@@ -102,6 +84,20 @@ namespace FileSharingApp_Desktop.Pages
         private void btn_Back_Click(object sender, RoutedEventArgs e)
         {
             Navigator.GoBack();
-        }        
+        }     
+        private void ShowDevices()
+        {
+            if (NetworkScanner.DeviceNames != null)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
+                    if (NetworkScanner.DeviceNames.Count > 0)
+                    {
+                        list_Devices.SelectedIndex = 0;
+                    }
+                });
+            }
+        }
     }
 }
