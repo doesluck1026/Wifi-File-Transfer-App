@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\
 FileSharingApp_Desktop
 none
 false
 DEBUG;TRACE
-E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\App.xaml
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\App.xaml
 7-497112439
 
-27-2110921834
-201042240041
+261216118401
+20-1598919374
 MainWindow.xaml;Pages\DevicesPage.xaml;Pages\MainPage.xaml;Pages\OptionsPage.xaml;Pages\SplashScreen.xaml;Pages\TransferDonePage.xaml;Pages\TransferPage.xaml;
 
-True
+False
 
