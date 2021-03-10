@@ -57,13 +57,11 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_Scan_Click(object sender, RoutedEventArgs e)
         {
-            NetworkScanner.DeviceNames = new List<string>();
             NetworkScanner.OnScanCompleted += NetworkScanner_OnScanCompleted;
-            Task.Run(()=> NetworkScanner.ScanAvailableDevices());
-            isScanning = true;
+            NetworkScanner.ScanAvailableDevices();
             Task.Run(() =>
             {
-                while (isScanning)
+                while (NetworkScanner.IsScanning)
                 {
                     ShowDevices();
                     Thread.Sleep(100);

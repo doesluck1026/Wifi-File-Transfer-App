@@ -79,7 +79,7 @@ class NetworkScanner
         IsScanning = true;
         Task.Run(() =>
         {
-            int numTasks = 16;
+            int numTasks = 8;
             int stackSize = 256 / numTasks;
             scanProgressArr = new int[numTasks];
             for (int i = 0; i < numTasks; i++)

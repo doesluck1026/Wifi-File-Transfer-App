@@ -135,7 +135,7 @@ namespace FileSharingApp_Desktop.Pages
         private void ScanNetwork()
         {
             Debug.WriteLine("Scanning Network");
-           Task.Run(()=> NetworkScanner.ScanAvailableDevices());
+            NetworkScanner.ScanAvailableDevices();
             Debug.WriteLine("Scanningg");
         }
         private void AddFilesToList(string[] filePaths)
