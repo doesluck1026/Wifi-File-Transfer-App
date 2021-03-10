@@ -16,10 +16,23 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
+
+        <Image Source="BC_logo_1.png" Grid.RowSpan="3" Grid.ColumnSpan="3"  Opacity="0.1" />
+
+
+        <Border Grid.Row="0" BorderThickness="0,0,0,2" 
+                Margin="10,0" BorderBrush="LightBlue" />
+        <Border Grid.Row="1" BorderThickness="0,0,0,2"
+                Margin="10,0" BorderBrush="LightBlue" />
+
         <Label Content="File Transfer is Succesful!" FontSize="25" Foreground="White" VerticalAlignment="Center"
                HorizontalAlignment="Center" Grid.Row="0"/>
-        <ListView x:Name="list_Files" SelectionChanged="list_Files_SelectionChanged" Grid.Row="1" VerticalAlignment="Center"
-                      HorizontalAlignment="Center" Background="White" Margin="5" Width="700" Height="300"/>
+        
+        <ListView x:Name="list_Files" SelectionChanged="list_Files_SelectionChanged" 
+                  Grid.Row="1" VerticalAlignment="Center"
+                  HorizontalAlignment="Center" Background="White"
+                  Margin="10" Width="700" Height="300"/>
+        
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="5*"/>
@@ -28,11 +41,19 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="7*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="btn_MainMenu" Grid.Column="0" Content="Main Menu" Click="btn_MainMenu_Click" 
+            <Button x:Name="btn_MainMenu" Grid.Column="0"
+                    Style="{StaticResource Blue}" Margin="10"
+                    Content="Main Menu" Click="btn_MainMenu_Click" 
                     FontSize="25" Foreground="White"/>
-            <Button x:Name="btn_OpenFile" Grid.Column="2" Content="Open FILE" Click="btn_OpenFile_Click" 
+            
+            <Button x:Name="btn_OpenFile" Grid.Column="2" 
+                    Style="{StaticResource Blue}" Margin="10"
+                    Content="Open FILE" Click="btn_OpenFile_Click" 
                     FontSize="25" Foreground="White"/>
-            <Button x:Name="btn_OpenFolder" Grid.Column="4" Content="Open Output Folder" Click="btn_OpenFolder_Click" 
+            
+            <Button x:Name="btn_OpenFolder" Grid.Column="4" 
+                    Style="{StaticResource Blue}" Margin="10"
+                    Content="Open Output Folder" Click="btn_OpenFolder_Click" 
                     FontSize="25" Foreground="White"/>
         </Grid>
     </Grid>

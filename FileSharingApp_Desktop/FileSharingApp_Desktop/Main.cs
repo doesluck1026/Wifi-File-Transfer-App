@@ -65,6 +65,19 @@ public class Main
                 _isTransfering = value;
         }
     }
+    public static bool IsSending
+    {
+        get
+        {
+            lock (Lck_IsSending)
+                return _isSending;
+        }
+        set
+        {
+            lock (Lck_IsSending)
+                _isSending = value;
+        }
+    }
     private static bool IsTransferEnabled
     {
         get
@@ -93,6 +106,7 @@ public class Main
     private static Thread sendingThread;
     private static bool _isTransferEnabled = false;
     private static bool _isTransfering = false;
+    private static bool _isSending = false;
     private static FileStruct CurrentFile;
     private static Metrics _transferMetrics;
     private static int MB = 1024 * 1024;
@@ -102,6 +116,7 @@ public class Main
     private static object Lck_IsTransferEnabled = new object();
     private static object Lck_TransferMetrics = new object();
     private static object Lck_IsTransfering = new object();
+    private static object Lck_IsSending = new object();
     #endregion
 
     #region Enums and structures definitions
@@ -135,6 +150,7 @@ public class Main
         public double TotalDataSize;        /// MB KB GB...
         public double TotalDataSent;        /// MB KB GB...
         public FileOperations.SizeUnit SizeUnit;
+        public FileOperations.SizeUnit SentSizeUnit;
         public double Progress;             /// between 0 and 100
         public double TotalElapsedTime;     /// Seconds
         public double EstimatedTime;        /// Seconds
@@ -186,7 +202,7 @@ public class Main
         Task.Run(() =>
         {
             byte[] clientResponse = client.GetData();
-            bool isAccepted=false;
+            bool isAccepted = false;
             if (clientResponse != null)
             {
                 if ((Functions)clientResponse[0] == Functions.AcceptFiles)
@@ -197,11 +213,11 @@ public class Main
                 OnTransferResponded(isAccepted);
             else
             {
-                 client.DisconnectFromServer();
-        client = null;
+                client.DisconnectFromServer();
+                client = null;
             }
         });
-        
+
     }
     public static void BeginSendingFiles()
     {
@@ -289,7 +305,7 @@ public class Main
         }
         IsTransfering = false;
         SendLastFrame();
-        if(OnTransferFinished!=null)
+        if (OnTransferFinished != null)
             OnTransferFinished();
         client.DisconnectFromServer();
         client = null;
@@ -300,6 +316,10 @@ public class Main
     private static bool CheckAck(Functions func)
     {
         byte[] data = client.GetData();
+        if (data == null)
+            return false;
+        if (data.Length <= 0)
+            return false;
         if (data[0] == (byte)func)
             return true;
         else
@@ -325,6 +345,7 @@ public class Main
             _transferMetrics.SizeUnit = file.FileSizeUnit;
             file.CalculateFileSize(_transferMetrics.TotalBytesSent);
             _transferMetrics.TotalDataSent = file.FileSize;
+            _transferMetrics.SentSizeUnit = file.FileSizeUnit;
         }
     }
     private static void SendFirstFrame()
@@ -365,10 +386,13 @@ public class Main
         byte[] receivedData = client.GetData();
         if (receivedData == null)
             return false;
-        if ((Functions)receivedData[0] == Functions.Ready)
-            return true;
-        else
-            return false;
+        bool isReady = false;
+        if (receivedData.Length > 0)
+        {
+            if ((Functions)receivedData[0] == Functions.Ready)
+                isReady = true;
+        }
+        return isReady;
     }
     private static long GetTransferSize()
     {
@@ -414,6 +438,23 @@ public class Main
         else
             data[0] = (byte)Functions.RejectFiles;
         server.SendDataToClient(data);
+        if (!isAccepted)
+        {
+            Task.Run(() =>
+            {
+                Thread.Sleep(500);
+                try
+                {
+                    server.CloseServer();
+                    server = null;
+                    StartServer();
+                }
+                catch
+                {
+
+                }
+            });
+        }
     }
 
     #endregion
@@ -438,7 +479,11 @@ public class Main
             File.CalculateFileSize(transferSize);
             string fileSizeString = File.FileSize.ToString("0.00") + " " + File.FileSizeUnit.ToString();
             Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString + " device Name: " + senderDevice);
-            OnClientRequested(fileSizeString, senderDevice);
+            IsSending = false;
+            if (OnClientRequested != null)
+                OnClientRequested(fileSizeString, senderDevice);
+            else
+                ResponseToTransferRequest(false);
             _transferMetrics.TotalDataSizeAsBytes = transferSize;
         }
     }
@@ -474,6 +519,7 @@ public class Main
             FilePaths[i] = FileSaveURL + CurrentFile.FileName;
             SendReadySignal();
             File = new FileOperations();
+            Debug.WriteLine("receiveing for: " + i + " FilePaths.Length: " + FilePaths.Length);
             File.Init(FileSaveURL + CurrentFile.FileName, FileOperations.TransferMode.Receive);
             Debug.WriteLine("saveURL:" + FileSaveURL + " name: " + CurrentFile.FileName);
             lock (Lck_TransferMetrics)

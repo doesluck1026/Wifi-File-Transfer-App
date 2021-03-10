@@ -77,12 +77,12 @@ class NetworkScanner
         IsScanning = true;
         Task.Run(() =>
         {
-            int numTasks = 10;
+            int numTasks = 20;
             int stackSize = 255 / numTasks;
             scanProgressArr = new int[numTasks];
             for (int i = 0; i < numTasks; i++)
             {
-                ParallelScan(stackSize * i + 1, stackSize * (i + 1) + 1, i);
+                ParallelScan(stackSize * i, stackSize * (i + 1), i);
                 // Debug.WriteLine("i: "+ i+"  stx:"+ (stackSize * i + 1)+" endx: "+(stackSize * (i + 1) + 1));
             }
             Task.Run(() =>

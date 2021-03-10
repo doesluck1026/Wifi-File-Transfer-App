@@ -127,3 +127,49 @@ C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masa�
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferPage.baml
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\OptionsPage.g.cs
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\OptionsPage.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.exe.config
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.exe
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\FileSharingApp_Desktop.pdb
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\en\FileSharingApp_Desktop.resources.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\tr\FileSharingApp_Desktop.resources.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignColors.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignColors.pdb
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.pdb
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\MaterialDesignThemes.Wpf.xml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csprojAssemblyReference.cache
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\DevicesPage.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\MainPage.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\OptionsPage.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferDonePage.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferPage.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop_MarkupCompile.cache
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop_MarkupCompile.lref
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\DevicesPage.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\MainPage.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\OptionsPage.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferDonePage.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferPage.baml
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.g.resources
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.resources
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Resource.Resource.en.resources
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Resource.Resource.tr.resources
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.GenerateResource.cache
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CoreCompileInputs.cache
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\en\FileSharingApp_Desktop.resources.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\tr\FileSharingApp_Desktop.resources.dll
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.exe
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.pdb
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.g.cs
+E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.baml
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.g.cs
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.baml
