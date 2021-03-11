@@ -10,11 +10,19 @@ none
 false
 DEBUG;TRACE
 E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\App.xaml
+<<<<<<< Updated upstream
 7-497112439
 
 27-2110921834
 201042240041
 MainWindow.xaml;Pages\DevicesPage.xaml;Pages\MainPage.xaml;Pages\OptionsPage.xaml;Pages\SplashScreen.xaml;Pages\TransferDonePage.xaml;Pages\TransferPage.xaml;
+=======
+61527683168
+
+25-1669040576
+201042240041
+MainWindow.xaml;Pages\DevicesPage.xaml;Pages\MainPage.xaml;Pages\OptionsPage.xaml;Pages\TransferDonePage.xaml;Pages\TransferPage.xaml;
+>>>>>>> Stashed changes
 
 True
 
