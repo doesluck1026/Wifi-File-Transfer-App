@@ -59,9 +59,10 @@ namespace FileSharingApp_Desktop.Pages
         {
             /// Show file transfer request and ask for permission here
             Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
-            var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
             Dispatcher.Invoke(() =>
             {
+                var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
@@ -134,7 +135,8 @@ namespace FileSharingApp_Desktop.Pages
         private void ScanNetwork()
         {
             Debug.WriteLine("Scanning Network");
-           Task.Run(()=> NetworkScanner.ScanAvailableDevices());
+            NetworkScanner.ScanAvailableDevices();
+            Debug.WriteLine("Scanningg");
         }
         private void AddFilesToList(string[] filePaths)
         {
