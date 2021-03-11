@@ -170,3 +170,6 @@ E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\o
 E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.g.cs
 E:\Github\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.baml
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.g.cs
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.baml

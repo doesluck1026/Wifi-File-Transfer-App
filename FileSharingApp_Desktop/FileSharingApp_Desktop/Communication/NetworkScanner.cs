@@ -59,6 +59,8 @@ class NetworkScanner
     private static int ScanCounter = 0;
     public static void ScanAvailableDevices(int timeout = 200)
     {
+        if (IsScanning)
+            return;
         ConnectionTimeout = timeout;
         ScanPercentage = 0;
         string deviceIP, deviceHostname;
@@ -77,12 +79,12 @@ class NetworkScanner
         IsScanning = true;
         Task.Run(() =>
         {
-            int numTasks = 10;
-            int stackSize = 255 / numTasks;
+            int numTasks = 8;
+            int stackSize = 256 / numTasks;
             scanProgressArr = new int[numTasks];
             for (int i = 0; i < numTasks; i++)
             {
-                ParallelScan(stackSize * i + 1, stackSize * (i + 1) + 1, i);
+                ParallelScan(stackSize * i, stackSize * (i + 1), i);
                 // Debug.WriteLine("i: "+ i+"  stx:"+ (stackSize * i + 1)+" endx: "+(stackSize * (i + 1) + 1));
             }
             Task.Run(() =>
@@ -98,7 +100,7 @@ class NetworkScanner
                     percentage /= numTasks;
                     //Debug.WriteLine("percentage: " + percentage);
                     ScanPercentage = percentage;
-                    if (percentage >= 99)
+                    if (percentage >= 99 || stopwatch.Elapsed.TotalSeconds>12)
                         break;
                     Thread.Sleep(50);
                 }

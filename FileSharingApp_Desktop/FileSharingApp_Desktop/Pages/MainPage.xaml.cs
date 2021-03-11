@@ -3,17 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FileSharingApp_Desktop.Pages
 {
@@ -66,9 +59,10 @@ namespace FileSharingApp_Desktop.Pages
         {
             /// Show file transfer request and ask for permission here
             Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
-            var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
             Dispatcher.Invoke(() =>
             {
+                var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
+
                 if (result == MessageBoxResult.Yes)
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
@@ -141,7 +135,8 @@ namespace FileSharingApp_Desktop.Pages
         private void ScanNetwork()
         {
             Debug.WriteLine("Scanning Network");
-           Task.Run(()=> NetworkScanner.ScanAvailableDevices());
+            NetworkScanner.ScanAvailableDevices();
+            Debug.WriteLine("Scanningg");
         }
         private void AddFilesToList(string[] filePaths)
         {
@@ -167,6 +162,7 @@ namespace FileSharingApp_Desktop.Pages
             {
                 Parameters.DeviceName = txt_DeviceName.Text;
                 Parameters.Save();
+                txt_DeviceName.IsReadOnly = true;
             }
         }
 

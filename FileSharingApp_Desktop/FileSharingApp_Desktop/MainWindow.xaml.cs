@@ -23,9 +23,6 @@ namespace FileSharingApp_Desktop
         {
             Main.StartServer();
             NetworkScanner.PublishDevice();
-
-            //Thread.Sleep(2000);
-
             Navigator.Navigate("Pages/SplashScreen.xaml");
         }
         private void Window_Closed(object sender, EventArgs e)

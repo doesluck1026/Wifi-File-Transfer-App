@@ -25,26 +25,21 @@ namespace FileSharingApp_Desktop.Pages
         {
             InitializeComponent();
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            System.Timers.Timer aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            aTimer.Interval = 2000;
-            aTimer.Enabled = true;
+            Task.Run(() =>
+            {
+                System.Threading.Thread.Sleep(2000);
+                OnTimedEvent();
+            });
         }
 
-        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        private void OnTimedEvent()
         {
-
             Dispatcher.Invoke(() =>
             {
                 Navigator.Navigate("Pages/MainPage.xaml");
             });
-
-           
-
         }
-
     }
 }
