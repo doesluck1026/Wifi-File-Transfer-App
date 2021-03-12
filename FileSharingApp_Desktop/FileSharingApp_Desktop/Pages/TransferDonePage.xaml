@@ -25,8 +25,18 @@
         <Border Grid.Row="1" BorderThickness="0,0,0,2"
                 Margin="10,0" BorderBrush="LightBlue" />
 
-        <Label Content="File Transfer is Succesful!" FontSize="25" Foreground="White" VerticalAlignment="Center"
-               HorizontalAlignment="Center" Grid.Row="0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            
+            <Image Source="/Icons/check.png" 
+                   Margin="0,0,30,0"
+                   Width="50" Height="50"/>
+
+        <Label Content="File Transfer is Succesful!" 
+               FontSize="25" Foreground="White"
+               VerticalAlignment="Center" HorizontalAlignment="Center" 
+               Grid.Row="0"/>
+            
+        </StackPanel>
         
         <ListView x:Name="list_Files" SelectionChanged="list_Files_SelectionChanged" 
                   Grid.Row="1" VerticalAlignment="Center"
@@ -39,22 +49,49 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="btn_MainMenu" Grid.Column="0"
                     Style="{StaticResource Blue}" Margin="10"
-                    Content="Main Menu" Click="btn_MainMenu_Click" 
-                    FontSize="25" Foreground="White"/>
-            
+                    Click="btn_MainMenu_Click" 
+                    FontSize="20" Foreground="White">
+                
+                <Grid Width="180">
+                    <Image Source="/Icons/Home.png" 
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                </Grid>
+            </Button>
+
             <Button x:Name="btn_OpenFile" Grid.Column="2" 
                     Style="{StaticResource Blue}" Margin="10"
-                    Content="Open FILE" Click="btn_OpenFile_Click" 
-                    FontSize="25" Foreground="White"/>
-            
+                    Click="btn_OpenFile_Click" 
+                    FontSize="20" Foreground="White">
+                
+                <Grid Width="180">
+                    <Image Source="/Icons/menu.png" 
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="Open File" TextWrapping="WrapWithOverflow"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                               TextAlignment="Center" Padding="2"/>
+                </Grid>
+            </Button>
             <Button x:Name="btn_OpenFolder" Grid.Column="4" 
                     Style="{StaticResource Blue}" Margin="10"
-                    Content="Open Output Folder" Click="btn_OpenFolder_Click" 
-                    FontSize="25" Foreground="White"/>
+                    Click="btn_OpenFolder_Click" 
+                    FontSize="20" Foreground="White">
+                <Grid Width="180">
+                    <Image Source="/Icons/folder.png" 
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="Open Output Folder" TextWrapping="WrapWithOverflow"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"
+                               TextAlignment="Center" Padding="2"/>
+                </Grid>
+            </Button>
         </Grid>
     </Grid>
 </Page>

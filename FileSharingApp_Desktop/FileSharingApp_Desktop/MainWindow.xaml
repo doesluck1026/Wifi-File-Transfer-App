@@ -7,14 +7,63 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Title="Wifi File Transfer " 
-        Height="600" 
+        Height="650" 
         Width="800"
         ResizeMode="CanMinimize" 
         Background="#353536"
         Closed="Window_Closed"
         >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
 
-    <Frame x:Name="MainFrame" HorizontalAlignment="Center" VerticalAlignment="Center" NavigationUIVisibility="Hidden" 
-           Width="750" Height="560" />
+        <Grid Grid.Row="0" Background="#1E88FA" >
+           
+            <Image Source="/Pages/BC_logo_1.png" 
+                   
+                   Margin="20,5"
+                   HorizontalAlignment="Left"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" 
+            HorizontalAlignment="Right" 
+                    Margin="10,0">
+
+            <Button Width="50" Height="50"
+                    Margin="4,5"
+                    Background="Transparent" BorderThickness="0">
+                <Image Source="/Icons/blogger.png" />
+            </Button>
+
+            <Button Width="50" Height="50"
+                    Margin="4,5"
+                    Background="Transparent" BorderThickness="0">
+                <Image Source="/Icons/patreon.png" />
+            </Button>
+            
+            <Button Width="50" Height="50" 
+                    Margin="4,5"
+                    Background="Transparent" BorderThickness="0" >
+                <Image Source="/Icons/instagram.png" />
+            </Button>
+
+            <Button Width="50" Height="50" 
+                    Margin="4,5"
+                    Background="Transparent" BorderThickness="0" >
+                <Image Source="/Icons/youtube.png" />
+            </Button>
+
+        </StackPanel>
+
+        <Frame x:Name="MainFrame" 
+               Grid.Row="1"
+           HorizontalAlignment="Center" VerticalAlignment="Center" 
+           NavigationUIVisibility="Hidden" 
+           Width="800" Height="560" />
+    </Grid>
+    
+   
 
 </Window>

@@ -115,11 +115,21 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
             <Button x:Name="btn_AbortTransfer" Grid.Column="4"
                     Style="{StaticResource Red}" Margin="5"
-                    Content="Abort" Click="btn_AbortTransfer_Click" 
-                    FontSize="30" VerticalAlignment="Center"
-                    HorizontalAlignment="Stretch" Foreground="White"/>
+                    Click="btn_AbortTransfer_Click" 
+                    FontSize="25" VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch" Foreground="White">
+                
+                <Grid Width="150">
+                    <Image Source="/Icons/x-mark.png" 
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="Abort" 
+                                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                </Grid>
+            </Button>
         </Grid>
     </Grid>
 </Page>
