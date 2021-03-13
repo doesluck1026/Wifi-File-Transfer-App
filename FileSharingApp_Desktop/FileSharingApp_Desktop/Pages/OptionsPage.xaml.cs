@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FileTransferApp_Mobile.Resources;
 
 namespace FileSharingApp_Desktop.Pages
 {
@@ -22,10 +25,16 @@ namespace FileSharingApp_Desktop.Pages
     /// </summary>
     public partial class OptionsPage : Page
     {
+        Dictionary<string, string> LanguageList = new Dictionary<string, string>();
         public OptionsPage()
         {
             InitializeComponent();
             Main.OnClientRequested += Main_OnClientRequested;
+            LanguageList.Add("English", "en");
+            LanguageList.Add("Türkçe", "tr");
+            var languageCodeList = LanguageList.Values.ToList();
+            Combo_Languages.ItemsSource = LanguageList.Keys.ToArray();
+            Combo_Languages.SelectedIndex = languageCodeList.IndexOf(Parameters.DeviceLanguage);
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -67,7 +76,12 @@ namespace FileSharingApp_Desktop.Pages
             if (txt_OutputFolder.Text[txt_OutputFolder.Text.Length - 1] != '\\')
                 txt_OutputFolder.Text += "\\";
             Parameters.SavingPath = txt_OutputFolder.Text;
-            Debug.WriteLine("Parameters.DeviceName: " + Parameters.DeviceName + " Parameters.SavingPath: " + Parameters.SavingPath);
+            string selectedLanguage = Combo_Languages.SelectedItem.ToString();
+            string languageCode;
+            LanguageList.TryGetValue(selectedLanguage, out languageCode);
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageCode);
+            AppResources.Culture = new CultureInfo(languageCode);
+            Parameters.DeviceLanguage = languageCode;
             Parameters.Save();
         }
 

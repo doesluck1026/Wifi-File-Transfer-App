@@ -20,24 +20,27 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="#1E88FA" >
-           
-            <Image Source="/Pages/BC_logo_1.png" 
-                   
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/Pages/BC_logo_1.png"                   
                    Margin="20,5"
                    HorizontalAlignment="Left"/>
+                <Label Content="Buggy Company" FontWeight="Bold" FontSize="20"  
+                   VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Foreground="White" FontStyle="Italic" />
+            </StackPanel>
+            
         </Grid>
 
         <StackPanel Orientation="Horizontal" 
             HorizontalAlignment="Right" 
                     Margin="10,0">
-
             <Button  x:Name="Btn_Blogger" Width="100" Height="50" Click="Btn_Blogger_Click"
                     Margin="0,5" 
                     Background="Transparent" BorderThickness="0">
                 <Border BorderBrush="Orange" BorderThickness="1" Background="Orange" CornerRadius="2" >
                     <StackPanel Orientation="Horizontal" Background="Transparent" >
                         <Image Source="/Icons/blogger.png" Width="25" />
-                        <Label Content="Blogger" />
+                        <Label Content="Blogger"  Foreground="White" FontWeight="Bold" />
                     </StackPanel>
                 </Border>
                 
@@ -49,7 +52,7 @@
                 <Border BorderBrush="LightPink" BorderThickness="1" Background="LightPink" CornerRadius="2" >
                     <StackPanel Orientation="Horizontal">
                     <Image Source="/Icons/patreon.png" Width="25" />
-                    <Label Content="Patreon" />
+                        <Label Content="Patreon" Foreground="White" FontWeight="Bold" />
                     </StackPanel>
                 </Border>
 
@@ -61,7 +64,7 @@
                 <Border BorderBrush="IndianRed" BorderThickness="1" Background="IndianRed" CornerRadius="2" >
                     <StackPanel Orientation="Horizontal" Background="IndianRed">
                     <Image Source="/Icons/instagram.png" Width="25" />
-                    <Label Content="Instagram" />
+                        <Label Content="Instagram" Foreground="White" FontWeight="Bold" />
                     </StackPanel>
                 </Border>
 
@@ -73,7 +76,7 @@
                 <Border BorderBrush="PaleVioletRed" BorderThickness="1" Background="PaleVioletRed" CornerRadius="2" >
                     <StackPanel Orientation="Horizontal" Background="PaleVioletRed">
                     <Image Source="/Icons/youtube.png" Width="25" />
-                    <Label Content="Youtube" />
+                        <Label Content="Youtube" Foreground="White" FontWeight="Bold"/>
                     </StackPanel>
                 </Border>
 

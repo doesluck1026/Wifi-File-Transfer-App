@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Ac_btnReceive" xml:space="preserve">
+    <value>Dosya Al</value>
+  </data>
+  <data name="Ac_btnSend" xml:space="preserve">
+    <value>Dosya Gönder</value>
+  </data>
+  <data name="Ac_InfoMessage" xml:space="preserve">
+    <value>Yapılacak İşlemi seç...</value>
+  </data>
+  <data name="Done_btnHome" xml:space="preserve">
+    <value>Anasayfa</value>
+  </data>
+  <data name="Done_btnOpen" xml:space="preserve">
+    <value>Aç</value>
+  </data>
+  <data name="Done_InfoMessage" xml:space="preserve">
+    <value>Dosya Transferi Başarılı!</value>
+  </data>
+  <data name="Done_lblFiles" xml:space="preserve">
+    <value>Dosyalar</value>
+  </data>
+  <data name="Files_Warning_NoFile" xml:space="preserve">
+    <value>Hiç Bir Dosya Seçilmedi!</value>
+  </data>
+  <data name="File_btnAdd" xml:space="preserve">
+    <value>Dosya ekle...</value>
+  </data>
+  <data name="File_btnConfirm" xml:space="preserve">
+    <value>Onayla</value>
+  </data>
+  <data name="File_btnOpen" xml:space="preserve">
+    <value>Göster</value>
+  </data>
+  <data name="File_btnRemove" xml:space="preserve">
+    <value>Kaldır</value>
+  </data>
+  <data name="File_InfoMessage" xml:space="preserve">
+    <value>Seçtiğin Dosyaları İncele</value>
+  </data>
+  <data name="File_SelectedList" xml:space="preserve">
+    <value>Dosya Listesi</value>
+  </data>
+  <data name="Info_InfoMessage" xml:space="preserve">
+    <value>Bu uygulamayı kullandığınız için teşekkür ederiz. Daha fazlası için bizi takip edip destekleyebilirsiniz.</value>
+  </data>
+  <data name="Main_btnSelect" xml:space="preserve">
+    <value>Dosyaları Seç</value>
+  </data>
+  <data name="Main_InfoMessage1" xml:space="preserve">
+    <value>Lütfen alıcı cihaz ile aynı WiFi'a bağlı olduğunuzdan emin olun.</value>
+  </data>
+  <data name="Main_InfoMessage2" xml:space="preserve">
+    <value>Göndermek istediğin dosyaları seç. Birden fazla dosyayı aynı anda seçebilirsin.</value>
+  </data>
+  <data name="Permission_btnAccept" xml:space="preserve">
+    <value>Kabul Et</value>
+  </data>
+  <data name="Permission_InfoMessage" xml:space="preserve">
+    <value>Yeni İstel</value>
+  </data>
+  <data name="Permission_RequestMessage" xml:space="preserve">
+    <value>size dosya göndermek istiyor: </value>
+  </data>
+  <data name="Permission_RequestMessage2" xml:space="preserve">
+    <value>Almak istiyor musunuz?</value>
+  </data>
+  <data name="Permisson_btnDecline" xml:space="preserve">
+    <value>Reddet</value>
+  </data>
+  <data name="Rec_InfoMessage" xml:space="preserve">
+    <value>Bağlantı bekleniyor...</value>
+  </data>
+  <data name="Send_btnRefresh" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="Send_btnSend" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="Send_deviceList" xml:space="preserve">
+    <value>Aktif Cihazların Listesi</value>
+  </data>
+  <data name="Send_infoMessage" xml:space="preserve">
+    <value>Hedef Cihazı Seçin..</value>
+  </data>
+  <data name="Send_Scanning" xml:space="preserve">
+    <value>Cihazlar Aranıyor..</value>
+  </data>
+  <data name="Send_TargetIP" xml:space="preserve">
+    <value>Hedef IP:</value>
+  </data>
+  <data name="Send_Warning_Goback" xml:space="preserve">
+    <value>İstek gönderdikten sonra geri gidemezsiniz. Üzgünüm..</value>
+  </data>
+  <data name="Send_Warning_rejected" xml:space="preserve">
+    <value>Üzgünüm transfer isteği reddedildi :</value>
+  </data>
+  <data name="Settings_fristTimeInfo" xml:space="preserve">
+    <value>Daha sonra tanıyabilmeniz açısından cihaz adını kişiselleştirmek iyi olur.
+                           Bu isim size dosya gönderilirken diğer cihazda görünecek isimdir. Ayrıca uygulama dilini de buradan değiştirebilirsiniz.</value>
+  </data>
+  <data name="Settings_WelcomeMessage" xml:space="preserve">
+    <value>Buggy File Transfer Uygulamasına Hoşgeldiniz!</value>
+  </data>
+  <data name="Setting_btnSave" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Setting_DeviceName" xml:space="preserve">
+    <value>Cihaz Adı:</value>
+  </data>
+  <data name="Setting_Language" xml:space="preserve">
+    <value>Dil:</value>
+  </data>
+  <data name="Setting_Warning_Saving" xml:space="preserve">
+    <value>Kaydediliyor...</value>
+  </data>
+  <data name="Transfer_btnAbort" xml:space="preserve">
+    <value>İptal</value>
+  </data>
+  <data name="Transfer_ConfirmAbortMessage" xml:space="preserve">
+    <value>Aktarımı gerçekten iptal etmek istiyor musunuz?</value>
+  </data>
+  <data name="Transfer_ConfirmAbortNo" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="Transfer_ConfirmAbortTitle" xml:space="preserve">
+    <value>Onayla</value>
+  </data>
+  <data name="Transfer_ConfirmAbortYes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="Transfer_Filename" xml:space="preserve">
+    <value>Dosya Adı:</value>
+  </data>
+  <data name="Transfer_FileSize" xml:space="preserve">
+    <value>Dosya Boyutu:</value>
+  </data>
+  <data name="Transfer_InfoMessage" xml:space="preserve">
+    <value>Dosyalar Gönderiliyor...</value>
+  </data>
+  <data name="Transfer_Remaining" xml:space="preserve">
+    <value>Kalan:</value>
+  </data>
+  <data name="Transfer_Time" xml:space="preserve">
+    <value>Geçen:</value>
+  </data>
+  <data name="Transfer_TransferSpeed" xml:space="preserve">
+    <value>Aktarım Hızı :</value>
+  </data>
+  <data name="Transfer_Warning_GoBack" xml:space="preserve">
+    <value>Aktarım sırasında geri gidemezsiniz. Üzgünüm..</value>
+  </data>
+  <data name="YourDeviceName" xml:space="preserve">
+    <value>Cihaz Adı:</value>
+  </data>
+  <data name="YourIPAddress" xml:space="preserve">
+    <value>Cihaz IP'si:</value>
+  </data>
+</root>

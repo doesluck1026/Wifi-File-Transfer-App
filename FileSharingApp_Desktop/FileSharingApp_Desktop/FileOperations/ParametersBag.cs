@@ -11,6 +11,7 @@ class ParametersBag
 {
     public string SavingPath;
     public string DeviceName;
+    public string DeviceLanguage;
     public void Save(string url)
     {
         FileStream writerFileStream = new FileStream(url, FileMode.Create, FileAccess.Write);
@@ -27,6 +28,7 @@ class ParametersBag
         bagFile = (ParametersBag)formatter.Deserialize(readerFileStream);
         this.SavingPath = bagFile.SavingPath;
         this.DeviceName = bagFile.DeviceName;
+        this.DeviceLanguage = bagFile.DeviceLanguage;
         // Close the readerFileStream when we are done
         readerFileStream.Close();
     }
