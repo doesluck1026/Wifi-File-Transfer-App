@@ -100,7 +100,7 @@ class NetworkScanner
                     percentage /= numTasks;
                     //Debug.WriteLine("percentage: " + percentage);
                     ScanPercentage = percentage;
-                    if (percentage >= 99 || stopwatch.Elapsed.TotalSeconds>12)
+                    if (percentage >= 99 || stopwatch.Elapsed.TotalSeconds > 12)
                         break;
                     Thread.Sleep(50);
                 }

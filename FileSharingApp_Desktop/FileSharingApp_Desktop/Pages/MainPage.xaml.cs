@@ -40,7 +40,7 @@ namespace FileSharingApp_Desktop.Pages
             if (!Parameters.DidInitParameters)
             {
                 Parameters.Init();
-                ScanNetwork();
+                Task.Run(() => ScanNetwork());
             }
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             Main.FileSaveURL = Parameters.SavingPath;
@@ -135,7 +135,10 @@ namespace FileSharingApp_Desktop.Pages
         private void ScanNetwork()
         {
             Debug.WriteLine("Scanning Network");
-            NetworkScanner.ScanAvailableDevices();
+            Dispatcher.Invoke(() =>
+            {
+                NetworkScanner.ScanAvailableDevices();
+            });
             Debug.WriteLine("Scanningg");
         }
         private void AddFilesToList(string[] filePaths)

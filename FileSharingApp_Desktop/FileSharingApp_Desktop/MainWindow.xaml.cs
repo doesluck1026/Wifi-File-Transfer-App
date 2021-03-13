@@ -30,5 +30,24 @@ namespace FileSharingApp_Desktop
             Environment.Exit(0);
             Thread.Sleep(10);
         }
+        private void Btn_Youtube_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
+        }
+
+        private void Btn_Instagram_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
+        }
+
+        private void Btn_Patreon_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
+        }
+
+        private void Btn_Blogger_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://freakingcyborg.blogspot.com/");
+        }
     }
 }

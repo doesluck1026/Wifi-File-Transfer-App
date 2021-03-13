@@ -31,7 +31,7 @@
             HorizontalAlignment="Right" 
                     Margin="10,0">
 
-            <Button Width="100" Height="50"
+            <Button  x:Name="Btn_Blogger" Width="100" Height="50" Click="Btn_Blogger_Click"
                     Margin="0,5" 
                     Background="Transparent" BorderThickness="0">
                 <Border BorderBrush="Orange" BorderThickness="1" Background="Orange" CornerRadius="2" >
@@ -43,7 +43,7 @@
                 
             </Button>
 
-            <Button Width="100" Height="50"
+            <Button x:Name="Btn_Patreon" Width="100" Height="50" Click="Btn_Patreon_Click"
                     Margin="0,5"
                     Background="Transparent" BorderThickness="0">
                 <Border BorderBrush="LightPink" BorderThickness="1" Background="LightPink" CornerRadius="2" >
@@ -55,7 +55,7 @@
 
             </Button>
 
-            <Button Width="100" Height="50" 
+            <Button x:Name="Btn_Instagram" Width="100" Height="50" Click="Btn_Instagram_Click" 
                     Margin="0,5"
                     Background="Transparent" BorderThickness="0" >
                 <Border BorderBrush="IndianRed" BorderThickness="1" Background="IndianRed" CornerRadius="2" >
@@ -67,7 +67,7 @@
 
             </Button>
 
-            <Button Width="100" Height="50" 
+            <Button x:Name="Btn_Youtube" Width="100" Height="50" Click="Btn_Youtube_Click" 
                     Margin="0,5"
                     Background="Transparent" BorderThickness="0" >
                 <Border BorderBrush="PaleVioletRed" BorderThickness="1" Background="PaleVioletRed" CornerRadius="2" >
