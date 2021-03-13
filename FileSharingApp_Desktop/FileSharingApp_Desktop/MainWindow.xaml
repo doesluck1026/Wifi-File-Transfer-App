@@ -31,28 +31,52 @@
             HorizontalAlignment="Right" 
                     Margin="10,0">
 
-            <Button Width="50" Height="50"
-                    Margin="4,5"
+            <Button Width="100" Height="50"
+                    Margin="0,5" 
                     Background="Transparent" BorderThickness="0">
-                <Image Source="/Icons/blogger.png" />
+                <Border BorderBrush="Orange" BorderThickness="1" Background="Orange" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal" Background="Transparent" >
+                        <Image Source="/Icons/blogger.png" Width="25" />
+                        <Label Content="Blogger" />
+                    </StackPanel>
+                </Border>
+                
             </Button>
 
-            <Button Width="50" Height="50"
-                    Margin="4,5"
+            <Button Width="100" Height="50"
+                    Margin="0,5"
                     Background="Transparent" BorderThickness="0">
-                <Image Source="/Icons/patreon.png" />
-            </Button>
-            
-            <Button Width="50" Height="50" 
-                    Margin="4,5"
-                    Background="Transparent" BorderThickness="0" >
-                <Image Source="/Icons/instagram.png" />
+                <Border BorderBrush="LightPink" BorderThickness="1" Background="LightPink" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal">
+                    <Image Source="/Icons/patreon.png" Width="25" />
+                    <Label Content="Patreon" />
+                    </StackPanel>
+                </Border>
+
             </Button>
 
-            <Button Width="50" Height="50" 
-                    Margin="4,5"
+            <Button Width="100" Height="50" 
+                    Margin="0,5"
                     Background="Transparent" BorderThickness="0" >
-                <Image Source="/Icons/youtube.png" />
+                <Border BorderBrush="IndianRed" BorderThickness="1" Background="IndianRed" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal" Background="IndianRed">
+                    <Image Source="/Icons/instagram.png" Width="25" />
+                    <Label Content="Instagram" />
+                    </StackPanel>
+                </Border>
+
+            </Button>
+
+            <Button Width="100" Height="50" 
+                    Margin="0,5"
+                    Background="Transparent" BorderThickness="0" >
+                <Border BorderBrush="PaleVioletRed" BorderThickness="1" Background="PaleVioletRed" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal" Background="PaleVioletRed">
+                    <Image Source="/Icons/youtube.png" Width="25" />
+                    <Label Content="Youtube" />
+                    </StackPanel>
+                </Border>
+
             </Button>
 
         </StackPanel>

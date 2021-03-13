@@ -29,9 +29,6 @@
                     VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="OPTIONS" FontSize="40" FontWeight="Bold"
                Foreground="LightSteelBlue"  Grid.Row="0"/>
-            
-            <Image Source="BC_logo_1.png" Width="75" Height="75" />
-            
         </StackPanel>
 
         
@@ -84,18 +81,19 @@
             </Grid.ColumnDefinitions>
             
             <Button x:Name="btn_MainMenu" 
-                    Style="{StaticResource Blue}" Margin="10"
+                    Style="{StaticResource Blue}" Margin="30"
                     FontSize="25" Grid.Column="0" VerticalAlignment="Center"
                     HorizontalAlignment="Stretch" Click="btn_MainMenu_Click"
                     HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
 
-                <Grid Width="200">
-                    <Image Source="/Icons/Home.png" 
-                               Width =" 40" Height="40" 
+                <StackPanel Orientation="Horizontal" Width="200">
+                    <Image Source="/Icons/Home.png"  Margin="5,0"
+                               Width =" 35" Height="50" 
                                HorizontalAlignment="Left" />
                     <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                                Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                </Grid>
+                </StackPanel>
             </Button>
             
             <Button x:Name="btn_Save" FontSize="25" 
@@ -104,13 +102,15 @@
                     HorizontalAlignment="Stretch" Click="btn_Save_Click"
                     VerticalContentAlignment="Center">
                 
-                <Grid Width="150">
+                <StackPanel Orientation="Horizontal" Width="150">
                     <Image Source="/Icons/save.png" 
-                               Width =" 40" Height="40" 
-                               HorizontalAlignment="Left" />
-                    <TextBlock Text="Save" Margin="0,0,20,0"
+                               Width =" 35" Height="50" 
+                               HorizontalAlignment="Left" 
+                                           Margin="5,0" 
+                           />
+                    <TextBlock Text="Save"  Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                </Grid>
+                </StackPanel>
             </Button>
         </Grid>
     </Grid>

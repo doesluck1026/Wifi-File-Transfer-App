@@ -64,14 +64,14 @@
                         Style="{StaticResource Red}" Margin="20,10"
                         Foreground="White" FontSize="25"
                         HorizontalContentAlignment="Center" VerticalContentAlignment ="Center">
-                    <Grid Width="150"
+                    <StackPanel Orientation="Horizontal" Width="150"
                           HorizontalAlignment="Stretch" >
                         <Image Source="/Icons/back3.png"
                                Width =" 40" Height="40" 
-                               HorizontalAlignment="Left" />
-                        <TextBlock Text="Back" 
+                               HorizontalAlignment="Left"  Margin="5,0" />
+                        <TextBlock Text="Back"  Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    </Grid>
+                    </StackPanel>
                 </Button>
                 
                 <Button x:Name="btn_Scan" 
@@ -81,14 +81,14 @@
                         Click="btn_Scan_Click" 
                         Foreground="White" FontSize="25">
 
-                    <Grid Width="150"
+                    <StackPanel Orientation="Horizontal" Width="150"
                                 HorizontalAlignment="Stretch" >
                         <Image Source="/Icons/refresh.png" 
                                Width =" 40" Height="40" 
-                               HorizontalAlignment="Left" />
-                        <TextBlock Text="Refresh" 
+                               HorizontalAlignment="Left"  Margin="5,0" />
+                        <TextBlock Text="Refresh"  Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    </Grid>
+                    </StackPanel>
 
                 </Button>
 
@@ -109,14 +109,14 @@
                             Style="{StaticResource Green}"  Margin="20,20"
                             Foreground="White" FontSize="25">
                     
-                    <Grid Width="200"
+                    <StackPanel Orientation="Horizontal" Width="200"
                                 HorizontalAlignment="Stretch" >
                         <Image Source="/Icons/send.png" 
                                Width =" 40" Height="40" 
-                               HorizontalAlignment="Left" />
-                        <TextBlock Text="Send Files" 
+                               HorizontalAlignment="Left"  Margin="5,0" />
+                        <TextBlock Text="Send Files"   Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    </Grid>
+                    </StackPanel>
 
                 </Button>
 
