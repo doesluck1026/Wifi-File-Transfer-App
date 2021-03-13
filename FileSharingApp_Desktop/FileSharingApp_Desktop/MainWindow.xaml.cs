@@ -5,6 +5,8 @@ using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Globalization;
+using System.Threading.Tasks;
 
 namespace FileSharingApp_Desktop
 {
@@ -21,6 +23,13 @@ namespace FileSharingApp_Desktop
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            if (!Parameters.DidInitParameters)
+            {
+                Parameters.Init();
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Parameters.DeviceLanguage);
+                Properties.Resources.Culture = new CultureInfo(Parameters.DeviceLanguage);
+                Task.Run(() => ScanNetwork());
+            }
             Main.StartServer();
             NetworkScanner.PublishDevice();
             Navigator.Navigate("Pages/SplashScreen.xaml");
@@ -48,6 +57,13 @@ namespace FileSharingApp_Desktop
         private void Btn_Blogger_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://freakingcyborg.blogspot.com/");
+        }
+        private void ScanNetwork()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                NetworkScanner.ScanAvailableDevices();
+            });
         }
     }
 }

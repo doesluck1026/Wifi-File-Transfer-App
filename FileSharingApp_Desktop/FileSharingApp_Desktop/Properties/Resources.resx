@@ -133,7 +133,7 @@
     <value>Open</value>
   </data>
   <data name="Done_InfoMessage" xml:space="preserve">
-    <value>File transfer is succesful!</value>
+    <value>File transfer is successful!</value>
   </data>
   <data name="Done_lblFiles" xml:space="preserve">
     <value>Files</value>
@@ -151,7 +151,7 @@
     <value>Confirm files</value>
   </data>
   <data name="File_btnOpen" xml:space="preserve">
-    <value>View</value>
+    <value>Open</value>
   </data>
   <data name="File_btnRemove" xml:space="preserve">
     <value>Remove</value>
@@ -172,13 +172,16 @@
     <value>Drag Your Files Here or Click to Select Files.</value>
   </data>
   <data name="Main_InfoMessage1" xml:space="preserve">
-    <value>Plase make sure that your phone and the receiver device are connected to same Wi-Fi!</value>
+    <value>Please make sure that your phone and the receiver device are connected to same Wi-Fi!</value>
   </data>
   <data name="Main_InfoMessage2" xml:space="preserve">
     <value>Select the files you want to send. You can select multiple files.</value>
   </data>
   <data name="Main_OrReceive" xml:space="preserve">
     <value>Or wait here to receive files.</value>
+  </data>
+  <data name="Options_Title" xml:space="preserve">
+    <value>Options</value>
   </data>
   <data name="Permission_btnAccept" xml:space="preserve">
     <value>Accept</value>
@@ -197,6 +200,9 @@
   </data>
   <data name="Rec_InfoMessage" xml:space="preserve">
     <value>Waiting for connection...</value>
+  </data>
+  <data name="Rejected_Title" xml:space="preserve">
+    <value>Transfer is Rejected!</value>
   </data>
   <data name="Send_btnRefresh" xml:space="preserve">
     <value>Refresh</value>
@@ -225,6 +231,9 @@
   <data name="Settings_fristTimeInfo" xml:space="preserve">
     <value>It is better to change the name of your device so that you can easily recognize it later.
                            This name will be seen when you want to receive files. You can also change the language of this app</value>
+  </data>
+  <data name="Settings_SelectTargetFolder" xml:space="preserve">
+    <value>Select folder to store received files.</value>
   </data>
   <data name="Settings_WelcomeMessage" xml:space="preserve">
     <value>Welcome to Buggy File Transfer App!</value>
@@ -284,7 +293,7 @@
     <value>You can't go back while files are being transferred!</value>
   </data>
   <data name="YourDeviceName" xml:space="preserve">
-    <value>Your Device Name </value>
+    <value>Device Name </value>
   </data>
   <data name="YourIPAddress" xml:space="preserve">
     <value>IP Address</value>

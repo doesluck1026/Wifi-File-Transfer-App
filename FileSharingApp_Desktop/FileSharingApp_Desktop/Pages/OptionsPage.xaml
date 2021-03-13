@@ -42,7 +42,7 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="{x:Static p:Resources.Setting_DeviceName}" Grid.Column="0" 
-                   FontSize="25" HorizontalAlignment="Center" 
+                   FontSize="25" HorizontalAlignment="Left"  Margin="10,0,0,0"
                    VerticalAlignment="center" Foreground="White"/>
             
             <TextBox x:Name="txt_DeviceName" Text="Device Name" Grid.Column="1"
@@ -74,8 +74,8 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="{x:Static p:Resources.Setting_OutputFolder}" Grid.Column="0"
-                   FontSize="25" 
-                   HorizontalAlignment="Center" 
+                   FontSize="25"  Margin="10,0,0,0"
+                   HorizontalAlignment="Left" 
                    VerticalAlignment="center" Foreground="White"/>
             
             <TextBox x:Name="txt_OutputFolder" Text="bişeyler" 

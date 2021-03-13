@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Ac_btnReceive" xml:space="preserve">
+    <value>Recevoir des fichiers</value>
+  </data>
+  <data name="Ac_btnSend" xml:space="preserve">
+    <value>Envoyer les fichiers</value>
+  </data>
+  <data name="Ac_InfoMessage" xml:space="preserve">
+    <value>Choisissez quoi faire.</value>
+  </data>
+  <data name="Done_btnHome" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="Done_btnOpen" xml:space="preserve">
+    <value>Ouvrir</value>
+  </data>
+  <data name="Done_InfoMessage" xml:space="preserve">
+    <value>Le transfert de fichiers est réussi!</value>
+  </data>
+  <data name="Done_lblFiles" xml:space="preserve">
+    <value>Fichiers</value>
+  </data>
+  <data name="Files_Warning_NoFile" xml:space="preserve">
+    <value>Aucun fichier n'est sélectionné.</value>
+  </data>
+  <data name="File_btnAdd" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="File_btnConfirm" xml:space="preserve">
+    <value>Confirmer les fichiers</value>
+  </data>
+  <data name="File_btnOpen" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="File_btnRemove" xml:space="preserve">
+    <value>Enlever</value>
+  </data>
+  <data name="File_InfoMessage" xml:space="preserve">
+    <value>Passez en revue les fichiers sélectionnés.</value>
+  </data>
+  <data name="File_SelectedList" xml:space="preserve">
+    <value>Liste des fichiers sélectionnés</value>
+  </data>
+  <data name="Info_InfoMessage" xml:space="preserve">
+    <value>Merci d'utiliser cette application. Vous pouvez nous suivre et nous soutenir pour en savoir plus!</value>
+  </data>
+  <data name="Main_btnSelect" xml:space="preserve">
+    <value>Sélectionnez les fichiers</value>
+  </data>
+  <data name="Main_InfoMessage1" xml:space="preserve">
+    <value>Veuillez vous assurer que votre téléphone et l'appareil récepteur sont connectés au même Wi-Fi!</value>
+  </data>
+  <data name="Main_InfoMessage2" xml:space="preserve">
+    <value>Sélectionnez les fichiers que vous souhaitez envoyer. Vous pouvez sélectionner plusieurs fichiers.</value>
+  </data>
+  <data name="Permission_btnAccept" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
+  <data name="Permission_InfoMessage" xml:space="preserve">
+    <value>Nouvelle demande</value>
+  </data>
+  <data name="Permission_RequestMessage" xml:space="preserve">
+    <value>veut vous envoyer des fichiers:</value>
+  </data>
+  <data name="Permission_RequestMessage2" xml:space="preserve">
+    <value>Voulez-vous recevoir?</value>
+  </data>
+  <data name="Permisson_btnDecline" xml:space="preserve">
+    <value>Refuser</value>
+  </data>
+  <data name="Rec_InfoMessage" xml:space="preserve">
+    <value>Attente de la connexion...</value>
+  </data>
+  <data name="Send_btnRefresh" xml:space="preserve">
+    <value>Actualiser</value>
+  </data>
+  <data name="Send_btnSend" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Send_deviceList" xml:space="preserve">
+    <value>Liste des appareils disponibles:</value>
+  </data>
+  <data name="Send_infoMessage" xml:space="preserve">
+    <value>Sélectionnez l'appareil cible</value>
+  </data>
+  <data name="Send_Scanning" xml:space="preserve">
+    <value>Réseau de numérisation ...</value>
+  </data>
+  <data name="Send_TargetIP" xml:space="preserve">
+    <value>IP cible</value>
+  </data>
+  <data name="Send_Warning_Goback" xml:space="preserve">
+    <value>Vous ne pouvez pas revenir en arrière après avoir envoyé une demande. Pardon...</value>
+  </data>
+  <data name="Send_Warning_rejected" xml:space="preserve">
+    <value>Désolé ... La demande de transfert est rejetée par</value>
+  </data>
+  <data name="Settings_fristTimeInfo" xml:space="preserve">
+    <value>Il est préférable de changer le nom de votre appareil afin de pouvoir le reconnaître facilement plus tard.
+                            Ce nom sera visible lorsque vous souhaitez recevoir des fichiers. Vous pouvez également changer la langue de cette application</value>
+  </data>
+  <data name="Settings_WelcomeMessage" xml:space="preserve">
+    <value>Bienvenue dans l'application Buggy File Transfer!</value>
+  </data>
+  <data name="Setting_btnSave" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Setting_DeviceName" xml:space="preserve">
+    <value>Nom du périphérique</value>
+  </data>
+  <data name="Setting_Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="Setting_Warning_Saving" xml:space="preserve">
+    <value>Enregistrement des paramètres ...</value>
+  </data>
+  <data name="Transfer_btnAbort" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Transfer_ConfirmAbortMessage" xml:space="preserve">
+    <value>Voulez-vous vraiment annuler le transfert?</value>
+  </data>
+  <data name="Transfer_ConfirmAbortNo" xml:space="preserve">
+    <value>NON</value>
+  </data>
+  <data name="Transfer_ConfirmAbortTitle" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="Transfer_ConfirmAbortYes" xml:space="preserve">
+    <value>OUI</value>
+  </data>
+  <data name="Transfer_Filename" xml:space="preserve">
+    <value>Nom de fichier</value>
+  </data>
+  <data name="Transfer_FileSize" xml:space="preserve">
+    <value>Taille du fichier :</value>
+  </data>
+  <data name="Transfer_InfoMessage" xml:space="preserve">
+    <value>Les fichiers sont en cours de transfert ...</value>
+  </data>
+  <data name="Transfer_Remaining" xml:space="preserve">
+    <value>Restant</value>
+  </data>
+  <data name="Transfer_Time" xml:space="preserve">
+    <value>Heure</value>
+  </data>
+  <data name="Transfer_TransferSpeed" xml:space="preserve">
+    <value>Vitesse de transfert:</value>
+  </data>
+  <data name="Transfer_Warning_GoBack" xml:space="preserve">
+    <value>Vous ne pouvez pas revenir en arrière pendant le transfert des fichiers!</value>
+  </data>
+  <data name="YourDeviceName" xml:space="preserve">
+    <value>Le nom de votre appareil</value>
+  </data>
+  <data name="YourIPAddress" xml:space="preserve">
+    <value>Adresse IP</value>
+  </data>
+  <data name="Transfer_AbortedMessage" xml:space="preserve">
+    <value>Le transfert est interrompu par un autre appareil.</value>
+  </data>
+  <data name="Done_OpenFolder" xml:space="preserve">
+    <value>Ouvrir le dossier de sortie</value>
+  </data>
+  <data name="Main_DragInfo" xml:space="preserve">
+    <value>Faites glisser vos fichiers ici ou cliquez pour sélectionner des fichiers.</value>
+  </data>
+  <data name="Main_OrReceive" xml:space="preserve">
+    <value>Ou attendez ici pour recevoir les fichiers.</value>
+  </data>
+  <data name="Rejected_Title" xml:space="preserve">
+    <value>Le transfert est rejeté!</value>
+  </data>
+  <data name="Setting_OutputFolder" xml:space="preserve">
+    <value>Dossier de sortie :</value>
+  </data>
+  <data name="Options_Title" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="Settings_SelectTargetFolder" xml:space="preserve">
+    <value>Sélectionnez le dossier pour stocker les fichiers reçus.</value>
+  </data>
+</root>

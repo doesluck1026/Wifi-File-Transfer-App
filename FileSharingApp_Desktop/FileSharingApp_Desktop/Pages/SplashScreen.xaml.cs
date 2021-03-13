@@ -29,7 +29,7 @@ namespace FileSharingApp_Desktop.Pages
         {
             Task.Run(() =>
             {
-                System.Threading.Thread.Sleep(2000);
+                System.Threading.Thread.Sleep(500);
                 OnTimedEvent();
             });
         }

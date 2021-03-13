@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,11 +39,7 @@ namespace FileSharingApp_Desktop.Pages
                 FilePaths = new List<string>();
                 ShowFileList(false);
             }
-            if (!Parameters.DidInitParameters)
-            {
-                Parameters.Init();
-                Task.Run(() => ScanNetwork());
-            }
+            
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             Main.FileSaveURL = Parameters.SavingPath;
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);
@@ -58,10 +56,11 @@ namespace FileSharingApp_Desktop.Pages
         private void Main_OnClientRequested(string totalTransferSize, string deviceName)
         {
             /// Show file transfer request and ask for permission here
-            Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
+            Debug.WriteLine(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n "+ Properties.Resources.Permission_RequestMessage);
             Dispatcher.Invoke(() =>
             {
-                var result = MessageBox.Show(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
+                var result = MessageBox.Show(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage, 
+                    Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -134,15 +133,7 @@ namespace FileSharingApp_Desktop.Pages
             });
             
         }
-        private void ScanNetwork()
-        {
-            Debug.WriteLine("Scanning Network");
-            Dispatcher.Invoke(() =>
-            {
-                NetworkScanner.ScanAvailableDevices();
-            });
-            Debug.WriteLine("Scanningg");
-        }
+        
         private void AddFilesToList(string[] filePaths)
         {
             if (filePaths == null)

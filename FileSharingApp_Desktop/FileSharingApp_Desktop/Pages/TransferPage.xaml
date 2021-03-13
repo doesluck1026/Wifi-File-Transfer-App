@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
+      xmlns:p="clr-namespace:FileSharingApp_Desktop.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TransferPage"
@@ -29,9 +30,9 @@
                 Margin="10,0" BorderBrush="LightBlue" />
         <Border Grid.Row="6" BorderThickness="0,0,0,2"
                 Margin="10,0" BorderBrush="LightBlue" />
-        
-        
-        <Label x:Name="lbl_info" Content="Your Files are being Transferred. Be patient..." 
+
+
+        <Label x:Name="lbl_info" Content="{x:Static p:Resources.Transfer_InfoMessage}" 
                    VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"
                    FontSize="25"/>
 
@@ -40,7 +41,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <Label Content="File Name :" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Label Content="{x:Static p:Resources.Transfer_Filename}" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="0" />
             <Label x:Name="lbl_FileName" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="1" />
@@ -50,7 +51,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="5*" />
             </Grid.ColumnDefinitions>
-            <Label Content="File Size :" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Label Content="{x:Static p:Resources.Transfer_FileSize}" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="0" />
             <Label x:Name="lbl_FileSize" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="1" />
@@ -60,7 +61,7 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
-            <Label Content="Transfer Speed :" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Label Content="{x:Static p:Resources.Transfer_TransferSpeed}" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="0" />
             <Label x:Name="lbl_TransferSpeed" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="1" />
@@ -97,13 +98,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Margin="5,0,5,0">
-                <Label Content="Time:" Foreground="White" Background="Transparent"
+                <Label Content="{x:Static p:Resources.Transfer_Time}" Foreground="White" Background="Transparent"
                        VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
                 <Label x:Name="lbl_PassedTime" Foreground="White" Background="Transparent"
                        VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="5,0,5,0">
-                <Label Content="Remaining:" Foreground="White" Background="Transparent"
+                <Label Content="{x:Static p:Resources.Transfer_Remaining}" Foreground="White" Background="Transparent"
                        VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
                 <Label x:Name="lbl_RemainingTime" Foreground="White" Background="Transparent"
                        VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
@@ -127,7 +128,7 @@
                     <Image Source="/Icons/x-mark.png" 
                                Width ="35" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                    <TextBlock Text="Abort"  Margin="5,0"
+                    <TextBlock Text="{x:Static p:Resources.Transfer_btnAbort}"  Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </StackPanel>
             </Button>

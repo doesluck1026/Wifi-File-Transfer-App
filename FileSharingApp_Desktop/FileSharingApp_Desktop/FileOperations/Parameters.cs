@@ -31,7 +31,7 @@ class Parameters
             IsUsingFirstTime = true;
             SavingPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\";
             DeviceName = "MyDevice";
-            DeviceLanguage = "en";
+            DeviceLanguage = "tr";
             Save();
         }
     }

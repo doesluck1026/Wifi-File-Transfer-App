@@ -22,7 +22,7 @@ namespace FileSharingApp_Desktop.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace FileSharingApp_Desktop.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FileSharingApp_Desktop.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace FileSharingApp_Desktop.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Receive Files.
         /// </summary>
-        internal static string Ac_btnReceive {
+        public static string Ac_btnReceive {
             get {
                 return ResourceManager.GetString("Ac_btnReceive", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Send Files.
         /// </summary>
-        internal static string Ac_btnSend {
+        public static string Ac_btnSend {
             get {
                 return ResourceManager.GetString("Ac_btnSend", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Choose what to do..
         /// </summary>
-        internal static string Ac_InfoMessage {
+        public static string Ac_InfoMessage {
             get {
                 return ResourceManager.GetString("Ac_InfoMessage", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Homepage.
         /// </summary>
-        internal static string Done_btnHome {
+        public static string Done_btnHome {
             get {
                 return ResourceManager.GetString("Done_btnHome", resourceCulture);
             }
@@ -99,16 +99,16 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string Done_btnOpen {
+        public static string Done_btnOpen {
             get {
                 return ResourceManager.GetString("Done_btnOpen", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File transfer is succesful!.
+        ///   Looks up a localized string similar to File transfer is successful!.
         /// </summary>
-        internal static string Done_InfoMessage {
+        public static string Done_InfoMessage {
             get {
                 return ResourceManager.GetString("Done_InfoMessage", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Files.
         /// </summary>
-        internal static string Done_lblFiles {
+        public static string Done_lblFiles {
             get {
                 return ResourceManager.GetString("Done_lblFiles", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Open Output Folder.
         /// </summary>
-        internal static string Done_OpenFolder {
+        public static string Done_OpenFolder {
             get {
                 return ResourceManager.GetString("Done_OpenFolder", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Add more.
         /// </summary>
-        internal static string File_btnAdd {
+        public static string File_btnAdd {
             get {
                 return ResourceManager.GetString("File_btnAdd", resourceCulture);
             }
@@ -144,16 +144,16 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Confirm files.
         /// </summary>
-        internal static string File_btnConfirm {
+        public static string File_btnConfirm {
             get {
                 return ResourceManager.GetString("File_btnConfirm", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View.
+        ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string File_btnOpen {
+        public static string File_btnOpen {
             get {
                 return ResourceManager.GetString("File_btnOpen", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
-        internal static string File_btnRemove {
+        public static string File_btnRemove {
             get {
                 return ResourceManager.GetString("File_btnRemove", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Review selected files..
         /// </summary>
-        internal static string File_InfoMessage {
+        public static string File_InfoMessage {
             get {
                 return ResourceManager.GetString("File_InfoMessage", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to List of selected files.
         /// </summary>
-        internal static string File_SelectedList {
+        public static string File_SelectedList {
             get {
                 return ResourceManager.GetString("File_SelectedList", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No file is selected!.
         /// </summary>
-        internal static string Files_Warning_NoFile {
+        public static string Files_Warning_NoFile {
             get {
                 return ResourceManager.GetString("Files_Warning_NoFile", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Thanks for using this application. You can follow and support us for more!.
         /// </summary>
-        internal static string Info_InfoMessage {
+        public static string Info_InfoMessage {
             get {
                 return ResourceManager.GetString("Info_InfoMessage", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Select FIles.
         /// </summary>
-        internal static string Main_btnSelect {
+        public static string Main_btnSelect {
             get {
                 return ResourceManager.GetString("Main_btnSelect", resourceCulture);
             }
@@ -216,16 +216,16 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Drag Your Files Here or Click to Select Files..
         /// </summary>
-        internal static string Main_DragInfo {
+        public static string Main_DragInfo {
             get {
                 return ResourceManager.GetString("Main_DragInfo", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Plase make sure that your phone and the receiver device are connected to same Wi-Fi!.
+        ///   Looks up a localized string similar to Please make sure that your phone and the receiver device are connected to same Wi-Fi!.
         /// </summary>
-        internal static string Main_InfoMessage1 {
+        public static string Main_InfoMessage1 {
             get {
                 return ResourceManager.GetString("Main_InfoMessage1", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Select the files you want to send. You can select multiple files..
         /// </summary>
-        internal static string Main_InfoMessage2 {
+        public static string Main_InfoMessage2 {
             get {
                 return ResourceManager.GetString("Main_InfoMessage2", resourceCulture);
             }
@@ -243,16 +243,25 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Or wait here to receive files..
         /// </summary>
-        internal static string Main_OrReceive {
+        public static string Main_OrReceive {
             get {
                 return ResourceManager.GetString("Main_OrReceive", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string Options_Title {
+            get {
+                return ResourceManager.GetString("Options_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accept.
         /// </summary>
-        internal static string Permission_btnAccept {
+        public static string Permission_btnAccept {
             get {
                 return ResourceManager.GetString("Permission_btnAccept", resourceCulture);
             }
@@ -261,7 +270,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to New Request.
         /// </summary>
-        internal static string Permission_InfoMessage {
+        public static string Permission_InfoMessage {
             get {
                 return ResourceManager.GetString("Permission_InfoMessage", resourceCulture);
             }
@@ -270,7 +279,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to wants to send you some files : .
         /// </summary>
-        internal static string Permission_RequestMessage {
+        public static string Permission_RequestMessage {
             get {
                 return ResourceManager.GetString("Permission_RequestMessage", resourceCulture);
             }
@@ -279,7 +288,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Do you want to receive?.
         /// </summary>
-        internal static string Permission_RequestMessage2 {
+        public static string Permission_RequestMessage2 {
             get {
                 return ResourceManager.GetString("Permission_RequestMessage2", resourceCulture);
             }
@@ -288,7 +297,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Decline.
         /// </summary>
-        internal static string Permisson_btnDecline {
+        public static string Permisson_btnDecline {
             get {
                 return ResourceManager.GetString("Permisson_btnDecline", resourceCulture);
             }
@@ -297,16 +306,25 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Waiting for connection....
         /// </summary>
-        internal static string Rec_InfoMessage {
+        public static string Rec_InfoMessage {
             get {
                 return ResourceManager.GetString("Rec_InfoMessage", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transfer is Rejected!.
+        /// </summary>
+        public static string Rejected_Title {
+            get {
+                return ResourceManager.GetString("Rejected_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Refresh.
         /// </summary>
-        internal static string Send_btnRefresh {
+        public static string Send_btnRefresh {
             get {
                 return ResourceManager.GetString("Send_btnRefresh", resourceCulture);
             }
@@ -315,7 +333,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Send.
         /// </summary>
-        internal static string Send_btnSend {
+        public static string Send_btnSend {
             get {
                 return ResourceManager.GetString("Send_btnSend", resourceCulture);
             }
@@ -324,7 +342,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Available device list :.
         /// </summary>
-        internal static string Send_deviceList {
+        public static string Send_deviceList {
             get {
                 return ResourceManager.GetString("Send_deviceList", resourceCulture);
             }
@@ -333,7 +351,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Select the target device.
         /// </summary>
-        internal static string Send_infoMessage {
+        public static string Send_infoMessage {
             get {
                 return ResourceManager.GetString("Send_infoMessage", resourceCulture);
             }
@@ -342,7 +360,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Scanning Network....
         /// </summary>
-        internal static string Send_Scanning {
+        public static string Send_Scanning {
             get {
                 return ResourceManager.GetString("Send_Scanning", resourceCulture);
             }
@@ -351,7 +369,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Target IP :.
         /// </summary>
-        internal static string Send_TargetIP {
+        public static string Send_TargetIP {
             get {
                 return ResourceManager.GetString("Send_TargetIP", resourceCulture);
             }
@@ -360,7 +378,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to You can&apos;t go back after sending a request. Sorry....
         /// </summary>
-        internal static string Send_Warning_Goback {
+        public static string Send_Warning_Goback {
             get {
                 return ResourceManager.GetString("Send_Warning_Goback", resourceCulture);
             }
@@ -369,7 +387,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Sorry... Transfer request is rejected by.
         /// </summary>
-        internal static string Send_Warning_rejected {
+        public static string Send_Warning_rejected {
             get {
                 return ResourceManager.GetString("Send_Warning_rejected", resourceCulture);
             }
@@ -378,7 +396,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
-        internal static string Setting_btnSave {
+        public static string Setting_btnSave {
             get {
                 return ResourceManager.GetString("Setting_btnSave", resourceCulture);
             }
@@ -387,7 +405,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Device Name :.
         /// </summary>
-        internal static string Setting_DeviceName {
+        public static string Setting_DeviceName {
             get {
                 return ResourceManager.GetString("Setting_DeviceName", resourceCulture);
             }
@@ -396,7 +414,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Language :.
         /// </summary>
-        internal static string Setting_Language {
+        public static string Setting_Language {
             get {
                 return ResourceManager.GetString("Setting_Language", resourceCulture);
             }
@@ -405,7 +423,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Output Folder.
         /// </summary>
-        internal static string Setting_OutputFolder {
+        public static string Setting_OutputFolder {
             get {
                 return ResourceManager.GetString("Setting_OutputFolder", resourceCulture);
             }
@@ -414,7 +432,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Saving Parameters....
         /// </summary>
-        internal static string Setting_Warning_Saving {
+        public static string Setting_Warning_Saving {
             get {
                 return ResourceManager.GetString("Setting_Warning_Saving", resourceCulture);
             }
@@ -424,16 +442,25 @@ namespace FileSharingApp_Desktop.Properties {
         ///   Looks up a localized string similar to It is better to change the name of your device so that you can easily recognize it later.
         ///                           This name will be seen when you want to receive files. You can also change the language of this app.
         /// </summary>
-        internal static string Settings_fristTimeInfo {
+        public static string Settings_fristTimeInfo {
             get {
                 return ResourceManager.GetString("Settings_fristTimeInfo", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select folder to store received files..
+        /// </summary>
+        public static string Settings_SelectTargetFolder {
+            get {
+                return ResourceManager.GetString("Settings_SelectTargetFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Welcome to Buggy File Transfer App!.
         /// </summary>
-        internal static string Settings_WelcomeMessage {
+        public static string Settings_WelcomeMessage {
             get {
                 return ResourceManager.GetString("Settings_WelcomeMessage", resourceCulture);
             }
@@ -442,7 +469,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Transfer is aborted by other device..
         /// </summary>
-        internal static string Transfer_AbortedMessage {
+        public static string Transfer_AbortedMessage {
             get {
                 return ResourceManager.GetString("Transfer_AbortedMessage", resourceCulture);
             }
@@ -451,7 +478,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Transfer_btnAbort {
+        public static string Transfer_btnAbort {
             get {
                 return ResourceManager.GetString("Transfer_btnAbort", resourceCulture);
             }
@@ -460,7 +487,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Do you really want to cancel transfer?.
         /// </summary>
-        internal static string Transfer_ConfirmAbortMessage {
+        public static string Transfer_ConfirmAbortMessage {
             get {
                 return ResourceManager.GetString("Transfer_ConfirmAbortMessage", resourceCulture);
             }
@@ -469,7 +496,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string Transfer_ConfirmAbortNo {
+        public static string Transfer_ConfirmAbortNo {
             get {
                 return ResourceManager.GetString("Transfer_ConfirmAbortNo", resourceCulture);
             }
@@ -478,7 +505,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Confirmation.
         /// </summary>
-        internal static string Transfer_ConfirmAbortTitle {
+        public static string Transfer_ConfirmAbortTitle {
             get {
                 return ResourceManager.GetString("Transfer_ConfirmAbortTitle", resourceCulture);
             }
@@ -487,7 +514,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string Transfer_ConfirmAbortYes {
+        public static string Transfer_ConfirmAbortYes {
             get {
                 return ResourceManager.GetString("Transfer_ConfirmAbortYes", resourceCulture);
             }
@@ -496,7 +523,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to File name :.
         /// </summary>
-        internal static string Transfer_Filename {
+        public static string Transfer_Filename {
             get {
                 return ResourceManager.GetString("Transfer_Filename", resourceCulture);
             }
@@ -505,7 +532,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to File Size :.
         /// </summary>
-        internal static string Transfer_FileSize {
+        public static string Transfer_FileSize {
             get {
                 return ResourceManager.GetString("Transfer_FileSize", resourceCulture);
             }
@@ -514,7 +541,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Files are being transferred....
         /// </summary>
-        internal static string Transfer_InfoMessage {
+        public static string Transfer_InfoMessage {
             get {
                 return ResourceManager.GetString("Transfer_InfoMessage", resourceCulture);
             }
@@ -523,7 +550,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Remaining :.
         /// </summary>
-        internal static string Transfer_Remaining {
+        public static string Transfer_Remaining {
             get {
                 return ResourceManager.GetString("Transfer_Remaining", resourceCulture);
             }
@@ -532,7 +559,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Time :.
         /// </summary>
-        internal static string Transfer_Time {
+        public static string Transfer_Time {
             get {
                 return ResourceManager.GetString("Transfer_Time", resourceCulture);
             }
@@ -541,7 +568,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Transfer speed :.
         /// </summary>
-        internal static string Transfer_TransferSpeed {
+        public static string Transfer_TransferSpeed {
             get {
                 return ResourceManager.GetString("Transfer_TransferSpeed", resourceCulture);
             }
@@ -550,16 +577,16 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to You can&apos;t go back while files are being transferred!.
         /// </summary>
-        internal static string Transfer_Warning_GoBack {
+        public static string Transfer_Warning_GoBack {
             get {
                 return ResourceManager.GetString("Transfer_Warning_GoBack", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Device Name .
+        ///   Looks up a localized string similar to Device Name .
         /// </summary>
-        internal static string YourDeviceName {
+        public static string YourDeviceName {
             get {
                 return ResourceManager.GetString("YourDeviceName", resourceCulture);
             }
@@ -568,7 +595,7 @@ namespace FileSharingApp_Desktop.Properties {
         /// <summary>
         ///   Looks up a localized string similar to IP Address.
         /// </summary>
-        internal static string YourIPAddress {
+        public static string YourIPAddress {
             get {
                 return ResourceManager.GetString("YourIPAddress", resourceCulture);
             }

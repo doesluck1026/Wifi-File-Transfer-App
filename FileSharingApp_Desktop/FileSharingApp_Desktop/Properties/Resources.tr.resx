@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Ac_btnReceive" xml:space="preserve">
+    <value>Dosyaları Al</value>
+  </data>
+  <data name="Ac_btnSend" xml:space="preserve">
+    <value>Dosyaları Gönder</value>
+  </data>
+  <data name="Ac_InfoMessage" xml:space="preserve">
+    <value>Yapılacak işlemi Seç</value>
+  </data>
+  <data name="Done_btnHome" xml:space="preserve">
+    <value>Anasayfa</value>
+  </data>
+  <data name="Done_btnOpen" xml:space="preserve">
+    <value>Aç</value>
+  </data>
+  <data name="Done_InfoMessage" xml:space="preserve">
+    <value>Dosya aktarımı başarılı!</value>
+  </data>
+  <data name="Done_lblFiles" xml:space="preserve">
+    <value>Dosyalar</value>
+  </data>
+  <data name="Done_OpenFolder" xml:space="preserve">
+    <value>Çıktı Klasörünü Aç</value>
+  </data>
+  <data name="Files_Warning_NoFile" xml:space="preserve">
+    <value>Hiçbir dosya seçilmedi.</value>
+  </data>
+  <data name="File_btnAdd" xml:space="preserve">
+    <value>Daha fazla ekle</value>
+  </data>
+  <data name="File_btnConfirm" xml:space="preserve">
+    <value>Onayla</value>
+  </data>
+  <data name="File_btnOpen" xml:space="preserve">
+    <value>Aç</value>
+  </data>
+  <data name="File_btnRemove" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="File_InfoMessage" xml:space="preserve">
+    <value>Seçilen dosyaları gözden geçir.</value>
+  </data>
+  <data name="File_SelectedList" xml:space="preserve">
+    <value>Dosya Listesi</value>
+  </data>
+  <data name="Info_InfoMessage" xml:space="preserve">
+    <value>Bu uygulamayı kullandığınız için teşekkür ederiz. Daha fazlası için bizi takip edebilir ve destek olabilirsiniz.</value>
+  </data>
+  <data name="Main_btnSelect" xml:space="preserve">
+    <value>Dosya Seç</value>
+  </data>
+  <data name="Main_DragInfo" xml:space="preserve">
+    <value>Dosyalarınızı buraya sürükleyin ya da seçmek için tıklayın.</value>
+  </data>
+  <data name="Main_InfoMessage1" xml:space="preserve">
+    <value>Lütfen cihazınızın ve diğer cihazın aynı Wi-Fi ağına bağlı olduğundan emin olun.</value>
+  </data>
+  <data name="Main_InfoMessage2" xml:space="preserve">
+    <value>Göndermek istediğiniz dosyaları seçin. Aynı anda birden çok dosya seçebilirsiniz.</value>
+  </data>
+  <data name="Main_OrReceive" xml:space="preserve">
+    <value>Dosya almak için bu sayfada bekleyin.</value>
+  </data>
+  <data name="Permission_btnAccept" xml:space="preserve">
+    <value>Kabul Et</value>
+  </data>
+  <data name="Permission_InfoMessage" xml:space="preserve">
+    <value>Yeni İstek</value>
+  </data>
+  <data name="Permission_RequestMessage" xml:space="preserve">
+    <value>Size dosya göndermek istiyor:</value>
+  </data>
+  <data name="Permission_RequestMessage2" xml:space="preserve">
+    <value>Almak istiyor musunuz?</value>
+  </data>
+  <data name="Permisson_btnDecline" xml:space="preserve">
+    <value>Reddet</value>
+  </data>
+  <data name="Rec_InfoMessage" xml:space="preserve">
+    <value>Bağlantı için bekliyor...</value>
+  </data>
+  <data name="Rejected_Title" xml:space="preserve">
+    <value>Transfer isteği reddedildi!</value>
+  </data>
+  <data name="Send_btnRefresh" xml:space="preserve">
+    <value>Yenile</value>
+  </data>
+  <data name="Send_btnSend" xml:space="preserve">
+    <value>Gönder</value>
+  </data>
+  <data name="Send_deviceList" xml:space="preserve">
+    <value>Uygun Cihazların Listesi:</value>
+  </data>
+  <data name="Send_infoMessage" xml:space="preserve">
+    <value>Hedef cihazı seçin</value>
+  </data>
+  <data name="Send_Scanning" xml:space="preserve">
+    <value>Ağ Taranıyor...</value>
+  </data>
+  <data name="Send_TargetIP" xml:space="preserve">
+    <value>Hedef IP</value>
+  </data>
+  <data name="Send_Warning_Goback" xml:space="preserve">
+    <value>Üzgünüm, istek gönderdikten sonra geri gidemezsiniz.</value>
+  </data>
+  <data name="Send_Warning_rejected" xml:space="preserve">
+    <value>Transfer isteği reddedildi:</value>
+  </data>
+  <data name="Settings_fristTimeInfo" xml:space="preserve">
+    <value>Cihazınıza yeni bir isim vermek, daha sonra kolayca bulabilmeniz için önemlidir.
+                           Bu isim dosya aktarımı sırasında diğer cihazlarda görünecek olan isimdir.</value>
+  </data>
+  <data name="Settings_WelcomeMessage" xml:space="preserve">
+    <value>Buggy Dosya Transferi Uygulamasına Hoşgeldiniz!</value>
+  </data>
+  <data name="Setting_btnSave" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="Setting_DeviceName" xml:space="preserve">
+    <value>Cihaz Adı</value>
+  </data>
+  <data name="Setting_Language" xml:space="preserve">
+    <value>Dil:</value>
+  </data>
+  <data name="Setting_OutputFolder" xml:space="preserve">
+    <value>Çıktı Klasörü:</value>
+  </data>
+  <data name="Setting_Warning_Saving" xml:space="preserve">
+    <value>Parametreler kaydediliyor...</value>
+  </data>
+  <data name="Transfer_AbortedMessage" xml:space="preserve">
+    <value>Transfer diğer cihaz tarafından iptal edildi.</value>
+  </data>
+  <data name="Transfer_btnAbort" xml:space="preserve">
+    <value>İptal Et</value>
+  </data>
+  <data name="Transfer_ConfirmAbortMessage" xml:space="preserve">
+    <value>Gerçekten iptal etmek istiyor musunuz?</value>
+  </data>
+  <data name="Transfer_ConfirmAbortNo" xml:space="preserve">
+    <value>Hayır</value>
+  </data>
+  <data name="Transfer_ConfirmAbortTitle" xml:space="preserve">
+    <value>Onayla</value>
+  </data>
+  <data name="Transfer_ConfirmAbortYes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="Transfer_Filename" xml:space="preserve">
+    <value>Dosya adı...</value>
+  </data>
+  <data name="Transfer_FileSize" xml:space="preserve">
+    <value>Dosya Boyutu:</value>
+  </data>
+  <data name="Transfer_InfoMessage" xml:space="preserve">
+    <value>Dosyalar aktarılıyor...</value>
+  </data>
+  <data name="Transfer_Remaining" xml:space="preserve">
+    <value>Geçen:</value>
+  </data>
+  <data name="Transfer_Time" xml:space="preserve">
+    <value>Kalan:</value>
+  </data>
+  <data name="Transfer_TransferSpeed" xml:space="preserve">
+    <value>Aktarım Hızı:</value>
+  </data>
+  <data name="Transfer_Warning_GoBack" xml:space="preserve">
+    <value>Aktarım sırasında geri gidemezsiniz!</value>
+  </data>
+  <data name="YourDeviceName" xml:space="preserve">
+    <value>Cihaz Adı:</value>
+  </data>
+  <data name="YourIPAddress" xml:space="preserve">
+    <value>IP Adresi:</value>
+  </data>
+  <data name="Options_Title" xml:space="preserve">
+    <value>Seçenekler</value>
+  </data>
+  <data name="Settings_SelectTargetFolder" xml:space="preserve">
+    <value>Dosyaların kaydedileceği klasörü seçin.</value>
+  </data>
+</root>

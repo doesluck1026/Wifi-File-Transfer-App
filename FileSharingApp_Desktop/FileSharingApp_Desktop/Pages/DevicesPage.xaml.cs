@@ -42,7 +42,7 @@ namespace FileSharingApp_Desktop.Pages
             }
             else
             {
-                var result = MessageBox.Show("Transfer request is rejected by receiver", "Transfer Rejected", button: MessageBoxButton.OK);
+                var result = MessageBox.Show(Properties.Resources.Send_Warning_rejected, Properties.Resources.Rejected_Title, button: MessageBoxButton.OK);
             }
         }
 

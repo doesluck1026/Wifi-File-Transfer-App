@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Ac_btnReceive" xml:space="preserve">
+    <value>接收文件</value>
+  </data>
+  <data name="Ac_btnSend" xml:space="preserve">
+    <value>发送文件</value>
+  </data>
+  <data name="Ac_InfoMessage" xml:space="preserve">
+    <value>选择要做什么。</value>
+  </data>
+  <data name="Done_btnHome" xml:space="preserve">
+    <value>住宅</value>
+  </data>
+  <data name="Done_btnOpen" xml:space="preserve">
+    <value>打开</value>
+  </data>
+  <data name="Done_InfoMessage" xml:space="preserve">
+    <value>文件传输成功！</value>
+  </data>
+  <data name="Done_lblFiles" xml:space="preserve">
+    <value>文件</value>
+  </data>
+  <data name="Files_Warning_NoFile" xml:space="preserve">
+    <value>未选择任何文件。</value>
+  </data>
+  <data name="File_btnAdd" xml:space="preserve">
+    <value>添加更多</value>
+  </data>
+  <data name="File_btnConfirm" xml:space="preserve">
+    <value>确认文件</value>
+  </data>
+  <data name="File_btnOpen" xml:space="preserve">
+    <value>视图</value>
+  </data>
+  <data name="File_btnRemove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="File_InfoMessage" xml:space="preserve">
+    <value>查看选定的文件。</value>
+  </data>
+  <data name="File_SelectedList" xml:space="preserve">
+    <value>选定文件的列表</value>
+  </data>
+  <data name="Info_InfoMessage" xml:space="preserve">
+    <value>感谢您使用此应用程序。 您可以关注并支持我们以获取更多！</value>
+  </data>
+  <data name="Main_btnSelect" xml:space="preserve">
+    <value>选择文件</value>
+  </data>
+  <data name="Main_InfoMessage1" xml:space="preserve">
+    <value>请确保您的手机和接收器设备连接到同一Wi-Fi！</value>
+  </data>
+  <data name="Main_InfoMessage2" xml:space="preserve">
+    <value>选择您要发送的文件。 您可以选择多个文件。</value>
+  </data>
+  <data name="Permission_btnAccept" xml:space="preserve">
+    <value>接受</value>
+  </data>
+  <data name="Permission_InfoMessage" xml:space="preserve">
+    <value>新请求</value>
+  </data>
+  <data name="Permission_RequestMessage" xml:space="preserve">
+    <value>想要向您发送一些文件：</value>
+  </data>
+  <data name="Permission_RequestMessage2" xml:space="preserve">
+    <value>你想收到吗？</value>
+  </data>
+  <data name="Permisson_btnDecline" xml:space="preserve">
+    <value>拒绝</value>
+  </data>
+  <data name="Rec_InfoMessage" xml:space="preserve">
+    <value>正在等待连接</value>
+  </data>
+  <data name="Send_btnRefresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="Send_btnSend" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="Send_deviceList" xml:space="preserve">
+    <value>可用设备列表：</value>
+  </data>
+  <data name="Send_infoMessage" xml:space="preserve">
+    <value>选择目标设备</value>
+  </data>
+  <data name="Send_Scanning" xml:space="preserve">
+    <value>扫描网络...</value>
+  </data>
+  <data name="Send_TargetIP" xml:space="preserve">
+    <value>目标 IP</value>
+  </data>
+  <data name="Send_Warning_Goback" xml:space="preserve">
+    <value>发送请求后，您将无法返回。 对不起...</value>
+  </data>
+  <data name="Send_Warning_rejected" xml:space="preserve">
+    <value>抱歉...转移请求被拒绝</value>
+  </data>
+  <data name="Settings_fristTimeInfo" xml:space="preserve">
+    <value>最好更改设备的名称，以便以后可以轻松识别它。
+                            当您要接收文件时，将显示该名称。 您还可以更改此应用的语言</value>
+  </data>
+  <data name="Settings_WelcomeMessage" xml:space="preserve">
+    <value>欢迎使用Buggy File Transfer App！</value>
+  </data>
+  <data name="Setting_btnSave" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Setting_DeviceName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="Setting_Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="Setting_Warning_Saving" xml:space="preserve">
+    <value>保存参数...</value>
+  </data>
+  <data name="Transfer_btnAbort" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Transfer_ConfirmAbortMessage" xml:space="preserve">
+    <value>您真的要取消转帐吗？</value>
+  </data>
+  <data name="Transfer_ConfirmAbortNo" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="Transfer_ConfirmAbortTitle" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="Transfer_ConfirmAbortYes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="Transfer_Filename" xml:space="preserve">
+    <value>文件名</value>
+  </data>
+  <data name="Transfer_FileSize" xml:space="preserve">
+    <value>文件大小：</value>
+  </data>
+  <data name="Transfer_InfoMessage" xml:space="preserve">
+    <value>文件正在传输中...</value>
+  </data>
+  <data name="Transfer_Remaining" xml:space="preserve">
+    <value>剩余</value>
+  </data>
+  <data name="Transfer_Time" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="Transfer_TransferSpeed" xml:space="preserve">
+    <value>传输速度：</value>
+  </data>
+  <data name="Transfer_Warning_GoBack" xml:space="preserve">
+    <value>传输文件时您不能回头！</value>
+  </data>
+  <data name="YourDeviceName" xml:space="preserve">
+    <value>您的设备名称</value>
+  </data>
+  <data name="YourIPAddress" xml:space="preserve">
+    <value>IP 地址</value>
+  </data>
+  <data name="Transfer_AbortedMessage" xml:space="preserve">
+    <value>传输被其他设备中止。</value>
+  </data>
+  <data name="Done_OpenFolder" xml:space="preserve">
+    <value>打开输出文件夹</value>
+  </data>
+  <data name="Main_DragInfo" xml:space="preserve">
+    <value>将文件拖到此处或单击以选择文件。</value>
+  </data>
+  <data name="Main_OrReceive" xml:space="preserve">
+    <value>或者在这里等待接收文件。</value>
+  </data>
+  <data name="Rejected_Title" xml:space="preserve">
+    <value>转移被拒绝！</value>
+  </data>
+  <data name="Setting_OutputFolder" xml:space="preserve">
+    <value>输出文件夹:</value>
+  </data>
+  <data name="Options_Title" xml:space="preserve">
+    <value>选项</value>
+  </data>
+  <data name="Settings_SelectTargetFolder" xml:space="preserve">
+    <value>选择文件夹来存储接收到的文件。</value>
+  </data>
+</root>
