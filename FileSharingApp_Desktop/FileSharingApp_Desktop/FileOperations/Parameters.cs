@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,8 +31,11 @@ class Parameters
         {
             IsUsingFirstTime = true;
             SavingPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\";
-            DeviceName = "MyDevice";
-            DeviceLanguage = "tr";
+            DeviceName = Environment.MachineName;
+            char[] splitter = { '-' };
+            string language = CultureInfo.InstalledUICulture.ToString().Split(splitter)[0];
+            DeviceLanguage = language;
+            DidInitParameters = true;
             Save();
         }
     }
