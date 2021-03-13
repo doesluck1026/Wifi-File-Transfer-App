@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DevicesPage"
@@ -58,21 +57,42 @@
                           Foreground="Black" MinWidth="300"
                           MinHeight="300" SelectionChanged="list_Devices_SelectionChanged"/>
 
-                <Button x:Name="btn_Back" Content="Back"
+                <Button x:Name="btn_Back" 
                         Grid.Row="1" Grid.Column="0"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Click="btn_Back_Click" 
                         Style="{StaticResource Red}" Margin="20,10"
-                        Foreground="White" FontSize="25"/>
-
-                <Button x:Name="btn_Scan" Content="Scan Devices"
+                        Foreground="White" FontSize="25"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment ="Center">
+                    <StackPanel Orientation="Horizontal" Width="150"
+                          HorizontalAlignment="Stretch" >
+                        <Image Source="/Icons/back3.png"
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left"  Margin="5,0" />
+                        <TextBlock Text="Back"  Margin="5,0"
+                                   VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button x:Name="btn_Scan" 
                         Grid.Row="1" Grid.Column="1"
                         Style="{StaticResource Blue}"  Margin="20,10"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Click="btn_Scan_Click" 
-                        Foreground="White" FontSize="25"/>
+                        Foreground="White" FontSize="25">
 
-             
+                    <StackPanel Orientation="Horizontal" Width="150"
+                                HorizontalAlignment="Stretch" >
+                        <Image Source="/Icons/refresh.png" 
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left"  Margin="5,0" />
+                        <TextBlock Text="Refresh"  Margin="5,0"
+                                   VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    </StackPanel>
+
+                </Button>
+
+
             </Grid>
             <Grid Grid.Column="1" >
                 <Grid.RowDefinitions >
@@ -82,12 +102,23 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 
-                <Button x:Name="btn_Send" Content="Send Files" 
+                <Button x:Name="btn_Send" 
                         Grid.Row="1" Grid.Column="1"
                             HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                             Click="btn_Send_Click" 
                             Style="{StaticResource Green}"  Margin="20,20"
-                            Foreground="White" FontSize="25"/>
+                            Foreground="White" FontSize="25">
+                    
+                    <StackPanel Orientation="Horizontal" Width="200"
+                                HorizontalAlignment="Stretch" >
+                        <Image Source="/Icons/send.png" 
+                               Width =" 40" Height="40" 
+                               HorizontalAlignment="Left"  Margin="5,0" />
+                        <TextBlock Text="Send Files"   Margin="5,0"
+                                   VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                    </StackPanel>
+
+                </Button>
 
                 <TextBox x:Name="txt_DeviceIP" Grid.Row="0" 
                          Text="192.168.1.39" FontSize="28"

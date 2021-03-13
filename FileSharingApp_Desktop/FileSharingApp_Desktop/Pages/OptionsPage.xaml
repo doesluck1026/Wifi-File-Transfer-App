@@ -29,9 +29,6 @@
                     VerticalAlignment="Center" HorizontalAlignment="Center">
             <Label Content="OPTIONS" FontSize="40" FontWeight="Bold"
                Foreground="LightSteelBlue"  Grid.Row="0"/>
-            
-            <Image Source="BC_logo_1.png" Width="75" Height="75" />
-            
         </StackPanel>
 
         
@@ -83,15 +80,38 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             
-            <Button x:Name="btn_MainMenu" Content=" Main Menu " 
-                    Style="{StaticResource Blue}" Margin="10"
-                    FontSize="28" Grid.Column="0" VerticalAlignment="Center"
-                    HorizontalAlignment="Stretch" Click="btn_MainMenu_Click"/>
+            <Button x:Name="btn_MainMenu" 
+                    Style="{StaticResource Blue}" Margin="30"
+                    FontSize="25" Grid.Column="0" VerticalAlignment="Center"
+                    HorizontalAlignment="Stretch" Click="btn_MainMenu_Click"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+
+                <StackPanel Orientation="Horizontal" Width="200">
+                    <Image Source="/Icons/Home.png"  Margin="5,0"
+                               Width =" 35" Height="50" 
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                                Margin="5,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Button>
             
-            <Button x:Name="btn_Save" Content=" Save " FontSize="28" 
-                    Style="{StaticResource Green}" Margin="10"
+            <Button x:Name="btn_Save" FontSize="25" 
+                    Style="{StaticResource Green}" Margin="30"
                     Grid.Column="2" VerticalAlignment="Center"
-                    HorizontalAlignment="Stretch" Click="btn_Save_Click"/>
+                    HorizontalAlignment="Stretch" Click="btn_Save_Click"
+                    VerticalContentAlignment="Center">
+                
+                <StackPanel Orientation="Horizontal" Width="150">
+                    <Image Source="/Icons/save.png" 
+                               Width =" 35" Height="50" 
+                               HorizontalAlignment="Left" 
+                                           Margin="5,0" 
+                           />
+                    <TextBlock Text="Save"  Margin="5,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Button>
         </Grid>
     </Grid>
 </Page>

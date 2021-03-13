@@ -7,14 +7,87 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Title="Wifi File Transfer " 
-        Height="600" 
+        Height="650" 
         Width="800"
         ResizeMode="CanMinimize" 
         Background="#353536"
         Closed="Window_Closed"
         >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
 
-    <Frame x:Name="MainFrame" HorizontalAlignment="Center" VerticalAlignment="Center" NavigationUIVisibility="Hidden" 
-           Width="750" Height="560" />
+        <Grid Grid.Row="0" Background="#1E88FA" >
+           
+            <Image Source="/Pages/BC_logo_1.png" 
+                   
+                   Margin="20,5"
+                   HorizontalAlignment="Left"/>
+        </Grid>
+
+        <StackPanel Orientation="Horizontal" 
+            HorizontalAlignment="Right" 
+                    Margin="10,0">
+
+            <Button Width="100" Height="50"
+                    Margin="0,5" 
+                    Background="Transparent" BorderThickness="0">
+                <Border BorderBrush="Orange" BorderThickness="1" Background="Orange" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal" Background="Transparent" >
+                        <Image Source="/Icons/blogger.png" Width="25" />
+                        <Label Content="Blogger" />
+                    </StackPanel>
+                </Border>
+                
+            </Button>
+
+            <Button Width="100" Height="50"
+                    Margin="0,5"
+                    Background="Transparent" BorderThickness="0">
+                <Border BorderBrush="LightPink" BorderThickness="1" Background="LightPink" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal">
+                    <Image Source="/Icons/patreon.png" Width="25" />
+                    <Label Content="Patreon" />
+                    </StackPanel>
+                </Border>
+
+            </Button>
+
+            <Button Width="100" Height="50" 
+                    Margin="0,5"
+                    Background="Transparent" BorderThickness="0" >
+                <Border BorderBrush="IndianRed" BorderThickness="1" Background="IndianRed" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal" Background="IndianRed">
+                    <Image Source="/Icons/instagram.png" Width="25" />
+                    <Label Content="Instagram" />
+                    </StackPanel>
+                </Border>
+
+            </Button>
+
+            <Button Width="100" Height="50" 
+                    Margin="0,5"
+                    Background="Transparent" BorderThickness="0" >
+                <Border BorderBrush="PaleVioletRed" BorderThickness="1" Background="PaleVioletRed" CornerRadius="2" >
+                    <StackPanel Orientation="Horizontal" Background="PaleVioletRed">
+                    <Image Source="/Icons/youtube.png" Width="25" />
+                    <Label Content="Youtube" />
+                    </StackPanel>
+                </Border>
+
+            </Button>
+
+        </StackPanel>
+
+        <Frame x:Name="MainFrame" 
+               Grid.Row="1"
+           HorizontalAlignment="Center" VerticalAlignment="Center" 
+           NavigationUIVisibility="Hidden" 
+           Width="800" Height="560" />
+    </Grid>
+    
+   
 
 </Window>
