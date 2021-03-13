@@ -168,9 +168,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resource\AppResources.ar.resx" />
+    <EmbeddedResource Include="Resource\AppResources.de.resx" />
     <EmbeddedResource Include="Resource\AppResources.es.resx" />
+    <EmbeddedResource Include="Resource\AppResources.fr.resx" />
     <EmbeddedResource Include="Resource\AppResources.resx" />
     <EmbeddedResource Include="Resource\AppResources.tr.resx" />
+    <EmbeddedResource Include="Resource\AppResources.zh-Hans.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

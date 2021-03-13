@@ -28,10 +28,16 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            list_Files.ItemsSource = Main.FileNames;
+            Dispatcher.Invoke(() =>
+            {
+                list_Files.ItemsSource = Main.FileNames;
+            });
             Main.OnClientRequested += Main_OnClientRequested;
         }
-
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
+        }
         private void Main_OnClientRequested(string totalTransferSize, string senderDevice)
         {
             /// Show file transfer request and ask for permission here
@@ -70,5 +76,7 @@ namespace FileSharingApp_Desktop.Pages
             string selectedFilePath = Main.FilePaths[selectedFileIndex];
             System.Diagnostics.Process.Start(@selectedFilePath);
         }
+
+        
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileTransferApp_Mobile.Resources;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace FileSharingApp_Desktop.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Main.OnTransferFinished += Main_OnTransferFinished;
+            Main.OnTransferAborted += Main_OnTransferAborted;
             Task.Run(() =>
             {
                 while (!Main.IsTransfering)//&& TimeSpan.FromSeconds(5).TotalSeconds<5) ;
@@ -40,6 +42,20 @@ namespace FileSharingApp_Desktop.Pages
                 StartUpdatingUI();
             });
         }
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnTransferFinished -= Main_OnTransferFinished;
+            Main.OnTransferAborted -= Main_OnTransferAborted;
+        }
+        private void Main_OnTransferAborted()
+        {
+            MessageBox.Show(AppResources.Transfer_AbortedMessage);
+            Dispatcher.Invoke(() =>
+            {
+                Navigator.Navigate("Pages/MainPage.xaml");
+            });
+        }
+
         private void Main_OnTransferFinished()
         {
             
@@ -102,5 +118,7 @@ namespace FileSharingApp_Desktop.Pages
             if (!Main.IsTransfering)
                 StopUpdateingUI();
         }
+
+        
     }
 }

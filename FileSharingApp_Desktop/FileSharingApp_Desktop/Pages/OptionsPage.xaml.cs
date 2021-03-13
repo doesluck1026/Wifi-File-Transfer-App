@@ -29,7 +29,6 @@ namespace FileSharingApp_Desktop.Pages
         public OptionsPage()
         {
             InitializeComponent();
-            Main.OnClientRequested += Main_OnClientRequested;
             LanguageList.Add("English", "en");
             LanguageList.Add("Türkçe", "tr");
             var languageCodeList = LanguageList.Values.ToList();
@@ -38,11 +37,16 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Main.OnClientRequested += Main_OnClientRequested;
             Dispatcher.Invoke(() =>
             {
                 txt_DeviceName.Text = Parameters.DeviceName;
                 txt_OutputFolder.Text = Parameters.SavingPath;
             });
+        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
         }
         private void Main_OnClientRequested(string totalTransferSize, string senderDevice)
         {
@@ -53,7 +57,6 @@ namespace FileSharingApp_Desktop.Pages
             {
                 if (result == MessageBoxResult.Yes)
                 {
-                    Main.OnClientRequested -= Main_OnClientRequested;
                     Navigator.Navigate("Pages/TransferPage.xaml");
                     Main.ResponseToTransferRequest(true);
                 }
@@ -117,5 +120,7 @@ namespace FileSharingApp_Desktop.Pages
             }
             return null;
         }
+
+        
     }
 }

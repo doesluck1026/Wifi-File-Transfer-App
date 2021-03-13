@@ -232,6 +232,9 @@
   <data name="Setting_Warning_Saving" xml:space="preserve">
     <value>Saving Parameters...</value>
   </data>
+  <data name="Transfer_AbortedMessage" xml:space="preserve">
+    <value>Transfer is aborted by other device.</value>
+  </data>
   <data name="Transfer_btnAbort" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -266,10 +269,10 @@
     <value>Transfer speed :</value>
   </data>
   <data name="Transfer_Warning_GoBack" xml:space="preserve">
-    <value>You can't go back while transferring!</value>
+    <value>You can't go back while files are being transferred!</value>
   </data>
   <data name="YourDeviceName" xml:space="preserve">
-    <value>Your Device Name:</value>
+    <value>Your Device Name </value>
   </data>
   <data name="YourIPAddress" xml:space="preserve">
     <value>Your IP Address</value>

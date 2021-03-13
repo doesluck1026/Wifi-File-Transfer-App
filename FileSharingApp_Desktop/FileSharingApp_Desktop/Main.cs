@@ -32,6 +32,7 @@ public class Main
 
     public delegate void TransferFinishedDelegate();
     public static event TransferFinishedDelegate OnTransferFinished;
+    public static event TransferFinishedDelegate OnTransferAborted;
 
     public delegate void TransferRespondedDelegate(bool isAccepted);
     public static event TransferRespondedDelegate OnTransferResponded;
@@ -129,7 +130,8 @@ public class Main
         AllisSent,                  /// || no bytes needed ==> no response expected
         AcceptFiles,                /// Response to QueryTransfer function
         RejectFiles,                /// Response to QueryTransfer function
-        Ready                       /// Ready to receive file (response from receiver to StartofFileTransfer)
+        Ready,                      /// Ready to receive file (response from receiver to StartofFileTransfer)
+        Aborted                     /// When any of the device aborts the transfer
     }
     public struct FileStruct
     {
@@ -172,6 +174,12 @@ public class Main
         server.StartListener();
         server.OnClientConnected += Server_OnClientConnected;
         IsTransferEnabled = true;
+    }
+    private static byte[] PrepareAbortMessage()
+    {
+        byte[] data = new byte[2];
+        data[0] = (byte)Functions.Aborted;
+        return data;
     }
     #endregion
 
@@ -281,7 +289,18 @@ public class Main
                 client.SendDataServer(buffer);
                 totalBytesRead += numberOfBytesRead;
                 byteCounter += numberOfBytesRead;
-                CheckAck(Functions.TransferMode);
+                if (!CheckAck(Functions.TransferMode))
+                {
+                    client.DisconnectFromServer();
+                    client.DisconnectFromServer();
+                    client = null;
+                    server.CloseServer();
+                    server = null;
+                    StartServer();
+                    if (File != null)
+                        File.CloseFile();
+                    return;
+                }
                 if (watch.Elapsed.TotalSeconds >= 0.5)
                 {
                     UpdateMetrics(watch, byteCounter);
@@ -296,12 +315,17 @@ public class Main
                 }
             }
             File.CloseFile();
+            if (!IsTransferEnabled)
+            {
+                byte[] abortData = PrepareAbortMessage();
+                client.SendDataServer(abortData);
+                break;
+            }
             byte[] endBytes = new byte[5];
             endBytes[0] = (byte)Functions.EndofFileTransfer;
             client.SendDataServer(endBytes);
             CheckAck(Functions.EndofFileTransfer);
-            if (!IsTransferEnabled)
-                break;
+            
         }
         IsTransfering = false;
         SendLastFrame();
@@ -309,21 +333,32 @@ public class Main
             OnTransferFinished();
         client.DisconnectFromServer();
         client = null;
-        server.CloseServer();
+        if (server != null) ;
+            server.CloseServer();
         server = null;
         StartServer();
     }
     private static bool CheckAck(Functions func)
     {
         byte[] data = client.GetData();
-        if (data == null)
-            return false;
-        if (data.Length <= 0)
-            return false;
-        if (data[0] == (byte)func)
-            return true;
-        else
-            return false;
+        bool ack = false;
+        if (data != null)
+        {
+            if (data.Length > 0)
+            {
+                if (data[0] == (byte)func)
+                {
+                    ack = true;
+                }
+                else if (data[0] == (byte)Functions.Aborted)
+                {
+                    if (OnTransferAborted != null)
+                        OnTransferAborted();
+                    IsTransfering = false;
+                }
+            }
+        }
+        return ack;
     }
     private static void UpdateMetrics(Stopwatch watch, long byteCount)
     {
@@ -569,7 +604,21 @@ public class Main
                     server.CloseServer();
                     server = null;
                     IsTransfering = false;
+                    StartServer();
+                    if (File != null)
+                        File.CloseFile();
                     OnTransferFinished();
+                    return;
+                }
+                else if (receivedData[0] == (byte)Functions.Aborted)
+                {
+                    server.CloseServer();
+                    server = null;
+                    IsTransfering = false;
+                    if (File != null)
+                        File.CloseFile();
+                    if (OnTransferAborted != null)
+                        OnTransferAborted();
                     return;
                 }
                 else
@@ -580,7 +629,11 @@ public class Main
             }
             File.CloseFile();
             if (!IsTransferEnabled)
+            {
+                byte[] abortData = PrepareAbortMessage();
+                server.SendDataToClient(abortData);
                 break;
+            }
         }
         if (server != null)
         {
