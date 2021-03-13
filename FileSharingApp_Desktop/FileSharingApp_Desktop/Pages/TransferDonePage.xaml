@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
+      xmlns:p="clr-namespace:FileSharingApp_Desktop.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TransferDonePage"
@@ -32,7 +33,7 @@
                    Margin="0,0,30,0"
                    Width="50" Height="50"/>
 
-        <Label Content="File Transfer is Succesful!" 
+            <Label Content="{x:Static p:Resources.Done_InfoMessage}"
                FontSize="25" Foreground="White"
                VerticalAlignment="Center" HorizontalAlignment="Center" 
                Grid.Row="0"/>
@@ -61,7 +62,7 @@
                     <Image Source="/Icons/Home.png" 
                                Width =" 40" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                    <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="{x:Static p:Resources.Done_btnHome}" TextWrapping="WrapWithOverflow"
                                 Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </StackPanel>
@@ -74,9 +75,9 @@
                 
                 <StackPanel Orientation="Horizontal" Width="180">
                     <Image Source="/Icons/menu.png" 
-                               Width =" 40" Height="40" 
+                               Width =" 60" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                    <TextBlock Text="Open File" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="{x:Static p:Resources.Done_btnOpen}" TextWrapping="WrapWithOverflow"
                                 Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                TextAlignment="Center" Padding="2"/>
@@ -90,7 +91,7 @@
                     <Image Source="/Icons/folder.png" 
                                Width =" 40" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                    <TextBlock Text="Open Output Folder" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="{x:Static p:Resources.Done_OpenFolder}" TextWrapping="WrapWithOverflow"
                                 Margin="5,0" Width="150"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                TextAlignment="Center" Padding="2"/>

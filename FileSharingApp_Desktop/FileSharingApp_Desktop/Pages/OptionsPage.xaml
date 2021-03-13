@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileSharingApp_Desktop.Pages"
+      xmlns:p="clr-namespace:FileSharingApp_Desktop.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OptionsPage"
@@ -39,8 +40,8 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
-            
-            <Label Content="Device Name : " Grid.Column="0" 
+
+            <Label Content="{x:Static p:Resources.Setting_DeviceName}" Grid.Column="0" 
                    FontSize="25" HorizontalAlignment="Center" 
                    VerticalAlignment="center" Foreground="White"/>
             
@@ -56,7 +57,7 @@
                 <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <Label Content="Language : " Grid.Column="0" 
+            <Label Content="{x:Static p:Resources.Setting_Language}" Grid.Column="0" 
                    FontSize="25" HorizontalAlignment="Left" Margin="10,0,0,0" 
                    VerticalAlignment="center" Foreground="White"/>
             <ComboBox Name="Combo_Languages" Width="200" Grid.Column="1" Height="50" 
@@ -71,8 +72,8 @@
                 <ColumnDefinition Width="8*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
-            <Label Content="Output Folder : " Grid.Column="0"
+
+            <Label Content="{x:Static p:Resources.Setting_OutputFolder}" Grid.Column="0"
                    FontSize="25" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="center" Foreground="White"/>
@@ -106,7 +107,7 @@
                     <Image Source="/Icons/Home.png"  Margin="5,0"
                                Width =" 35" Height="50" 
                                HorizontalAlignment="Left" />
-                    <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="{x:Static p:Resources.Done_btnHome}" TextWrapping="WrapWithOverflow"
                                 Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </StackPanel>
@@ -124,7 +125,7 @@
                                HorizontalAlignment="Left" 
                                            Margin="5,0" 
                            />
-                    <TextBlock Text="Save"  Margin="5,0"
+                    <TextBlock Text="{x:Static p:Resources.Setting_btnSave}"  Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </StackPanel>
             </Button>

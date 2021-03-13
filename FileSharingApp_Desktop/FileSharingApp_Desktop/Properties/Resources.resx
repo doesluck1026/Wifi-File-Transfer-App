@@ -127,7 +127,7 @@
     <value>Choose what to do.</value>
   </data>
   <data name="Done_btnHome" xml:space="preserve">
-    <value>Home</value>
+    <value>Homepage</value>
   </data>
   <data name="Done_btnOpen" xml:space="preserve">
     <value>Open</value>
@@ -137,6 +137,9 @@
   </data>
   <data name="Done_lblFiles" xml:space="preserve">
     <value>Files</value>
+  </data>
+  <data name="Done_OpenFolder" xml:space="preserve">
+    <value>Open Output Folder</value>
   </data>
   <data name="Files_Warning_NoFile" xml:space="preserve">
     <value>No file is selected!</value>
@@ -165,11 +168,17 @@
   <data name="Main_btnSelect" xml:space="preserve">
     <value>Select FIles</value>
   </data>
+  <data name="Main_DragInfo" xml:space="preserve">
+    <value>Drag Your Files Here or Click to Select Files.</value>
+  </data>
   <data name="Main_InfoMessage1" xml:space="preserve">
     <value>Plase make sure that your phone and the receiver device are connected to same Wi-Fi!</value>
   </data>
   <data name="Main_InfoMessage2" xml:space="preserve">
     <value>Select the files you want to send. You can select multiple files.</value>
+  </data>
+  <data name="Main_OrReceive" xml:space="preserve">
+    <value>Or wait here to receive files.</value>
   </data>
   <data name="Permission_btnAccept" xml:space="preserve">
     <value>Accept</value>
@@ -229,6 +238,9 @@
   <data name="Setting_Language" xml:space="preserve">
     <value>Language :</value>
   </data>
+  <data name="Setting_OutputFolder" xml:space="preserve">
+    <value>Output Folder</value>
+  </data>
   <data name="Setting_Warning_Saving" xml:space="preserve">
     <value>Saving Parameters...</value>
   </data>
@@ -275,6 +287,6 @@
     <value>Your Device Name </value>
   </data>
   <data name="YourIPAddress" xml:space="preserve">
-    <value>Your IP Address</value>
+    <value>IP Address</value>
   </data>
 </root>

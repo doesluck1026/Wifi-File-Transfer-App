@@ -88,7 +88,7 @@ namespace FileSharingApp_Desktop.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to Homepage.
         /// </summary>
         internal static string Done_btnHome {
             get {
@@ -120,6 +120,15 @@ namespace FileSharingApp_Desktop.Properties {
         internal static string Done_lblFiles {
             get {
                 return ResourceManager.GetString("Done_lblFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Output Folder.
+        /// </summary>
+        internal static string Done_OpenFolder {
+            get {
+                return ResourceManager.GetString("Done_OpenFolder", resourceCulture);
             }
         }
         
@@ -205,6 +214,15 @@ namespace FileSharingApp_Desktop.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drag Your Files Here or Click to Select Files..
+        /// </summary>
+        internal static string Main_DragInfo {
+            get {
+                return ResourceManager.GetString("Main_DragInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plase make sure that your phone and the receiver device are connected to same Wi-Fi!.
         /// </summary>
         internal static string Main_InfoMessage1 {
@@ -219,6 +237,15 @@ namespace FileSharingApp_Desktop.Properties {
         internal static string Main_InfoMessage2 {
             get {
                 return ResourceManager.GetString("Main_InfoMessage2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or wait here to receive files..
+        /// </summary>
+        internal static string Main_OrReceive {
+            get {
+                return ResourceManager.GetString("Main_OrReceive", resourceCulture);
             }
         }
         
@@ -372,6 +399,15 @@ namespace FileSharingApp_Desktop.Properties {
         internal static string Setting_Language {
             get {
                 return ResourceManager.GetString("Setting_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output Folder.
+        /// </summary>
+        internal static string Setting_OutputFolder {
+            get {
+                return ResourceManager.GetString("Setting_OutputFolder", resourceCulture);
             }
         }
         
@@ -530,7 +566,7 @@ namespace FileSharingApp_Desktop.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your IP Address.
+        ///   Looks up a localized string similar to IP Address.
         /// </summary>
         internal static string YourIPAddress {
             get {

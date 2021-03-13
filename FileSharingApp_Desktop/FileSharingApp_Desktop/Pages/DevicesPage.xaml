@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:p="clr-namespace:FileSharingApp_Desktop.Properties"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="DevicesPage"
@@ -20,7 +21,7 @@
         <Border Grid.Row="0" BorderThickness="0,0,0,2" 
                 Margin="10,0" BorderBrush="LightBlue" />
 
-        <Label Content="sending"
+        <Label Content="{x:Static p:Resources.Send_infoMessage}" 
                Grid.Row="0" Foreground="White"
                HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25"/>
         <Grid Grid.Row="1">
@@ -69,7 +70,7 @@
                         <Image Source="/Icons/back3.png"
                                Width =" 40" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                        <TextBlock Text="Back"  Margin="5,0"
+                        <TextBlock Text="{x:Static p:Resources.Done_btnHome}" Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </StackPanel>
                 </Button>
@@ -86,7 +87,7 @@
                         <Image Source="/Icons/refresh.png" 
                                Width =" 40" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                        <TextBlock Text="Refresh"  Margin="5,0"
+                        <TextBlock Text="{x:Static p:Resources.Send_btnRefresh}"  Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </StackPanel>
 
@@ -114,7 +115,7 @@
                         <Image Source="/Icons/send.png" 
                                Width =" 40" Height="40" 
                                HorizontalAlignment="Left"  Margin="5,0" />
-                        <TextBlock Text="Send Files"   Margin="5,0"
+                        <TextBlock Text="{x:Static p:Resources.Send_btnSend}" Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </StackPanel>
 
