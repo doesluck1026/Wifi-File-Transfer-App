@@ -46,7 +46,7 @@
     
     mimetype: application/x-microsoft.net.object.binary.base64
     value   : The object must be serialized with 
-            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
     
     mimetype: application/x-microsoft.net.object.soap.base64
@@ -60,6 +60,7 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -68,9 +69,10 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="name" use="required" type="xsd:string" />
               <xsd:attribute name="type" type="xsd:string" />
               <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
@@ -85,9 +87,10 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -109,9 +112,169 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Ac_btnReceive" xml:space="preserve">
+    <value>Receive Files</value>
+  </data>
+  <data name="Ac_btnSend" xml:space="preserve">
+    <value>Send Files</value>
+  </data>
+  <data name="Ac_InfoMessage" xml:space="preserve">
+    <value>Choose what to do.</value>
+  </data>
+  <data name="Done_btnHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Done_btnOpen" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="Done_InfoMessage" xml:space="preserve">
+    <value>File transfer is succesful!</value>
+  </data>
+  <data name="Done_lblFiles" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Files_Warning_NoFile" xml:space="preserve">
+    <value>No file is selected!</value>
+  </data>
+  <data name="File_btnAdd" xml:space="preserve">
+    <value>Add more</value>
+  </data>
+  <data name="File_btnConfirm" xml:space="preserve">
+    <value>Confirm files</value>
+  </data>
+  <data name="File_btnOpen" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="File_btnRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="File_InfoMessage" xml:space="preserve">
+    <value>Review selected files.</value>
+  </data>
+  <data name="File_SelectedList" xml:space="preserve">
+    <value>List of selected files</value>
+  </data>
+  <data name="Info_InfoMessage" xml:space="preserve">
+    <value>Thanks for using this application. You can follow and support us for more!</value>
+  </data>
+  <data name="Main_btnSelect" xml:space="preserve">
+    <value>Select FIles</value>
+  </data>
+  <data name="Main_InfoMessage1" xml:space="preserve">
+    <value>Plase make sure that your phone and the receiver device are connected to same Wi-Fi!</value>
+  </data>
+  <data name="Main_InfoMessage2" xml:space="preserve">
+    <value>Select the files you want to send. You can select multiple files.</value>
+  </data>
+  <data name="Permission_btnAccept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="Permission_InfoMessage" xml:space="preserve">
+    <value>New Request</value>
+  </data>
+  <data name="Permission_RequestMessage" xml:space="preserve">
+    <value>wants to send you some files : </value>
+  </data>
+  <data name="Permission_RequestMessage2" xml:space="preserve">
+    <value>Do you want to receive?</value>
+  </data>
+  <data name="Permisson_btnDecline" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="Rec_InfoMessage" xml:space="preserve">
+    <value>Waiting for connection...</value>
+  </data>
+  <data name="Send_btnRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Send_btnSend" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Send_deviceList" xml:space="preserve">
+    <value>Available device list :</value>
+  </data>
+  <data name="Send_infoMessage" xml:space="preserve">
+    <value>Select the target device</value>
+  </data>
+  <data name="Send_Scanning" xml:space="preserve">
+    <value>Scanning Network...</value>
+  </data>
+  <data name="Send_TargetIP" xml:space="preserve">
+    <value>Target IP :</value>
+  </data>
+  <data name="Send_Warning_Goback" xml:space="preserve">
+    <value>You can't go back after sending a request. Sorry...</value>
+  </data>
+  <data name="Send_Warning_rejected" xml:space="preserve">
+    <value>Sorry... Transfer request is rejected by</value>
+  </data>
+  <data name="Settings_fristTimeInfo" xml:space="preserve">
+    <value>It is better to change the name of your device so that you can easily recognize it later.
+                           This name will be seen when you want to receive files. You can also change the language of this app</value>
+  </data>
+  <data name="Settings_WelcomeMessage" xml:space="preserve">
+    <value>Welcome to Buggy File Transfer App!</value>
+  </data>
+  <data name="Setting_btnSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Setting_DeviceName" xml:space="preserve">
+    <value>Device Name :</value>
+  </data>
+  <data name="Setting_Language" xml:space="preserve">
+    <value>Language :</value>
+  </data>
+  <data name="Setting_Warning_Saving" xml:space="preserve">
+    <value>Saving Parameters...</value>
+  </data>
+  <data name="Transfer_AbortedMessage" xml:space="preserve">
+    <value>Transfer is aborted by other device.</value>
+  </data>
+  <data name="Transfer_btnAbort" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Transfer_ConfirmAbortMessage" xml:space="preserve">
+    <value>Do you really want to cancel transfer?</value>
+  </data>
+  <data name="Transfer_ConfirmAbortNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Transfer_ConfirmAbortTitle" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="Transfer_ConfirmAbortYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Transfer_Filename" xml:space="preserve">
+    <value>File name :</value>
+  </data>
+  <data name="Transfer_FileSize" xml:space="preserve">
+    <value>File Size :</value>
+  </data>
+  <data name="Transfer_InfoMessage" xml:space="preserve">
+    <value>Files are being transferred...</value>
+  </data>
+  <data name="Transfer_Remaining" xml:space="preserve">
+    <value>Remaining :</value>
+  </data>
+  <data name="Transfer_Time" xml:space="preserve">
+    <value>Time :</value>
+  </data>
+  <data name="Transfer_TransferSpeed" xml:space="preserve">
+    <value>Transfer speed :</value>
+  </data>
+  <data name="Transfer_Warning_GoBack" xml:space="preserve">
+    <value>You can't go back while files are being transferred!</value>
+  </data>
+  <data name="YourDeviceName" xml:space="preserve">
+    <value>Your Device Name </value>
+  </data>
+  <data name="YourIPAddress" xml:space="preserve">
+    <value>Your IP Address</value>
+  </data>
 </root>

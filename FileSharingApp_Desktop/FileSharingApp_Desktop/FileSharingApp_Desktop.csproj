@@ -80,9 +80,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AutoUpdater\ApplicationUpdate\Versions.cs" />
-    <Compile Include="AutoUpdater\SingleInstance.cs" />
-    <Compile Include="AutoUpdater\UpdaterMain.cs" />
     <Compile Include="Communication\NetworkScanner.cs" />
     <Compile Include="Communication\Server.cs" />
     <Compile Include="Controls\MyCustomConverter.cs" />
@@ -108,7 +105,6 @@
     <Compile Include="Pages\TransferPage.xaml.cs">
       <DependentUpon>TransferPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Resource\AppResources.Designer.cs" />
     <Compile Include="System\Windows\Forms.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -168,13 +164,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resource\AppResources.ar.resx" />
-    <EmbeddedResource Include="Resource\AppResources.de.resx" />
-    <EmbeddedResource Include="Resource\AppResources.es.resx" />
-    <EmbeddedResource Include="Resource\AppResources.fr.resx" />
-    <EmbeddedResource Include="Resource\AppResources.resx" />
-    <EmbeddedResource Include="Resource\AppResources.tr.resx" />
-    <EmbeddedResource Include="Resource\AppResources.zh-Hans.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

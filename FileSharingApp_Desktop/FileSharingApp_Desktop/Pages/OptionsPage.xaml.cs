@@ -16,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FileTransferApp_Mobile.Resources;
 
 namespace FileSharingApp_Desktop.Pages
 {
@@ -83,7 +82,7 @@ namespace FileSharingApp_Desktop.Pages
             string languageCode;
             LanguageList.TryGetValue(selectedLanguage, out languageCode);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageCode);
-            AppResources.Culture = new CultureInfo(languageCode);
+            Properties.Resources.Culture = new CultureInfo(languageCode);
             Parameters.DeviceLanguage = languageCode;
             Parameters.Save();
         }

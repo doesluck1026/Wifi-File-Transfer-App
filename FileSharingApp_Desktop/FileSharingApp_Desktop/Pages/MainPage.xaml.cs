@@ -119,6 +119,7 @@ namespace FileSharingApp_Desktop.Pages
                     list_Files.SelectedIndex = 0;
                     btn_Send.Visibility = Visibility.Visible;
                     lbl_ReceiveInfo.Visibility = Visibility.Hidden;
+                    btn_MainMenu.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -128,6 +129,7 @@ namespace FileSharingApp_Desktop.Pages
                     lbl_Info.Visibility = Visibility.Visible;
                     btn_Send.Visibility = Visibility.Hidden;
                     lbl_ReceiveInfo.Visibility = Visibility.Visible;
+                    btn_MainMenu.Visibility = Visibility.Hidden;
                 }
             });
             
@@ -208,6 +210,11 @@ namespace FileSharingApp_Desktop.Pages
                 Main.SetFilePaths(FilePaths.ToArray());
                 Navigator.Navigate("Pages/DevicesPage.xaml");
             }
-        }       
+        }
+
+        private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ShowFileList(false);
+        }
     }
 }

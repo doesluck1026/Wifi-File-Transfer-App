@@ -120,23 +120,41 @@
                 </Grid>
             </Border>
         </Grid>
-        <Button x:Name="btn_Send" Width="200"
-                FontSize="25" Grid.Row="2"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+            <Button x:Name="btn_MainMenu" 
+                    Style="{StaticResource Blue}" Margin="20"
+                    FontSize="25" Grid.Column="0" VerticalAlignment="Center"
+                    HorizontalAlignment="Left" Click="btn_MainMenu_Click" Visibility="Hidden"
+                    HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+
+                <StackPanel Orientation="Horizontal" Width="200">
+                    <Image Source="/Icons/Home.png"  Margin="5,0"
+                               Width =" 35" Height="50" 
+                               HorizontalAlignment="Left" />
+                    <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                                Margin="5,0"
+                                VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btn_Send" Width="200"
+                FontSize="25" 
                     Style="{StaticResource Green}" 
-                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                VerticalAlignment="Center" HorizontalAlignment="Right" 
                 Click="btn_Send_Click" Visibility="Hidden">
-            
-            <StackPanel Orientation="Horizontal" Width="175">
-                <Image Source="/Icons/send.png" 
+
+                <StackPanel Orientation="Horizontal" Width="175">
+                    <Image Source="/Icons/send.png" 
                                Width =" 35" Height="50" 
                                HorizontalAlignment="Left" Margin="5,0" />
 
-                <TextBlock Text="Send Files" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="Send Files" TextWrapping="WrapWithOverflow"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                            Margin="5,0" 
                                TextAlignment="Center" Padding="2"/>
-            </StackPanel>
-        </Button>
+                </StackPanel>
+            </Button>
+
+        </StackPanel>
 
         <Label x:Name="lbl_ReceiveInfo" FontSize="25" Grid.Row="2" 
                Content="Or wait here to receive files"

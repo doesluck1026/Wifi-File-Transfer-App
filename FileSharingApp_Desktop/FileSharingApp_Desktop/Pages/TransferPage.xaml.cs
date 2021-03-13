@@ -1,5 +1,4 @@
-﻿using FileTransferApp_Mobile.Resources;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -49,7 +48,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Main_OnTransferAborted()
         {
-            MessageBox.Show(AppResources.Transfer_AbortedMessage);
+            MessageBox.Show(Properties.Resources.Transfer_AbortedMessage);
             Dispatcher.Invoke(() =>
             {
                 Navigator.Navigate("Pages/MainPage.xaml");
