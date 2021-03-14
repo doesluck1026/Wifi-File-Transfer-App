@@ -41,7 +41,7 @@ namespace FileSharingApp_Desktop
         }
         private async Task CheckForUpdates()
         {
-            using (var manager = new UpdateManager(@"C:\Users\CDS_Software02\Desktop\Releases"))
+            using (var manager = new UpdateManager("https://drive.google.com/drive/folders/1tDKmbxeF8ptchEIssFop8pb6hSxmC1f9?usp=sharing"))
             {
                 await manager.UpdateApp();
             }
