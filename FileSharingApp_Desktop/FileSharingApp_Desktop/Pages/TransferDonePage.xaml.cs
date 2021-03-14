@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace FileSharingApp_Desktop.Pages
 {
@@ -31,14 +21,18 @@ namespace FileSharingApp_Desktop.Pages
             list_Files.ItemsSource = Main.FileNames;
             Main.OnClientRequested += Main_OnClientRequested;
         }
-
-        private void Main_OnClientRequested(string totalTransferSize, string senderDevice)
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
+        }
+        private void Main_OnClientRequested(string totalTransferSize, string deviceName)
         {
             /// Show file transfer request and ask for permission here
-            Debug.WriteLine(senderDevice + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
-            var result = MessageBox.Show(senderDevice + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
+            Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
             Dispatcher.Invoke(() =>
             {
+                var result = MessageBox.Show(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
+                    Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     Main.OnClientRequested -= Main_OnClientRequested;
@@ -71,9 +65,6 @@ namespace FileSharingApp_Desktop.Pages
             System.Diagnostics.Process.Start(@selectedFilePath);
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Main.OnClientRequested -= Main_OnClientRequested;
-        }
+       
     }
 }
