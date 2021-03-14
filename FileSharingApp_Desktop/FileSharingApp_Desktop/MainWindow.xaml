@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FileSharingApp_Desktop"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Wifi File Transfer " 
+        Title="Buggy File Transfer " 
         Height="650" 
         Width="800"
         ResizeMode="CanMinimize" 

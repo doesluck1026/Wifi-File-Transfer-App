@@ -1,0 +1,319 @@
+﻿[14.03.21 22:53:13] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 22:53:13] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 22:53:13] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 22:53:13] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.0-full.nupkg
+[14.03.21 22:53:14] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 22:53:14] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 22:53:14] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 22:53:14] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 22:53:15] fatal: Finished with unhandled exception: System.AggregateException: Bir veya daha fazla hata oluştu. ---> System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   konum: System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   konum: Squirrel.Update.Program.<>c__DisplayClass10_0.<Releasify>b__6()
+   konum: Squirrel.Utility.<>c__DisplayClass8_0.<Retry>b__0()
+   konum: Squirrel.Utility.Retry[T](Func`1 block, Int32 retries)
+   konum: Squirrel.Update.Program.Releasify(String package, String targetDir, String packagesDir, String bootstrapperExe, String backgroundGif, String signingOpts, String baseUrl, String setupIcon, Boolean generateMsi, Boolean packageAs64Bit, String frameworkVersion, Boolean generateDeltas)
+   konum: Squirrel.Update.Program.executeCommandLine(String[] args)
+   konum: Squirrel.Update.Program.main(String[] args)
+---> (İç Özel Durum #0) System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()<---
+
+[14.03.21 23:00:24] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:00:24] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:00:24] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:00:25] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.0-full.nupkg
+[14.03.21 23:00:25] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:00:25] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:00:25] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:00:25] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:00:26] fatal: Finished with unhandled exception: System.AggregateException: Bir veya daha fazla hata oluştu. ---> System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   konum: System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   konum: Squirrel.Update.Program.<>c__DisplayClass10_0.<Releasify>b__6()
+   konum: Squirrel.Utility.<>c__DisplayClass8_0.<Retry>b__0()
+   konum: Squirrel.Utility.Retry[T](Func`1 block, Int32 retries)
+   konum: Squirrel.Update.Program.Releasify(String package, String targetDir, String packagesDir, String bootstrapperExe, String backgroundGif, String signingOpts, String baseUrl, String setupIcon, Boolean generateMsi, Boolean packageAs64Bit, String frameworkVersion, Boolean generateDeltas)
+   konum: Squirrel.Update.Program.executeCommandLine(String[] args)
+   konum: Squirrel.Update.Program.main(String[] args)
+---> (İç Özel Durum #0) System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()<---
+
+[14.03.21 23:02:31] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:02:31] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:02:31] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:02:32] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.0-full.nupkg
+[14.03.21 23:02:32] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:02:32] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:02:32] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:02:32] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:02:33] fatal: Finished with unhandled exception: System.AggregateException: Bir veya daha fazla hata oluştu. ---> System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   konum: System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   konum: Squirrel.Update.Program.<>c__DisplayClass10_0.<Releasify>b__6()
+   konum: Squirrel.Utility.<>c__DisplayClass8_0.<Retry>b__0()
+   konum: Squirrel.Utility.Retry[T](Func`1 block, Int32 retries)
+   konum: Squirrel.Update.Program.Releasify(String package, String targetDir, String packagesDir, String bootstrapperExe, String backgroundGif, String signingOpts, String baseUrl, String setupIcon, Boolean generateMsi, Boolean packageAs64Bit, String frameworkVersion, Boolean generateDeltas)
+   konum: Squirrel.Update.Program.executeCommandLine(String[] args)
+   konum: Squirrel.Update.Program.main(String[] args)
+---> (İç Özel Durum #0) System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()<---
+
+[14.03.21 23:07:16] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:07:16] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:07:16] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:07:16] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.0-full.nupkg
+[14.03.21 23:07:17] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:07:17] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:07:17] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:07:18] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:07:18] fatal: Finished with unhandled exception: System.AggregateException: Bir veya daha fazla hata oluştu. ---> System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   konum: System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   konum: Squirrel.Update.Program.<>c__DisplayClass10_0.<Releasify>b__6()
+   konum: Squirrel.Utility.<>c__DisplayClass8_0.<Retry>b__0()
+   konum: Squirrel.Utility.Retry[T](Func`1 block, Int32 retries)
+   konum: Squirrel.Update.Program.Releasify(String package, String targetDir, String packagesDir, String bootstrapperExe, String backgroundGif, String signingOpts, String baseUrl, String setupIcon, Boolean generateMsi, Boolean packageAs64Bit, String frameworkVersion, Boolean generateDeltas)
+   konum: Squirrel.Update.Program.executeCommandLine(String[] args)
+   konum: Squirrel.Update.Program.main(String[] args)
+---> (İç Özel Durum #0) System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()<---
+
+[14.03.21 23:13:54] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:13:54] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:13:54] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:13:54] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.0-full.nupkg
+[14.03.21 23:13:54] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:13:54] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:13:54] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:13:55] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:13:56] fatal: Finished with unhandled exception: System.AggregateException: Bir veya daha fazla hata oluştu. ---> System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()
+   --- İç özel durum yığını izlemesinin sonu ---
+   konum: System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   konum: System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   konum: Squirrel.Update.Program.<>c__DisplayClass10_0.<Releasify>b__6()
+   konum: Squirrel.Utility.<>c__DisplayClass8_0.<Retry>b__0()
+   konum: Squirrel.Utility.Retry[T](Func`1 block, Int32 retries)
+   konum: Squirrel.Update.Program.Releasify(String package, String targetDir, String packagesDir, String bootstrapperExe, String backgroundGif, String signingOpts, String baseUrl, String setupIcon, Boolean generateMsi, Boolean packageAs64Bit, String frameworkVersion, Boolean generateDeltas)
+   konum: Squirrel.Update.Program.executeCommandLine(String[] args)
+   konum: Squirrel.Update.Program.main(String[] args)
+---> (İç Özel Durum #0) System.Exception: Failed to modify resources, command invoked was: 'C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\rcedit.exe "C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\Setup.exe" --set-version-string "CompanyName" "doesluck,UA" --set-version-string "LegalCopyright" "Copyright © 2021 doesluck,UA" --set-version-string "FileDescription" "Buggy File Transfer" --set-version-string "ProductName" "Buggy File Transfer" --set-file-version 2.3.0 --set-product-version 2.3.0'
+
+Output was:
+Fatal error: Unable to load file
+   konum: Squirrel.Update.Program.<setPEVersionInfoAndIcon>d__20.MoveNext()<---
+
+[14.03.21 23:19:30] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:19:30] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:19:30] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg
+[14.03.21 23:19:30] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.0.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.0-full.nupkg
+[14.03.21 23:19:31] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:19:31] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:19:31] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:19:31] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:19:33] ınfo: Program: Finished Squirrel Updater
+[14.03.21 23:24:39] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.1.nupkg
+[14.03.21 23:24:39] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:24:39] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.1.nupkg
+[14.03.21 23:24:39] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.1.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.1-full.nupkg
+[14.03.21 23:24:40] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:24:40] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:24:40] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.3.0-full.nupkg and C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.1-full.nupkg into C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\FileSharingApp_Desktop.exe hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\FileSharingApp_Desktop.exe.config hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\FileSharingApp_Desktop_ExecutionStub.exe hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[14.03.21 23:24:40] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\ar\_._ hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\de\_._ hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\es\_._ hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\fr\_._ hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\tr\_._ hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\_._ hasn't changed, writing dummy file
+[14.03.21 23:24:41] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:24:43] ınfo: Program: Finished Squirrel Updater
+[14.03.21 23:32:23] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.2.nupkg
+[14.03.21 23:32:23] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:32:23] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.2.nupkg
+[14.03.21 23:32:23] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.2.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.2-full.nupkg
+[14.03.21 23:32:24] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:32:24] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:32:24] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.3.1-full.nupkg and C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.2-full.nupkg into C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\FileSharingApp_Desktop.exe hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\FileSharingApp_Desktop.exe.config hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\FileSharingApp_Desktop_ExecutionStub.exe hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[14.03.21 23:32:24] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\ar\_._ hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\de\_._ hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\es\_._ hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\fr\_._ hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\tr\_._ hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\_._ hasn't changed, writing dummy file
+[14.03.21 23:32:25] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:32:27] ınfo: Program: Finished Squirrel Updater
+[14.03.21 23:42:29] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.4.nupkg
+[14.03.21 23:42:29] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:42:29] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.4.nupkg
+[14.03.21 23:42:29] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.4.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.4-full.nupkg
+[14.03.21 23:42:29] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:42:29] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:42:29] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.3.2-full.nupkg and C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.4-full.nupkg into C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Buggy File Transfer.exe not found in base package, marking as new
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Buggy File Transfer.exe.config not found in base package, marking as new
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Buggy File Transfer_ExecutionStub.exe not found in base package, marking as new
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:42:30] ınfo: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\ar\Buggy File Transfer.resources.dll not found in base package, marking as new
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\de\Buggy File Transfer.resources.dll not found in base package, marking as new
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\es\Buggy File Transfer.resources.dll not found in base package, marking as new
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\fr\Buggy File Transfer.resources.dll not found in base package, marking as new
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\tr\Buggy File Transfer.resources.dll not found in base package, marking as new
+[14.03.21 23:42:31] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\Buggy File Transfer.resources.dll not found in base package, marking as new
+[14.03.21 23:42:31] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:42:33] ınfo: Program: Finished Squirrel Updater
+[14.03.21 23:50:05] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.5.nupkg
+[14.03.21 23:50:05] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[14.03.21 23:50:05] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.5.nupkg
+[14.03.21 23:50:05] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.5.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.5-full.nupkg
+[14.03.21 23:50:05] ınfo: ReleasePackage: Extracting dependent packages: []
+[14.03.21 23:50:05] ınfo: ReleasePackage: Removing unnecessary data
+[14.03.21 23:50:05] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[14.03.21 23:50:06] ınfo: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.3.4-full.nupkg and C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.5-full.nupkg into C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb
+[14.03.21 23:50:06] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer.exe => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer.exe
+[14.03.21 23:50:06] ınfo: DeltaPackageBuilder: \lib\net45\Buggy File Transfer.exe.config hasn't changed, writing dummy file
+[14.03.21 23:50:06] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer_ExecutionStub.exe => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer_ExecutionStub.exe
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\ar\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\ar\Buggy File Transfer.resources.dll
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\de\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\de\Buggy File Transfer.resources.dll
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\es\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\es\Buggy File Transfer.resources.dll
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\fr\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\fr\Buggy File Transfer.resources.dll
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\tr\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\tr\Buggy File Transfer.resources.dll
+[14.03.21 23:50:07] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\zh-Hans\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\zh-Hans\Buggy File Transfer.resources.dll
+[14.03.21 23:50:07] ınfo: Program: Building embedded zip file for Setup.exe
+[14.03.21 23:50:10] ınfo: Program: Finished Squirrel Updater
+[15.03.21 00:00:23] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.6.nupkg
+[15.03.21 00:00:23] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[15.03.21 00:00:23] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.6.nupkg
+[15.03.21 00:00:23] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.6.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.6-full.nupkg
+[15.03.21 00:00:24] ınfo: ReleasePackage: Extracting dependent packages: []
+[15.03.21 00:00:24] ınfo: ReleasePackage: Removing unnecessary data
+[15.03.21 00:00:24] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[15.03.21 00:00:24] ınfo: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.3.5-full.nupkg and C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.6-full.nupkg into C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer.exe => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer.exe
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\Buggy File Transfer.exe.config hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer_ExecutionStub.exe => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer_ExecutionStub.exe
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[15.03.21 00:00:25] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\ar\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\de\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\es\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\fr\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\tr\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[15.03.21 00:00:26] ınfo: Program: Building embedded zip file for Setup.exe
+[15.03.21 00:00:28] ınfo: Program: Finished Squirrel Updater

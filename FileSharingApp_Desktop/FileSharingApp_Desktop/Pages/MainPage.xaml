@@ -73,7 +73,7 @@
                     <Label Content="{x:Static p:Resources.Main_DragInfo}"  Grid.Row="1"
                            FontSize="20"  x:Name="lbl_Info" HorizontalAlignment="Center" 
                            Foreground="White"/>
-                    <ListBox x:Name="list_Files" Grid.Row="0" Width="400" Height="200" Visibility="Hidden"
+                    <ListBox x:Name="list_Files" Grid.Row="0" Width="600" Height="200" Visibility="Hidden"
                              SelectionChanged="list_Files_SelectionChanged"/>
                     <Grid Grid.Row="1" x:Name="grid_AddRemove" Visibility="Hidden"  >
                         

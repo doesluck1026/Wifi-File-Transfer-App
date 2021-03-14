@@ -85,6 +85,7 @@ namespace FileSharingApp_Desktop.Pages
             Properties.Resources.Culture = new CultureInfo(languageCode);
             Parameters.DeviceLanguage = languageCode;
             Parameters.Save();
+            Dispatcher.Invoke(() => Navigator.Navigate("Pages/MainPage.xaml"));
         }
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)

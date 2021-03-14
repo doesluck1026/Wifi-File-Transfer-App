@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Threading;
-using FileSharingApp_Desktop.Pages;
-using System.Net;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Globalization;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using Squirrel;
 
 namespace FileSharingApp_Desktop
 {
@@ -20,6 +18,8 @@ namespace FileSharingApp_Desktop
         {
             InitializeComponent();
             Instance = this;
+            CheckForUpdates();
+            AddVersionNumber();
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -39,6 +39,22 @@ namespace FileSharingApp_Desktop
             Environment.Exit(0);
             Thread.Sleep(10);
         }
+        private async Task CheckForUpdates()
+        {
+            using (var manager = new UpdateManager(@"C:\Users\CDS_Software02\Desktop\Releases"))
+            {
+                await manager.UpdateApp();
+            }
+        }
+        private void AddVersionNumber()
+        {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            Dispatcher.Invoke(() =>
+            {
+                this.Title += $" v.{versionInfo.FileVersion}";
+            });
+        }
         private void Btn_Youtube_Click(object sender, RoutedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
@@ -51,7 +67,7 @@ namespace FileSharingApp_Desktop
 
         private void Btn_Patreon_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
+            System.Diagnostics.Process.Start("https://www.patreon.com/buggycompany");
         }
 
         private void Btn_Blogger_Click(object sender, RoutedEventArgs e)

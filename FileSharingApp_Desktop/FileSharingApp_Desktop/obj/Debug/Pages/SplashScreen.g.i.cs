@@ -60,7 +60,7 @@ namespace FileSharingApp_Desktop.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FileSharingApp_Desktop;component/pages/splashscreen.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Buggy File Transfer;component/pages/splashscreen.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Pages\SplashScreen.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

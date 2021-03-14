@@ -62,14 +62,14 @@
                         Grid.Row="1" Grid.Column="0"
                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
                         Click="btn_Back_Click" 
-                        Style="{StaticResource Red}" Margin="20,10"
+                        Style="{StaticResource Red}" Margin="10,10"
                         Foreground="White" FontSize="25"
                         HorizontalContentAlignment="Center" VerticalContentAlignment ="Center">
-                    <StackPanel Orientation="Horizontal" Width="150"
+                    <StackPanel Orientation="Horizontal"
                           HorizontalAlignment="Stretch" >
                         <Image Source="/Icons/back3.png"
                                Width =" 40" Height="40" 
-                               HorizontalAlignment="Left"  Margin="5,0" />
+                               HorizontalAlignment="Left"  Margin="0,0" />
                         <TextBlock Text="{x:Static p:Resources.Done_btnHome}" Margin="5,0"
                                    VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     </StackPanel>

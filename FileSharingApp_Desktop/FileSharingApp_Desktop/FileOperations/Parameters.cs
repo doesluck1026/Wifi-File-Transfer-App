@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 class Parameters
 {
-    //private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\BuggyCompany\\BuggyFileTransfer\\Parameters.dat";
-    private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\FileTransferParameters.dat";
+    private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FileTransferParameters.dat";
 
     public static string SavingPath { get; set; }
     public static string DeviceName { get; set; }
@@ -18,6 +13,7 @@ class Parameters
     public static bool DidInitParameters = false;
     public static void Init()
     {
+        System.Diagnostics.Debug.WriteLine(" path :::+ "+ parametersPath);
         var param = new ParametersBag();
         try
         {
@@ -41,15 +37,22 @@ class Parameters
     }
     public static void Save()
     {
-        if (!DidInitParameters)
+        try
         {
-            System.Diagnostics.Debug.WriteLine("Init parameters first!");
-            return;
+            if (!DidInitParameters)
+            {
+                System.Diagnostics.Debug.WriteLine("Init parameters first!");
+                return;
+            }
+            var param = new ParametersBag();
+            param.SavingPath = SavingPath;
+            param.DeviceName = DeviceName;
+            param.DeviceLanguage = DeviceLanguage;
+            param.Save(parametersPath);
         }
-        var param = new ParametersBag();
-        param.SavingPath = SavingPath;
-        param.DeviceName = DeviceName;
-        param.DeviceLanguage = DeviceLanguage;
-        param.Save(parametersPath);
+        catch
+        {
+
+        }
     }
 }
