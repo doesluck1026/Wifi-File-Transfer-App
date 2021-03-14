@@ -2,12 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace FileSharingApp_Desktop.Pages
 {
@@ -16,46 +22,30 @@ namespace FileSharingApp_Desktop.Pages
     /// </summary>
     public partial class OptionsPage : Page
     {
-        Dictionary<string, string> LanguageList = new Dictionary<string, string>();
         public OptionsPage()
         {
             InitializeComponent();
-            LanguageList.Add("English", "en");
-            LanguageList.Add("Türkçe", "tr");
-            LanguageList.Add("Deutsche", "de");
-            LanguageList.Add("Française", "fr");
-            LanguageList.Add("Española", "es");
-            LanguageList.Add("中国人", "zh-Hans");
-            LanguageList.Add("عربي", "ar");
-            
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             Main.OnClientRequested += Main_OnClientRequested;
+
             Dispatcher.Invoke(() =>
             {
-                var languageCodeList = LanguageList.Values.ToList();
-                Combo_Languages.ItemsSource = LanguageList.Keys.ToArray();
-                Combo_Languages.SelectedIndex = languageCodeList.IndexOf(Parameters.DeviceLanguage);
                 txt_DeviceName.Text = Parameters.DeviceName;
                 txt_OutputFolder.Text = Parameters.SavingPath;
             });
         }
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            Main.OnClientRequested -= Main_OnClientRequested;
-        }
-        private void Main_OnClientRequested(string totalTransferSize, string deviceName)
+        private void Main_OnClientRequested(string totalTransferSize, string senderDevice)
         {
             /// Show file transfer request and ask for permission here
-            Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
-           
+            Debug.WriteLine(senderDevice + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
+            var result = MessageBox.Show(senderDevice + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?", "Transfer Request!", button: MessageBoxButton.YesNo);
             Dispatcher.Invoke(() =>
             {
-                var result = MessageBox.Show(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
-                    Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
+                    Main.OnClientRequested -= Main_OnClientRequested;
                     Navigator.Navigate("Pages/TransferPage.xaml");
                     Main.ResponseToTransferRequest(true);
                 }
@@ -78,14 +68,8 @@ namespace FileSharingApp_Desktop.Pages
             if (txt_OutputFolder.Text[txt_OutputFolder.Text.Length - 1] != '\\')
                 txt_OutputFolder.Text += "\\";
             Parameters.SavingPath = txt_OutputFolder.Text;
-            string selectedLanguage = Combo_Languages.SelectedItem.ToString();
-            string languageCode;
-            LanguageList.TryGetValue(selectedLanguage, out languageCode);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageCode);
-            Properties.Resources.Culture = new CultureInfo(languageCode);
-            Parameters.DeviceLanguage = languageCode;
+            Debug.WriteLine("Parameters.DeviceName: " + Parameters.DeviceName + " Parameters.SavingPath: " + Parameters.SavingPath);
             Parameters.Save();
-            Dispatcher.Invoke(() => Navigator.Navigate("Pages/MainPage.xaml"));
         }
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
@@ -99,7 +83,7 @@ namespace FileSharingApp_Desktop.Pages
         private string GetFolder()
         {
             var dlg = new CommonOpenFileDialog();
-            dlg.Title = Properties.Resources.Settings_SelectTargetFolder;
+            dlg.Title = "Select Target Folder";
             dlg.IsFolderPicker = true;
             dlg.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
@@ -121,6 +105,10 @@ namespace FileSharingApp_Desktop.Pages
             return null;
         }
 
-        
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
+
+        }
     }
 }
