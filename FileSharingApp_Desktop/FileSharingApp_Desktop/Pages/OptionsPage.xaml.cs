@@ -25,10 +25,11 @@ namespace FileSharingApp_Desktop.Pages
         public OptionsPage()
         {
             InitializeComponent();
-            Main.OnClientRequested += Main_OnClientRequested;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            Main.OnClientRequested += Main_OnClientRequested;
+
             Dispatcher.Invoke(() =>
             {
                 txt_DeviceName.Text = Parameters.DeviceName;
@@ -102,6 +103,12 @@ namespace FileSharingApp_Desktop.Pages
                 return folder;
             }
             return null;
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
+
         }
     }
 }

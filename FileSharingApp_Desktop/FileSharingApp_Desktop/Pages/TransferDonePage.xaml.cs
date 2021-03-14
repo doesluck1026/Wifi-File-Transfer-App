@@ -70,5 +70,10 @@ namespace FileSharingApp_Desktop.Pages
             string selectedFilePath = Main.FilePaths[selectedFileIndex];
             System.Diagnostics.Process.Start(@selectedFilePath);
         }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Main.OnClientRequested -= Main_OnClientRequested;
+        }
     }
 }
