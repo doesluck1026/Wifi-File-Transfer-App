@@ -1,0 +1,429 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Easy.Logger.Interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:Easy.Logger.Interfaces.IEasyLogger">
+            <summary>
+            The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> interface specifying 
+            available methods for different levels of logging.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.Name">
+            <summary>
+            Gets the logger name.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.GetScopedLogger(System.String)">
+            <summary>
+            Returns an <see cref="T:System.IDisposable"/> which allows the caller to specify a scope as
+            <paramref name="name"/> which will then be rendered as part of the message.
+            </summary>
+            <param name="name">The name of the scope</param>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.IsTraceEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Trace</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.IsDebugEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <see cref="T:System.Diagnostics.Debug"/> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.IsInfoEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Info</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.IsWarnEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Warn</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.IsErrorEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Error</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.IEasyLogger.IsFatalEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Fatal</c> messages.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Trace(System.Object)">
+            <summary>
+            Logs a <c>Trace</c> level message object.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Trace(System.Object,System.Exception)">
+            <summary>
+            Logs a <c>Trace</c> level message object including the stack trace of 
+            the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.TraceFormat(System.String,System.Object)">
+            <summary>
+            Logs a <c>Trace</c> level formatted message string with the given <paramref name="arg"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.TraceFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Trace</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.TraceFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Trace</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.TraceFormat(System.String,System.Object[])">
+            <summary>
+            Logs a <c>Trace</c> level formatted message string with the given <paramref name="args"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.TraceFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a <c>Trace</c> level formatted message string with the 
+            given <paramref name="args"/> and a given <paramref name="provider"/>.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider"/> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Debug(System.Object)">
+            <summary>
+            Logs a <c>Debug</c> level message object.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Debug(System.Object,System.Exception)">
+            <summary>
+            Logs a <c>Debug</c> level message object including the stack trace of 
+            the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.DebugFormat(System.String,System.Object)">
+            <summary>
+            Logs a <c>Debug</c> level formatted message string with the given <paramref name="arg"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.DebugFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Debug</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.DebugFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Debug</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.DebugFormat(System.String,System.Object[])">
+            <summary>
+            Logs a <c>Debug</c> level formatted message string with the given <paramref name="args"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.DebugFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a <c>Debug</c> level formatted message string with the 
+            given <paramref name="args"/> and a given <paramref name="provider"/>.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider"/> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Info(System.Object)">
+            <summary>
+            Logs a <c>Info</c> level message object.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Info(System.Object,System.Exception)">
+            <summary>
+            Logs a <c>Info</c> level message object including the stack trace of 
+            the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.InfoFormat(System.String,System.Object)">
+            <summary>
+            Logs a <c>Info</c> level formatted message string with the given <paramref name="arg"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.InfoFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Info</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.InfoFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Info</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.InfoFormat(System.String,System.Object[])">
+            <summary>
+            Logs a <c>Info</c> level formatted message string with the given <paramref name="args"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.InfoFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a <c>Info</c> level formatted message string with the 
+            given <paramref name="args"/> and a given <paramref name="provider"/>.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider"/> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Warn(System.Object)">
+            <summary>
+            Logs a <c>Warn</c> level message object.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Warn(System.Object,System.Exception)">
+            <summary>
+            Logs a <c>Warn</c> level message object including the stack trace of 
+            the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.WarnFormat(System.String,System.Object)">
+            <summary>
+            Logs a <c>Warn</c> level formatted message string with the given <paramref name="arg"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.WarnFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Warn</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.WarnFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Warn</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.WarnFormat(System.String,System.Object[])">
+            <summary>
+            Logs a <c>Warn</c> level formatted message string with the given <paramref name="args"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.WarnFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a <c>Warn</c> level formatted message string with the 
+            given <paramref name="args"/> and a given <paramref name="provider"/>.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider"/> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Error(System.Object)">
+            <summary>
+            Logs a <c>Error</c> level message object.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Error(System.Object,System.Exception)">
+            <summary>
+            Logs a <c>Error</c> level message object including the stack trace of 
+            the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.ErrorFormat(System.String,System.Object)">
+            <summary>
+            Logs a <c>Error</c> level formatted message string with the given <paramref name="arg"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.ErrorFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Error</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.ErrorFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Error</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.ErrorFormat(System.String,System.Object[])">
+            <summary>
+            Logs a <c>Error</c> level formatted message string with the given <paramref name="args"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.ErrorFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a <c>Error</c> level formatted message string with the 
+            given <paramref name="args"/> and a given <paramref name="provider"/>.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider"/> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Fatal(System.Object)">
+            <summary>
+            Logs a <c>Fatal</c> level message object.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.Fatal(System.Object,System.Exception)">
+            <summary>
+            Logs a <c>Fatal</c> level message object including the stack trace of 
+            the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.FatalFormat(System.String,System.Object)">
+            <summary>
+            Logs a <c>Fatal</c> level formatted message string with the given <paramref name="arg"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.FatalFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Fatal</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.FatalFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a <c>Fatal</c> level formatted message string with the given arguments.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.FatalFormat(System.String,System.Object[])">
+            <summary>
+            Logs a <c>Fatal</c> level formatted message string with the given <paramref name="args"/>.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.IEasyLogger.FatalFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a <c>Fatal</c> level formatted message string with the 
+            given <paramref name="args"/> and a given <paramref name="provider"/>.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider"/> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+        </member>
+        <member name="T:Easy.Logger.Interfaces.IEasyLogger`1">
+            <summary>
+            The <see cref="T:Easy.Logger.Interfaces.IEasyLogger`1"/> interface specifying 
+            available methods for different levels of logging.
+            </summary>
+        </member>
+        <member name="T:Easy.Logger.Interfaces.ILogService">
+            <summary>
+            The <see cref="T:Easy.Logger.Interfaces.ILogService"/> specifying the methods relating
+            to configuring and obtaining an instance of <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/>.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Interfaces.ILogService.Configuration">
+            <summary>
+            Gets the configuration file used to configure the <see cref="T:Easy.Logger.Interfaces.ILogService"/>.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.ILogService.Configure(System.IO.FileInfo)">
+            <summary>
+            Configures the logging service by using the specified configuration file.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.ILogService.GetLogger(System.String)">
+            <summary>
+            Obtains an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> for the given <paramref name="loggerName"/>.
+            </summary>
+            <param name="loggerName">The name for which an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> should be returned</param>
+            <returns>The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/></returns>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.ILogService.GetLogger(System.Type)">
+            <summary>
+            Obtains an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> for the given <paramref name="loggerType"/>.
+            </summary>
+            <param name="loggerType">The <see cref="T:System.Type"/> for which an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> should be returned</param>
+            <returns>The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/></returns>
+        </member>
+        <member name="M:Easy.Logger.Interfaces.ILogService.GetLogger``1">
+            <summary>
+            Obtains an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> for the given <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The type for which an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> should be returned</typeparam>
+            <returns>The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/></returns>
+        </member>
+    </members>
+</doc>

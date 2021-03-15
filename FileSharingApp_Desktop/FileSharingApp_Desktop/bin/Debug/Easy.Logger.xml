@@ -1,0 +1,1002 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Easy.Logger</name>
+    </assembly>
+    <members>
+        <member name="T:Easy.Logger.AsyncBufferingForwardingAppender">
+            <summary>
+            An appender which batches the log events and asynchronously forwards them to any configured appenders.
+            <seealso href="www.nimaara.com/2016/01/01/high-performance-logging-log4net/"/>
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.AsyncBufferingForwardingAppender.IdleTime">
+            <summary>
+            Gets or sets the idle-time in milliseconds at which any pending logging events are flushed.
+            <value>The idle-time in milliseconds.</value>
+            <remarks>
+            <para>
+            The value should be a positive integer representing the maximum idle-time of logging events 
+            to be collected in the <see cref="T:Easy.Logger.AsyncBufferingForwardingAppender"/>. When this value is 
+            reached, buffered events are then flushed. By default the idle-time is <c>500</c> milliseconds.
+            </para>
+            <para>
+            If the <see cref="P:Easy.Logger.AsyncBufferingForwardingAppender.IdleTime"/> is set to a value less than or equal to <c>0</c>
+            then use the default value is used.
+            </para>
+            </remarks>
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.AsyncBufferingForwardingAppender.#ctor">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.AsyncBufferingForwardingAppender"/>
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.AsyncBufferingForwardingAppender.ActivateOptions">
+            <summary>
+            Activates the options for this appender.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.AsyncBufferingForwardingAppender.SendBuffer(log4net.Core.LoggingEvent[])">
+            <summary>
+            Forwards the events to every configured appender. 
+            </summary>
+            <param name="events">The events that need to be forwarded</param>
+        </member>
+        <member name="M:Easy.Logger.AsyncBufferingForwardingAppender.OnClose">
+            <summary>
+            Ensures that all pending logging events are flushed out before exiting.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.AsyncBufferingForwardingAppender.InvokeFlushIfIdle(System.Object)">
+            <summary>
+            This only flushes if <see cref="P:log4net.Appender.BufferingAppenderSkeleton.Lossy"/> is <c>False</c>.
+            </summary>
+        </member>
+        <member name="T:Easy.Logger.Log4NetLogger`1">
+            <summary>
+            A <c>log4net</c> implementation of the <see cref="T:Easy.Logger.Interfaces.IEasyLogger`1"/> interface.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger`1.#ctor">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.Log4NetLogger`1"/> where the name of the logger is
+            set as the name of the type of <typeparamref name="T"/>.
+            </summary>
+        </member>
+        <member name="T:Easy.Logger.Log4NetLogger">
+            <summary>
+            A <c>log4net</c> implementation of the <see cref="T:log4net.Core.ILogger"/> interface.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.#ctor(log4net.ILog)">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.Log4NetLogger"/>.
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.Name">
+            <summary>
+            Gets the logger name.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.GetScopedLogger(System.String)">
+            <summary>
+            Returns an <see cref="T:System.IDisposable"/> which allows the caller to specify a scope as
+            <paramref name="name"/> which will then be rendered as part of the message.
+            </summary>
+            <param name="name">The name of the scope</param>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.IsTraceEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Trace</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.IsDebugEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Debug</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.IsInfoEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Info</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.IsWarnEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Warn</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.IsErrorEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Error</c> messages.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Log4NetLogger.IsFatalEnabled">
+            <summary>
+            Gets the flag indicating whether the logger is enabled for 
+            <c>Fatal</c> messages.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Trace(System.Object)">
+            <summary>
+            Logs a message object with the <c>Trace</c> level.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <remarks>
+            <para>
+            This method first checks if this logger is <c>Debug</c> enabled by comparing the level of 
+            this logger with the <c>Trace</c> level. If this logger is <c>Debug</c> 
+            enabled, then it converts the message object (passed as parameter) to a string by invoking the appropriate
+            <see cref="T:log4net.ObjectRenderer.IObjectRenderer"/>. It then proceeds to call all the registered appenders 
+            in this logger  and also higher in the hierarchy depending on the value of the additivity flag.
+            </para>
+            <para>
+            <b>WARNING</b> Note that passing an<see cref="T:System.Exception"/> to this method 
+            will print the name of the <see cref="T:System.Exception"/> but no stack trace.
+            To print a stack trace use the <see cref="M:Debug(object,Exception)"/> form instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Trace(System.Object,System.Exception)">
+            <summary>
+            Logs a message object with the <c>Trace</c> level including 
+            the stack trace of the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.TraceFormat(System.String,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Trace</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. 
+            See <see cref = "M:String.Format(string, object[])" /> for details 
+            of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.TraceFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Trace</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.TraceFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Trace</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.TraceFormat(System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Trace</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref = "T:System.Exception"/> object to include in the log event. 
+            To pass an<see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.TraceFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Trace</c> level.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider" /> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref="T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/>, use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Debug(System.Object)">
+            <summary>
+            Logs a message object with the <c>Debug</c> level.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <remarks>
+            <para>
+            This method first checks if this logger is <c>Debug</c> enabled by comparing the level of 
+            this logger with the <c>Debug</c> level. If this logger is <c>Debug</c> 
+            enabled, then it converts the message object (passed as parameter) to a string by invoking the appropriate
+            <see cref="T:log4net.ObjectRenderer.IObjectRenderer"/>. It then proceeds to call all the registered appenders 
+            in this logger  and also higher in the hierarchy depending on the value of the additivity flag.
+            </para>
+            <para>
+            <b>WARNING</b> Note that passing an<see cref="T:System.Exception"/> to this method 
+            will print the name of the <see cref="T:System.Exception"/> but no stack trace.
+            To print a stack trace use the <see cref="M:Debug(object,Exception)"/> form instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Debug(System.Object,System.Exception)">
+            <summary>
+            Logs a message object with the <c>Debug</c> level including 
+            the stack trace of the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.DebugFormat(System.String,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Debug</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. 
+            See <see cref = "M:String.Format(string, object[])" /> for details 
+            of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.DebugFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Debug</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.DebugFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Debug</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.DebugFormat(System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Debug</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref = "T:System.Exception"/> object to include in the log event. 
+            To pass an<see cref="T:System.Exception"/> use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.DebugFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Debug</c> level.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider" /> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref="T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/>, use one of the <see cref="M:Debug(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Info(System.Object)">
+            <summary>
+            Logs a message object with the <c>Info</c> level.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <remarks>
+            <para>
+            This method first checks if this logger is <c>Info</c> enabled by comparing the level of 
+            this logger with the <c>Info</c> level. If this logger is <c>Info</c> 
+            enabled, then it converts the message object (passed as parameter) to a string by invoking the appropriate
+            <see cref="T:log4net.ObjectRenderer.IObjectRenderer"/>. It then proceeds to call all the registered appenders 
+            in this logger  and also higher in the hierarchy depending on the value of the additivity flag.
+            </para>
+            <para>
+            <b>WARNING</b> Note that passing an<see cref="T:System.Exception"/> to this method 
+            will print the name of the <see cref="T:System.Exception"/> but no stack trace.
+            To print a stack trace use the <see cref="M:Info(object,Exception)"/> form instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Info(System.Object,System.Exception)">
+            <summary>
+            Logs a message object with the <c>Info</c> level including 
+            the stack trace of the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.InfoFormat(System.String,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Info</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. 
+            See <see cref = "M:String.Format(string, object[])" /> for details 
+            of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Info(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.InfoFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Info</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Info(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.InfoFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Info</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Info(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.InfoFormat(System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Info</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref = "T:System.Exception"/> object to include in the log event. 
+            To pass an<see cref="T:System.Exception"/> use one of the <see cref="M:Info(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.InfoFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Info</c> level.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider" /> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref="T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/>, use one of the <see cref="M:Info(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Warn(System.Object)">
+            <summary>
+            Logs a message object with the <c>Warn</c> level.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <remarks>
+            <para>
+            This method first checks if this logger is <c>Warn</c> enabled by comparing the level of 
+            this logger with the <c>Warn</c> level. If this logger is <c>Warn</c> 
+            enabled, then it converts the message object (passed as parameter) to a string by invoking the appropriate
+            <see cref="T:log4net.ObjectRenderer.IObjectRenderer"/>. It then proceeds to call all the registered appenders 
+            in this logger  and also higher in the hierarchy depending on the value of the additivity flag.
+            </para>
+            <para>
+            <b>WARNING</b> Note that passing an<see cref="T:System.Exception"/> to this method 
+            will print the name of the <see cref="T:System.Exception"/> but no stack trace.
+            To print a stack trace use the <see cref="M:Warn(object,Exception)"/> form instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Warn(System.Object,System.Exception)">
+            <summary>
+            Logs a message object with the <c>Warn</c> level including 
+            the stack trace of the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.WarnFormat(System.String,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Warn</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. 
+            See <see cref = "M:String.Format(string, object[])" /> for details 
+            of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Warn(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.WarnFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Warn</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Warn(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.WarnFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Warn</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Warn(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.WarnFormat(System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Warn</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref = "T:System.Exception"/> object to include in the log event. 
+            To pass an<see cref="T:System.Exception"/> use one of the <see cref="M:Warn(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.WarnFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Warn</c> level.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider" /> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref="T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/>, use one of the <see cref="M:Warn(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Error(System.Object)">
+            <summary>
+            Logs a message object with the <c>Error</c> level.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <remarks>
+            <para>
+            This method first checks if this logger is <c>Error</c> enabled by comparing the level of 
+            this logger with the <c>Error</c> level. If this logger is <c>Error</c> 
+            enabled, then it converts the message object (passed as parameter) to a string by invoking the appropriate
+            <see cref="T:log4net.ObjectRenderer.IObjectRenderer"/>. It then proceeds to call all the registered appenders 
+            in this logger  and also higher in the hierarchy depending on the value of the additivity flag.
+            </para>
+            <para>
+            <b>WARNING</b> Note that passing an<see cref="T:System.Exception"/> to this method 
+            will print the name of the <see cref="T:System.Exception"/> but no stack trace.
+            To print a stack trace use the <see cref="M:Error(object,Exception)"/> form instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Error(System.Object,System.Exception)">
+            <summary>
+            Logs a message object with the <c>Error</c> level including 
+            the stack trace of the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.ErrorFormat(System.String,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Error</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. 
+            See <see cref = "M:String.Format(string, object[])" /> for details 
+            of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Error(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.ErrorFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Error</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Error(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.ErrorFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Error</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Error(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.ErrorFormat(System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Error</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref = "T:System.Exception"/> object to include in the log event. 
+            To pass an<see cref="T:System.Exception"/> use one of the <see cref="M:Error(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.ErrorFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Error</c> level.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider" /> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref="T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/>, use one of the <see cref="M:Error(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Fatal(System.Object)">
+            <summary>
+            Logs a message object with the <c>Fatal</c> level.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <remarks>
+            <para>
+            This method first checks if this logger is <c>Fatal</c> enabled by comparing the level of 
+            this logger with the <c>Fatal</c> level. If this logger is <c>Fatal</c> 
+            enabled, then it converts the message object (passed as parameter) to a string by invoking the appropriate
+            <see cref="T:log4net.ObjectRenderer.IObjectRenderer"/>. It then proceeds to call all the registered appenders 
+            in this logger  and also higher in the hierarchy depending on the value of the additivity flag.
+            </para>
+            <para>
+            <b>WARNING</b> Note that passing an<see cref="T:System.Exception"/> to this method 
+            will print the name of the <see cref="T:System.Exception"/> but no stack trace.
+            To print a stack trace use the <see cref="M:Fatal(object,Exception)"/> form instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.Fatal(System.Object,System.Exception)">
+            <summary>
+            Logs a message object with the <c>Fatal</c> level including 
+            the stack trace of the <see cref="T:System.Exception"/> passed as a parameter.
+            </summary>
+            <param name="message">The message object to be logged.</param>
+            <param name="exception">The exception to be logged, including its stack trace.</param>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.FatalFormat(System.String,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Fatal</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg">The object to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. 
+            See <see cref = "M:String.Format(string, object[])" /> for details 
+            of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Fatal(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.FatalFormat(System.String,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Fatal</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Fatal(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.FatalFormat(System.String,System.Object,System.Object,System.Object)">
+            <summary>
+            Logs a formatted message string with the <c>Fatal</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="arg1">The first object to format</param>
+            <param name="arg2">The second object to format</param>
+            <param name="arg3">The third object to format</param>
+            <remarks>
+            <para>
+            This method does not take an <see cref= "T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/> use one of the <see cref="M:Fatal(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.FatalFormat(System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Fatal</c> level.
+            </summary>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref = "T:System.Exception"/> object to include in the log event. 
+            To pass an<see cref="T:System.Exception"/> use one of the <see cref="M:Fatal(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetLogger.FatalFormat(System.IFormatProvider,System.String,System.Object[])">
+            <summary>
+            Logs a formatted message string with the <c>Fatal</c> level.
+            </summary>
+            <param name="provider">An <see cref= "T:System.IFormatProvider" /> that supplies culture-specific formatting information</param>
+            <param name="format">A String containing zero or more format items</param>
+            <param name="args">An Object array containing zero or more objects to format</param>
+            <remarks>
+            <para>
+            The message is formatted using the <c>String.Format</c> method. See <see cref="M:String.Format(string, object[])"/> 
+            for details of the syntax of the format string and the behavior of the formatting.
+            </para>
+            <para>
+            This method does not take an <see cref="T:System.Exception"/> object to include in the log event. 
+            To pass an <see cref="T:System.Exception"/>, use one of the <see cref="M:Fatal(object,Exception)"/> methods instead.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:Easy.Logger.Log4NetService">
+            <summary>
+            An implementation of the <see cref="T:Easy.Logger.Interfaces.ILogService"/> based on <c>log4net</c>.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Log4NetService.Instance">
+            <summary>
+            Returns a single instance of the <see cref="T:Easy.Logger.Log4NetService"/>
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Log4NetService.#ctor">
+            <summary>
+            Creates and configures an instance of the <see cref="T:Easy.Logger.Log4NetService"/> by looking for a 
+            default <c>log4net.config</c> file in the executing directory and monitoring it for changes.
+            </summary>
+            <exception cref="T:System.IO.FileNotFoundException">
+            Thrown when a valid <c>log4net.config</c> file is not found.
+            </exception>
+        </member>
+        <member name="P:Easy.Logger.Log4NetService.Configuration">
+            <summary>
+            Gets the configuration file used to configure the <see cref="T:Easy.Logger.Log4NetService"/>.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Log4NetService.Configure(System.IO.FileInfo)">
+            <summary>
+            Provides an override to configure the <see cref="T:Easy.Logger.Log4NetService"/> with a valid <c>log4net</c>
+            config file represented as <paramref name="configFile"/> and monitor any changes to it.
+            </summary> 
+            <param name="configFile">Points to a valid log4net config file.</param>
+            <exception cref="T:System.ArgumentException">Thrown when <c>log4net</c> config file is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when a valid <c>log4net.config</c> file is not found.</exception>
+            <remarks>
+            If this method is not used, the <see cref="T:Easy.Logger.Log4NetService"/> will be configured by looking for a 
+            default <c>log4net.config</c> file in the executing directory.
+            </remarks>
+        </member>
+        <member name="M:Easy.Logger.Log4NetService.GetLogger(System.String)">
+            <summary>
+            Obtains an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> for the given <paramref name="loggerName"/>.
+            </summary>
+            <param name="loggerName">The name for which an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> should be returned</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if <see cref="T:Easy.Logger.Log4NetService"/> is not configured with a valid configuration file.</exception>
+            <returns>The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/>An instance of the logger.</returns>
+        </member>
+        <member name="M:Easy.Logger.Log4NetService.GetLogger(System.Type)">
+            <summary>
+            Obtains an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> for the given <paramref name="loggerType"/>.
+            </summary>
+            <param name="loggerType">The <see cref="T:System.Type"/> for which an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> should be returned</param>
+            <exception cref="T:System.InvalidOperationException">Thrown if <see cref="T:Easy.Logger.Log4NetService"/> is not configured with a valid configuration file.</exception>
+            <returns>The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/>An instance of the logger.</returns>
+        </member>
+        <member name="M:Easy.Logger.Log4NetService.GetLogger``1">
+            <summary>
+            Obtains an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> for the given <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The type for which an <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/> should be returned</typeparam>
+            <exception cref="T:System.InvalidOperationException">Thrown if <see cref="T:Easy.Logger.Log4NetService"/> is not configured with a valid configuration file.</exception>
+            <returns>The <see cref="T:Easy.Logger.Interfaces.IEasyLogger"/>An instance of the logger.</returns>
+        </member>
+        <member name="M:Easy.Logger.Log4NetService.Dispose">
+            <summary>
+            Disposes the <see cref="T:Easy.Logger.Log4NetService"/>
+            </summary>
+        </member>
+        <member name="T:Easy.Logger.Scope">
+            <summary>
+            Provides scoped logging.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Scope.#ctor(System.String)">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.Scope"/> with the given <paramref name="name"/>.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Scope.Dispose">
+            <summary>
+            Removes the scope.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Scope.ToString">
+            <summary>
+            Returns the current context information for this scope.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Easy.Logger.Sequencer`1">
+            <summary>
+            A single worker implementation of the <c>Producer-Consumer</c> pattern.
+            </summary>
+            <typeparam name="T">The type of the object to be produced/consumed</typeparam>
+        </member>
+        <member name="M:Easy.Logger.Sequencer`1.#ctor(System.Action{`0})">
+            <summary>
+            Creates an instance of <see cref="T:Easy.Logger.Sequencer`1"/>
+            </summary>
+            <param name="consumer">The action to be executed when consuming the item.</param>
+        </member>
+        <member name="M:Easy.Logger.Sequencer`1.#ctor(System.Action{`0},System.Int32)">
+            <summary>
+            Creates an instance of <see cref="T:Easy.Logger.Sequencer`1"/>
+            </summary>
+            <param name="consumer">The action to be executed when consuming the item.</param>
+            <param name="boundedCapacity">
+            The bounded size of the queue.
+            Any more items added will block until there is more space available.
+            </param>
+        </member>
+        <member name="P:Easy.Logger.Sequencer`1.Capacity">
+            <summary>
+            Returns the bounded capacity of the underlying queue. -1 for unbounded.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Sequencer`1.PendingCount">
+            <summary>
+            Returns the count of items that are pending consumption.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Sequencer`1.PendingItems">
+            <summary>
+            Returns the pending items in the queue. Note, the items are valid as
+            the snapshot at the time of invocation.
+            </summary>
+        </member>
+        <member name="P:Easy.Logger.Sequencer`1.ShutdownRequested">
+            <summary>
+            Gets whether <see cref="T:Easy.Logger.Sequencer`1"/> has started to shutdown.
+            </summary>
+        </member>
+        <member name="E:Easy.Logger.Sequencer`1.OnException">
+            <summary>
+            Thrown when the <see cref="F:Easy.Logger.Sequencer`1._worker"/> throws an exception.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.Sequencer`1.Enqueue(`0)">
+            <summary>
+            Adds the specified item to the <see cref="T:Easy.Logger.Sequencer`1"/>. 
+            This method blocks if the queue is full and until there is more room.
+            </summary>
+            <param name="item">The item to be added.</param>
+        </member>
+        <member name="M:Easy.Logger.Sequencer`1.TryEnqueue(`0)">
+            <summary>
+            Attempts to add the specified item to the <see cref="T:Easy.Logger.Sequencer`1"/>.
+            </summary>
+            <param name="item">The item to be added.</param>
+            <returns>
+            <c>True</c> if item could be added; otherwise <c>False</c>. 
+            If the item is a duplicate, and the underlying collection does 
+            not accept duplicate items, then an InvalidOperationException is thrown.
+            </returns>
+        </member>
+        <member name="M:Easy.Logger.Sequencer`1.TryEnqueue(`0,System.TimeSpan)">
+            <summary>
+            Attempts to add the specified item to the <see cref="T:Easy.Logger.Sequencer`1"/>.
+            </summary>
+            <param name="item">The item to be added.</param>
+            <param name="timeout">
+            A <c>TimeSpan</c> that represents the number of milliseconds 
+            to wait, or a <c>TimeSpan</c> that represents -1 milliseconds to wait indefinitely.
+            </param>
+            <returns>
+            <c>True</c> if the item could be added to the collection within the specified time span; otherwise, <c>False</c>.
+            </returns>
+        </member>
+        <member name="M:Easy.Logger.Sequencer`1.Shutdown(System.Boolean)">
+            <summary>
+            Marks the <see cref="T:Easy.Logger.Sequencer`1"/> instance as not accepting 
+            any more items. Any outstanding items will be consumed.
+            </summary>
+            <param name="waitForPendingItems">
+            Flag indicating whether to wait for pending items to be processed.
+            </param>
+        </member>
+        <member name="T:Easy.Logger.SequencerExceptionEventArgs">
+            <summary>
+            This class used as a container for when an <see cref="T:System.Exception"/> 
+            is raised by the <see cref="T:Easy.Logger.Sequencer`1"/>
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.SequencerExceptionEventArgs.#ctor(Easy.Logger.SequencerException)">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.Sequencer`1"/>
+            </summary>
+            <param name="e">The <see cref="T:System.Exception"/></param>
+        </member>
+        <member name="P:Easy.Logger.SequencerExceptionEventArgs.Exception">
+            <summary>
+            The <see cref="T:System.Exception"/> raised by the <see cref="T:Easy.Logger.Sequencer`1"/>.
+            </summary>
+        </member>
+        <member name="T:Easy.Logger.SequencerException">
+            <summary>
+            The <see cref="T:System.Exception"/> thrown by the <see cref="T:Easy.Logger.Sequencer`1"/>.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.SequencerException.#ctor">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.SequencerException"/>.
+            </summary>
+        </member>
+        <member name="M:Easy.Logger.SequencerException.#ctor(System.String)">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.SequencerException"/>.
+            </summary>
+            <param name="message">The message for the <see cref="T:System.Exception"/></param>
+        </member>
+        <member name="M:Easy.Logger.SequencerException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates an instance of the <see cref="T:Easy.Logger.SequencerException"/>.
+            </summary>
+            <param name="message">The message for the <see cref="T:System.Exception"/></param>
+            <param name="innerException">The inner exception</param>
+        </member>
+    </members>
+</doc>

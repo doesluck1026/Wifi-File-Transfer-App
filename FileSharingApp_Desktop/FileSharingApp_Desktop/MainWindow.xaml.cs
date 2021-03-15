@@ -13,11 +13,9 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow Instance;
         public MainWindow()
         {
             InitializeComponent();
-            Instance = this;
             
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,7 +33,15 @@ namespace FileSharingApp_Desktop
             Navigator.Navigate("Pages/SplashScreen.xaml");
             Task.Run(()  =>
             {
-                CheckForUpdates();
+                try
+                {
+                    CheckForUpdates();
+
+                }
+                catch (Exception err)
+                { 
+                    MessageBox.Show(err.ToString());
+                }
             });
             AddVersionNumber();
         }
@@ -47,12 +53,10 @@ namespace FileSharingApp_Desktop
         private async Task CheckForUpdates()
         {
             Debug.WriteLine("Checking updates...");
-            using (var manager = UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
+            using (var manager = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
             {
-                Debug.WriteLine("Sent request...");
 
-                await manager.Result.UpdateApp();
-                Debug.WriteLine("result " + manager.Result.ApplicationName);
+                ReleaseEntry releaseEntry = await manager.UpdateApp();
             }
         }
         private void AddVersionNumber()
