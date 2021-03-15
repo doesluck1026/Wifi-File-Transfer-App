@@ -39,7 +39,7 @@
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Label Content="{x:Static p:Resources.Transfer_Filename}" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="0" />
@@ -49,7 +49,7 @@
         <Grid Grid.Row="2" >
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
             <Label Content="{x:Static p:Resources.Transfer_FileSize}" HorizontalAlignment="Left" VerticalAlignment="Center"
                FontSize="25" Foreground="White" Grid.Column="0" />
@@ -68,7 +68,7 @@
         </Grid>
         <Grid Grid.Row="4" Margin="5">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="12*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
