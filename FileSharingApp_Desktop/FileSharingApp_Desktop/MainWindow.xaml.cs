@@ -41,9 +41,9 @@ namespace FileSharingApp_Desktop
         }
         private async Task CheckForUpdates()
         {
-            using (var manager = new UpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App/tree/master/FileSharingApp_Desktop/Releases"))
+            using (var manager = UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App/releases/latest"))
             {
-                await manager.UpdateApp();
+                await manager.Result.UpdateApp();
             }
         }
         private void AddVersionNumber()
