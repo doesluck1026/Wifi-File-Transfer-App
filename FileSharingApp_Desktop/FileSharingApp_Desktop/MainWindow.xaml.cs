@@ -41,7 +41,7 @@ namespace FileSharingApp_Desktop
         }
         private async Task CheckForUpdates()
         {
-            using (var manager = new UpdateManager("https://drive.google.com/drive/folders/1tDKmbxeF8ptchEIssFop8pb6hSxmC1f9?usp=sharing"))
+            using (var manager = new UpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App/tree/master/FileSharingApp_Desktop/Releases"))
             {
                 await manager.UpdateApp();
             }
