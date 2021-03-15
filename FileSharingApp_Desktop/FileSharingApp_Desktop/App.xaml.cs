@@ -13,5 +13,6 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class App : Application
     {
+
     }
 }

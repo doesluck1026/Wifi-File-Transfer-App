@@ -18,11 +18,11 @@ namespace FileSharingApp_Desktop
         {
             InitializeComponent();
             Instance = this;
-            CheckForUpdates();
-            AddVersionNumber();
+            
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            
             if (!Parameters.DidInitParameters)
             {
                 Parameters.Init();
@@ -33,6 +33,11 @@ namespace FileSharingApp_Desktop
             Main.StartServer();
             NetworkScanner.PublishDevice();
             Navigator.Navigate("Pages/SplashScreen.xaml");
+            Task.Run(()  =>
+            {
+                CheckForUpdates();
+            });
+            AddVersionNumber();
         }
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -41,9 +46,13 @@ namespace FileSharingApp_Desktop
         }
         private async Task CheckForUpdates()
         {
+            Debug.WriteLine("Checking updates...");
             using (var manager = UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
             {
+                Debug.WriteLine("Sent request...");
+
                 await manager.Result.UpdateApp();
+                Debug.WriteLine("result " + manager.Result.ApplicationName);
             }
         }
         private void AddVersionNumber()
