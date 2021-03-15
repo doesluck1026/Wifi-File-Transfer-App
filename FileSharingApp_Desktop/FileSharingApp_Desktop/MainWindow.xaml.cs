@@ -13,7 +13,6 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        private UpdateManager updateManager;
         public MainWindow()
         {
             InitializeComponent();
@@ -56,9 +55,9 @@ namespace FileSharingApp_Desktop
         {
             try
             {
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App/"))
                 {
-                    updateManager = mgr;
+                    //updateManager = mgr;
                     var release = await mgr.UpdateApp();
                 }
             }
@@ -67,7 +66,7 @@ namespace FileSharingApp_Desktop
                 string message = ex.Message + Environment.NewLine;
                 if (ex.InnerException != null)
                     message += ex.InnerException.Message;
-                MessageBox.Show(message);
+                MessageBox.Show(message+" soooo: "+ex.ToString());
             }
         }
         private void AddVersionNumber()

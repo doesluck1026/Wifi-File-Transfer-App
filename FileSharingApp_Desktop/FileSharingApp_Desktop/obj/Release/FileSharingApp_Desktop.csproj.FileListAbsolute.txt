@@ -66,9 +66,3 @@ C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masa�
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Release\zh-Hans\Buggy File Transfer.resources.dll
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Release\Buggy File Transfer.exe
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Release\Buggy File Transfer.pdb
-C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Release\Easy.Logger.dll
-C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Release\Easy.Logger.Interfaces.dll
-C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Release\log4net.dll
-C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Release\Easy.Logger.xml
-C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Release\Easy.Logger.Interfaces.xml
-C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Release\log4net.xml
