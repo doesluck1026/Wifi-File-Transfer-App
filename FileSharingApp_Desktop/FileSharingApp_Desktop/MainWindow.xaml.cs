@@ -16,11 +16,11 @@ namespace FileSharingApp_Desktop
         public MainWindow()
         {
             InitializeComponent();
-            
+
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+
             if (!Parameters.DidInitParameters)
             {
                 Parameters.Init();
@@ -31,18 +31,7 @@ namespace FileSharingApp_Desktop
             Main.StartServer();
             NetworkScanner.PublishDevice();
             Navigator.Navigate("Pages/SplashScreen.xaml");
-            Task.Run(()  =>
-            {
-                try
-                {
-                    CheckForUpdates();
-
-                }
-                catch (Exception err)
-                { 
-                    MessageBox.Show(err.ToString());
-                }
-            });
+            CheckForUpdates();
             AddVersionNumber();
         }
         private void Window_Closed(object sender, EventArgs e)
@@ -50,15 +39,32 @@ namespace FileSharingApp_Desktop
             Environment.Exit(0);
             Thread.Sleep(10);
         }
-   
+
+        //private async void CheckForUpdates()
+        //{
+        //    try
+        //    {
+        //        using (var mgr = await UpdateManager.GitHubUpdateManager("https://disk.yandex.com.tr/d/Yc4HHNREmCRRrg?w=1"))
+        //        {
+        //            //updateManager = mgr;
+        //            var release = await mgr.UpdateApp();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string message = ex.Message + Environment.NewLine;
+        //        if (ex.InnerException != null)
+        //            message += ex.InnerException.Message;
+        //        MessageBox.Show(message+" soooo: "+ex.ToString());
+        //    }
+        //}
         private async void CheckForUpdates()
         {
             try
             {
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
-                {
-                    //updateManager = mgr;
-                    var release = await mgr.UpdateApp();
+                using (var mgr = new UpdateManager("https://disk.yandex.com.tr/d/Yc4HHNREmCRRrg?w=1")) 
+                    {
+                    await mgr.UpdateApp();
                 }
             }
             catch (Exception ex)
@@ -66,8 +72,9 @@ namespace FileSharingApp_Desktop
                 string message = ex.Message + Environment.NewLine;
                 if (ex.InnerException != null)
                     message += ex.InnerException.Message;
-                MessageBox.Show(message+" soooo: "+ex.ToString());
+                MessageBox.Show(message + " soooo: " + ex.ToString());
             }
+
         }
         private void AddVersionNumber()
         {
