@@ -22,6 +22,16 @@ namespace FileSharingApp_Desktop.Pages
         {
             Main.OnTransferResponded += Main_OnTransferResponded;
             ShowDevices();
+            bool isAnyDeviceAvailable = false;
+            if (NetworkScanner.DeviceNames==null)
+            {
+                if(NetworkScanner.DeviceNames.Count>0)
+                {
+                    isAnyDeviceAvailable = true;
+                }
+            }
+            if (!isAnyDeviceAvailable)
+                btn_Scan_Click(null, null);
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
@@ -96,7 +106,7 @@ namespace FileSharingApp_Desktop.Pages
                         list_Devices.SelectedIndex = 0;
                     }
                 });
-            }
+            }            
         }
     }
 }

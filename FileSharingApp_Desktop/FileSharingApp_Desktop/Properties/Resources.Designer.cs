@@ -403,7 +403,7 @@ namespace FileSharingApp_Desktop.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Device Name :.
+        ///   Looks up a localized string similar to Device Name .
         /// </summary>
         public static string Setting_DeviceName {
             get {

@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 class Client
 {
@@ -26,12 +25,12 @@ class Client
     /// Connects to server with specified IP.
     /// </summary>
     /// <returns>Hostname of server</returns>
-    public string ConnectToServer(int timeout=0)
+    public string ConnectToServer(int timeout = 0)
     {
         try
         {
             client = new TcpClient();
-            //client.NoDelay = true;
+            client.NoDelay = true;
             Stopwatch stp = Stopwatch.StartNew();
             if (timeout > 0)
             {
@@ -41,7 +40,7 @@ class Client
                 {
                     //client.EndConnect(result);
                     client.Close();
-                    return "";  //throw new Exception("Failed to connect.");
+                    throw new Exception("Failed to connect.");
                 }
                 else
                     client.EndConnect(result);
@@ -53,16 +52,15 @@ class Client
             client.SendBufferSize = BufferSize;
             client.ReceiveBufferSize = BufferSize;
             Debug.WriteLine("Succesfully Connected to: " + IP + " on Port: " + Port);
-            //if(timeout==0)
-            //{
-            //    var host = Dns.GetHostEntry(IP);
-            //    return host.HostName;
-            //}
-            //else
-            //{
-            //    return IP;
-            //}
-            return IP;
+            if (timeout == 0)
+            {
+                var host = Dns.GetHostEntry(IP);
+                return host.HostName;
+            }
+            else
+            {
+                return IP;
+            }
         }
 
         catch (Exception e)

@@ -26,7 +26,10 @@ namespace FileSharingApp_Desktop.Pages
         {
             Dispatcher.Invoke(() =>
             {
-                Navigator.Navigate("Pages/MainPage.xaml");
+                if(!Parameters.IsUsingFirstTime)
+                    Navigator.Navigate("Pages/MainPage.xaml");
+                else
+                    Navigator.Navigate("Pages/OptionsPage.xaml");
             });
         }
     }

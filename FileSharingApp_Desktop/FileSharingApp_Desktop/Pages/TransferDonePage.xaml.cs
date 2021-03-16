@@ -31,7 +31,7 @@ namespace FileSharingApp_Desktop.Pages
             Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
             Dispatcher.Invoke(() =>
             {
-                var result = MessageBox.Show(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
+                var result = MessageBox.Show(deviceName +" "+ Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
                     Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {

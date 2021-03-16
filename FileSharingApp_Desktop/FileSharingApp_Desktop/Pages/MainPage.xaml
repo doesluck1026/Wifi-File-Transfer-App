@@ -34,8 +34,12 @@
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="{x:Static p:Resources.Setting_DeviceName}"  Grid.Column="0" FontSize="25" HorizontalAlignment="Left" 
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Label Content="{x:Static p:Resources.Setting_DeviceName}"   FontSize="25" HorizontalAlignment="Left" 
                    VerticalAlignment="center" Foreground="White"/>
+                <Label Content=":" FontSize="25" VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" Foreground="White"/>
+            </StackPanel>
             <TextBox x:Name="txt_DeviceName" Text="bişeyler" 
                      Grid.Column="1" FontSize="25" 
                      HorizontalAlignment="Left" VerticalAlignment="center" 
@@ -87,12 +91,12 @@
                                 Style="{StaticResource Blue}" Margin="50,10"
                                 Click="btn_AddFiles_Click" Grid.Column="0">
                             
-                            <Grid Width="100">
+                            <Grid Width="170">
                                 <Image Source="/Icons/add.png" 
                                Width =" 35" Height="40" 
                                HorizontalAlignment="Left" 
                                        Margin="5,0" />
-                                <TextBlock Text="Add" TextWrapping="WrapWithOverflow"
+                                <TextBlock Text="{x:Static p:Resources.File_btnAdd}" TextWrapping="WrapWithOverflow"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                            Margin="5,0" 
                                TextAlignment="Center" Padding="2"/>
@@ -105,12 +109,12 @@
                                 FontSize="18" Foreground="White" 
                                 Click="btn_RemoveFiles_Click" Grid.Column="1">
 
-                            <StackPanel Orientation="Horizontal" Width="120">
+                            <StackPanel Orientation="Horizontal" Width="170">
                                 <Image Source="/Icons/minus.png" 
                                Width =" 35" Height="40" 
                                HorizontalAlignment="Left" Margin="5,0" />
-                                
-                                <TextBlock Text="Remove" TextWrapping="WrapWithOverflow"
+
+                                <TextBlock Text="{x:Static p:Resources.File_btnRemove}" TextWrapping="WrapWithOverflow"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                            Margin="5,0" 
                                TextAlignment="Center" Padding="2"/>
@@ -132,7 +136,7 @@
                     <Image Source="/Icons/Home.png"  Margin="5,0"
                                Width =" 35" Height="50" 
                                HorizontalAlignment="Left" />
-                    <TextBlock Text="Main Menu" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="{x:Static p:Resources.Done_btnHome}" TextWrapping="WrapWithOverflow"
                                 Margin="5,0"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"/>
                 </StackPanel>
@@ -148,7 +152,7 @@
                                Width =" 35" Height="50" 
                                HorizontalAlignment="Left" Margin="5,0" />
 
-                    <TextBlock Text="Send Files" TextWrapping="WrapWithOverflow"
+                    <TextBlock Text="{x:Static p:Resources.File_btnConfirm}" TextWrapping="WrapWithOverflow"
                                 VerticalAlignment="Center" HorizontalAlignment="Right"
                                            Margin="5,0" 
                                TextAlignment="Center" Padding="2"/>

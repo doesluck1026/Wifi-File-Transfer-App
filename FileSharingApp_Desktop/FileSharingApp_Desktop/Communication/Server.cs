@@ -4,8 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 
 class Server
 {
@@ -59,7 +57,7 @@ class Server
             IsServerStarted = true;
             IP = localAddr.ToString();
             Debug.WriteLine("Server is ready:  IP: " + IP);
-            return localAddr.ToString();
+            return IP;
         }
         catch (Exception e)
         {
@@ -80,21 +78,28 @@ class Server
         {
         }
     }
-    private void DoAcceptTcpClientCallback(IAsyncResult ar)
+    public void DoAcceptTcpClientCallback(IAsyncResult ar)
     {
-        TcpListener listener = (TcpListener)ar.AsyncState;
-        if (listener.Server == null)
-            return;
-        if (listener.Server.LocalEndPoint == null)
-            return;
-        Client = listener.EndAcceptTcpClient(ar);
-        IsCLientConnected = true;
-        IPEndPoint endPoint = (IPEndPoint)Client.Client.RemoteEndPoint;
-        var ipAddress = endPoint.Address;
-        Client.ReceiveBufferSize = BufferSize;
-        Client.SendBufferSize = BufferSize;
-        Debug.WriteLine(ipAddress + " is connected");
-        OnClientConnected(ipAddress.ToString());
+        try
+        {
+            TcpListener listener = (TcpListener)ar.AsyncState;
+            if (listener.Server == null)
+                return;
+            if (listener.Server.LocalEndPoint == null)
+                return;
+            Client = listener.EndAcceptTcpClient(ar);
+            IsCLientConnected = true;
+            IPEndPoint endPoint = (IPEndPoint)Client.Client.RemoteEndPoint;
+            var ipAddress = endPoint.Address;
+            Client.ReceiveBufferSize = BufferSize;
+            Client.SendBufferSize = BufferSize;
+            Debug.WriteLine(ipAddress + " is connected");
+            OnClientConnected(ipAddress.ToString());
+        }
+        catch
+        {
+
+        }
     }
     public void CloseServer()
     {
@@ -119,6 +124,7 @@ class Server
     }
     public bool SendDataToClient(byte[] data)
     {
+        Debug.WriteLine("Function:: " + data[0] + " len: " + data.Length);
         bool success = false;
         byte[] headerBytes = PrepareDataHeader(data.Length);
         int DataLength = headerBytes.Length + data.Length;

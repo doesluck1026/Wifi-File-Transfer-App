@@ -27,7 +27,7 @@ namespace FileSharingApp_Desktop.Pages
             {
                 while (!Main.IsTransfering)//&& TimeSpan.FromSeconds(5).TotalSeconds<5) ;
                 {
-                    Thread.Sleep(1);
+                    Thread.Sleep(2);
                 }
                 StartUpdatingUI();
             });
@@ -42,6 +42,7 @@ namespace FileSharingApp_Desktop.Pages
             MessageBox.Show(Properties.Resources.Transfer_AbortedMessage);
             Dispatcher.Invoke(() =>
             {
+                Main.FilePaths = null;
                 Navigator.Navigate("Pages/MainPage.xaml");
             });
         }
@@ -57,8 +58,17 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_AbortTransfer_Click(object sender, RoutedEventArgs e)
         {
-            Main.AbortTransfer();
-            Navigator.Navigate("Pages/MainPage.xaml");
+            Dispatcher.Invoke(() =>
+            {
+                var result = MessageBox.Show(Properties.Resources.Transfer_ConfirmAbortMessage, Properties.Resources.Transfer_ConfirmAbortTitle, MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    Main.OnTransferFinished -= Main_OnTransferFinished;
+                    Main.AbortTransfer();
+                    Main.FilePaths = null;
+                    Navigator.Navigate("Pages/MainPage.xaml");
+                }
+            });
         }
         private void StartUpdatingUI()
         {

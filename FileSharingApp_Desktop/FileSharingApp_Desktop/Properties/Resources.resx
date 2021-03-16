@@ -242,7 +242,7 @@
     <value>Save</value>
   </data>
   <data name="Setting_DeviceName" xml:space="preserve">
-    <value>Device Name :</value>
+    <value>Device Name </value>
   </data>
   <data name="Setting_Language" xml:space="preserve">
     <value>Language :</value>

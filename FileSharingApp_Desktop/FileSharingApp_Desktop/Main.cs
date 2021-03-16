@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 public class Main
 {
@@ -291,7 +284,6 @@ public class Main
                 byteCounter += numberOfBytesRead;
                 if (!CheckAck(Functions.TransferMode))
                 {
-                    client.DisconnectFromServer();
                     client.DisconnectFromServer();
                     client = null;
                     server.CloseServer();
@@ -615,6 +607,7 @@ public class Main
                     server.CloseServer();
                     server = null;
                     IsTransfering = false;
+                    StartServer();
                     if (File != null)
                         File.CloseFile();
                     if (OnTransferAborted != null)
@@ -638,7 +631,8 @@ public class Main
         if (server != null)
         {
             server.GetData();
-            OnTransferFinished();
+            if(OnTransferFinished!=null)
+                OnTransferFinished();
             server.CloseServer();
             server = null;
         }

@@ -56,8 +56,8 @@ namespace FileSharingApp_Desktop.Pages
             Debug.WriteLine(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n "+ Properties.Resources.Permission_RequestMessage);
             Dispatcher.Invoke(() =>
             {
-                var result = MessageBox.Show(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage, 
-                    Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
+                var result = MessageBox.Show(deviceName + " " + Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
+                   Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
 
                 if (result == MessageBoxResult.Yes)
                 {
@@ -202,6 +202,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
         {
+            Main.FilePaths = null;
             ShowFileList(false);
         }
     }

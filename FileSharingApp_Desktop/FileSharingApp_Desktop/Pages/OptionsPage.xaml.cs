@@ -50,8 +50,8 @@ namespace FileSharingApp_Desktop.Pages
 
             Dispatcher.Invoke(() =>
             {
-                var result = MessageBox.Show(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
-                    Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
+                var result = MessageBox.Show(deviceName + " " + Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
+                   Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");

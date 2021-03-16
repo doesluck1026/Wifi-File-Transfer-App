@@ -30,7 +30,7 @@
 
         <StackPanel Orientation="Horizontal" 
                     VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label Content="OPTIONS" FontSize="40" FontWeight="Bold"
+            <Label Content="{x:Static p:Resources.Options_Title}" FontSize="40" FontWeight="Bold"
                Foreground="LightSteelBlue"  Grid.Row="0"/>
         </StackPanel>
 
