@@ -40,31 +40,14 @@ namespace FileSharingApp_Desktop
             Thread.Sleep(10);
         }
 
-        //private async void CheckForUpdates()
-        //{
-        //    try
-        //    {
-        //        using (var mgr = await UpdateManager.GitHubUpdateManager("https://disk.yandex.com.tr/d/Yc4HHNREmCRRrg?w=1"))
-        //        {
-        //            //updateManager = mgr;
-        //            var release = await mgr.UpdateApp();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string message = ex.Message + Environment.NewLine;
-        //        if (ex.InnerException != null)
-        //            message += ex.InnerException.Message;
-        //        MessageBox.Show(message+" soooo: "+ex.ToString());
-        //    }
-        //}
         private async void CheckForUpdates()
         {
             try
             {
-                using (var mgr = new UpdateManager("https://disk.yandex.com.tr/d/Yc4HHNREmCRRrg?w=1")) 
-                    {
-                    await mgr.UpdateApp();
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
+                {
+                    //updateManager = mgr;
+                    var release = await mgr.UpdateApp();
                 }
             }
             catch (Exception ex)
@@ -74,8 +57,25 @@ namespace FileSharingApp_Desktop
                     message += ex.InnerException.Message;
                 MessageBox.Show(message + " soooo: " + ex.ToString());
             }
-
         }
+        //private async void CheckForUpdates()
+        //{
+        //    try
+        //    {
+        //        using (var mgr = new UpdateManager("https://disk.yandex.com.tr/d/Yc4HHNREmCRRrg?w=1")) 
+        //            {
+        //            await mgr.UpdateApp();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string message = ex.Message + Environment.NewLine;
+        //        if (ex.InnerException != null)
+        //            message += ex.InnerException.Message;
+        //        MessageBox.Show(message + " soooo: " + ex.ToString());
+        //    }
+
+        //}
         private void AddVersionNumber()
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
