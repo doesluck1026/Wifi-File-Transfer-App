@@ -1456,3 +1456,12 @@ light.exe : error LGHT0128 : The process can not access the file 'C:\Users\CDS_S
 [16.03.21 11:18:48] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
 [16.03.21 11:18:48] ınfo: Program: Building embedded zip file for Setup.exe
 [16.03.21 11:18:50] ınfo: Program: Finished Squirrel Updater
+[16.03.21 11:49:44] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.4.2.nupkg
+[16.03.21 11:49:44] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[16.03.21 11:49:44] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.4.2.nupkg
+[16.03.21 11:49:44] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.4.2.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.4.2-full.nupkg
+[16.03.21 11:49:45] ınfo: ReleasePackage: Extracting dependent packages: []
+[16.03.21 11:49:45] ınfo: ReleasePackage: Removing unnecessary data
+[16.03.21 11:49:45] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[16.03.21 11:49:45] ınfo: Program: Building embedded zip file for Setup.exe
+[16.03.21 11:49:47] ınfo: Program: Finished Squirrel Updater
