@@ -1210,3 +1210,21 @@ Fatal error: Unable to load file
 [16.03.21 02:50:53] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
 [16.03.21 02:50:53] ınfo: Program: Building embedded zip file for Setup.exe
 [16.03.21 02:50:55] ınfo: Program: Finished Squirrel Updater
+[16.03.21 02:56:40] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.33.nupkg
+[16.03.21 02:56:40] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[16.03.21 02:56:41] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.33.nupkg
+[16.03.21 02:56:41] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.33.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.33-full.nupkg
+[16.03.21 02:56:41] ınfo: ReleasePackage: Extracting dependent packages: []
+[16.03.21 02:56:41] ınfo: ReleasePackage: Removing unnecessary data
+[16.03.21 02:56:41] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[16.03.21 02:56:41] ınfo: Program: Building embedded zip file for Setup.exe
+[16.03.21 02:56:43] ınfo: Program: Finished Squirrel Updater
+[16.03.21 02:59:29] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.3.33.nupkg
+[16.03.21 02:59:29] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[16.03.21 02:59:29] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.33.nupkg
+[16.03.21 02:59:29] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.3.33.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.3.33-full.nupkg
+[16.03.21 02:59:30] ınfo: ReleasePackage: Extracting dependent packages: []
+[16.03.21 02:59:30] ınfo: ReleasePackage: Removing unnecessary data
+[16.03.21 02:59:30] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[16.03.21 02:59:30] ınfo: Program: Building embedded zip file for Setup.exe
+[16.03.21 02:59:32] ınfo: Program: Finished Squirrel Updater

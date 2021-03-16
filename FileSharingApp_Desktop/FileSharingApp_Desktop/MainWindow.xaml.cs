@@ -55,7 +55,7 @@ namespace FileSharingApp_Desktop
         {
             try
             {
-                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App/"))
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
                 {
                     //updateManager = mgr;
                     var release = await mgr.UpdateApp();
