@@ -31,7 +31,6 @@ namespace FileSharingApp_Desktop
             Main.StartServer();
             NetworkScanner.PublishDevice();
             Navigator.Navigate("Pages/SplashScreen.xaml");
-            CheckForUpdates();
             AddVersionNumber();
         }
         private void Window_Closed(object sender, EventArgs e)
@@ -92,7 +91,9 @@ namespace FileSharingApp_Desktop
 
         private void Btn_Instagram_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
+            //System.Diagnostics.Process.Start("https://www.youtube.com/channel/UCkUWRx8ozzEgi7R2I6OY-BQ");
+            CheckForUpdates();
+
         }
 
         private void Btn_Patreon_Click(object sender, RoutedEventArgs e)
