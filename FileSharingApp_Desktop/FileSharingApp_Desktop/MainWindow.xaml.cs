@@ -111,5 +111,10 @@ namespace FileSharingApp_Desktop
                 NetworkScanner.ScanAvailableDevices();
             });
         }
+
+        private void Btn_PlayStore_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://play.google.com/store/apps/details?id=com.BuggyComp.BuggyFileTransfer");
+        }
     }
 }
