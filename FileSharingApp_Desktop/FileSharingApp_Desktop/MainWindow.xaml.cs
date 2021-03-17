@@ -53,9 +53,9 @@ namespace FileSharingApp_Desktop
             catch (Exception ex)
             {
                 string message = ex.Message + Environment.NewLine;
-                if (ex.InnerException != null)
-                    message += ex.InnerException.Message;
-                MessageBox.Show(message + " soooo: " + ex.ToString());
+                //if (ex.InnerException != null)
+                //    message += ex.InnerException.Message;
+                //MessageBox.Show(message + " soooo: " + ex.ToString());
             }
         }
         //private async void CheckForUpdates()

@@ -61,10 +61,15 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void btn_OpenFile_Click(object sender, RoutedEventArgs e)
         {
-            string selectedFilePath = Main.FilePaths[selectedFileIndex];
-            System.Diagnostics.Process.Start(@selectedFilePath);
-        }
+            try
+            {
+                string selectedFilePath = Main.FilePaths[selectedFileIndex];
+                System.Diagnostics.Process.Start(@selectedFilePath);
+            }
+            catch
+            {
 
-       
+            }
+        }
     }
 }

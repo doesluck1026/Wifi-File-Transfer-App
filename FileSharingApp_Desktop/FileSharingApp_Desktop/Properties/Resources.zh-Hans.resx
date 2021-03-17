@@ -193,4 +193,7 @@
   <data name="Settings_SelectTargetFolder" xml:space="preserve">
     <value>选择文件夹来存储接收到的文件。</value>
   </data>
+  <data name="Setting_DownloadDektop" xml:space="preserve">
+    <value>桌面应用</value>
+  </data>
 </root>

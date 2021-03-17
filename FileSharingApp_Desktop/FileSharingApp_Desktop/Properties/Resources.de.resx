@@ -193,4 +193,7 @@
   <data name="Settings_SelectTargetFolder" xml:space="preserve">
     <value>Wählen Sie den Ordner aus, in dem die empfangenen Dateien gespeichert werden sollen.</value>
   </data>
+  <data name="Setting_DownloadDektop" xml:space="preserve">
+    <value>Desktop-Anwendung</value>
+  </data>
 </root>

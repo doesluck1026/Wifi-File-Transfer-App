@@ -142,7 +142,7 @@ namespace FileSharingApp_Desktop.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm files.
+        ///   Looks up a localized string similar to Confirm.
         /// </summary>
         public static string File_btnConfirm {
             get {

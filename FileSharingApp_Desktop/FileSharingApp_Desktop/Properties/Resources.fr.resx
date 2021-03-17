@@ -13,7 +13,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Ac_btnReceive" xml:space="preserve">
-    <value>Recevoir des fichiers</value>
+    <value>Application de bureau</value>
   </data>
   <data name="Ac_btnSend" xml:space="preserve">
     <value>Envoyer les fichiers</value>
@@ -40,7 +40,7 @@
     <value>Ajouter</value>
   </data>
   <data name="File_btnConfirm" xml:space="preserve">
-    <value>Confirmer les fichiers</value>
+    <value>Confirmer</value>
   </data>
   <data name="File_btnOpen" xml:space="preserve">
     <value>Afficher</value>
@@ -192,5 +192,8 @@
   </data>
   <data name="Settings_SelectTargetFolder" xml:space="preserve">
     <value>Sélectionnez le dossier pour stocker les fichiers reçus.</value>
+  </data>
+  <data name="Setting_DownloadDektop" xml:space="preserve">
+    <value>Obtenir une application de bureau</value>
   </data>
 </root>
