@@ -58,24 +58,6 @@ namespace FileSharingApp_Desktop
                 //MessageBox.Show(message + " soooo: " + ex.ToString());
             }
         }
-        //private async void CheckForUpdates()
-        //{
-        //    try
-        //    {
-        //        using (var mgr = new UpdateManager("https://disk.yandex.com.tr/d/Yc4HHNREmCRRrg?w=1")) 
-        //            {
-        //            await mgr.UpdateApp();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        string message = ex.Message + Environment.NewLine;
-        //        if (ex.InnerException != null)
-        //            message += ex.InnerException.Message;
-        //        MessageBox.Show(message + " soooo: " + ex.ToString());
-        //    }
-
-        //}
         private void AddVersionNumber()
         {
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
@@ -102,7 +84,7 @@ namespace FileSharingApp_Desktop
 
         private void Btn_Blogger_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://freakingcyborg.blogspot.com/");
+            System.Diagnostics.Process.Start("https://buggycompany.blogspot.com/");
         }
         private void ScanNetwork()
         {
