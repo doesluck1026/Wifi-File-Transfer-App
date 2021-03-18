@@ -111,7 +111,7 @@ namespace FileSharingApp_Desktop.Pages
                     (((int)Main.TransferMetrics.TotalElapsedTime % 3600) % 60).ToString("00");
                 lbl_RemainingTime.Content = ((int)Main.TransferMetrics.EstimatedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.EstimatedTime % 3600) / 60).ToString("00") + ":" +
                     (((int)Main.TransferMetrics.EstimatedTime % 3600) % 60).ToString("00");
-                lbl_totalSent.Content = Main.TransferMetrics.TotalDataSent.ToString("0.00") + " " + Main.TransferMetrics.SizeUnit.ToString();
+                lbl_totalSent.Content = Main.TransferMetrics.TotalDataSent.ToString("0.00") + " " + Main.TransferMetrics.SentSizeUnit.ToString();
                 lbl_totalSize.Content = Main.TransferMetrics.TotalDataSize.ToString("0.00") + " " + Main.TransferMetrics.SizeUnit.ToString();
             });
 

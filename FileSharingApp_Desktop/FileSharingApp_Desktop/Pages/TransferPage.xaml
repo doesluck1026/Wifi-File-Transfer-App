@@ -84,7 +84,7 @@
                    VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
         </Grid>
         <ProgressBar x:Name="prg_Transfer" Margin="10" 
-                     Style="{StaticResource BlueProgress}" 
+                     Style="{StaticResource ResourceKey=BlueProgress}" 
                      Grid.Row="5" FlowDirection="LeftToRight"
                      HorizontalAlignment="Center" 
                      VerticalAlignment="Center" Height="50"
