@@ -1567,3 +1567,37 @@ light.exe : error LGHT0128 : The process can not access the file 'C:\Users\CDS_S
 [17.03.21 23:06:05] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\zh-Hans\Buggy File Transfer.resources.dll => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\zh-Hans\Buggy File Transfer.resources.dll
 [17.03.21 23:06:05] ınfo: Program: Building embedded zip file for Setup.exe
 [17.03.21 23:06:08] ınfo: Program: Finished Squirrel Updater
+[18.03.21 12:45:30] ınfo: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.4.6.nupkg
+[18.03.21 12:45:30] ınfo: Program: Bootstrapper EXE found at:C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[18.03.21 12:45:30] ınfo: Program: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.4.6.nupkg
+[18.03.21 12:45:30] ınfo: ReleasePackage: Creating release package: C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.4.6.nupkg => C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.4.6-full.nupkg
+[18.03.21 12:45:31] ınfo: ReleasePackage: Extracting dependent packages: []
+[18.03.21 12:45:31] ınfo: ReleasePackage: Removing unnecessary data
+[18.03.21 12:45:31] ınfo: ReleasePackage: No release notes found in C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[18.03.21 12:45:32] ınfo: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.4.5-full.nupkg and C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.4.6-full.nupkg into C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb
+[18.03.21 12:45:32] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer.exe => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer.exe
+[18.03.21 12:45:33] ınfo: DeltaPackageBuilder: \lib\net45\Buggy File Transfer.exe.config hasn't changed, writing dummy file
+[18.03.21 12:45:33] ınfo: DeltaPackageBuilder: Delta patching C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer_ExecutionStub.exe => C:\Users\CDS_Software02\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer_ExecutionStub.exe
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\ar\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[18.03.21 12:45:34] ınfo: DeltaPackageBuilder: \lib\net45\de\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[18.03.21 12:45:35] ınfo: DeltaPackageBuilder: \lib\net45\es\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[18.03.21 12:45:35] ınfo: DeltaPackageBuilder: \lib\net45\fr\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[18.03.21 12:45:35] ınfo: DeltaPackageBuilder: \lib\net45\tr\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[18.03.21 12:45:35] ınfo: DeltaPackageBuilder: \lib\net45\zh-Hans\Buggy File Transfer.resources.dll hasn't changed, writing dummy file
+[18.03.21 12:45:35] ınfo: Program: Building embedded zip file for Setup.exe
+[18.03.21 12:45:39] ınfo: Program: Finished Squirrel Updater
