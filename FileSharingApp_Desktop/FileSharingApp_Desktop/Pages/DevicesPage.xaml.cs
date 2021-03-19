@@ -13,6 +13,7 @@ namespace FileSharingApp_Desktop.Pages
     {
         private string TargetDeviceIP;
         private bool isScanning = false;
+        private bool isRequestSent = false;
         public DevicesPage()
         {
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace FileSharingApp_Desktop.Pages
         private void Main_OnTransferResponded(bool isAccepted)
         {
             Debug.WriteLine("Receiver Response: " + isAccepted);
+            isRequestSent = false;
             if (isAccepted)
             {
                 Dispatcher.Invoke(() =>
@@ -87,11 +89,16 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
-            Main.ConnectToTargetDevice(txt_DeviceIP.Text);            
+            if (!isRequestSent)
+            {
+                Main.ConnectToTargetDevice(txt_DeviceIP.Text);
+                isRequestSent = true;
+            }
         }
         private void btn_Back_Click(object sender, RoutedEventArgs e)
         {
-            Navigator.GoBack();
+            if(!isRequestSent)
+                Navigator.GoBack();
         }     
         private void ShowDevices()
         {

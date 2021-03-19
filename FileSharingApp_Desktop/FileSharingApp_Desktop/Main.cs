@@ -388,7 +388,7 @@ public class Main
         byte[] sizeBytes = BitConverter.GetBytes(totalTransferSize);
         sizeBytes.CopyTo(data, 5);
         data[13] = (byte)lenName;
-        Encoding.ASCII.GetBytes(Parameters.DeviceName).CopyTo(data, 14);
+        Encoding.UTF8.GetBytes(Parameters.DeviceName).CopyTo(data, 14);
         client.SendDataServer(data);
         Debug.WriteLine("Sent First Frame:" + FilePaths.Length);
     }
@@ -400,7 +400,7 @@ public class Main
     }
     private static void SendFileInformation(int indexOfFile)
     {
-        byte[] nameBytes = Encoding.ASCII.GetBytes(FileNames[indexOfFile]);
+        byte[] nameBytes = Encoding.UTF8.GetBytes(FileNames[indexOfFile]);
         int nameLen = nameBytes.Length;
         byte[] data = new byte[nameLen + 10];
         data[0] = (byte)Functions.StartofFileTransfer;
@@ -501,7 +501,7 @@ public class Main
             int numberOfFiles = BitConverter.ToInt32(receivedData, 1);
             long transferSize = BitConverter.ToInt64(receivedData, 5);
             int nameLen = receivedData[13];
-            string senderDevice = Encoding.ASCII.GetString(receivedData, 14, nameLen);
+            string senderDevice = Encoding.UTF8.GetString(receivedData, 14, nameLen);
             FilePaths = new string[numberOfFiles];
             if (File == null)
                 File = new FileOperations();
@@ -659,7 +659,7 @@ public class Main
         if (receivedData[0] == (byte)Functions.StartofFileTransfer)
         {
             byte nameLen = receivedData[1];
-            string fileName = Encoding.ASCII.GetString(receivedData, 2, nameLen);
+            string fileName = Encoding.UTF8.GetString(receivedData, 2, nameLen);
             long fileSizeAsBytes = BitConverter.ToInt64(receivedData, nameLen + 2);
             CurrentFile.FilePath = FileSaveURL;
             CurrentFile.FileName = fileName;

@@ -164,7 +164,7 @@ class NetworkScanner
                 Debug.WriteLine("Data was null: " + IP);
                 return;
             }
-            string msg = Encoding.ASCII.GetString(data);
+            string msg = Encoding.UTF8.GetString(data);
             char[] splitter = new char[] { '&' };
             string[] msgParts = msg.Split(splitter);
             string ip = msgParts[0].Substring(3);
@@ -172,7 +172,7 @@ class NetworkScanner
             DeviceNames.Add(deviceName);
             DeviceIPs.Add(ip);
             Debug.WriteLine("data: " + msg);
-            client.SendDataServer(Encoding.ASCII.GetBytes("Gotcha"));
+            client.SendDataServer(Encoding.UTF8.GetBytes("Gotcha"));
             client.DisconnectFromServer();
         }
     }
@@ -189,7 +189,7 @@ class NetworkScanner
     private static void PublisherServer_OnClientConnected(string clientIP)
     {
         Debug.WriteLine("Client IP: " + clientIP);
-        publisherServer.SendDataToClient(Encoding.ASCII.GetBytes("IP:" + DeviceIP + "&DeviceName:" + Parameters.DeviceName));
+        publisherServer.SendDataToClient(Encoding.UTF8.GetBytes("IP:" + DeviceIP + "&DeviceName:" + Parameters.DeviceName));
 
         publisherServer.GetData();
 
