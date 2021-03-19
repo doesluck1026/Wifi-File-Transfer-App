@@ -273,7 +273,7 @@ public class Main
             watch.Restart();
             while (IsTransferEnabled)
             {
-                File.FileReadAtByteIndex(totalBytesRead, out numberOfBytesRead, out buffer, chunkSize: (int)(ChunkSize + TransferMetrics.TransferSpeed * MB*0.4), functionByte: (byte)Functions.TransferMode);
+                File.FileReadAtByteIndex(totalBytesRead, out numberOfBytesRead, out buffer, chunkSize: (int)(ChunkSize + TransferMetrics.TransferSpeed * MB * 0.3), functionByte: (byte)Functions.TransferMode);
                 if (numberOfBytesRead == 0)
                 {
                     UpdateMetrics(watch, byteCounter);
@@ -319,7 +319,7 @@ public class Main
             endBytes[0] = (byte)Functions.EndofFileTransfer;
             client.SendDataServer(endBytes);
             CheckAck(Functions.EndofFileTransfer);
-            
+
         }
         IsTransfering = false;
         SendLastFrame();
@@ -328,7 +328,7 @@ public class Main
         client.DisconnectFromServer();
         client = null;
         if (server != null) ;
-            server.CloseServer();
+        server.CloseServer();
         server = null;
         StartServer();
     }
@@ -633,7 +633,7 @@ public class Main
         if (server != null)
         {
             server.GetData();
-            if(OnTransferFinished!=null)
+            if (OnTransferFinished != null)
                 OnTransferFinished();
             server.CloseServer();
             server = null;
