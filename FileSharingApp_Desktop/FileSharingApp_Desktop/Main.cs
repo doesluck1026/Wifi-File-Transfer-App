@@ -104,6 +104,7 @@ public class Main
     private static FileStruct CurrentFile;
     private static Metrics _transferMetrics;
     private static int MB = 1024 * 1024;
+    private static readonly int ChunkSize = (int)(0.1 * MB);
     #endregion
 
     #region Lock Objects
@@ -272,7 +273,7 @@ public class Main
             watch.Restart();
             while (IsTransferEnabled)
             {
-                File.FileReadAtByteIndex(totalBytesRead, out numberOfBytesRead, out buffer, chunkSize: BufferSize * 4, functionByte: (byte)Functions.TransferMode);
+                File.FileReadAtByteIndex(totalBytesRead, out numberOfBytesRead, out buffer, chunkSize: (int)(ChunkSize + TransferMetrics.TransferSpeed * MB*0.4), functionByte: (byte)Functions.TransferMode);
                 if (numberOfBytesRead == 0)
                 {
                     UpdateMetrics(watch, byteCounter);
@@ -293,6 +294,7 @@ public class Main
                         File.CloseFile();
                     return;
                 }
+
                 if (watch.Elapsed.TotalSeconds >= 0.5)
                 {
                     UpdateMetrics(watch, byteCounter);

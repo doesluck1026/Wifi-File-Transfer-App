@@ -93,6 +93,7 @@ class Server
             var ipAddress = endPoint.Address;
             Client.ReceiveBufferSize = BufferSize;
             Client.SendBufferSize = BufferSize;
+            Client.NoDelay = true;
             Debug.WriteLine(ipAddress + " is connected");
             OnClientConnected(ipAddress.ToString());
         }
