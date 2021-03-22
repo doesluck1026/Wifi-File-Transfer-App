@@ -133,7 +133,6 @@
     <Compile Include="Controls\MyCustomConverter.cs" />
     <Compile Include="FileOperations\Parameters.cs" />
     <Compile Include="FileOperations\ParametersBag.cs" />
-    <Compile Include="FileOperations\RecentClientListBag.cs" />
     <Compile Include="Pages\DevicesPage.xaml.cs">
       <DependentUpon>DevicesPage.xaml</DependentUpon>
     </Compile>
