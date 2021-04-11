@@ -46,16 +46,12 @@ namespace FileSharingApp_Desktop
             {
                 using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/doesluck1026/Wifi-File-Transfer-App"))
                 {
-                    //updateManager = mgr;
                     var release = await mgr.UpdateApp();
                 }
             }
             catch (Exception ex)
             {
                 string message = ex.Message + Environment.NewLine;
-                //if (ex.InnerException != null)
-                //    message += ex.InnerException.Message;
-                //MessageBox.Show(message + " soooo: " + ex.ToString());
             }
         }
         private void AddVersionNumber()
