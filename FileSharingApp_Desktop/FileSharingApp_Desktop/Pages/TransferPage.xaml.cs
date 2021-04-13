@@ -14,7 +14,7 @@ namespace FileSharingApp_Desktop.Pages
     public partial class TransferPage : Page
     {
         private Timer UpdateTimer;
-        private int updatePeriod = 50;          ///ms
+        private int updatePeriod = 30;          ///ms
         public TransferPage()
         {
             InitializeComponent();
