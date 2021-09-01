@@ -41,7 +41,10 @@ class NetworkScanner
     }
 
     private static int[] scanProgressArr;
-    private static string DeviceIP;
+    //public static string MyIP;
+    public static string MyIP = "192.168.3.103";
+    private static string MyHostname;
+
     private static readonly int PublishPort = 41019;
     private static Server publisherServer;
 
@@ -63,7 +66,7 @@ class NetworkScanner
         ScanPercentage = 0;
         string deviceIP, deviceHostname;
         GetDeviceAddress(out deviceIP, out deviceHostname);
-        DeviceIP = deviceIP;
+        MyIP = deviceIP;
         DeviceNames.Clear();
         DeviceIPs.Clear();
         char[] splitter = new char[] { '.' };
@@ -83,7 +86,6 @@ class NetworkScanner
             for (int i = 0; i < numTasks; i++)
             {
                 ParallelScan(stackSize * i, stackSize * (i + 1), i);
-                // Debug.WriteLine("i: "+ i+"  stx:"+ (stackSize * i + 1)+" endx: "+(stackSize * (i + 1) + 1));
             }
             Task.Run(() =>
             {
@@ -132,7 +134,7 @@ class NetworkScanner
                 {
                     //Debug.WriteLine("Pinging: " + holder.IpHeader + i.ToString());
                     string targetIP = IPHeader + i.ToString();
-                    if (targetIP == DeviceIP)
+                    if (targetIP == MyIP)
                         continue;
                     GetDeviceData(targetIP);
                     progress = (int)(((i - startx) / (double)(endx - startx - 1)) * 100.0);
@@ -178,7 +180,8 @@ class NetworkScanner
     }
     public static void PublishDevice()
     {
-        publisherServer = new Server(port: PublishPort);
+        GetDeviceAddress(out MyIP, out MyHostname);
+        publisherServer = new Server(port: PublishPort, ip: MyIP);
         publisherServer.SetupServer();
         publisherServer.StartListener();
         publisherServer.OnClientConnected += PublisherServer_OnClientConnected;
@@ -189,7 +192,7 @@ class NetworkScanner
     private static void PublisherServer_OnClientConnected(string clientIP)
     {
         Debug.WriteLine("Client IP: " + clientIP);
-        publisherServer.SendDataToClient(Encoding.UTF8.GetBytes("IP:" + DeviceIP + "&DeviceName:" + Parameters.DeviceName));
+        publisherServer.SendDataToClient(Encoding.UTF8.GetBytes("IP:" + MyIP + "&DeviceName:" + Parameters.DeviceName));
 
         publisherServer.GetData();
 
@@ -208,30 +211,11 @@ class NetworkScanner
                 localAddr = ip;
             }
         }
-        deviceIP = localAddr.ToString();
+        if (string.IsNullOrEmpty(MyIP))
+            deviceIP = localAddr.ToString();
+        else
+            deviceIP = MyIP;
         deviceHostname = host.HostName;
-        DeviceIP = localAddr.ToString();
     }
-    public string GetHostName(string ipAddress)
-    {
-        try
-        {
-            IPHostEntry entry = Dns.GetHostEntry(ipAddress);
-            if (entry != null)
-            {
-                return entry.HostName;
-            }
-        }
-        catch (SocketException)
-        {
-            // MessageBox.Show(e.Message.ToString());
-        }
 
-        return null;
-    }
-    public string GetDeviceHostName()
-    {
-        var host = Dns.GetHostEntry(Dns.GetHostName());
-        return host.HostName;
-    }
 }
