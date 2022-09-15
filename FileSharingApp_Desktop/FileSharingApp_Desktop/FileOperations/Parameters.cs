@@ -9,10 +9,12 @@ class Parameters
     public static string DeviceName { get; set; }
     public static bool IsUsingFirstTime { get; set; }
     public static string DeviceLanguage { get; set; }
+    public static string DeviceIP { get; set; }
 
     public static bool AcceptAllRequests { get; set; }
 
     public static bool DidInitParameters = false;
+
     public static void Init()
     {
         System.Diagnostics.Debug.WriteLine(" path :::+ "+ parametersPath);

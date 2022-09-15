@@ -134,8 +134,8 @@ class NetworkScanner
                 {
                     //Debug.WriteLine("Pinging: " + holder.IpHeader + i.ToString());
                     string targetIP = IPHeader + i.ToString();
-                    //if (targetIP == MyIP)
-                    //    continue;
+                    if (targetIP == MyIP)
+                        continue;
                     GetDeviceData(targetIP);
                     progress = (int)(((i - startx) / (double)(endx - startx - 1)) * 100.0);
                     scanProgressArr[progressIndex] = progress;

@@ -90,7 +90,6 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
-            isRequestSent=false;
             if (!isRequestSent)
             {
                 if(list_Devices.SelectedItems.Count > 1)
