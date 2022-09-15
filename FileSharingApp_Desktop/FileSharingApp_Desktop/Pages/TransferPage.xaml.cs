@@ -23,6 +23,7 @@ namespace FileSharingApp_Desktop.Pages
         {
             Main.OnTransferFinished += Main_OnTransferFinished;
             Main.OnTransferAborted += Main_OnTransferAborted;
+            Main.OnTransferResponded += Main_OnTransferResponded;
             Task.Run(() =>
             {
                 while (!Main.IsTransfering)//&& TimeSpan.FromSeconds(5).TotalSeconds<5) ;
@@ -36,6 +37,24 @@ namespace FileSharingApp_Desktop.Pages
         {
             Main.OnTransferFinished -= Main_OnTransferFinished;
             Main.OnTransferAborted -= Main_OnTransferAborted;
+            Main.OnTransferResponded -= Main_OnTransferResponded;
+        }
+
+        private void Main_OnTransferResponded(bool isAccepted)
+        {
+            Debug.WriteLine("Receiver Response: " + isAccepted);
+            if (isAccepted)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Navigator.Navigate("Pages/TransferPage.xaml");
+                });
+                Main.BeginSendingFiles();
+            }
+            else
+            {
+                var result = MessageBox.Show(Properties.Resources.Send_Warning_rejected, Properties.Resources.Rejected_Title, button: MessageBoxButton.OK);
+            }
         }
         private void Main_OnTransferAborted()
         {
@@ -113,6 +132,7 @@ namespace FileSharingApp_Desktop.Pages
                     (((int)Main.TransferMetrics.EstimatedTime % 3600) % 60).ToString("00");
                 lbl_totalSent.Content = Main.TransferMetrics.TotalDataSent.ToString("0.00") + " " + Main.TransferMetrics.SentSizeUnit.ToString();
                 lbl_totalSize.Content = Main.TransferMetrics.TotalDataSize.ToString("0.00") + " " + Main.TransferMetrics.SizeUnit.ToString();
+                lbl_Receiver.Content = Main.TransferMetrics.ReceiverDevice;
             });
 
             if (!Main.IsTransfering)

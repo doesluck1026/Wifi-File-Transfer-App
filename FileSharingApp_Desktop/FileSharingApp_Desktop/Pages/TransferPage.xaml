@@ -118,7 +118,11 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+            <Label Content="Receiver Device:" Foreground="White" Background="Transparent" Grid.Column="0"
+                       VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25"/>
+            <Label x:Name="lbl_Receiver" Foreground="White" Background="Transparent"
+                    Grid.Column="1" VerticalAlignment="Center" 
+                   HorizontalAlignment="Center" FontSize="25"/>
             <Button x:Name="btn_AbortTransfer" Grid.Column="4"
                     Style="{StaticResource Red}" Margin="5"
                     Click="btn_AbortTransfer_Click" 
