@@ -26,6 +26,7 @@ class Parameters
             DeviceName = param.DeviceName;
             DeviceLanguage = param.DeviceLanguage;
             AcceptAllRequests = param.AcceptAllRequests;
+            DeviceIP = param.DeviceIP;
             DidInitParameters = true;
         }
         catch
@@ -37,6 +38,7 @@ class Parameters
             string language = CultureInfo.InstalledUICulture.ToString().Split(splitter)[0];
             DeviceLanguage = language;
             AcceptAllRequests = false;
+            DeviceIP = null;
             DidInitParameters = true;
             Save();
         }
@@ -54,6 +56,8 @@ class Parameters
             param.SavingPath = SavingPath;
             param.DeviceName = DeviceName;
             param.DeviceLanguage = DeviceLanguage;
+            param.AcceptAllRequests = AcceptAllRequests;
+            param.DeviceIP = DeviceIP;  
             param.Save(parametersPath);
         }
         catch

@@ -38,6 +38,11 @@ namespace FileSharingApp_Desktop.Pages
                 txt_DeviceName.Text = Parameters.DeviceName;
                 txt_OutputFolder.Text = Parameters.SavingPath;
                 Chc_AllowRequests.IsChecked = Parameters.AcceptAllRequests;
+                bool isStaticIpEnabled= !string.IsNullOrEmpty(Parameters.DeviceIP);
+                Chc_EnableStaticIP.IsChecked = isStaticIpEnabled;
+                txt_DeviceIP.IsEnabled = isStaticIpEnabled;
+                if (isStaticIpEnabled)
+                    txt_DeviceIP.Text = Parameters.DeviceIP;
             });
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -94,6 +99,18 @@ namespace FileSharingApp_Desktop.Pages
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(languageCode);
             Properties.Resources.Culture = new CultureInfo(languageCode);
             Parameters.DeviceLanguage = languageCode;
+            if (Chc_EnableStaticIP.IsChecked == true)
+            {
+                Parameters.DeviceIP = txt_DeviceIP.Text;
+                NetworkScanner.MyIP = Parameters.DeviceIP;
+            }
+            else
+            {
+                Parameters.DeviceIP = null;
+                NetworkScanner.MyIP = null;
+                string ip, name;
+                NetworkScanner.GetDeviceAddress(out ip, out name);
+            }
             Parameters.Save();
             Dispatcher.Invoke(() => Navigator.Navigate("Pages/MainPage.xaml"));
         }
@@ -134,6 +151,12 @@ namespace FileSharingApp_Desktop.Pages
         private void Chc_AllowRequests_Click(object sender, RoutedEventArgs e)
         {
             Parameters.AcceptAllRequests = (bool)Chc_AllowRequests.IsChecked;
+        }
+
+        private void Chc_EnableStaticIP_Click(object sender, RoutedEventArgs e)
+        {
+            txt_DeviceIP.IsEnabled = (bool)Chc_EnableStaticIP.IsChecked;
+
         }
     }
 }

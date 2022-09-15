@@ -36,7 +36,8 @@ namespace FileSharingApp_Desktop.Pages
                 FilePaths = new List<string>();
                 ShowFileList(false);
             }
-            
+            if (!string.IsNullOrEmpty(Parameters.DeviceIP))
+                NetworkScanner.MyIP = Parameters.DeviceIP;
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
             Main.FileSaveURL = Parameters.SavingPath;
             Debug.WriteLine("Save file path: " + Main.FileSaveURL);

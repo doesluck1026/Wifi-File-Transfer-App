@@ -17,6 +17,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         
@@ -73,7 +74,6 @@
                        HorizontalContentAlignment="Center"
                        VerticalContentAlignment="Center"/>
         </Grid>
-
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="3*" />
@@ -99,6 +99,31 @@
                     HorizontalAlignment="Center" Click="btn_SelectFolder_Click"/>
         </Grid>
         <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <CheckBox Content="Device IP:" Grid.Column="0"
+                   FontSize="25"  Margin="10,0,0,0"
+                   HorizontalAlignment="Left" 
+                   VerticalContentAlignment="Center"
+                      x:Name="Chc_EnableStaticIP"
+                      Click="Chc_EnableStaticIP_Click"
+                   VerticalAlignment="center" Foreground="White"/>
+
+            <TextBox x:Name="txt_DeviceIP" Text="192.168.1.2" 
+                     IsEnabled="False"
+                     Grid.Column="1" FontSize="25" 
+                     BorderThickness="0,0,0,2"
+                     HorizontalAlignment="Left" VerticalAlignment="center" 
+                     Foreground="White" Margin="5,0,0,0"
+                     IsReadOnly="False" Background="Transparent" Width="500"/>
+
+        </Grid>
+
+        <Grid Grid.Row="5">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

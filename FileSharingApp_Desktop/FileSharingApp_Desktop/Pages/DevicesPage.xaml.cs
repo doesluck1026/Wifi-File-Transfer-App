@@ -96,7 +96,7 @@ namespace FileSharingApp_Desktop.Pages
                 {
                     Main.MultipleSendMode = true;
                     List<string> deviceIps = new List<string>();
-                    for( int i = 0; i < NetworkScanner.DeviceNames.Count; i++)
+                    for( int i = 0; i < list_Devices.SelectedItems.Count; i++)
                     {
                         int index = NetworkScanner.DeviceNames.IndexOf(list_Devices.SelectedItems[i].ToString());
                         string targetDeviceIP = NetworkScanner.DeviceIPs[index];
