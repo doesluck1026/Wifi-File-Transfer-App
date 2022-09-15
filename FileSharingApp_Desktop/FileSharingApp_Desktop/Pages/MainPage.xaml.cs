@@ -50,23 +50,34 @@ namespace FileSharingApp_Desktop.Pages
         {
             Main.OnClientRequested -= Main_OnClientRequested;
         }
-        private void Main_OnClientRequested(string totalTransferSize, string deviceName)
+        private void Main_OnClientRequested(string totalTransferSize, string deviceName, bool isAlreadyAccepted)
         {
             /// Show file transfer request and ask for permission here
             Debug.WriteLine(deviceName + Properties.Resources.Permission_RequestMessage + totalTransferSize + " \n "+ Properties.Resources.Permission_RequestMessage);
-            Dispatcher.Invoke(() =>
+            if (!isAlreadyAccepted)
             {
-                var result = MessageBox.Show(deviceName + " " + Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
-                   Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
+                Dispatcher.Invoke(() =>
+                {
+                    var result = MessageBox.Show(deviceName + " " + Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
+                       Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
 
-                if (result == MessageBoxResult.Yes)
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Navigator.Navigate("Pages/TransferPage.xaml");
+                        Main.ResponseToTransferRequest(true);
+                    }
+                    else
+                        Main.ResponseToTransferRequest(false);
+                });
+            }
+            else
+            {
+                Dispatcher.Invoke(() =>
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
-                    Main.ResponseToTransferRequest(true);
-                }
-                else
-                    Main.ResponseToTransferRequest(false);
-            });
+                });
+            }
+                
         }
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {

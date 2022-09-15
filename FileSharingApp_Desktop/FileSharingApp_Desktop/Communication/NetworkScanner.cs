@@ -41,8 +41,8 @@ class NetworkScanner
     }
 
     private static int[] scanProgressArr;
-    //public static string MyIP;
-    public static string MyIP = "192.168.3.103";
+    public static string MyIP;
+    //public static string MyIP = "192.168.3.103";
     private static string MyHostname;
 
     private static readonly int PublishPort = 41019;

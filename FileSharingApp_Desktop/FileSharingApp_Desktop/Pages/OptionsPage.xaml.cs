@@ -43,23 +43,34 @@ namespace FileSharingApp_Desktop.Pages
         {
             Main.OnClientRequested -= Main_OnClientRequested;
         }
-        private void Main_OnClientRequested(string totalTransferSize, string deviceName)
+        private void Main_OnClientRequested(string totalTransferSize, string deviceName, bool isAlreadyAccepted)
         {
             /// Show file transfer request and ask for permission here
             Debug.WriteLine(deviceName + " wants to send you files: " + totalTransferSize + " \n Do you want to receive?");
 
-            Dispatcher.Invoke(() =>
+            if (!isAlreadyAccepted)
             {
-                var result = MessageBox.Show(deviceName + " " + Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
-                   Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
-                if (result == MessageBoxResult.Yes)
+                Dispatcher.Invoke(() =>
+                {
+                    var result = MessageBox.Show(deviceName + " " + Properties.Resources.Permission_RequestMessage + " " + totalTransferSize + " \n " + Properties.Resources.Permission_RequestMessage,
+                       Properties.Resources.Permission_InfoMessage, button: MessageBoxButton.YesNo);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Navigator.Navigate("Pages/TransferPage.xaml");
+                        Main.ResponseToTransferRequest(true);
+                    }
+                    else
+                        Main.ResponseToTransferRequest(false);
+                });
+            }
+            else
+            {
+                Dispatcher.Invoke(() =>
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
-                    Main.ResponseToTransferRequest(true);
-                }
-                else
-                    Main.ResponseToTransferRequest(false);
-            });
+                });
+            }
         }
         private void btn_SelectFolder_Click(object sender, RoutedEventArgs e)
         {

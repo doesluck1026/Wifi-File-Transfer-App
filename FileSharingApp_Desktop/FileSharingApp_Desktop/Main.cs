@@ -12,6 +12,7 @@ public class Main
     private static readonly int BufferSize = 64 * 1024 - 1;
     private static readonly int Port = 42009;
 
+    private static bool AcceptAllRequests = true;
     #endregion
 
     #region Public Variables
@@ -20,7 +21,7 @@ public class Main
     /// </summary>
     /// <param name="files">files to be sent by client</param>
     /// <returns></returns>
-    public delegate void ClientRequestDelegate(string totalTransferSize, string senderDevice);
+    public delegate void ClientRequestDelegate(string totalTransferSize, string senderDevice,bool isAlreadyAccepted=false);
     public static event ClientRequestDelegate OnClientRequested;
 
     public delegate void TransferFinishedDelegate();
@@ -509,10 +510,20 @@ public class Main
             string fileSizeString = File.FileSize.ToString("0.00") + " " + File.FileSizeUnit.ToString();
             Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString + " device Name: " + senderDevice);
             IsSending = false;
-            if (OnClientRequested != null)
-                OnClientRequested(fileSizeString, senderDevice);
+            if (AcceptAllRequests)
+            {
+                ResponseToTransferRequest(true);
+                OnClientRequested?.Invoke(fileSizeString, senderDevice,true);
+
+            }
             else
-                ResponseToTransferRequest(false);
+            {
+                if(OnClientRequested!=null)
+                    OnClientRequested?.Invoke(fileSizeString, senderDevice);
+                else
+                    ResponseToTransferRequest(false);
+
+            }
             _transferMetrics.TotalDataSizeAsBytes = transferSize;
         }
     }

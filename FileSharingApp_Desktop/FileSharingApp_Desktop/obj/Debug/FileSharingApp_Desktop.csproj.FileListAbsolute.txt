@@ -199,3 +199,73 @@ C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masa�
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer.exe
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer.pdb
 C:\Users\CDS_Software02\Desktop\Projeler\GitHub\Dosya Aktarım Uygulaması\Masaüstü Uygulaması\FileSharingApp\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.AssemblyReference.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Buggy File Transfer.exe.config
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Buggy File Transfer.exe
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Buggy File Transfer.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\ar\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\de\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\es\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\fr\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\tr\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\zh-Hans\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\DeltaCompressionDotNet.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\DeltaCompressionDotNet.MsDelta.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\DeltaCompressionDotNet.PatchApi.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Sensors.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Microsoft.WindowsAPICodePack.ShellExtensions.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.Mdb.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.Pdb.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.Rocks.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\NuGet.Squirrel.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\SharpCompress.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Squirrel.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.Mdb.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.Pdb.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Mono.Cecil.Rocks.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\NuGet.Squirrel.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\bin\Debug\Squirrel.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.AssemblyReference.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.SuggestedBindingRedirects.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\DevicesPage.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\MainPage.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\OptionsPage.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferDonePage.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferPage.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer_MarkupCompile.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer_MarkupCompile.lref
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\App.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\MainWindow.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\DevicesPage.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\MainPage.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\OptionsPage.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\SplashScreen.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferDonePage.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Pages\TransferPage.baml
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer.g.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.ar.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.de.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.es.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.fr.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.tr.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.Properties.Resources.zh-Hans.resources
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.GenerateResource.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CoreCompileInputs.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\ar\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\de\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\es\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\fr\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\tr\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\zh-Hans\Buggy File Transfer.resources.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\FileSharingApp_Desktop.csproj.CopyComplete
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer.exe
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileSharingApp_Desktop\obj\Debug\Buggy File Transfer.pdb
