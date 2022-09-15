@@ -10,6 +10,8 @@ class Parameters
     public static bool IsUsingFirstTime { get; set; }
     public static string DeviceLanguage { get; set; }
 
+    public static bool AcceptAllRequests { get; set; }
+
     public static bool DidInitParameters = false;
     public static void Init()
     {
@@ -21,6 +23,7 @@ class Parameters
             SavingPath = param.SavingPath;
             DeviceName = param.DeviceName;
             DeviceLanguage = param.DeviceLanguage;
+            AcceptAllRequests = param.AcceptAllRequests;
             DidInitParameters = true;
         }
         catch
@@ -31,6 +34,7 @@ class Parameters
             char[] splitter = { '-' };
             string language = CultureInfo.InstalledUICulture.ToString().Split(splitter)[0];
             DeviceLanguage = language;
+            AcceptAllRequests = false;
             DidInitParameters = true;
             Save();
         }

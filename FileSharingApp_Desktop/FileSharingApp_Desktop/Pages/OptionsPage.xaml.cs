@@ -37,6 +37,7 @@ namespace FileSharingApp_Desktop.Pages
                 Combo_Languages.SelectedIndex = languageCodeList.IndexOf(Parameters.DeviceLanguage);
                 txt_DeviceName.Text = Parameters.DeviceName;
                 txt_OutputFolder.Text = Parameters.SavingPath;
+                Chc_AllowRequests.IsChecked = Parameters.AcceptAllRequests;
             });
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -130,6 +131,9 @@ namespace FileSharingApp_Desktop.Pages
             return null;
         }
 
-
+        private void Chc_AllowRequests_Click(object sender, RoutedEventArgs e)
+        {
+            Parameters.AcceptAllRequests = (bool)Chc_AllowRequests.IsChecked;
+        }
     }
 }

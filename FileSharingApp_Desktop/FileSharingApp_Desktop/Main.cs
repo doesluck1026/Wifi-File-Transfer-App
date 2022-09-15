@@ -12,7 +12,6 @@ public class Main
     private static readonly int BufferSize = 64 * 1024 - 1;
     private static readonly int Port = 42009;
 
-    private static bool AcceptAllRequests = true;
     #endregion
 
     #region Public Variables
@@ -510,7 +509,7 @@ public class Main
             string fileSizeString = File.FileSize.ToString("0.00") + " " + File.FileSizeUnit.ToString();
             Debug.WriteLine("numberOfFiles: " + numberOfFiles + " transfer size: " + fileSizeString + " device Name: " + senderDevice);
             IsSending = false;
-            if (AcceptAllRequests)
+            if (Parameters.AcceptAllRequests)
             {
                 ResponseToTransferRequest(true);
                 OnClientRequested?.Invoke(fileSizeString, senderDevice,true);

@@ -8,6 +8,7 @@ class ParametersBag
     public string SavingPath;
     public string DeviceName;
     public string DeviceLanguage;
+    public bool AcceptAllRequests;
     public void Save(string url)
     {
         FileStream writerFileStream = new FileStream(url, FileMode.Create, FileAccess.Write);
@@ -25,6 +26,7 @@ class ParametersBag
         this.SavingPath = bagFile.SavingPath;
         this.DeviceName = bagFile.DeviceName;
         this.DeviceLanguage = bagFile.DeviceLanguage;
+        this.AcceptAllRequests = bagFile.AcceptAllRequests;
         // Close the readerFileStream when we are done
         readerFileStream.Close();
     }

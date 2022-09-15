@@ -54,7 +54,8 @@
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
 
             <Label Content="{x:Static p:Resources.Setting_Language}" Grid.Column="0" 
@@ -64,6 +65,13 @@
                       Text="English" HorizontalAlignment="Left" VerticalAlignment="Center"
                       Background="Transparent"  Foreground="Red" 
                       FontSize="25"/>
+            <CheckBox  Content="Accept All Requests" Grid.Column="2" 
+                   FontSize="25" HorizontalAlignment="Left" Margin="30,0,0,0" 
+                   VerticalAlignment="center" Foreground="White"
+                       x:Name="Chc_AllowRequests"
+                       Click="Chc_AllowRequests_Click"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Row="3">
