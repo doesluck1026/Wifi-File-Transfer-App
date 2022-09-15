@@ -55,6 +55,7 @@
                           BorderBrush="DarkBlue" BorderThickness="2"
                           Margin="5" Background="White" 
                           Foreground="Black" MinWidth="300"
+                          SelectionMode="Extended"
                           MinHeight="300" SelectionChanged="list_Devices_SelectionChanged"/>
 
                 <Button x:Name="btn_Back" 

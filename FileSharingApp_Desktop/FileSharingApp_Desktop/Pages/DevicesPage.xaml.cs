@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -89,9 +90,27 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_Send_Click(object sender, RoutedEventArgs e)
         {
+            isRequestSent=false;
             if (!isRequestSent)
             {
-                Main.ConnectToTargetDevice(txt_DeviceIP.Text);
+                if(list_Devices.SelectedItems.Count > 1)
+                {
+                    Main.MultipleSendMode = true;
+                    List<string> deviceIps = new List<string>();
+                    for( int i = 0; i < NetworkScanner.DeviceNames.Count; i++)
+                    {
+                        int index = NetworkScanner.DeviceNames.IndexOf(list_Devices.SelectedItems[i].ToString());
+                        string targetDeviceIP = NetworkScanner.DeviceIPs[index];
+                        deviceIps.Add(targetDeviceIP);
+                    }
+                    Main.SendToMultipleDevices(deviceIps);
+                }
+                else
+                {
+                    Main.ConnectToTargetDevice(txt_DeviceIP.Text);
+                    Main.MultipleSendMode = false;
+
+                }
                 isRequestSent = true;
             }
         }

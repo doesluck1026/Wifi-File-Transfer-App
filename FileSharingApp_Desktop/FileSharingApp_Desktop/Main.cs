@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Threading;
@@ -105,6 +106,10 @@ public class Main
     private static Metrics _transferMetrics;
     private static int MB = 1024 * 1024;
     private static readonly int ChunkSize = (int)(0.1 * MB);
+
+    private static List<string> TargetDeviceList=new List<string>();
+    public static bool MultipleSendMode=false;
+    private static string TargetDeviceIP;
     #endregion
 
     #region Lock Objects
@@ -150,6 +155,7 @@ public class Main
         public double Progress;             /// between 0 and 100
         public double TotalElapsedTime;     /// Seconds
         public double EstimatedTime;        /// Seconds
+        public string ReceiverDevice;
     }
     #endregion
 
@@ -195,6 +201,7 @@ public class Main
     }
     public static void ConnectToTargetDevice(string IP)
     {
+        TargetDeviceIP = IP;
         IsTransferEnabled = true;
         client = new Client(port: Port, ip: IP, bufferSize: BufferSize, StartByte: StartByte);
         ServerIP = client.ConnectToServer();
@@ -218,9 +225,29 @@ public class Main
                 client.DisconnectFromServer();
                 client = null;
             }
+            if(!isAccepted)
+                SendToNextDevice();
+            else
+            {
+                lock (Lck_TransferMetrics)
+                {
+                    _transferMetrics.ReceiverDevice = NetworkScanner.DeviceNames[NetworkScanner.DeviceIPs.IndexOf(TargetDeviceIP)];
+                }
+            }
+
         });
 
     }
+
+    public static void SendToMultipleDevices(List<string> deviceIPs)
+    {
+        if (deviceIPs == null || deviceIPs.Count == 0)
+            return;
+        MultipleSendMode = true;
+        TargetDeviceList=new List<string>(deviceIPs);
+        SendToNextDevice();
+    }
+
     public static void BeginSendingFiles()
     {
         IsTransferEnabled = true;
@@ -235,6 +262,18 @@ public class Main
     #endregion
 
     #region Private Functions
+
+    private static void SendToNextDevice()
+    {
+        if (!MultipleSendMode || TargetDeviceList==null || TargetDeviceList.Count<1)
+        {
+            MultipleSendMode = false;
+            return;
+        }
+        ConnectToTargetDevice(TargetDeviceList[0]);
+        TargetDeviceList.RemoveAt(0);
+
+    }
     private static void SendingCoreFcn()
     {
         lock (Lck_TransferMetrics)
@@ -331,6 +370,8 @@ public class Main
         server.CloseServer();
         server = null;
         StartServer();
+        SendToNextDevice();
+
     }
     private static bool CheckAck(Functions func)
     {

@@ -20,10 +20,28 @@ namespace FileSharingApp_Desktop.Pages
         {
             list_Files.ItemsSource = Main.FileNames;
             Main.OnClientRequested += Main_OnClientRequested;
+            Main.OnTransferResponded += Main_OnTransferResponded;
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             Main.OnClientRequested -= Main_OnClientRequested;
+            Main.OnTransferResponded -= Main_OnTransferResponded;
+        }
+        private void Main_OnTransferResponded(bool isAccepted)
+        {
+            Debug.WriteLine("Receiver Response: " + isAccepted);
+            if (isAccepted)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    Navigator.Navigate("Pages/TransferPage.xaml");
+                });
+                Main.BeginSendingFiles();
+            }
+            else
+            {
+                var result = MessageBox.Show(Properties.Resources.Send_Warning_rejected, Properties.Resources.Rejected_Title, button: MessageBoxButton.OK);
+            }
         }
         private void Main_OnClientRequested(string totalTransferSize, string deviceName, bool isAlreadyAccepted)
         {
