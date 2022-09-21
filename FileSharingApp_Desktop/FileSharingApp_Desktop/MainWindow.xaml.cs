@@ -24,6 +24,8 @@ namespace FileSharingApp_Desktop
             if (!Parameters.DidInitParameters)
             {
                 Parameters.Init();
+                if (!string.IsNullOrEmpty(Parameters.DeviceIP))
+                    NetworkScanner.MyIP = Parameters.DeviceIP;
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(Parameters.DeviceLanguage);
                 Properties.Resources.Culture = new CultureInfo(Parameters.DeviceLanguage);
                 Task.Run(() => ScanNetwork());
