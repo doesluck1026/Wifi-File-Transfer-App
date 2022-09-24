@@ -129,6 +129,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Communication\NetworkScanner.cs" />
+    <Compile Include="Communication\NetworkScanner_oldd.cs" />
     <Compile Include="Communication\Server.cs" />
     <Compile Include="Controls\MyCustomConverter.cs" />
     <Compile Include="FileOperations\Parameters.cs" />

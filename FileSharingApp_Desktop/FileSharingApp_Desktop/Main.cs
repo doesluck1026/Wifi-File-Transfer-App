@@ -169,7 +169,7 @@ public class Main
     {
         if (server != null)
             return;
-        server = new Server(port: Port,ip:NetworkScanner.MyIP, bufferSize: BufferSize, StartByte: StartByte);
+        server = new Server(port: Port,ip: NetworkScanner.MyIP, bufferSize: BufferSize, StartByte: StartByte);
         ServerIP = server.SetupServer();
         server.StartListener();
         server.OnClientConnected += Server_OnClientConnected;
@@ -231,7 +231,7 @@ public class Main
             {
                 lock (Lck_TransferMetrics)
                 {
-                    _transferMetrics.ReceiverDevice = NetworkScanner.DeviceNames[NetworkScanner.DeviceIPs.IndexOf(TargetDeviceIP)];
+                    _transferMetrics.ReceiverDevice = NetworkScanner.PublisherDevices.Find(x => x.IP.Equals(TargetDeviceIP)).Hostname;
                 }
             }
 

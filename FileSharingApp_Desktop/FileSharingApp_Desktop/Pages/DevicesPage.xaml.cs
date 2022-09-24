@@ -24,13 +24,8 @@ namespace FileSharingApp_Desktop.Pages
             Main.OnTransferResponded += Main_OnTransferResponded;
             ShowDevices();
             bool isAnyDeviceAvailable = false;
-            if (NetworkScanner.DeviceNames==null)
-            {
-                if(NetworkScanner.DeviceNames.Count>0)
-                {
+            if (NetworkScanner.PublisherDevices ==null && NetworkScanner.PublisherDevices.Count>0)
                     isAnyDeviceAvailable = true;
-                }
-            }
             if (!isAnyDeviceAvailable)
                 btn_Scan_Click(null, null);
         }
@@ -58,10 +53,10 @@ namespace FileSharingApp_Desktop.Pages
 
         private void list_Devices_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (NetworkScanner.DeviceNames.Count <= 0 || list_Devices.SelectedItem == null)
+            if (NetworkScanner.PublisherDevices.Count <= 0 || list_Devices.SelectedItem == null)
                 return;
-            int index = NetworkScanner.DeviceNames.IndexOf(list_Devices.SelectedItem.ToString());
-            TargetDeviceIP = NetworkScanner.DeviceIPs[index];
+            int index = NetworkScanner.PublisherDevices.FindIndex(x=> x.Hostname.Equals(list_Devices.SelectedItem.ToString()));
+            TargetDeviceIP = NetworkScanner.PublisherDevices[index].IP;
             txt_DeviceIP.Text = TargetDeviceIP;//list_Clients.SelectedItem.ToString();
         }
 
@@ -98,8 +93,8 @@ namespace FileSharingApp_Desktop.Pages
                     List<string> deviceIps = new List<string>();
                     for( int i = 0; i < list_Devices.SelectedItems.Count; i++)
                     {
-                        int index = NetworkScanner.DeviceNames.IndexOf(list_Devices.SelectedItems[i].ToString());
-                        string targetDeviceIP = NetworkScanner.DeviceIPs[index];
+                        int index = NetworkScanner.PublisherDevices.FindIndex(x=>x.Hostname.Equals(list_Devices.SelectedItems[i].ToString()));
+                        string targetDeviceIP = NetworkScanner.PublisherDevices[index].IP;
                         deviceIps.Add(targetDeviceIP);
                     }
                     Main.SendToMultipleDevices(deviceIps);
@@ -120,16 +115,17 @@ namespace FileSharingApp_Desktop.Pages
         }     
         private void ShowDevices()
         {
-            if (NetworkScanner.DeviceNames != null)
+            list_Devices.Items.Clear();
+            if (NetworkScanner.PublisherDevices != null)
             {
-                Dispatcher.Invoke(() =>
+                for(int i = 0; i < NetworkScanner.PublisherDevices.Count; i++)
                 {
-                    list_Devices.ItemsSource = NetworkScanner.DeviceNames.ToArray();
-                    if (NetworkScanner.DeviceNames.Count > 0)
+                    Dispatcher.Invoke(() =>
                     {
-                        list_Devices.SelectedIndex = 0;
-                    }
-                });
+                        list_Devices.Items.Add(NetworkScanner.PublisherDevices[i].Hostname);
+                    });
+                }
+                
             }            
         }
     }
