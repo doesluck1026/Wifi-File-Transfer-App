@@ -31,6 +31,17 @@ public class NetworkScanner
         public string Port;
         public DeviceTypes DeviceType;
         public ConnectionStatus Status;
+
+        public DeviceHandleTypeDef DeepClone()
+        {
+            DeviceHandleTypeDef device = new DeviceHandleTypeDef();
+            device.IP = this.IP;
+            device.Port= this.Port;
+            device.DeviceType = this.DeviceType;
+            device.Status= this.Status;
+            return device;
+        }
+
     }
     public enum DeviceTypes
     {
@@ -79,7 +90,23 @@ public class NetworkScanner
     public static bool IsDevicePublished = false;
 
     public static string MyIP;
+    private static string MyDeviceName;
 
+    public static List<string> DeviceNames
+    {
+        get
+        {
+            List<string> deviceNames = new List<string>();
+            if (PublisherDevices != null)
+            {
+                for (int i = 0; i < PublisherDevices.Count; i++)
+                {
+                    deviceNames.Add(PublisherDevices[i].Hostname);
+                }
+            }
+            return deviceNames;
+        }
+    }
 
     #endregion
 
@@ -90,7 +117,6 @@ public class NetworkScanner
     private static int ConnectionTimeout;
 
 
-    private static string MyDeviceName;
     private static Server publisherServer;
 
     private static string IPHeader;
@@ -180,7 +206,7 @@ public class NetworkScanner
                             percentage += scanProgressArr[i] / numRobot;
                         }
                         percentage /= numTasks;
-                            //Debug.WriteLine("percentage: " + percentage);
+                        //Debug.WriteLine("percentage: " + percentage);
                         ScanPercentage = percentage;
                         if (percentage >= 99 || stopwatch.Elapsed.TotalSeconds > 25)
                             break;
@@ -326,7 +352,7 @@ public class NetworkScanner
                 {
                     string targetIP = IPHeader + i.ToString();
                     var device = GetDeviceData(targetIP, port);
-                    if (device != null)
+                    if (device != null && !device.Hostname.Equals(MyDeviceName))
                         PublisherDevices.Add(device);
                     progress = (int)(((i - startx) / (double)(endx - startx - 1)) * 100.0);
                     scanProgressArr[progressIndex] = progress;
@@ -422,3 +448,4 @@ public class NetworkScanner
         return device;
     }
 }
+

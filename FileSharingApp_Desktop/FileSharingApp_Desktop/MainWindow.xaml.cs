@@ -31,7 +31,7 @@ namespace FileSharingApp_Desktop
                 Task.Run(() => ScanNetwork());
             }
             Main.StartServer();
-            NetworkScanner.PublishDevice();
+            NetworkScanner.PublishDevice(Parameters.DeviceName);
             Navigator.Navigate("Pages/SplashScreen.xaml");
             CheckForUpdates();
             AddVersionNumber();

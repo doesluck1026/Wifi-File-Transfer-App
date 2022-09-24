@@ -112,21 +112,22 @@ namespace FileSharingApp_Desktop.Pages
         {
             if(!isRequestSent)
                 Navigator.GoBack();
-        }     
+        }
         private void ShowDevices()
         {
-            list_Devices.Items.Clear();
-            if (NetworkScanner.PublisherDevices != null)
+            Dispatcher.Invoke(() =>
             {
-                for(int i = 0; i < NetworkScanner.PublisherDevices.Count; i++)
+                list_Devices.Items.Clear();
+                if (NetworkScanner.PublisherDevices != null)
                 {
-                    Dispatcher.Invoke(() =>
+                    for (int i = 0; i < NetworkScanner.PublisherDevices.Count; i++)
                     {
                         list_Devices.Items.Add(NetworkScanner.PublisherDevices[i].Hostname);
-                    });
+                    }
+                    if (NetworkScanner.PublisherDevices.Count > 0)
+                        list_Devices.SelectedIndex = 0;
                 }
-                
-            }            
+            });
         }
     }
 }
