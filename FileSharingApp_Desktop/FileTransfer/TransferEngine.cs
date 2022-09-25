@@ -366,8 +366,7 @@ namespace FileTransfer
             }
             IsTransfering = false;
             SendLastFrame();
-            if (OnTransferFinished != null)
-                OnTransferFinished();
+            OnTransferFinished?.Invoke();
             client.DisconnectFromServer();
             client = null;
             if (server != null) ;
@@ -391,8 +390,7 @@ namespace FileTransfer
                     }
                     else if (data[0] == (byte)Functions.Aborted)
                     {
-                        if (OnTransferAborted != null)
-                            OnTransferAborted();
+                        OnTransferAborted?.Invoke();
                         IsTransfering = false;
                     }
                 }
@@ -662,7 +660,7 @@ namespace FileTransfer
                         StartServer();
                         if (File != null)
                             File.CloseFile();
-                        OnTransferFinished();
+                        OnTransferFinished?.Invoke();
                         return;
                     }
                     else if (receivedData[0] == (byte)Functions.Aborted)
@@ -673,8 +671,7 @@ namespace FileTransfer
                         StartServer();
                         if (File != null)
                             File.CloseFile();
-                        if (OnTransferAborted != null)
-                            OnTransferAborted();
+                        OnTransferAborted?.Invoke();
                         return;
                     }
                     else
@@ -694,8 +691,7 @@ namespace FileTransfer
             if (server != null)
             {
                 server.GetData();
-                if (OnTransferFinished != null)
-                    OnTransferFinished();
+                OnTransferFinished?.Invoke();
                 server.CloseServer();
                 server = null;
             }

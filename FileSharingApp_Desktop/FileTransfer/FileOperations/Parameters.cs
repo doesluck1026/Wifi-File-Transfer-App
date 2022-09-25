@@ -6,7 +6,7 @@ namespace FileTransfer.FileOperation
 {
     public class Parameters
     {
-        private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FileTransferParameters.dat";
+        private static readonly string parametersPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FileTransferParameters.ftp";
 
         public static string SavingPath { get; set; }
         public static string DeviceName { get; set; }
