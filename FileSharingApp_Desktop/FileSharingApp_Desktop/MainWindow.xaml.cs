@@ -30,7 +30,7 @@ namespace FileSharingApp_Desktop
                 Properties.Resources.Culture = new CultureInfo(Parameters.DeviceLanguage);
                 Task.Run(() => ScanNetwork());
             }
-            Main.StartServer();
+            TransferEngine.StartServer();
             NetworkScanner.PublishDevice(Parameters.DeviceName);
             Navigator.Navigate("Pages/SplashScreen.xaml");
             CheckForUpdates();

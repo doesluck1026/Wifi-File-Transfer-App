@@ -18,14 +18,14 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            list_Files.ItemsSource = Main.FileNames;
-            Main.OnClientRequested += Main_OnClientRequested;
-            Main.OnTransferResponded += Main_OnTransferResponded;
+            list_Files.ItemsSource = TransferEngine.FileNames;
+            TransferEngine.OnClientRequested += Main_OnClientRequested;
+            TransferEngine.OnTransferResponded += Main_OnTransferResponded;
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            Main.OnClientRequested -= Main_OnClientRequested;
-            Main.OnTransferResponded -= Main_OnTransferResponded;
+            TransferEngine.OnClientRequested -= Main_OnClientRequested;
+            TransferEngine.OnTransferResponded -= Main_OnTransferResponded;
         }
         private void Main_OnTransferResponded(bool isAccepted)
         {
@@ -36,7 +36,7 @@ namespace FileSharingApp_Desktop.Pages
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
                 });
-                Main.BeginSendingFiles();
+                TransferEngine.BeginSendingFiles();
             }
             else
             {
@@ -57,10 +57,10 @@ namespace FileSharingApp_Desktop.Pages
                     if (result == MessageBoxResult.Yes)
                     {
                         Navigator.Navigate("Pages/TransferPage.xaml");
-                        Main.ResponseToTransferRequest(true);
+                        TransferEngine.ResponseToTransferRequest(true);
                     }
                     else
-                        Main.ResponseToTransferRequest(false);
+                        TransferEngine.ResponseToTransferRequest(false);
                 });
             }
             else
@@ -74,7 +74,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void list_Files_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedFileIndex = Main.FileNames.ToList().IndexOf(list_Files.SelectedItem.ToString());
+            selectedFileIndex = TransferEngine.FileNames.ToList().IndexOf(list_Files.SelectedItem.ToString());
         }
 
         private void btn_OpenFolder_Click(object sender, RoutedEventArgs e)
@@ -84,14 +84,14 @@ namespace FileSharingApp_Desktop.Pages
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            Main.FilePaths = null;
+            TransferEngine.FilePaths = null;
             Navigator.Navigate("Pages/MainPage.xaml");
         }
         private void btn_OpenFile_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                string selectedFilePath = Main.FilePaths[selectedFileIndex];
+                string selectedFilePath = TransferEngine.FilePaths[selectedFileIndex];
                 System.Diagnostics.Process.Start(@selectedFilePath);
             }
             catch

@@ -29,7 +29,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Main.OnClientRequested += Main_OnClientRequested;
+            TransferEngine.OnClientRequested += Main_OnClientRequested;
             Dispatcher.Invoke(() =>
             {
                 var languageCodeList = LanguageList.Values.ToList();
@@ -47,7 +47,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            Main.OnClientRequested -= Main_OnClientRequested;
+            TransferEngine.OnClientRequested -= Main_OnClientRequested;
         }
         private void Main_OnClientRequested(string totalTransferSize, string deviceName, bool isAlreadyAccepted)
         {
@@ -64,10 +64,10 @@ namespace FileSharingApp_Desktop.Pages
                     if (result == MessageBoxResult.Yes)
                     {
                         Navigator.Navigate("Pages/TransferPage.xaml");
-                        Main.ResponseToTransferRequest(true);
+                        TransferEngine.ResponseToTransferRequest(true);
                     }
                     else
-                        Main.ResponseToTransferRequest(false);
+                        TransferEngine.ResponseToTransferRequest(false);
                 });
             }
             else

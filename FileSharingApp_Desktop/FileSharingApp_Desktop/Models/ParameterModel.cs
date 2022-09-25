@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
 [Serializable]
-class ParametersBag
+class ParameterModel
 {
     public string SavingPath;
     public string DeviceName;
@@ -22,7 +22,7 @@ class ParametersBag
         FileStream readerFileStream = new FileStream(url, FileMode.Open, FileAccess.Read);
         // Reconstruct data
         BinaryFormatter formatter = new BinaryFormatter();
-        var bagFile = (ParametersBag)formatter.Deserialize(readerFileStream);
+        var bagFile = (ParameterModel)formatter.Deserialize(readerFileStream);
         this.SavingPath = bagFile.SavingPath;
         this.DeviceName = bagFile.DeviceName;
         this.DeviceLanguage = bagFile.DeviceLanguage;

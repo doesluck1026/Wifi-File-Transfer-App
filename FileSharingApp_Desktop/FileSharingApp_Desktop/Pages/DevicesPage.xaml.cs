@@ -21,7 +21,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Main.OnTransferResponded += Main_OnTransferResponded;
+            TransferEngine.OnTransferResponded += Main_OnTransferResponded;
             ShowDevices();
             bool isAnyDeviceAvailable = false;
             if (NetworkScanner.PublisherDevices ==null && NetworkScanner.PublisherDevices.Count>0)
@@ -31,7 +31,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            Main.OnTransferResponded -= Main_OnTransferResponded;
+            TransferEngine.OnTransferResponded -= Main_OnTransferResponded;
         }
         private void Main_OnTransferResponded(bool isAccepted)
         {
@@ -43,7 +43,7 @@ namespace FileSharingApp_Desktop.Pages
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
                 });
-                Main.BeginSendingFiles();
+                TransferEngine.BeginSendingFiles();
             }
             else
             {
@@ -89,7 +89,7 @@ namespace FileSharingApp_Desktop.Pages
             {
                 if(list_Devices.SelectedItems.Count > 1)
                 {
-                    Main.MultipleSendMode = true;
+                    TransferEngine.MultipleSendMode = true;
                     List<string> deviceIps = new List<string>();
                     for( int i = 0; i < list_Devices.SelectedItems.Count; i++)
                     {
@@ -97,12 +97,12 @@ namespace FileSharingApp_Desktop.Pages
                         string targetDeviceIP = NetworkScanner.PublisherDevices[index].IP;
                         deviceIps.Add(targetDeviceIP);
                     }
-                    Main.SendToMultipleDevices(deviceIps);
+                    TransferEngine.SendToMultipleDevices(deviceIps);
                 }
                 else
                 {
-                    Main.SendFileTo(txt_DeviceIP.Text);
-                    Main.MultipleSendMode = false;
+                    TransferEngine.SendFileTo(txt_DeviceIP.Text);
+                    TransferEngine.MultipleSendMode = false;
 
                 }
                 isRequestSent = true;

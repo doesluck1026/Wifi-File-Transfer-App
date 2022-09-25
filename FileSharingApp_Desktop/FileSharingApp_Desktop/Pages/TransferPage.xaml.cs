@@ -21,12 +21,12 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Main.OnTransferFinished += Main_OnTransferFinished;
-            Main.OnTransferAborted += Main_OnTransferAborted;
-            Main.OnTransferResponded += Main_OnTransferResponded;
+            TransferEngine.OnTransferFinished += Main_OnTransferFinished;
+            TransferEngine.OnTransferAborted += Main_OnTransferAborted;
+            TransferEngine.OnTransferResponded += Main_OnTransferResponded;
             Task.Run(() =>
             {
-                while (!Main.IsTransfering)//&& TimeSpan.FromSeconds(5).TotalSeconds<5) ;
+                while (!TransferEngine.IsTransfering)//&& TimeSpan.FromSeconds(5).TotalSeconds<5) ;
                 {
                     Thread.Sleep(2);
                 }
@@ -35,9 +35,9 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            Main.OnTransferFinished -= Main_OnTransferFinished;
-            Main.OnTransferAborted -= Main_OnTransferAborted;
-            Main.OnTransferResponded -= Main_OnTransferResponded;
+            TransferEngine.OnTransferFinished -= Main_OnTransferFinished;
+            TransferEngine.OnTransferAborted -= Main_OnTransferAborted;
+            TransferEngine.OnTransferResponded -= Main_OnTransferResponded;
         }
 
         private void Main_OnTransferResponded(bool isAccepted)
@@ -49,7 +49,7 @@ namespace FileSharingApp_Desktop.Pages
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
                 });
-                Main.BeginSendingFiles();
+                TransferEngine.BeginSendingFiles();
             }
             else
             {
@@ -61,7 +61,7 @@ namespace FileSharingApp_Desktop.Pages
             MessageBox.Show(Properties.Resources.Transfer_AbortedMessage);
             Dispatcher.Invoke(() =>
             {
-                Main.FilePaths = null;
+                TransferEngine.FilePaths = null;
                 Navigator.Navigate("Pages/MainPage.xaml");
             });
         }
@@ -82,9 +82,9 @@ namespace FileSharingApp_Desktop.Pages
                 var result = MessageBox.Show(Properties.Resources.Transfer_ConfirmAbortMessage, Properties.Resources.Transfer_ConfirmAbortTitle, MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    Main.OnTransferFinished -= Main_OnTransferFinished;
-                    Main.AbortTransfer();
-                    Main.FilePaths = null;
+                    TransferEngine.OnTransferFinished -= Main_OnTransferFinished;
+                    TransferEngine.AbortTransfer();
+                    TransferEngine.FilePaths = null;
                     Navigator.Navigate("Pages/MainPage.xaml");
                 }
             });
@@ -117,7 +117,7 @@ namespace FileSharingApp_Desktop.Pages
 
         private void UpdateUI()
         {
-            var metrics = Main.TransferMetrics;
+            var metrics = TransferEngine.TransferMetrics;
             Dispatcher.Invoke(() => {
                 lbl_currentFileNumber.Content = metrics.IndexOfCurrentFile.ToString();
                 lbl_FileCount.Content = metrics.CountOfFiles.ToString();
@@ -136,7 +136,7 @@ namespace FileSharingApp_Desktop.Pages
                 lbl_Receiver.Content = metrics.ReceiverDevice;
             });
 
-            if (!Main.IsTransfering)
+            if (!TransferEngine.IsTransfering)
                 StopUpdateingUI();
         }
 

@@ -23,11 +23,11 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Main.OnClientRequested += Main_OnClientRequested;
+            TransferEngine.OnClientRequested += Main_OnClientRequested;
             ShowFileList(false);
-            if(Main.FilePaths!=null)
+            if(TransferEngine.FilePaths!=null)
             {
-                FilePaths = Main.FilePaths.ToList();
+                FilePaths = TransferEngine.FilePaths.ToList();
                 ShowFileList(true);
                 list_Files.ItemsSource = FilePaths;
             }
@@ -38,8 +38,8 @@ namespace FileSharingApp_Desktop.Pages
             }
 
             NetworkScanner.GetDeviceAddress(out DeviceIP, out DeviceHostName);
-            Main.FileSaveURL = Parameters.SavingPath;
-            Debug.WriteLine("Save file path: " + Main.FileSaveURL);
+            TransferEngine.FileSaveURL = Parameters.SavingPath;
+            Debug.WriteLine("Save file path: " + TransferEngine.FileSaveURL);
             Dispatcher.Invoke(() =>
             {
                 txt_DeviceIP.Content = DeviceIP;
@@ -48,7 +48,7 @@ namespace FileSharingApp_Desktop.Pages
         }
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            Main.OnClientRequested -= Main_OnClientRequested;
+            TransferEngine.OnClientRequested -= Main_OnClientRequested;
         }
         private void Main_OnClientRequested(string totalTransferSize, string deviceName, bool isAlreadyAccepted)
         {
@@ -64,10 +64,10 @@ namespace FileSharingApp_Desktop.Pages
                     if (result == MessageBoxResult.Yes)
                     {
                         Navigator.Navigate("Pages/TransferPage.xaml");
-                        Main.ResponseToTransferRequest(true);
+                        TransferEngine.ResponseToTransferRequest(true);
                     }
                     else
-                        Main.ResponseToTransferRequest(false);
+                        TransferEngine.ResponseToTransferRequest(false);
                 });
             }
             else
@@ -153,7 +153,7 @@ namespace FileSharingApp_Desktop.Pages
                     FilePaths.Add(filePaths[i]);
             }
             list_Files.ItemsSource = FilePaths.ToArray();
-            Main.SetFilePaths(FilePaths.ToArray());
+            TransferEngine.SetFilePaths(FilePaths.ToArray());
             ShowFileList(true);
         }
         private void txt_DeviceName_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -206,14 +206,14 @@ namespace FileSharingApp_Desktop.Pages
                 return;
             if(FilePaths.Count>0)
             {
-                Main.SetFilePaths(FilePaths.ToArray());
+                TransferEngine.SetFilePaths(FilePaths.ToArray());
                 Navigator.Navigate("Pages/DevicesPage.xaml");
             }
         }
 
         private void btn_MainMenu_Click(object sender, RoutedEventArgs e)
         {
-            Main.FilePaths = null;
+            TransferEngine.FilePaths = null;
             ShowFileList(false);
         }
     }
