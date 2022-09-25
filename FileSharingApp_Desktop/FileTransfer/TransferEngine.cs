@@ -38,6 +38,7 @@ namespace FileTransfer
         public static string FileSaveURL = "/storage/emulated/0/Download/";
         public static string ServerIP;
         public static string ClientIP;
+
         public static Metrics TransferMetrics
         {
             get

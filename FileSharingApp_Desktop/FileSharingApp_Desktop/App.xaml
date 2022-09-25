@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:FileSharingApp_Desktop" 
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             Startup="Application_Startup">
     <Application.Resources>
         <!-- Resources for the entire application can be defined here. -->
         <Style x:Name="BlueStyle" x:Key="Blue" TargetType="{x:Type Button}">

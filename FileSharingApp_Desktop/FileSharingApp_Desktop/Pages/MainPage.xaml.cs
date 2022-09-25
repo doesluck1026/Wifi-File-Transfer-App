@@ -27,7 +27,6 @@ namespace FileSharingApp_Desktop.Pages
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             TransferEngine.OnClientRequested += Main_OnClientRequested;
-            ShowFileList(false);
             if(TransferEngine.FilePaths!=null)
             {
                 FilePaths = TransferEngine.FilePaths.ToList();
