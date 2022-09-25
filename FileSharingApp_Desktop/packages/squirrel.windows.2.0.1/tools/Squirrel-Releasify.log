@@ -1938,3 +1938,136 @@ light.exe : error LGHT0128 : The process can not access the file 'C:\Users\CDS_S
 [24/09/22 23:27:08] info: DeltaPackageBuilder: \lib\net45\zh-Hans\_._ hasn't changed, writing dummy file
 [24/09/22 23:27:10] info: Program: Building embedded zip file for Setup.exe
 [24/09/22 23:27:15] info: Program: Finished Squirrel Updater
+[25/09/22 00:05:47] info: Program: Starting Squirrel Updater: --releasify BuggyFileTransfer.2.5.5.nupkg
+[25/09/22 00:05:47] info: Program: Bootstrapper EXE found at:C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\packages\squirrel.windows.2.0.1\tools\Setup.exe
+[25/09/22 00:05:47] info: Program: Creating release package: C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.5.5.nupkg
+[25/09/22 00:05:47] info: ReleasePackage: Creating release package: C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\Releases\BuggyFileTransfer.2.5.5.nupkg => C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.5.5-full.nupkg
+[25/09/22 00:05:47] info: ReleasePackage: Extracting dependent packages: []
+[25/09/22 00:05:47] info: ReleasePackage: Removing unnecessary data
+[25/09/22 00:05:48] info: ReleasePackage: No release notes found in C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempa\BuggyFileTransfer.nuspec
+[25/09/22 00:05:48] info: DeltaPackageBuilder: Extracting .\Releases\BuggyFileTransfer-2.5.4-full.nupkg and C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\Releases\BuggyFileTransfer-2.5.5-full.nupkg into C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempb
+[25/09/22 00:05:48] info: DeltaPackageBuilder: Delta patching C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer.exe => C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer.exe
+[25/09/22 00:05:49] info: DeltaPackageBuilder: \lib\net45\Buggy File Transfer.exe.config hasn't changed, writing dummy file
+[25/09/22 00:05:49] info: DeltaPackageBuilder: Delta patching C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempa\lib\net45\Buggy File Transfer_ExecutionStub.exe => C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempb\lib\net45\Buggy File Transfer_ExecutionStub.exe
+[25/09/22 00:05:49] info: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.dll hasn't changed, writing dummy file
+[25/09/22 00:05:49] info: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.MsDelta.dll hasn't changed, writing dummy file
+[25/09/22 00:05:49] info: DeltaPackageBuilder: \lib\net45\DeltaCompressionDotNet.PatchApi.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: Delta patching C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempa\lib\net45\FileTransfer.dll => C:\Users\yhsvk\AppData\Local\SquirrelTemp\tempb\lib\net45\FileTransfer.dll
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Microsoft.Win32.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ExtendedLinguisticServices.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Sensors.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.Shell.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Microsoft.WindowsAPICodePack.ShellExtensions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Mono.Cecil.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Mdb.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Mono.Cecil.pdb hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Pdb.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.dll hasn't changed, writing dummy file
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\Mono.Cecil.Rocks.pdb not found in base package, marking as new
+[25/09/22 00:05:50] info: DeltaPackageBuilder: \lib\net45\netstandard.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\NuGet.Squirrel.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\SharpCompress.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\Squirrel.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.AppContext.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.Collections.Concurrent.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.Collections.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.Collections.NonGeneric.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.Collections.Specialized.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.ComponentModel.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.ComponentModel.EventBasedAsync.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.ComponentModel.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.ComponentModel.TypeConverter.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.Console.dll hasn't changed, writing dummy file
+[25/09/22 00:05:51] info: DeltaPackageBuilder: \lib\net45\System.Data.Common.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.Contracts.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.Debug.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.FileVersionInfo.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.Process.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.StackTrace.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.TextWriterTraceListener.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.Tools.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.TraceSource.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Diagnostics.Tracing.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Drawing.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Dynamic.Runtime.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Globalization.Calendars.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Globalization.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.Globalization.Extensions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.IO.Compression.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.IO.Compression.ZipFile.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.IO.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.IO.FileSystem.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.IO.FileSystem.DriveInfo.dll hasn't changed, writing dummy file
+[25/09/22 00:05:52] info: DeltaPackageBuilder: \lib\net45\System.IO.FileSystem.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.IO.FileSystem.Watcher.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.IO.IsolatedStorage.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.IO.MemoryMappedFiles.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.IO.Pipes.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.IO.UnmanagedMemoryStream.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Linq.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Linq.Expressions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Linq.Parallel.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Linq.Queryable.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.Http.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.NameResolution.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.NetworkInformation.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.Ping.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.Requests.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.Security.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.Sockets.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.WebHeaderCollection.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.WebSockets.Client.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Net.WebSockets.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.ObjectModel.dll hasn't changed, writing dummy file
+[25/09/22 00:05:53] info: DeltaPackageBuilder: \lib\net45\System.Reflection.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Reflection.Extensions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Reflection.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Resources.Reader.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Resources.ResourceManager.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Resources.Writer.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.CompilerServices.VisualC.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Extensions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Handles.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.InteropServices.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Numerics.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Serialization.Formatters.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Serialization.Json.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Serialization.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Runtime.Serialization.Xml.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Claims.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Cryptography.Algorithms.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Cryptography.Csp.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Cryptography.Encoding.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Cryptography.Primitives.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Cryptography.X509Certificates.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.Principal.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Security.SecureString.dll hasn't changed, writing dummy file
+[25/09/22 00:05:54] info: DeltaPackageBuilder: \lib\net45\System.Text.Encoding.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Text.Encoding.Extensions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Text.RegularExpressions.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.Overlapped.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.Tasks.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.Tasks.Parallel.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.Thread.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.ThreadPool.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Threading.Timer.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.ValueTuple.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Xml.ReaderWriter.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Xml.XDocument.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Xml.XmlDocument.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Xml.XmlSerializer.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Xml.XPath.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\System.Xml.XPath.XDocument.dll hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\ar\_._ hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\de\_._ hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\es\_._ hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\fr\_._ hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\tr\_._ hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: DeltaPackageBuilder: \lib\net45\zh-Hans\_._ hasn't changed, writing dummy file
+[25/09/22 00:05:55] info: Program: Building embedded zip file for Setup.exe
+[25/09/22 00:06:00] info: Program: Finished Squirrel Updater

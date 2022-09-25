@@ -14,7 +14,6 @@ namespace FileSharingApp_Desktop
     /// </summary>
     public partial class App : Application
     {
-        TextFileHelper TextFile = new TextFileHelper(Environment.GetFolderPath(Environment.SpecialFolder.Desktop)+"\\debug.txt");
         public App()
         {
            
@@ -24,8 +23,6 @@ namespace FileSharingApp_Desktop
         {
             if (e.Args == null || e.Args.Length<1)
                 return;
-            for(int i=0;i<e.Args.Length;i++)
-                TextFile.WriteToFile("arg "+i+" : " + e.Args[i],i);
             TransferEngine.FilePaths = e.Args;
         }
     }
