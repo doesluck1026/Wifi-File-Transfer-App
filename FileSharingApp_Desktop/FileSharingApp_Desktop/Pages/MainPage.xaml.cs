@@ -152,7 +152,7 @@ namespace FileSharingApp_Desktop.Pages
                 if(!FilePaths.Contains(filePaths[i]))
                     FilePaths.Add(filePaths[i]);
             }
-            list_Files.ItemsSource = FilePaths.ToArray(); ;
+            list_Files.ItemsSource = FilePaths.ToArray();
             Main.SetFilePaths(FilePaths.ToArray());
             ShowFileList(true);
         }
