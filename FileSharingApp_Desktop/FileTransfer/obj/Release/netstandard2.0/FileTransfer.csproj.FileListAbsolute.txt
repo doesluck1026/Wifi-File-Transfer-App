@@ -1,0 +1,10 @@
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\bin\Release\netstandard2.0\FileTransfer.deps.json
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\bin\Release\netstandard2.0\FileTransfer.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\bin\Release\netstandard2.0\FileTransfer.pdb
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.csproj.AssemblyReference.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.AssemblyInfoInputs.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.AssemblyInfo.cs
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.csproj.CoreCompileInputs.cache
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.dll
+C:\Projects\Github\Buggy Company\C#\Wifi-File-Transfer-App\FileSharingApp_Desktop\FileTransfer\obj\Release\netstandard2.0\FileTransfer.pdb
