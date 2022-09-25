@@ -128,11 +128,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Communication\NetworkScanner.cs" />
-    <Compile Include="Communication\Server.cs" />
     <Compile Include="Controls\MyCustomConverter.cs" />
-    <Compile Include="FileOperations\Parameters.cs" />
-    <Compile Include="Models\ParameterModel.cs" />
     <Compile Include="Pages\DevicesPage.xaml.cs">
       <DependentUpon>DevicesPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +148,7 @@
     <Compile Include="Pages\TransferPage.xaml.cs">
       <DependentUpon>TransferPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="System\Windows\Forms.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -160,9 +157,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Communication\Client.cs" />
-    <Compile Include="FileOperations\FileOperations.cs" />
-    <Compile Include="TransferEngine.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -287,6 +281,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\playstoreGet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileTransfer\FileTransfer.csproj">
+      <Project>{011f954f-684a-416f-b7ce-11e55a771d13}</Project>
+      <Name>FileTransfer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

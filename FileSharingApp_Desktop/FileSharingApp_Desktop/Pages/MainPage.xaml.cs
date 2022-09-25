@@ -6,6 +6,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using FileTransfer;
+using FileTransfer.Communication;
+using FileTransfer.FileOperation;
 
 namespace FileSharingApp_Desktop.Pages
 {

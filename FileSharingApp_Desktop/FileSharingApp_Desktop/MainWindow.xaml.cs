@@ -5,6 +5,9 @@ using System.Globalization;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using Squirrel;
+using FileTransfer;
+using FileTransfer.Communication;
+using FileTransfer.FileOperation;
 
 namespace FileSharingApp_Desktop
 {
