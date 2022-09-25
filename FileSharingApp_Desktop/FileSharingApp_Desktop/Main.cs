@@ -199,7 +199,7 @@ public class Main
             Debug.WriteLine(i + " : " + FilePaths[i]);
         }
     }
-    public static void ConnectToTargetDevice(string IP)
+    public static void SendFileTo(string IP)
     {
         TargetDeviceIP = IP;
         IsTransferEnabled = true;
@@ -270,7 +270,7 @@ public class Main
             MultipleSendMode = false;
             return;
         }
-        ConnectToTargetDevice(TargetDeviceList[0]);
+        SendFileTo(TargetDeviceList[0]);
         TargetDeviceList.RemoveAt(0);
 
     }
@@ -312,7 +312,7 @@ public class Main
             watch.Restart();
             while (IsTransferEnabled)
             {
-                File.FileReadAtByteIndex(totalBytesRead, out numberOfBytesRead, out buffer, chunkSize: (int)(ChunkSize + TransferMetrics.TransferSpeed * MB * 0.3), functionByte: (byte)Functions.TransferMode);
+                File.FileReadAtByteIndex(totalBytesRead, out numberOfBytesRead, out buffer, chunkSize: (int)(ChunkSize + TransferMetrics.TransferSpeed * MB * 0.1), functionByte: (byte)Functions.TransferMode);
                 if (numberOfBytesRead == 0)
                 {
                     UpdateMetrics(watch, byteCounter);
@@ -405,7 +405,10 @@ public class Main
         lock (Lck_TransferMetrics)
         {
             _transferMetrics.TotalBytesSent += byteCounter;
-            _transferMetrics.TransferSpeed = (_transferMetrics.TransferSpeed * 0.9 + 0.1 * (byteCounter / (MB * elapsedTime)));
+            if(_transferMetrics.TransferSpeed==0)
+                _transferMetrics.TransferSpeed = byteCounter / (MB * elapsedTime);
+            else
+                _transferMetrics.TransferSpeed = (_transferMetrics.TransferSpeed * 0.9 + 0.1 * (byteCounter / (MB * elapsedTime)));
             _transferMetrics.Progress = ((double)_transferMetrics.TotalBytesSent / (double)_transferMetrics.TotalDataSizeAsBytes) * 100.0;
             _transferMetrics.TotalElapsedTime += elapsedTime;
             _transferMetrics.EstimatedTime = (_transferMetrics.TotalDataSizeAsBytes - _transferMetrics.TotalBytesSent) / (_transferMetrics.TotalBytesSent / _transferMetrics.TotalElapsedTime);

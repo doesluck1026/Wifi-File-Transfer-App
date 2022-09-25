@@ -101,7 +101,7 @@ namespace FileSharingApp_Desktop.Pages
                 }
                 else
                 {
-                    Main.ConnectToTargetDevice(txt_DeviceIP.Text);
+                    Main.SendFileTo(txt_DeviceIP.Text);
                     Main.MultipleSendMode = false;
 
                 }

@@ -117,22 +117,23 @@ namespace FileSharingApp_Desktop.Pages
 
         private void UpdateUI()
         {
+            var metrics = Main.TransferMetrics;
             Dispatcher.Invoke(() => {
-                lbl_currentFileNumber.Content = Main.TransferMetrics.IndexOfCurrentFile.ToString();
-                lbl_FileCount.Content = Main.TransferMetrics.CountOfFiles.ToString();
-                lbl_FileSize.Content = Main.TransferMetrics.CurrentFile.FileSize.ToString("0.00") + " " + Main.TransferMetrics.CurrentFile.SizeUnit;
-                lbl_FileName.Content = Main.TransferMetrics.CurrentFile.FileName;
-                lbl_progress.Content = "%" + Main.TransferMetrics.Progress.ToString("0.0");
-                int progress = (int)Math.Min(100, Main.TransferMetrics.Progress);
+                lbl_currentFileNumber.Content = metrics.IndexOfCurrentFile.ToString();
+                lbl_FileCount.Content = metrics.CountOfFiles.ToString();
+                lbl_FileSize.Content = metrics.CurrentFile.FileSize.ToString("0.00") + " " + metrics.CurrentFile.SizeUnit;
+                lbl_FileName.Content = metrics.CurrentFile.FileName;
+                lbl_progress.Content = "%" + metrics.Progress.ToString("0.0");
+                int progress = (int)Math.Min(100, metrics.Progress);
                 prg_Transfer.Value = Math.Max(0,progress);
-                lbl_TransferSpeed.Content = Main.TransferMetrics.TransferSpeed.ToString("0.00") + " MB/s";
-                lbl_PassedTime.Content = ((int)Main.TransferMetrics.TotalElapsedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.TotalElapsedTime % 3600) / 60).ToString("00") + ":" +
-                    (((int)Main.TransferMetrics.TotalElapsedTime % 3600) % 60).ToString("00");
-                lbl_RemainingTime.Content = ((int)Main.TransferMetrics.EstimatedTime / 3600).ToString("00") + ":" + (((int)Main.TransferMetrics.EstimatedTime % 3600) / 60).ToString("00") + ":" +
-                    (((int)Main.TransferMetrics.EstimatedTime % 3600) % 60).ToString("00");
-                lbl_totalSent.Content = Main.TransferMetrics.TotalDataSent.ToString("0.00") + " " + Main.TransferMetrics.SentSizeUnit.ToString();
-                lbl_totalSize.Content = Main.TransferMetrics.TotalDataSize.ToString("0.00") + " " + Main.TransferMetrics.SizeUnit.ToString();
-                lbl_Receiver.Content = Main.TransferMetrics.ReceiverDevice;
+                lbl_TransferSpeed.Content = metrics.TransferSpeed.ToString("0.00") + " MB/s";
+                lbl_PassedTime.Content = ((int)metrics.TotalElapsedTime / 3600).ToString("00") + ":" + (((int)metrics.TotalElapsedTime % 3600) / 60).ToString("00") + ":" +
+                    (((int)metrics.TotalElapsedTime % 3600) % 60).ToString("00");
+                lbl_RemainingTime.Content = ((int)metrics.EstimatedTime / 3600).ToString("00") + ":" + (((int)metrics.EstimatedTime % 3600) / 60).ToString("00") + ":" +
+                    (((int)metrics.EstimatedTime % 3600) % 60).ToString("00");
+                lbl_totalSent.Content = metrics.TotalDataSent.ToString("0.00") + " " + metrics.SentSizeUnit.ToString();
+                lbl_totalSize.Content = metrics.TotalDataSize.ToString("0.00") + " " + metrics.SizeUnit.ToString();
+                lbl_Receiver.Content = metrics.ReceiverDevice;
             });
 
             if (!Main.IsTransfering)
