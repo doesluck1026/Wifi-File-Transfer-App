@@ -428,7 +428,10 @@ namespace FileTransfer
         private static void SendFirstFrame()
         {
             long totalTransferSize = GetTransferSize();
-            int lenName = Parameters.DeviceName.Length;
+            Debug.WriteLine("transfer size: "+ totalTransferSize);
+            int lenName = NetworkScanner.MyDeviceName.Length;
+            Debug.WriteLine("my device name : " + NetworkScanner.MyDeviceName);
+
             byte[] data = new byte[15 + lenName];
             data[0] = (byte)Functions.QueryTransfer;
             byte[] numFilesBytes = BitConverter.GetBytes(FilePaths.Length);
@@ -436,7 +439,7 @@ namespace FileTransfer
             byte[] sizeBytes = BitConverter.GetBytes(totalTransferSize);
             sizeBytes.CopyTo(data, 5);
             data[13] = (byte)lenName;
-            Encoding.UTF8.GetBytes(Parameters.DeviceName).CopyTo(data, 14);
+            Encoding.UTF8.GetBytes(NetworkScanner.MyDeviceName).CopyTo(data, 14);
             client.SendDataServer(data);
             Debug.WriteLine("Sent First Frame:" + FilePaths.Length);
         }

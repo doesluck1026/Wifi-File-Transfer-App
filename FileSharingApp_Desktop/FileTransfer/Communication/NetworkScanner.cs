@@ -92,7 +92,7 @@ namespace FileTransfer.Communication
         public static bool IsDevicePublished = false;
 
         public static string MyIP;
-        private static string MyDeviceName;
+        public static string MyDeviceName;
 
         public static List<string> DeviceNames
         {
