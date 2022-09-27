@@ -103,7 +103,7 @@ namespace FileTransfer
         private static long[] FileSizeAsBytes;                 /// Size of files as bytes
         private static double[] FileSizes;                     /// File Sizes as a double 
         private static FileOperations.SizeUnit[] SizeUnits;    /// Unit of filesizes
-        private static Thread sendingThread;
+        private static Thread SendingThread;
         private static bool _isTransferEnabled = false;
         private static bool _isTransfering = false;
         private static bool _isSending = false;
@@ -234,6 +234,7 @@ namespace FileTransfer
                     SendToNextDevice();
                 else
                 {
+                    BeginSendingFiles();
                     lock (Lck_TransferMetrics)
                     {
                         _transferMetrics.ReceiverDevice = NetworkScanner.PublisherDevices.Find(x => x.IP.Equals(TargetDeviceIP)).Hostname;
@@ -256,8 +257,8 @@ namespace FileTransfer
         public static void BeginSendingFiles()
         {
             IsTransferEnabled = true;
-            sendingThread = new Thread(SendingCoreFcn);
-            sendingThread.Start();
+            SendingThread = new Thread(SendingCoreFcn);
+            SendingThread.Start();
         }
         public static void AbortTransfer()
         {
@@ -368,10 +369,11 @@ namespace FileTransfer
             IsTransfering = false;
             SendLastFrame();
             OnTransferFinished?.Invoke();
-            client.DisconnectFromServer();
+            if(client != null)
+                client.DisconnectFromServer();
             client = null;
-            if (server != null) ;
-            server.CloseServer();
+            if (server != null) 
+                server.CloseServer();
             server = null;
             StartServer();
             SendToNextDevice();
@@ -580,8 +582,8 @@ namespace FileTransfer
         private static void BeginReceivingFiles()
         {
             IsTransferEnabled = true;
-            sendingThread = new Thread(ReceivingCoreFcn);
-            sendingThread.Start();
+            SendingThread = new Thread(ReceivingCoreFcn);
+            SendingThread.Start();
 
         }
         private static void SendAck(Functions func)

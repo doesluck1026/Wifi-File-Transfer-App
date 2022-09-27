@@ -1,4 +1,5 @@
 ﻿using FileTransfer;
+using FileTransfer.FileOperation;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,6 +23,10 @@ namespace FileSharingApp_Desktop
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             if (e.Args == null || e.Args.Length<1)
+                return;
+            Parameters.Init();
+            Parameters.DidInitParameters = false;
+            if (Parameters.IsUsingFirstTime)
                 return;
             TransferEngine.FilePaths = e.Args;
         }

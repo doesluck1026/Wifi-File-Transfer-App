@@ -45,7 +45,6 @@ namespace FileSharingApp_Desktop.Pages
                 {
                     Navigator.Navigate("Pages/TransferPage.xaml");
                 });
-                TransferEngine.BeginSendingFiles();
             }
             else
             {

@@ -72,8 +72,6 @@ namespace FileTransfer.Communication
                 {
                     client.Close();
                     client.Dispose();           /// remove client object
-                    IsConnectedToServer = false;
-                    client = null;
                     Debug.WriteLine("Disconnected!");
                     success = true;
                 }
@@ -83,6 +81,8 @@ namespace FileTransfer.Communication
                     Debug.WriteLine("Failed to Disconnect!");
                 }
             }
+            client = null;
+            IsConnectedToServer = false;
             return success;
         }
         public bool SendDataServer(byte[] data)
